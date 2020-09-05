@@ -1,0 +1,19 @@
+.footer-back
+{
+    background-color: black;
+    color: #fff;
+    position: relative;
+}
+.footer-bottom
+{
+    
+    text-align: center;
+}
+
+ul
+{
+    list-style-type: none;
+}
+li{
+    margin-top: 12px;
+}
