@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Title Must Return Card Title 1`] = `
+<DocumentFragment>
+  <div
+    class="card-title"
+  >
+    Title
+  </div>
+</DocumentFragment>
+`;

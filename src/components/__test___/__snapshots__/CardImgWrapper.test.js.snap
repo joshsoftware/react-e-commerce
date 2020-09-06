@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Image Must Return Card Image 1`] = `
+<DocumentFragment>
+  <img
+    alt="Product Image"
+    class="card-img"
+    src="https://assets.ajio.com/medias/sys_master/root/hb7/h8b/15083561943070/-473Wx593H-460422382-black-MODEL.jpg"
+  />
+</DocumentFragment>
+`;

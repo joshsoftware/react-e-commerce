@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Text Must Return Card Text 1`] = `
+<DocumentFragment>
+  <p
+    class="card-text"
+  >
+    Card Text
+  </p>
+</DocumentFragment>
+`;
