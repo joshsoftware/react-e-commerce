@@ -1,33 +1,24 @@
 import React from 'react';
-import { Form, Button } from 'reactstrap';
+import { Form } from 'reactstrap';
 import FormField from './FormField';
+import ButtonWrapper from './ButtonWrapper';
+import PropTypes from 'prop-types';
 
-const LoginForm = () => {
-  const email = {
-      field: 'exampleEmail',
-      labelText: 'Email',
-      type: 'email',
-      name: 'email',
-      id: 'exampleEmail',
-      placeholder: 'example@company.com'
-    },
-    password = {
-      field: 'examplePassword',
-      labelText: 'Password',
-      type: 'password',
-      name: 'password',
-      id: 'examplePassword',
-      placeholder: 'password'
-    };
+const LoginForm = ({ email, password }) => {
   return (
     <Form>
-      <FormField obj={email} />
-      <FormField obj={password} />
-      <Button>Login</Button>
-      <hr/>
-      <Button >Sign In With Google</Button>
+      <FormField formfield={email} />
+      <FormField formfield={password} />
+      <ButtonWrapper buttonText={'Login'} />
+      <hr />
+      <ButtonWrapper buttonText={'Sign In With Google'} />
     </Form>
   );
 };
 
 export default LoginForm;
+
+LoginForm.propTypes = {
+  email: PropTypes.object.isRequired,
+  password: PropTypes.object.isRequired
+};

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormInput Component Must return FormInput Component 1`] = `
+<DocumentFragment>
+  <input
+    class="form-control"
+    type="text"
+    value=""
+  />
+</DocumentFragment>
+`;

@@ -1,16 +1,20 @@
 import React from 'react';
-import { Container, Col, Row } from 'reactstrap';
 import FormCard from './FormCard';
+import ContainerWrapper from './ContainerWrapper';
+import RowWrapper from './RowWrapper';
+import ColumnWrapper from './ColumnWrapper';
 
 const LoginComponent = () => {
   return (
-    <Container style={{ paddingTop: '15vh', paddingBottom: '15vh', minHeight: '50vh' }}>
-      <Row>
-        <Col sm={{ size: 6, offset: 3 }}>
-          <FormCard type={'login'} />
-        </Col>
-      </Row>
-    </Container>
+    <ContainerWrapper
+      styleClass={'container pt-3 text-center h-100 '}
+      data={
+        <RowWrapper
+          data={<ColumnWrapper sm={{ size: 6, offset: 3 }} data={<FormCard type={'login'} />} />}
+        />
+      }
+      fluid={true}
+    />
   );
 };
 

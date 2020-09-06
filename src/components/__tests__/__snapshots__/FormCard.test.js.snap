@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormCard Component Must render Login Form Component 1`] = `
+<DocumentFragment>
+  <div
+    class="card"
+  >
+    <div
+      class="card-body"
+    >
+      <h3>
+        Login
+      </h3>
+      <hr />
+      <form
+        class=""
+      >
+        <div
+          class="form-group"
+        >
+          <label
+            class=""
+            for="exampleEmail"
+          >
+            Email
+          </label>
+          <input
+            class="form-control"
+            name="email"
+            placeholder="example@company.com"
+            type="email"
+            value=""
+          />
+          <div
+            class="invalid-feedback"
+          />
+        </div>
+        <div
+          class="form-group"
+        >
+          <label
+            class=""
+            for="examplePassword"
+          >
+            Password
+          </label>
+          <input
+            class="form-control"
+            name="password"
+            placeholder="password"
+            type="password"
+            value=""
+          />
+          <div
+            class="invalid-feedback"
+          />
+        </div>
+        <button
+          class="btn btn-secondary"
+        >
+          Login
+        </button>
+        <hr />
+        <button
+          class="btn btn-secondary"
+        >
+          Sign In With Google
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonWrapper Component Must return FButtonWrapper Component 1`] = `
+<DocumentFragment>
+  <button
+    class="btn btn-secondary"
+  />
+</DocumentFragment>
+`;
