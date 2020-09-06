@@ -1,86 +1,42 @@
 import React from 'react';
-import { Form, Button } from 'reactstrap';
+import { Form } from 'reactstrap';
 import FormField from './FormField';
-
-const RegistrationForm = () => {
-  const firstname = {
-      field: 'exampleFirstName',
-      labelText: 'First Name',
-      type: 'firstname',
-      name: 'firstname',
-      id: 'exampleFirstName',
-      placeholder: 'John'
-    },
-    lastname = {
-      field: 'exampleLastName',
-      labelText: 'Last Name',
-      type: 'lastname',
-      name: 'lastname',
-      id: 'exampleLastName',
-      placeholder: 'Doe'
-    },
-    email = {
-      field: 'exampleEmail',
-      labelText: 'Email',
-      type: 'email',
-      name: 'email',
-      id: 'exampleEmail',
-      placeholder: 'example@company.com'
-    },
-    password = {
-      field: 'examplePassword',
-      labelText: 'Password',
-      type: 'password',
-      name: 'password',
-      id: 'examplePassword',
-      placeholder: 'password'
-    },
-    country = {
-      field: 'exampleCountry',
-      labelText: 'Country',
-      type: 'country',
-      name: 'country',
-      id: 'exampleCountry',
-      placeholder: ''
-    },
-    state = {
-      field: 'exampleState',
-      labelText: 'State',
-      type: 'state',
-      name: 'state',
-      id: 'exampleState',
-      placeholder: ''
-    },
-    city = {
-      field: 'exampleCity',
-      labelText: 'City',
-      type: 'city',
-      name: 'city',
-      id: 'exampleCity',
-      placeholder: ''
-    },
-    address = {
-      field: 'exampleAddress',
-      labelText: 'Address',
-      type: 'address',
-      name: 'address',
-      id: 'exampleAddress',
-      placeholder: ''
-    };
-
+import ButtonWrapper from './ButtonWrapper';
+import PropTypes from 'prop-types';
+const RegistrationForm = ({
+  firstname,
+  lastname,
+  email,
+  password,
+  country,
+  state,
+  city,
+  address
+}) => {
   return (
     <Form>
-      <FormField obj={firstname} />
-      <FormField obj={lastname} />
-      <FormField obj={email} />
-      <FormField obj={password} />
-      <FormField obj={country} />
-      <FormField obj={state} />
-      <FormField obj={city} />
-      <FormField obj={address} />
-      <Button>Submit</Button>
+      <FormField formfield={firstname} />
+      <FormField formfield={lastname} />
+      <FormField formfield={email} />
+      <FormField formfield={password} />
+      <FormField formfield={country} />
+      <FormField formfield={state} />
+      <FormField formfield={city} />
+      <FormField formfield={address} />
+      <ButtonWrapper buttonText={'Submit'} />
     </Form>
   );
 };
 
 export default RegistrationForm;
+
+RegistrationForm.propTypes = {
+  firstname: PropTypes.object.isRequired,
+  lastname: PropTypes.object.isRequired,
+  email: PropTypes.object.isRequired,
+  password: PropTypes.object.isRequired,
+  country: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  city: PropTypes.object.isRequired,
+  address: PropTypes.object.isRequired
+};

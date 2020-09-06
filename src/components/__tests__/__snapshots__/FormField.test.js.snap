@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormFild Component Must return FormField Component 1`] = `
+<DocumentFragment>
+  <div
+    class="form-group"
+  >
+    <label
+      class=""
+      for=""
+    />
+    <input
+      class="form-control"
+      name=""
+      placeholder=""
+      type=""
+      value=""
+    />
+    <div
+      class="invalid-feedback"
+    />
+  </div>
+</DocumentFragment>
+`;
