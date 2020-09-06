@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdowToggle Component Must return Dropdown Toggle 1`] = `
+<DocumentFragment>
+  <a
+    aria-haspopup="true"
+    class="dropdown-toggle nav-link"
+    href="#"
+  >
+    <img
+      alt="img"
+      class="rounded"
+      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+      style="width: 50px;"
+    />
+  </a>
+</DocumentFragment>
+`;

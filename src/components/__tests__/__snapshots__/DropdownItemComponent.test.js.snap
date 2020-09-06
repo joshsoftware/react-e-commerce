@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownItem Component Must return Dropdown Item 1`] = `
+<DocumentFragment>
+  <button
+    class="dropdown-item"
+    role="menuitem"
+    tabindex="0"
+    type="button"
+  >
+    Options
+  </button>
+  <div
+    class="dropdown-divider"
+    tabindex="-1"
+  />
+</DocumentFragment>
+`;

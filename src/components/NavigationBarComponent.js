@@ -1,63 +1,29 @@
 import React, { useState } from 'react';
-import search from '../images/search.svg';
-import cart from '../images/cart.jpg';
+import NavbarBrandComponent from './NavbarBrandComponent';
+import NavbarTogglerComponent from './NavbarTogglerComponent';
+import NavComponent from './NavComponent';
 import logo from '../images/logo.jpg';
-import {
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from 'reactstrap';
+import { Navbar } from 'reactstrap';
+import PropTypes from 'prop-types';
 
-const NavigationBarComponent = () => {
+const NavigationBarComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
 
-  return (
-        <Navbar color="dark" expand="md">
-            <NavbarBrand href="/">
-                <img style={{width: "70px"}} src={logo} className="rounded-circle" alt="img"/>
-            </NavbarBrand>
-            <NavbarToggler onClick={toggle} />
-            <Nav className="mr-auto" navbar>
-                <NavItem>
-                    <NavLink href="/components/">Shop</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink href="/about">About</NavLink>
-                </NavItem>
-            </Nav>
-            <Nav>
-            <NavItem>
-                <NavLink href="/cart-details">
-                    <img style={{width: "70px"}} src={cart} className="rounded-circle" alt="img"/>  
-                </NavLink> 
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                    <img style={{width: "50px"}} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" className="rounded" alt="img"/>
-                </DropdownToggle>
-                <DropdownMenu right>
-                    <DropdownItem>
-                        Profile
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>
-                        Logout
-                    </DropdownItem>
-                </DropdownMenu>
-            </UncontrolledDropdown>
-            </Nav>
-        </Navbar>
+  const { color, expand } = props;
 
+  return (
+    <Navbar color={color} expand={expand}>
+      <NavbarBrandComponent url={'/'} logo={logo} />
+      <NavbarTogglerComponent toggle={toggle} />
+      <NavComponent />
+    </Navbar>
   );
-}
+};
 
 export default NavigationBarComponent;
+
+NavigationBarComponent.propTypes = {
+  color: PropTypes.string.isRequired,
+  expand: PropTypes.string
+};

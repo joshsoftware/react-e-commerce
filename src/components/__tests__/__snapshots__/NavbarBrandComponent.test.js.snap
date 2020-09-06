@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavbarBrand Component Must return Navigation bar brand 1`] = `
+<DocumentFragment>
+  <a
+    class="navbar-brand"
+    href="/"
+  >
+    <img
+      alt="img"
+      class="rounded-circle"
+      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+      style="width: 70px;"
+    />
+  </a>
+</DocumentFragment>
+`;

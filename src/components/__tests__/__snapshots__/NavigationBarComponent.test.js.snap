@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationBar Component Must return Navigation bar 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar bg-dark"
+  >
+    <a
+      class="navbar-brand"
+      href="/"
+    >
+      <img
+        alt="img"
+        class="rounded-circle"
+        src="logo.jpg"
+        style="width: 70px;"
+      />
+    </a>
+    <button
+      aria-label="Toggle navigation"
+      class="navbar-toggler"
+      type="button"
+    >
+      <span
+        class="navbar-toggler-icon"
+      />
+    </button>
+    <ul
+      class="mr-auto navbar-nav"
+    >
+      <li
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          href="/components"
+        >
+          Shop
+        </a>
+      </li>
+      <li
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          href="/about"
+        >
+          About
+        </a>
+      </li>
+    </ul>
+    <ul
+      class="nav"
+    >
+      <li
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          href="/about"
+        >
+          <img
+            alt="img"
+            class="rounded-circle"
+            src="cart.jpg"
+            style="width: 70px;"
+          />
+        </a>
+      </li>
+      <li
+        class="dropdown nav-item"
+      >
+        <a
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="dropdown-toggle nav-link"
+          href="#"
+        >
+          <img
+            alt="img"
+            class="rounded"
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+            style="width: 50px;"
+          />
+        </a>
+        <div
+          aria-hidden="true"
+          class="dropdown-menu dropdown-menu-right"
+          role="menu"
+          tabindex="-1"
+        >
+          <button
+            class="dropdown-item"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          >
+            Profile
+          </button>
+          <div
+            class="dropdown-divider"
+            tabindex="-1"
+          />
+          <button
+            class="dropdown-item"
+            role="menuitem"
+            tabindex="0"
+            type="button"
+          >
+            Logout
+          </button>
+          <div
+            class="dropdown-divider"
+            tabindex="-1"
+          />
+        </div>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;
