@@ -5,7 +5,7 @@ import React from 'react';
 describe('NavbarToggler Component', () => {
   it('Must return Dropdown Item', () => {
     const toggle = () => {};
-    const { asFragment } = render(<NavbarTogglerComponent toggle={toggle}/>);
+    const { asFragment } = render(<NavbarTogglerComponent toggle={toggle} />);
 
     expect(asFragment()).toMatchSnapshot();
   });
