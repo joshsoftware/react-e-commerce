@@ -1,15 +1,23 @@
 import React from 'react';
-import RowComponent from '../components/RowComponent';
-import ColumnComponent from '../components/ColumnComponent';
+import RowWrapper from '../components/RowWrapper';
+import ColumnWrapper from '../components/ColumnWrapper';
+import PropTypes from 'prop-types';
+import CardComponent from '../components/CardComponent';
 
 const ProductRowContainer = ({ products }) => {
   let arr = [];
   for (let i = 0; i < 3; i++) {
     if (products[i] !== undefined) {
-      arr.push(<ColumnComponent product={products[i]} />);
+      arr.push(
+        <ColumnWrapper key={products[i].id} data={<CardComponent product={products[i]} />} />
+      );
     }
   }
-  return <RowComponent arr={arr} />;
+  return <RowWrapper data={arr} />;
 };
 
 export default ProductRowContainer;
+
+ProductRowContainer.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object).isRequired
+};
