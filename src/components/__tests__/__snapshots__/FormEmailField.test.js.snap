@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormEmailField Component Must return FormEmailField Component 1`] = `
+<DocumentFragment>
+  <div
+    class="form-group"
+  >
+    <label
+      class=""
+      for="exampleEmail"
+    >
+      Email
+    </label>
+    <input
+      class="form-control"
+      name="email"
+      placeholder="example@company.com"
+      type="email"
+      value=""
+    />
+    <div
+      class="invalid-feedback"
+    />
+  </div>
+</DocumentFragment>
+`;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FormCard Component Must render Login Form Component 1`] = `
+exports[`FormCard Component Must render  FormCard Component 1`] = `
 <DocumentFragment>
   <div
     class="card"

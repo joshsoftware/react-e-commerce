@@ -6,24 +6,7 @@ afterEach(cleanup);
 
 describe('LoginForm Component', () => {
   it('Must return LoginForm Component', () => {
-    const FormAttributes = {
-      email: {
-        field: '',
-        labelText: '',
-        type: '',
-        name: '',
-        placeholder: ''
-      },
-      password: {
-        field: '',
-        labelText: '',
-        type: '',
-        name: '',
-        placeholder: ''
-      }
-    };
-    const { email, password } = FormAttributes;
-    const { asFragment } = render(<LoginForm email={email} password={password} />);
+    const { asFragment } = render(<LoginForm />);
     expect(asFragment()).toMatchSnapshot();
   });
 });

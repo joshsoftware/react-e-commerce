@@ -2,6 +2,10 @@
 
 exports[`LoginForm Component Must return LoginForm Component 1`] = `
 <DocumentFragment>
+  <h3>
+    Login
+  </h3>
+  <hr />
   <form
     class=""
   >
@@ -10,13 +14,15 @@ exports[`LoginForm Component Must return LoginForm Component 1`] = `
     >
       <label
         class=""
-        for=""
-      />
+        for="exampleEmail"
+      >
+        Email
+      </label>
       <input
         class="form-control"
-        name=""
-        placeholder=""
-        type=""
+        name="email"
+        placeholder="example@company.com"
+        type="email"
         value=""
       />
       <div
@@ -28,13 +34,15 @@ exports[`LoginForm Component Must return LoginForm Component 1`] = `
     >
       <label
         class=""
-        for=""
-      />
+        for="examplePassword"
+      >
+        Password
+      </label>
       <input
         class="form-control"
-        name=""
-        placeholder=""
-        type=""
+        name="password"
+        placeholder="password"
+        type="password"
         value=""
       />
       <div
