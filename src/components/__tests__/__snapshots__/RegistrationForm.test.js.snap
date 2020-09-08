@@ -2,49 +2,13 @@
 
 exports[`RegistrationForm Component Must return RegistrationForm Component 1`] = `
 <DocumentFragment>
+  <h3>
+    Register
+  </h3>
+  <hr />
   <form
     class=""
   >
-    <div
-      class="form-group"
-    >
-      <label
-        class=""
-        for="exampleFirstName"
-      >
-        First Name
-      </label>
-      <input
-        class="form-control"
-        name="firstname"
-        placeholder="John"
-        type="firstname"
-        value=""
-      />
-      <div
-        class="invalid-feedback"
-      />
-    </div>
-    <div
-      class="form-group"
-    >
-      <label
-        class=""
-        for="exampleLastName"
-      >
-        Last Name
-      </label>
-      <input
-        class="form-control"
-        name="lastname"
-        placeholder="Doe"
-        type="lastname"
-        value=""
-      />
-      <div
-        class="invalid-feedback"
-      />
-    </div>
     <div
       class="form-group"
     >
@@ -79,6 +43,46 @@ exports[`RegistrationForm Component Must return RegistrationForm Component 1`] =
         name="password"
         placeholder="password"
         type="password"
+        value=""
+      />
+      <div
+        class="invalid-feedback"
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class=""
+        for="exampleFirstName"
+      >
+        First Name
+      </label>
+      <input
+        class="form-control"
+        name="firstname"
+        placeholder="John"
+        type="firstname"
+        value=""
+      />
+      <div
+        class="invalid-feedback"
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class=""
+        for="exampleLastName"
+      >
+        Last Name
+      </label>
+      <input
+        class="form-control"
+        name="lastname"
+        placeholder="Doe"
+        type="lastname"
         value=""
       />
       <div
@@ -171,5 +175,9 @@ exports[`RegistrationForm Component Must return RegistrationForm Component 1`] =
       Submit
     </button>
   </form>
+  <h6>
+    <br />
+    Already registered? login
+  </h6>
 </DocumentFragment>
 `;
