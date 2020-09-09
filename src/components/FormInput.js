@@ -23,5 +23,5 @@ FormInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  invalid: PropTypes.string
+  invalid: PropTypes.bool
 };

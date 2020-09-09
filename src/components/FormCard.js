@@ -4,11 +4,21 @@ import PropTypes from 'prop-types';
 import FormCardComponent from './FormCardComponent';
 import CardBodyWrapper from './CardBodyWrapper';
 
-const FormCard = ({ type }) => {
+const FormCard = ({ type, validateData, dispatch, formState }) => {
   if (type === 'registration') {
-    return <FormCardComponent data={<CardBodyWrapper body_content={'registration_data'} />} />;
+    return <FormCardComponent data={<CardBodyWrapper body_content={'registration'} />} />;
   } else {
-    return <FormCardComponent data={<CardBodyWrapper body_content={<LoginForm />} />} />;
+    return (
+      <FormCardComponent
+        data={
+          <CardBodyWrapper
+            body_content={
+              <LoginForm validateData={validateData} dispatch={dispatch} formState={formState} />
+            }
+          />
+        }
+      />
+    );
   }
 };
 
