@@ -1,10 +1,10 @@
 import React from 'react';
-import RegistrationComponent from './components/RegistrationComponent';
+import RegistrationContainer from './containers/RegistrationContainer';
 
 function App() {
   return (
     <div className="App">
-      <RegistrationComponent />
+      <RegistrationContainer />
     </div>
   );
 }
