@@ -3,8 +3,19 @@ import React from 'react';
 import FormCard from '../FormCard';
 
 describe('FormCard Component', () => {
-  it('Must render  FormCard Component', () => {
-    const { asFragment } = render(<FormCard type="login" />);
+  const validateData = () =>{
+
+  }
+  const dispatch = () => {
+
+  }
+  const formState = {
+    email: 'abc',
+    password: 'ada'
+  }
+
+  it('Must render  LoginFormCard Component', () => {
+    const { asFragment } = render(<FormCard type="login" validateData={validateData} dispatch={dispatch} formState={formState}/>);
     expect(asFragment()).toMatchSnapshot();
   });
 });

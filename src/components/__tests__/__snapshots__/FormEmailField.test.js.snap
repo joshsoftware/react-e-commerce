@@ -12,7 +12,8 @@ exports[`FormEmailField Component Must return FormEmailField Component 1`] = `
       Email
     </label>
     <input
-      class="form-control"
+      aria-invalid="true"
+      class="is-invalid form-control"
       name="email"
       placeholder="example@company.com"
       type="email"

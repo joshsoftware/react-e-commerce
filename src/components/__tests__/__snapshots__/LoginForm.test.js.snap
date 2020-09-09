@@ -19,11 +19,12 @@ exports[`LoginForm Component Must return LoginForm Component 1`] = `
         Email
       </label>
       <input
-        class="form-control"
+        aria-invalid="true"
+        class="is-invalid form-control"
         name="email"
         placeholder="example@company.com"
         type="email"
-        value=""
+        value="abc"
       />
       <div
         class="invalid-feedback"
@@ -39,11 +40,12 @@ exports[`LoginForm Component Must return LoginForm Component 1`] = `
         Password
       </label>
       <input
-        class="form-control"
+        aria-invalid="true"
+        class="is-invalid form-control"
         name="password"
         placeholder="password"
         type="password"
-        value=""
+        value="ada"
       />
       <div
         class="invalid-feedback"
@@ -51,6 +53,7 @@ exports[`LoginForm Component Must return LoginForm Component 1`] = `
     </div>
     <button
       class="btn btn-secondary"
+      type="button"
     >
       Login
     </button>
