@@ -5,8 +5,30 @@ import FormCard from '../FormCard';
 afterEach(cleanup);
 
 describe('FormCard Component', () => {
+  const validateData = () => {};
+
+  const dispatch = () => {};
+
+  const formState = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    country: '',
+    state: '',
+    city: '',
+    address: ''
+  };
+
   it('Must render RegistrationForm Component', () => {
-    const { asFragment } = render(<FormCard type="registration" />);
+    const { asFragment } = render(
+      <FormCard
+        type="registration"
+        validateData={validateData}
+        dispatch={dispatch}
+        formState={formState}
+      />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

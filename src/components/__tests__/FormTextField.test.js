@@ -6,7 +6,17 @@ afterEach(cleanup);
 
 describe('FormTextField Component', () => {
   it('Must return FormTextField Component', () => {
-    const { asFragment } = render(<FormTextField />);
+    const { asFragment } = render(
+      <FormTextField
+        firstname=""
+        lastname=""
+        country=""
+        state=""
+        city=""
+        address=""
+        dispatch={() => {}}
+      />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });
