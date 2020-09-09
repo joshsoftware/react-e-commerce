@@ -1,51 +1,54 @@
-import React from 'react'
-import '../Footer.css'
-import {Row,Col} from 'reactstrap'
-const Footer = () =>
-{
-    return(
-    <>
-    <div className='footer-back '>
-        <Row xs='4'>
-            <Col sm={{ size: 2, order: 1, offset: 1 }}>
-            <ul>
-                <li><h3>Categories</h3></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Testimonials</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Journal</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-
-            </ul>
-
-            </Col>
-            <Col  sm={{ size: 2, order: 1, offset: 2 }}>
-            <ul>
-                <li><h3>Partners</h3></li>
-                <li>Support</li>
-                <li>Shipping & Returns</li>
-                <li>Size Guide</li>
-                <li>Product Care</li>
-            </ul>
-
-            </Col>
-            <Col  sm={{ size: 2, order: 1, offset: 3}}>
-            <ul>
-                <li><h3>Contact us</h3></li>
-                <li>26A Pagoda St,TANGS,</li>
-                <li>Singapore,068758</li>
-                <li></li>
-                <li>+9167564739</li>
-            </ul>
-
-            </Col>
-        </Row>
-    <hr/>
-    <div className='footer-bottom'>
-        &copy;Copyright XYZ.ltd {new Date().getFullYear()}
-    </div>
-    </div>
-    </>
+import React from 'react';
+import '../Footer.css';
+import UlComponent from './UlComponent';
+import LiComponent from './LiComponent';
+import ContainerWrapper from './ContainerWrapper';
+import ColumnWrapper from './ColumnWrapeer';
+import RowWrapper from './RowWrapper';
+import FooterData from '../FooterData';
+const Footer = () => {
+  let arr1 = [];
+  let arr = [];
+  let arr2 = [];
+  const categories = FooterData[0].categories;
+  arr.push(<LiComponent key={'categories-element'} data="Categories" />);
+  categories.map((category) => {
+    return arr.push(
+      <LiComponent key={category.id} data={<a href={category.url}>{category.name}</a>} />
     );
-}
+  });
+
+  const partner = FooterData[1].partners;
+  arr1.push(<LiComponent key={'partners-element'} data="Partners" />);
+  partner.map((partner) => {
+    return arr1.push(<LiComponent key={partner.id} data={partner.name} />);
+  });
+
+  const contacts = FooterData[2].contactus;
+  console.log(contacts);
+  arr2.push(<LiComponent key={'contact-us-details'} data="Contact Us" />);
+  contacts.map((contact) => {
+    return arr2.push(<LiComponent key={contact.id} data={contact.name} />);
+  });
+
+  let a1 = [];
+  a1.push(
+    <ColumnWrapper key={'column-categories'} data={<UlComponent liElement={arr} />} xs={4} />
+  );
+  a1.push(<ColumnWrapper key={'column-partners'} data={<UlComponent liElement={arr1} />} xs={4} />);
+  a1.push(
+    <ColumnWrapper key={'column-contact-us'} data={<UlComponent liElement={arr2} />} xs={4} />
+  );
+  a1.push(
+    <div key={'a14'} className="footer-bottom">
+      &copy;Copyright XYZ.ltd {new Date().getFullYear()}
+    </div>
+  );
+
+  return (
+    <footer className="bg-dark text-white">
+      <ContainerWrapper data={<RowWrapper data={a1} />} fluid={true} />
+    </footer>
+  );
+};
 export default Footer;

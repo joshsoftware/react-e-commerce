@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product Container Must return entire product container 1`] = `
+<DocumentFragment>
+  <footer
+    class="bg-dark text-white"
+  >
+    <div
+      class="container-fluid"
+    >
+      <div
+        class="row"
+      >
+        <div
+          class="col-4"
+        >
+          <ul
+            class="list-inline"
+          >
+            <li
+              class="rounded-sm"
+            >
+              Categories
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              <a
+                href="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              >
+                About Us
+              </a>
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              <a
+                href="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              >
+                Testomonials
+              </a>
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              <a
+                href="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              >
+                Contact
+              </a>
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              <a
+                href="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              >
+                Journal
+              </a>
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              <a
+                href="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              >
+                Privacy Policy
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="col-4"
+        >
+          <ul
+            class="list-inline"
+          >
+            <li
+              class="rounded-sm"
+            >
+              Partners
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              Support
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              Shipping & Returns
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              Size Guide
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              Product Care
+            </li>
+          </ul>
+        </div>
+        <div
+          class="col-4"
+        >
+          <ul
+            class="list-inline"
+          >
+            <li
+              class="rounded-sm"
+            >
+              Contact Us
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              Josh
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              Pune
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              Bavdhan
+            </li>
+            <li
+              class="rounded-sm"
+            >
+              +974524379
+            </li>
+          </ul>
+        </div>
+        <div
+          class="footer-bottom"
+        >
+          ©Copyright XYZ.ltd 2020
+        </div>
+      </div>
+    </div>
+  </footer>
+</DocumentFragment>
+`;
