@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar  Must return entire SearchBar 1`] = `
+<DocumentFragment>
+  <input
+    class="form-control"
+    placeholder=""
+    type="text"
+    value=""
+  />
+  <button
+    class="btn btn-secondary"
+    type="button"
+  >
+    Search
+  </button>
+</DocumentFragment>
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBarContainer  Must return entire SearchBarContainer 1`] = `
+<DocumentFragment>
+  <input
+    class="form-control"
+    placeholder="search"
+    type="text"
+    value=""
+  />
+  <button
+    class="btn btn-secondary"
+    type="button"
+  >
+    Search
+  </button>
+</DocumentFragment>
+`;

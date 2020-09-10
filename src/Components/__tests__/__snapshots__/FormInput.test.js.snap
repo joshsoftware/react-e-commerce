@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormInput  Must return entire FormInput 1`] = `
+<DocumentFragment>
+  <input
+    aria-invalid="true"
+    class="is-invalid form-control"
+    name=""
+    placeholder=""
+    type=""
+    value=""
+  />
+</DocumentFragment>
+`;

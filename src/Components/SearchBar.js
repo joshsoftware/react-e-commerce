@@ -1,14 +1,27 @@
-import React from 'react'
-
-function SearchBar(props) {
-    return (
-        <>
-         <input type="text"
-                placeholder={props.placeholder}
-                onChange={props.handleChange}>
-        </input> 
-        </>
-    )
-}
+import React from 'react';
+import ButtonWrapper from './ButtonWrapper';
+import FormInput from './FormInput';
+import PropTypes from 'prop-types';
+const SearchBar = ({ placeholder, setSearch, filterProduct }) => {
+  const setSearchWrapper = (e) => {
+    setSearch(e.target.value);
+  };
+  const filterProductWrapper = () => {
+    let arr = filterProduct();
+    console.log(arr);
+  };
+  return (
+    <>
+      <FormInput placeholder={placeholder} onChange={setSearchWrapper} />
+      <ButtonWrapper buttonText={'Search'} onClick={filterProductWrapper} />
+    </>
+  );
+};
 
 export default SearchBar;
+
+SearchBar.propTypes = {
+  placeholder: PropTypes.string,
+  setSearch: PropTypes.func,
+  filterProduct: PropTypes.func
+};

@@ -1,0 +1,5 @@
+[
+    {"id": 1, "image_url":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", "category": "UXBOX", "description": "The open source prototyping tool. UXBOX is currently at an early development stage but we are working hard to bring you the beta version as soon as possible."},
+    {"id": 2, "image_url":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", "category": "Model transformation", "description": "Implement model transformation functions in Pharmpy."},
+    {"id": 3, "image_url":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", "category": "OpenSwitch", "description": "OpenSwitch Project"}
+]
