@@ -5,6 +5,9 @@ import FormEmailField from './FormEmailField';
 import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
 import PropTypes from 'prop-types';
+import FormDropdownField from './FormDropdownField';
+import { setField } from '../actions/formActions';
+import { initialState } from '../reducers/registrationReducer';
 
 const RegistrationForm = ({ validateData, dispatch, formState }) => {
   const {
@@ -20,12 +23,19 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     lastnameError,
     emailError,
     passwordError,
-    countryError,
-    stateError,
-    cityError,
     addressError
   } = formState;
-
+  const resetData = () => {
+    if (
+      country === initialState.country ||
+      state === initialState.state ||
+      city === initialState.city
+    ) {
+      dispatch(setField('country', ''));
+      dispatch(setField('state', ''));
+      dispatch(setField('city', ''));
+    }
+  };
   return (
     <>
       <h3>Register</h3>
@@ -36,24 +46,24 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
         <FormTextField
           firstname={firstname}
           lastname={lastname}
-          country={country}
-          state={state}
-          city={city}
           address={address}
           firstnameError={firstnameError}
           lastnameError={lastnameError}
-          countryError={countryError}
-          stateError={stateError}
-          cityError={cityError}
           addressError={addressError}
           dispatch={dispatch}
         />
-        <ButtonWrapper buttonText={'Submit'} onClick={validateData} />
-      </Form>
-      <h6>
+        <FormDropdownField country={country} state={state} city={city} dispatch={dispatch} />
         <br />
-        Already registered? login
-      </h6>
+        <ButtonWrapper
+          buttonText={'Submit'}
+          onClick={() => {
+            resetData();
+            validateData();
+          }}
+        />
+      </Form>
+      <br />
+      <h6>Already registered? login</h6>
     </>
   );
 };

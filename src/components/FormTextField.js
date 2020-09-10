@@ -1,13 +1,6 @@
 import React from 'react';
 import FormField from './FormField';
-import {
-  setFirstname,
-  setLastname,
-  setCountry,
-  setState,
-  setCity,
-  setAddress
-} from '../actions/formActions';
+import { setFirstname, setLastname, setAddress } from '../actions/formActions';
 import PropTypes from 'prop-types';
 
 let firstname = {
@@ -23,27 +16,6 @@ let firstname = {
     type: 'lastname',
     name: 'lastname',
     placeholder: 'Doe'
-  },
-  country = {
-    field: 'exampleCountry',
-    labelText: 'Country',
-    type: 'country',
-    name: 'country',
-    placeholder: ''
-  },
-  state = {
-    field: 'exampleState',
-    labelText: 'State',
-    type: 'state',
-    name: 'state',
-    placeholder: ''
-  },
-  city = {
-    field: 'exampleCity',
-    labelText: 'City',
-    type: 'city',
-    name: 'city',
-    placeholder: ''
   },
   address = {
     field: 'exampleAddress',
@@ -72,33 +44,6 @@ const FormTextField = (props) => {
     invalid: props.lastnameError !== null ? true : false,
     message: props.lastnameError
   };
-  country = {
-    ...country,
-    value: props.country,
-    onChange: (evt) => {
-      props.dispatch(setCountry(evt));
-    },
-    invalid: props.countryError !== null ? true : false,
-    message: props.countryError
-  };
-  state = {
-    ...state,
-    value: props.state,
-    onChange: (evt) => {
-      props.dispatch(setState(evt));
-    },
-    invalid: props.stateError !== null ? true : false,
-    message: props.stateError
-  };
-  city = {
-    ...city,
-    value: props.city,
-    onChange: (evt) => {
-      props.dispatch(setCity(evt));
-    },
-    invalid: props.cityError !== null ? true : false,
-    message: props.cityError
-  };
   address = {
     ...address,
     value: props.address,
@@ -113,9 +58,6 @@ const FormTextField = (props) => {
     <>
       <FormField formfield={firstname} />
       <FormField formfield={lastname} />
-      <FormField formfield={country} />
-      <FormField formfield={state} />
-      <FormField formfield={city} />
       <FormField formfield={address} />
     </>
   );
@@ -126,15 +68,9 @@ export default FormTextField;
 FormTextField.propTypes = {
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   firstnameError: PropTypes.string,
   lastnameError: PropTypes.string,
-  countryError: PropTypes.string,
-  stateError: PropTypes.string,
-  cityError: PropTypes.string,
   addressError: PropTypes.string,
   dispatch: PropTypes.func.isRequired
 };

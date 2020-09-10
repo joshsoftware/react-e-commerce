@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import registrationReducer, { initialState } from '../reducers/registrationReducer';
 import * as yup from 'yup';
 import RegistrationComponent from '../components/RegistrationComponent';
-import { setErrors, resetErrors } from '../actions/formActions';
+import { setErrors, resetErrors, setField } from '../actions/formActions';
 
 const RegistrationContainer = () => {
   const [registrationState, dispatch] = useReducer(registrationReducer, initialState);
@@ -20,6 +20,15 @@ const RegistrationContainer = () => {
   const { firstname, lastname, email, password, country, state, city, address } = registrationState;
   const validateData = () => {
     dispatch(resetErrors());
+    if (
+      country === initialState.country ||
+      state === initialState.state ||
+      city === initialState.city
+    ) {
+      dispatch(setField('country', ''));
+      dispatch(setField('state', ''));
+      dispatch(setField('city', ''));
+    }
     schema
       .isValid({ firstname, lastname, email, password, country, state, city, address })
       .then(function (valid) {
@@ -36,7 +45,17 @@ const RegistrationContainer = () => {
             });
         } else {
           // dispatch(loginRequest({ username, password }));
-          console.log('form submitted');
+          console.log(
+            'form submitted',
+            firstname,
+            lastname,
+            email,
+            password,
+            country,
+            state,
+            city,
+            address
+          );
         }
       });
   };

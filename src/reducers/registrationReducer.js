@@ -28,9 +28,9 @@ const registrationReducer = (state = initialState, action) => {
         lastnameError: null,
         emailError: null,
         passwordError: null,
-        countryError: null,
-        stateError: null,
-        cityError: null,
+        // countryError: null,
+        // stateError: null,
+        // cityError: null,
         addressError: null
       };
     }
@@ -58,12 +58,6 @@ const registrationReducer = (state = initialState, action) => {
       return { ...state, emailError: action.value };
     case FORM_ACTIONS.SET_PASSWORD_ERROR:
       return { ...state, passwordError: action.value };
-    case FORM_ACTIONS.SET_COUNTRY_ERROR:
-      return { ...state, countryError: action.value };
-    case FORM_ACTIONS.SET_STATE_ERROR:
-      return { ...state, stateError: action.value };
-    case FORM_ACTIONS.SET_CITY_ERROR:
-      return { ...state, cityError: action.value };
     case FORM_ACTIONS.SET_ADDRESS_ERROR:
       return { ...state, addressError: action.value };
     case FORM_ACTIONS.SET_FIELD: {
