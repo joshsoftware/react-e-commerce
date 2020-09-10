@@ -45,7 +45,7 @@ const registrationReducer = (state = initialState, action) => {
       return { ...state, city: action.value };
     case FORM_ACTIONS.SET_ADDRESS:
       return { ...state, address: action.value };
-      case FORM_ACTIONS.SET_ISLOADING:
+    case FORM_ACTIONS.SET_ISLOADING:
       return { ...state, isLoading: action.value };
     case FORM_ACTIONS.SET_FIRSTNAME_ERROR:
       return { ...state, firstnameError: action.value };

@@ -14,7 +14,9 @@ const LoginContainer = () => {
   const validateData = () => {
     dispatch(resetErrors());
     dispatch(setIsLoading(true));
-    setTimeout(() => {console.log("waiting")}, 5000);
+    setTimeout(() => {
+      console.log('waiting');
+    }, 5000);
     schema.isValid({ email, password }).then(function (valid) {
       if (!valid) {
         schema.validate({ email, password }, { abortEarly: false }).catch((err) => {

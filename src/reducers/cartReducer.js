@@ -20,13 +20,10 @@ const cartReducer = (state = initialState, action) => {
       return { ...state, cartItemsList: newCartItemsList };
     }
     case CART_REDUCER.ADD_CART_ITEM: {
-      let index = state.cartItemsList.findIndex((cartItem) => cartItem.id === action.value.id);
-      if (index === -1) {
-        console.log('product item', action.value);
-        let newCartItemsList = [...state.cartItemsList, action.value];
-        console.log('ADD cart item', newCartItemsList);
-        return { ...state, cartItemsList: newCartItemsList };
-      }
+      console.log('product item', action.value);
+      let newCartItemsList = [...state.cartItemsList, action.value];
+      console.log('ADD cart item', newCartItemsList);
+      return { ...state, cartItemsList: newCartItemsList };
     }
     default:
       return state;

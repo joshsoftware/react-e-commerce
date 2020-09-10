@@ -7,7 +7,7 @@ import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
 import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
-import { setField, setIsLoading } from '../actions/formActions';
+import { setField } from '../actions/formActions';
 import { initialState } from '../reducers/registrationReducer';
 
 const RegistrationForm = ({ validateData, dispatch, formState }) => {
@@ -66,10 +66,11 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
         />
       </Form>
       <br />
-      <h6>Already registered? 
-      <span className="input-group-btn">
-        <Link to="/login" > Click to login</Link>
-      </span>
+      <h6>
+        Already registered?
+        <span className="input-group-btn">
+          <Link to="/login"> Click to login</Link>
+        </span>
       </h6>
     </>
   );
