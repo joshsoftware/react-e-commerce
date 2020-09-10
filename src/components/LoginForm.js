@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Form } from 'reactstrap';
 import ButtonWrapper from './ButtonWrapper';
 import FormEmailField from './FormEmailField';
@@ -8,15 +8,14 @@ import { GoogleLogin } from 'react-google-login';
 
 const LoginForm = ({ validateData, dispatch, formState }) => {
   const { email, password, emailError, passwordError } = formState;
-  
-  const [token, setToken] =  useState('');
+
+  const [token, setToken] = useState('');
 
   const responseGoogle = (response) => {
     console.log(response);
     setToken(response.tokenObj.access_token);
     console.log(token);
-  }
-  
+  };
 
   return (
     <>
@@ -33,8 +32,8 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={'single_host_origin'}
-       />
-       </Form>
+        />
+      </Form>
     </>
   );
 };

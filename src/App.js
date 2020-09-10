@@ -1,10 +1,11 @@
 import React from 'react';
-import RegistrationContainer from './containers/RegistrationContainer';
+import './App.css';
+import Routes from './routes/Routes';
 
 function App() {
   return (
     <div className="App">
-      <RegistrationContainer />
+      <Routes />
     </div>
   );
 }
