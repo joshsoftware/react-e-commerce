@@ -4,9 +4,9 @@ import { getCartItemsApi } from '../apis/cartApi';
 import { setCartItems } from '../actions/cartActions';
 
 //worker saga
-function* projectWorkerSaga(action) {
+function* cartWorkerSaga(action) {
   try {
-    const { data } = yield call(getCartItemsApi);
+    const { data } = yield call(getCartItemsApi, action.value);
     yield put(setCartItems(data));
   } catch (error) {
     console.log(error);
@@ -14,6 +14,6 @@ function* projectWorkerSaga(action) {
 }
 
 //watcher saga
-export default function* projectWatcherSaga() {
-  yield takeLatest(CART_REDUCER.GET_PROJECTS, projectWorkerSaga);
+export default function* cartSaga() {
+  yield takeLatest(CART_REDUCER.GET_PROJECTS, cartWorkerSaga);
 }

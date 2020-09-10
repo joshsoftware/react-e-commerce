@@ -4,16 +4,19 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import './App.css';
 import Routes from './routes/Routes';
+import rootSaga from './sagas/rootSaga';
 import loginReducer from './reducers/LoginReducer';
 import registrationReducer from './reducers/registrationReducer';
-import rootSaga from './sagas/rootSaga';
 import cartReducer from './reducers/cartReducer';
+import productListReducer from './reducers/productListReducer';
+
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
   combineReducers({
     loginReducer,
     registrationReducer,
-    cartReducer
+    cartReducer,
+    productListReducer
   }),
   applyMiddleware(sagaMiddleWare)
 );
