@@ -28,30 +28,6 @@ export const setPasswordError = () => {
   };
 };
 
-<<<<<<< HEAD
-=======
-export const setCountryError = () => {
-  return {
-    type: FORM_ACTIONS.SET_COUNTRY_ERROR,
-    value: null
-  };
-};
-
-export const setStateError = () => {
-  return {
-    type: FORM_ACTIONS.SET_STATE_ERROR,
-    value: null
-  };
-};
-
-export const setCityError = () => {
-  return {
-    type: FORM_ACTIONS.SET_CITY_ERROR,
-    value: null
-  };
-};
-
->>>>>>> 1d1b1271312ea99ee565ca3b6ff7cfdca389e46b
 export const setAddressError = () => {
   return {
     type: FORM_ACTIONS.SET_ADDRESS_ERROR,
