@@ -31,4 +31,15 @@ describe('FormCard Component', () => {
     );
     expect(asFragment()).toMatchSnapshot();
   });
+  it('Must render  LoginFormCard Component', () => {
+    const { asFragment } = render(
+      <FormCard
+        type="login"
+        validateData={validateData}
+        dispatch={dispatch}
+        formState={formState}
+      />
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

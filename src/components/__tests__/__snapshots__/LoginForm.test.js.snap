@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm Component Must return LoginForm Component 1`] = `
+<DocumentFragment>
+  <h3>
+    Login
+  </h3>
+  <hr />
+  <form
+    class=""
+  >
+    <div
+      class="form-group"
+    >
+      <label
+        class=""
+        for="exampleEmail"
+      >
+        Email
+      </label>
+      <input
+        aria-invalid="true"
+        class="is-invalid form-control"
+        name="email"
+        placeholder="example@company.com"
+        type="email"
+        value="abc"
+      />
+      <div
+        class="invalid-feedback"
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class=""
+        for="examplePassword"
+      >
+        Password
+      </label>
+      <input
+        aria-invalid="true"
+        class="is-invalid form-control"
+        name="password"
+        placeholder="password"
+        type="password"
+        value="ada"
+      />
+      <div
+        class="invalid-feedback"
+      />
+    </div>
+    <button
+      class="btn btn-secondary"
+      type="button"
+    >
+      Login
+    </button>
+    <hr />
+    <button
+      class="btn btn-secondary"
+    >
+      Sign In With Google
+    </button>
+  </form>
+</DocumentFragment>
+`;

@@ -1,5 +1,6 @@
 import React from 'react';
 import RegistrationForm from './RegistrationForm';
+import LoginForm from './LoginForm';
 import PropTypes from 'prop-types';
 import FormCardComponent from './FormCardComponent';
 import CardBodyWrapper from './CardBodyWrapper';
@@ -22,7 +23,17 @@ const FormCard = ({ type, validateData, dispatch, formState }) => {
       />
     );
   } else {
-    return <FormCardComponent data={<CardBodyWrapper body_content={'login'} />} />;
+    return (
+      <FormCardComponent
+        data={
+          <CardBodyWrapper
+            body_content={
+              <LoginForm validateData={validateData} dispatch={dispatch} formState={formState} />
+            }
+          />
+        }
+      />
+    );
   }
 };
 
