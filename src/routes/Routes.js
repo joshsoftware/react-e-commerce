@@ -2,9 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationContainer from '../containers/RegistrationContainer';
 import LoginContainer from '../containers/LoginContainer';
-import ProductContainer from './containers/ProductContainer';
-import CartContainer from './containers/CartContainer';
-
+import ProductContainer from '../containers/ProductContainer';
+import CartContainer from '../containers/CartContainer';
 
 const Routes = () => {
   return (

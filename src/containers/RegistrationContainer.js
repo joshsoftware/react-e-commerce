@@ -21,7 +21,9 @@ const RegistrationContainer = () => {
   const validateData = () => {
     dispatch(resetErrors());
     dispatch(setIsLoading(true));
-    setTimeout(() => {console.log("waiting")}, 5000);
+    setTimeout(() => {
+      console.log('waiting');
+    }, 5000);
     if (
       country === initialState.country ||
       state === initialState.state ||
@@ -61,8 +63,8 @@ const RegistrationContainer = () => {
           );
         }
       });
-      
-      dispatch(setIsLoading(false));
+
+    dispatch(setIsLoading(false));
   };
 
   // if (userDetails.auth_token) {

@@ -1,16 +1,14 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import ContainerWrapper from '../components/ContainerWrapper';
 import CartItem from '../components/CartItem';
-import cartReducer from '../reducers/cartReducer';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CartItemListContainer = () => {
-  const [state, dispatch] = useReducer(cartReducer);
+  const dispatch = useDispatch();
+  const { cartItemsList, totalPrice } = useSelector((state) => state);
   let arr = [];
-  if (state !== undefined && state.cartItemsList !== undefined) {
-    arr = state.cartItemsList.map((item) => (
-      <CartItem key={item.id} item={item} dispatch={dispatch} />
-    ));
-  }
+  arr = cartItemsList.map((item) => <CartItem key={item.id} item={item} dispatch={dispatch} />);
+  arr.push(<p>Total Price: ${totalPrice.toFixed(2)} </p>);
   return <ContainerWrapper data={arr} />;
 };
 

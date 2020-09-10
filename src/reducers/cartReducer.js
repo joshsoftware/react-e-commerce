@@ -1,6 +1,7 @@
 import { CART_REDUCER } from '../shared/actionConstants';
 const initialState = {
-  cartItemsList: []
+  cartItemsList: [],
+  totalPrice: 0
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -10,23 +11,26 @@ const cartReducer = (state = initialState, action) => {
     case CART_REDUCER.DELETE_CART_ITEM: {
       let newCartItemsList = [...state.cartItemsList];
       let index = state.cartItemsList.findIndex((cartItem) => cartItem.id === action.value);
+      let newTotalPrice = state.totalPrice;
+      newTotalPrice -= newCartItemsList[index].product_price * newCartItemsList[index].quantity;
       newCartItemsList.splice(index, 1);
-      return { ...state, cartItemsList: newCartItemsList };
+      return { ...state, cartItemsList: newCartItemsList, totalPrice: newTotalPrice };
     }
     case CART_REDUCER.UPDATE_ITEM_QUANTITY: {
       let newCartItemsList = [...state.cartItemsList];
       let index = state.cartItemsList.findIndex((cartItem) => cartItem.id === action.value.id);
+      let newTotalPrice = state.totalPrice;
+      newTotalPrice +=
+        newCartItemsList[index].product_price *
+        (action.value.newQuantity - newCartItemsList[index].quantity);
       newCartItemsList[index].quantity = action.value.newQuantity;
-      return { ...state, cartItemsList: newCartItemsList };
+      return { ...state, cartItemsList: newCartItemsList, totalPrice: newTotalPrice };
     }
     case CART_REDUCER.ADD_CART_ITEM: {
-      let index = state.cartItemsList.findIndex((cartItem) => cartItem.id === action.value.id);
-      if (index === -1) {
-        console.log('product item', action.value);
-        let newCartItemsList = [...state.cartItemsList, action.value];
-        console.log('ADD cart item', newCartItemsList);
-        return { ...state, cartItemsList: newCartItemsList };
-      }
+      let newCartItemsList = [...state.cartItemsList, action.value];
+      let newTotalPrice = state.totalPrice;
+      newTotalPrice += action.value.product_price;
+      return { ...state, cartItemsList: newCartItemsList, totalPrice: newTotalPrice };
     }
     default:
       return state;

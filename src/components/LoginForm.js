@@ -24,7 +24,7 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
       <Form>
         <FormEmailField email={email} emailError={emailError} dispatch={dispatch} />
         <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} />
-        <ButtonWrapper buttonText={'Login'} onClick={validateData} disabled={isLoading}/>
+        <ButtonWrapper buttonText={'Login'} onClick={validateData} disabled={isLoading} />
         <hr />
         <GoogleLogin
           clientId={process.env.REACT_APP_CLIENT_ID}

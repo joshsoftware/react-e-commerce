@@ -66,10 +66,11 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
         />
       </Form>
       <br />
-      <h6>Already registered? 
-      <span className="input-group-btn">
-        <Link to="/login" > Click to login</Link>
-      </span>
+      <h6>
+        Already registered?
+        <span className="input-group-btn">
+          <Link to="/login"> Click to login</Link>
+        </span>
       </h6>
     </>
   );

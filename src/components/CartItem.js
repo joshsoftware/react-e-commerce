@@ -12,7 +12,7 @@ import CartDropdownContainer from '../containers/CartDropdownContainer';
 import { deleteCartItem } from '../actions/cartActions';
 
 const CartItem = ({ item, dispatch }) => {
-  const { product_title, product_price, stock, quantity, id } = item;
+  const { product_title, image_url, product_price, stock, quantity, id } = item;
   let column_content = [];
   let i = 0;
   let item_details = [];
@@ -30,14 +30,7 @@ const CartItem = ({ item, dispatch }) => {
       sm={3}
       lg={3}
       xl={3}
-      data={
-        <CardImgWrapper
-          src={
-            'https://assets.ajio.com/medias/sys_master/root/hb7/h8b/15083561943070/-473Wx593H-460422382-black-MODEL.jpg'
-          }
-          className="img_fluid img_style"
-        />
-      }
+      data={<CardImgWrapper src={image_url} className="img_fluid img_style" />}
     />
   );
   column_content.push(<ColumnWrapper key={i++} className={'col_two'} data={item_details} />);
@@ -60,6 +53,7 @@ export default CartItem;
 
 CartItem.propTypes = {
   item: PropTypes.shape({
+    image_url: PropTypes.string,
     product_title: PropTypes.string,
     product_price: PropTypes.number,
     quantity: PropTypes.number,
