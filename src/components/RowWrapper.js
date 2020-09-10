@@ -2,9 +2,17 @@ import React from 'react';
 import { Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const RowWrapper = ({ data, noGutters, form, xs, sm, md, lg, xl }) => {
+const RowWrapper = ({ data, className, noGutters, form, xs, sm, md, lg, xl }) => {
   return (
-    <Row noGutters={noGutters} form={form} xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
+    <Row
+      className={className}
+      noGutters={noGutters}
+      form={form}
+      xs={xs}
+      sm={sm}
+      md={md}
+      lg={lg}
+      xl={xl}>
       {data}
     </Row>
   );
@@ -14,6 +22,7 @@ export default RowWrapper;
 
 RowWrapper.propTypes = {
   data: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
+  className: PropTypes.string,
   noGutters: PropTypes.bool,
   form: PropTypes.bool,
   xs: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

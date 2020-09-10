@@ -1,18 +1,36 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import RowWrapper from '../components/RowWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
 import PropTypes from 'prop-types';
 import CardComponent from '../components/CardComponent';
+import cartReducer from '../reducers/cartReducer';
+import { addCartItem, updateItemQuantity } from '../actions/cartActions';
 
 const ProductRowContainer = ({ products }) => {
+  const [state, dispatch] = useReducer(cartReducer);
   let arr = [];
-  for (let i = 0; i < 3; i++) {
-    if (products[i] !== undefined) {
-      arr.push(
-        <ColumnWrapper key={products[i].id} data={<CardComponent product={products[i]} />} />
+  let productExists = (product) => {
+    if (state === undefined) {
+      dispatch(addCartItem(product));
+    } else {
+      let index = state.cartItemsList.findIndex((cartItem) => cartItem.id === product.id);
+      if (index === -1) {
+        dispatch(addCartItem(product));
+      } else {
+        dispatch(updateItemQuantity({ id: product.id, newQuantity: product.quantity + 1 }));
+      }
+    }
+  };
+  arr = products.map((product) => {
+    if (product !== undefined) {
+      return (
+        <ColumnWrapper
+          key={product.id}
+          data={<CardComponent product={product} productExists={productExists} />}
+        />
       );
     }
-  }
+  });
   return <RowWrapper data={arr} />;
 };
 
