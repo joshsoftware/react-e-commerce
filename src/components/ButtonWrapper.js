@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-const ButtonWrapper = ({ style, onClick, buttonText }) => {
+const ButtonWrapper = ({ style, onClick, buttonText, color, disabled }) => {
   return (
-    <Button className={style} onClick={onClick}>
+    <Button className={style} onClick={onClick} color={color} disabled={disabled}>
       {buttonText}
     </Button>
   );
@@ -12,6 +12,8 @@ const ButtonWrapper = ({ style, onClick, buttonText }) => {
 export default ButtonWrapper;
 
 ButtonWrapper.propTypes = {
+  color: PropTypes.string,
+  disabled: PropTypes.bool,
   style: PropTypes.string,
   onClick: PropTypes.func,
   buttonText: PropTypes.string

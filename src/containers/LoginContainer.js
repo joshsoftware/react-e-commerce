@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
 import loginReducer, { initialState } from '../reducers/LoginReducer';
-import { setErrors, resetErrors } from '../actions/formActions';
+import { setErrors, resetErrors, setIsLoading } from '../actions/formActions';
 const LoginContainer = () => {
   const [loginState, dispatch] = useReducer(loginReducer, initialState);
   let schema = yup.object().shape({
@@ -13,6 +13,8 @@ const LoginContainer = () => {
   const { email, password } = loginState;
   const validateData = () => {
     dispatch(resetErrors());
+    dispatch(setIsLoading(true));
+    setTimeout(() => {console.log("waiting")}, 5000);
     schema.isValid({ email, password }).then(function (valid) {
       if (!valid) {
         schema.validate({ email, password }, { abortEarly: false }).catch((err) => {
@@ -25,6 +27,7 @@ const LoginContainer = () => {
         console.log('login done');
       }
     });
+    dispatch(setIsLoading(false));
   };
 
   // if (userDetails.auth_token) {

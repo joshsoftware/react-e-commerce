@@ -1,12 +1,13 @@
 import React from 'react';
 import { Form } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import ButtonWrapper from './ButtonWrapper';
 import FormEmailField from './FormEmailField';
 import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
 import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
-import { setField } from '../actions/formActions';
+import { setField, setIsLoading } from '../actions/formActions';
 import { initialState } from '../reducers/registrationReducer';
 
 const RegistrationForm = ({ validateData, dispatch, formState }) => {
@@ -23,7 +24,8 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     lastnameError,
     emailError,
     passwordError,
-    addressError
+    addressError,
+    isLoading
   } = formState;
   const resetData = () => {
     if (
@@ -60,10 +62,15 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
             resetData();
             validateData();
           }}
+          disabled={isLoading}
         />
       </Form>
       <br />
-      <h6>Already registered? login</h6>
+      <h6>Already registered? 
+      <span className="input-group-btn">
+        <Link to="/login" > Click to login</Link>
+      </span>
+      </h6>
     </>
   );
 };

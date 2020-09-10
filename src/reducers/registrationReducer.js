@@ -13,10 +13,8 @@ const initialState = {
   lastnameError: null,
   emailError: null,
   passwordError: null,
-  countryError: null,
-  stateError: null,
-  cityError: null,
-  addressError: null
+  addressError: null,
+  isLoading: false
 };
 
 const registrationReducer = (state = initialState, action) => {
@@ -28,9 +26,6 @@ const registrationReducer = (state = initialState, action) => {
         lastnameError: null,
         emailError: null,
         passwordError: null,
-        // countryError: null,
-        // stateError: null,
-        // cityError: null,
         addressError: null
       };
     }
@@ -50,6 +45,8 @@ const registrationReducer = (state = initialState, action) => {
       return { ...state, city: action.value };
     case FORM_ACTIONS.SET_ADDRESS:
       return { ...state, address: action.value };
+      case FORM_ACTIONS.SET_ISLOADING:
+      return { ...state, isLoading: action.value };
     case FORM_ACTIONS.SET_FIRSTNAME_ERROR:
       return { ...state, firstnameError: action.value };
     case FORM_ACTIONS.SET_LASTNAME_ERROR:

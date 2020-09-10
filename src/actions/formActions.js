@@ -69,6 +69,13 @@ export const setEmail = (val) => {
   };
 };
 
+export const setIsLoading = (val) => {
+  return {
+    type: FORM_ACTIONS.SET_ISLOADING,
+    value: val
+  };
+};
+
 export const setPassword = (val) => {
   return {
     type: FORM_ACTIONS.SET_PASSWORD,

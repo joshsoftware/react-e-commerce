@@ -4,7 +4,8 @@ const initialState = {
   password: '',
   userDetails: {},
   emailError: null,
-  passwordError: null
+  passwordError: null,
+  isLoading: false
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -15,6 +16,8 @@ const loginReducer = (state = initialState, action) => {
       return { ...state, email: action.value };
     case FORM_ACTIONS.SET_PASSWORD:
       return { ...state, password: action.value };
+    case FORM_ACTIONS.SET_ISLOADING:
+      return { ...state, isLoading: action.value };
     case FORM_ACTIONS.SET_EMAIL_ERROR:
       return { ...state, emailError: action.value };
     case FORM_ACTIONS.SET_USER_DETAILS:

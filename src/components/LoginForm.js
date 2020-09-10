@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
 
 const LoginForm = ({ validateData, dispatch, formState }) => {
-  const { email, password, emailError, passwordError } = formState;
+  const { email, password, emailError, passwordError, isLoading } = formState;
 
   const [token, setToken] = useState('');
 
@@ -24,7 +24,7 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
       <Form>
         <FormEmailField email={email} emailError={emailError} dispatch={dispatch} />
         <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} />
-        <ButtonWrapper buttonText={'Login'} onClick={validateData} />
+        <ButtonWrapper buttonText={'Login'} onClick={validateData} disabled={isLoading}/>
         <hr />
         <GoogleLogin
           clientId={process.env.REACT_APP_CLIENT_ID}
