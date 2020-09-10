@@ -1,12 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Form } from 'reactstrap';
 import ButtonWrapper from './ButtonWrapper';
 import FormEmailField from './FormEmailField';
 import FormPasswordField from './FormPasswordField';
 import PropTypes from 'prop-types';
+import { GoogleLogin } from 'react-google-login';
 
 const LoginForm = ({ validateData, dispatch, formState }) => {
   const { email, password, emailError, passwordError } = formState;
+  
+  const [token, setToken] =  useState('');
+
+  const responseGoogle = (response) => {
+    console.log(response);
+    setToken(response.tokenObj.access_token);
+    console.log(token);
+  }
+  
 
   return (
     <>
@@ -17,8 +27,14 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
         <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} />
         <ButtonWrapper buttonText={'Login'} onClick={validateData} />
         <hr />
-        <ButtonWrapper buttonText={'Sign In With Google'} />
-      </Form>
+        <GoogleLogin
+          clientId={process.env.REACT_APP_CLIENT_ID}
+          buttonText="Sign in with Google "
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+       />
+       </Form>
     </>
   );
 };
