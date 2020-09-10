@@ -1,11 +1,16 @@
-import React, { useReducer } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import registrationReducer, { initialState } from '../reducers/registrationReducer';
 import * as yup from 'yup';
+import { Redirect } from "react-router-dom";
 import RegistrationComponent from '../components/RegistrationComponent';
-import { setErrors, resetErrors, setField, setIsLoading } from '../actions/formActions';
+import { setErrors, resetErrors, setField, setIsLoading, registrationRequest } from '../actions/formActions';
 
 const RegistrationContainer = () => {
-  const [registrationState, dispatch] = useReducer(registrationReducer, initialState);
+  // const [registrationState, dispatch] = useReducer(registrationReducer, initialState);
+  const dispatch = useDispatch();
+  const registrationState = useSelector((state) => state.registrationReducer);
+  const { firstname, lastname, email, password, country, state, city, address } = registrationState;
   const schema = yup.object().shape({
     firstname: yup.string().required(),
     lastname: yup.string(),
@@ -17,13 +22,13 @@ const RegistrationContainer = () => {
     address: yup.string()
   });
 
-  const { firstname, lastname, email, password, country, state, city, address } = registrationState;
+  // const { firstname, lastname, email, password, country, state, city, address } = registrationState;
   const validateData = () => {
     dispatch(resetErrors());
-    dispatch(setIsLoading(true));
-    setTimeout(() => {
-      console.log('waiting');
-    }, 5000);
+    // dispatch(setIsLoading(true));
+    // setTimeout(() => {
+    //   console.log('waiting');
+    // }, 5000);
     if (
       country === initialState.country ||
       state === initialState.state ||
@@ -48,28 +53,19 @@ const RegistrationContainer = () => {
               });
             });
         } else {
-          // dispatch(loginRequest({ username, password }));
+          console.log("in else")
+          dispatch(registrationRequest({ firstname, lastname, email, password, country, state, city, address }));
           // dispatch(setIsLoading(true));
-          console.log(
-            'form submitted',
-            firstname,
-            lastname,
-            email,
-            password,
-            country,
-            state,
-            city,
-            address
-          );
+          console.log('form submitted');
         }
       });
 
-    dispatch(setIsLoading(false));
+    // dispatch(setIsLoading(false));
   };
 
-  // if (userDetails.auth_token) {
-  //   return <Redirect to="/dashboard" />;
-  // }
+  if (registrationState.registered) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <RegistrationComponent

@@ -14,7 +14,8 @@ const initialState = {
   emailError: null,
   passwordError: null,
   addressError: null,
-  isLoading: false
+  isLoading: false,
+  registered: false
 };
 
 const registrationReducer = (state = initialState, action) => {
@@ -47,6 +48,8 @@ const registrationReducer = (state = initialState, action) => {
       return { ...state, address: action.value };
     case FORM_ACTIONS.SET_ISLOADING:
       return { ...state, isLoading: action.value };
+    case FORM_ACTIONS.SET_REGISTERED:
+      return { ...state, registered: action.value };
     case FORM_ACTIONS.SET_FIRSTNAME_ERROR:
       return { ...state, firstnameError: action.value };
     case FORM_ACTIONS.SET_LASTNAME_ERROR:

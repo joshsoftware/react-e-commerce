@@ -119,16 +119,44 @@ export const setField = (field, value) => {
   };
 };
 
-// export const loginRequest = (data) => {
-//   return {
-//     type: FORM_ACTIONS.LOGIN_REQUEST,
-//     value: data,
-//   };
-// };
+export const registrationRequest = (data) => {
+  return {
+    type: FORM_ACTIONS.REGISTRATION_REQUEST,
+    value: data,
+  };
+};
 
-// export const loginFailed = (error) => {
-//   return {
-//     type: FORM_ACTIONS.LOGIN_FAILED,
-//     value: error,
-//   };
-// };
+export const setRegistered = (data) => {
+  return {
+    type: FORM_ACTIONS.SET_REGISTERED,
+    value: data,
+  };
+};
+
+export const registrationFailed = (error) => {
+  return {
+    type: FORM_ACTIONS.REGISTRATION_FAILED,
+    value: error,
+  };
+};
+
+export const loginRequest = (data) => {
+  return {
+    type: FORM_ACTIONS.LOGIN_REQUEST,
+    value: data,
+  };
+};
+
+export const setUserDetails = (data) => {
+  return {
+    type: FORM_ACTIONS.SET_USER_DETAILS,
+    value: data,
+  };
+};
+
+export const loginFailed = (error) => {
+  return {
+    type: FORM_ACTIONS.LOGIN_FAILED,
+    value: error,
+  };
+};
