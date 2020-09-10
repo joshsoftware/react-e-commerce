@@ -2,9 +2,9 @@ import React from 'react';
 import { Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const ColumnWrapper = ({ data, xs, sm, md, lg, xl, widths }) => {
+const ColumnWrapper = ({ data, className, xs, sm, md, lg, xl, widths }) => {
   return (
-    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} widths={widths}>
+    <Col xs={xs} className={className} sm={sm} md={md} lg={lg} xl={xl} widths={widths}>
       {data}
     </Col>
   );
@@ -25,6 +25,7 @@ const columnProps = PropTypes.oneOfType([
 ]);
 
 ColumnWrapper.propTypes = {
+  className: PropTypes.string,
   data: PropTypes.oneOfType([PropTypes.element, PropTypes.array, PropTypes.object]),
   xs: columnProps,
   sm: columnProps,

@@ -2,6 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationContainer from '../containers/RegistrationContainer';
 import LoginContainer from '../containers/LoginContainer';
+import ProductContainer from './containers/ProductContainer';
+import CartContainer from './containers/CartContainer';
+
 
 const Routes = () => {
   return (
@@ -14,13 +17,13 @@ const Routes = () => {
           <LoginContainer />
         </Route>
         <Route path="/products" exact={true}>
-          <h3>products</h3>
+          <ProductContainer />
         </Route>
         <Route path="/users/:user_id/profile" exact={true}>
           <h3>profile</h3>
         </Route>
-        <Route path="/users/:user_id/cart" exact={true}>
-          <h3>cart</h3>
+        <Route path="/cart" exact={true}>
+          <CartContainer />
         </Route>
       </Switch>
     </Router>
