@@ -12,8 +12,8 @@ const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
   combineReducers({
     loginReducer,
-    registrationReducer
-    // cartReducer
+    registrationReducer,
+    cartReducer
   }),
   applyMiddleware(sagaMiddleWare)
 );

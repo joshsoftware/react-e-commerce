@@ -1,9 +1,10 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
 import logout from '../apis/logoutApi';
 
-export const logoutRequest = (token) => {
+export const logoutRequest = (token, dispatch) => {
+  dispatch(setUserDetails({}));
   return logout(token);
-}
+};
 
 export const setFirstnameError = () => {
   return {

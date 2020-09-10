@@ -4,7 +4,13 @@ import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
 // import loginReducer, { initialState } from '../reducers/LoginReducer';
-import { setErrors, resetErrors, setIsLoading, loginRequest, setRegistered } from '../actions/formActions';
+import {
+  setErrors,
+  resetErrors,
+  setIsLoading,
+  loginRequest,
+  setRegistered
+} from '../actions/formActions';
 
 const LoginContainer = () => {
   // const [loginState, dispatch] = useReducer(loginReducer, initialState);
