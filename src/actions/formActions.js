@@ -28,27 +28,6 @@ export const setPasswordError = () => {
   };
 };
 
-export const setCountryError = () => {
-  return {
-    type: FORM_ACTIONS.SET_COUNTRY_ERROR,
-    value: null
-  };
-};
-
-export const setStateError = () => {
-  return {
-    type: FORM_ACTIONS.SET_STATE_ERROR,
-    value: null
-  };
-};
-
-export const setCityError = () => {
-  return {
-    type: FORM_ACTIONS.SET_CITY_ERROR,
-    value: null
-  };
-};
-
 export const setAddressError = () => {
   return {
     type: FORM_ACTIONS.SET_ADDRESS_ERROR,
@@ -122,6 +101,14 @@ export const setAddress = (val) => {
   return {
     type: FORM_ACTIONS.SET_ADDRESS,
     value: val.target.value
+  };
+};
+
+export const setField = (field, value) => {
+  return {
+    type: FORM_ACTIONS.SET_FIELD,
+    field: field,
+    value: value
   };
 };
 
