@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 // import loginReducer, { initialState } from '../reducers/LoginReducer';
-import { setErrors, resetErrors, setIsLoading, loginRequest } from '../actions/formActions';
+import { setErrors, resetErrors, setIsLoading, loginRequest, setRegistered } from '../actions/formActions';
 
 const LoginContainer = () => {
   // const [loginState, dispatch] = useReducer(loginReducer, initialState);
@@ -15,7 +15,7 @@ const LoginContainer = () => {
     password,
     // usernameError,
     // passwordError,
-    userDetails,
+    userDetails
   } = result;
 
   let schema = yup.object().shape({
@@ -42,9 +42,9 @@ const LoginContainer = () => {
     // dispatch(setIsLoading(false));
   };
 
-  // if (userDetails.auth_token) {
-  //   return (<Redirect to='/product' />)
-  // }
+  if (userDetails.token) {
+    return <Redirect to="/product" />;
+  }
 
   return <LoginComponent validateData={validateData} dispatch={dispatch} formState={result} />;
 };
