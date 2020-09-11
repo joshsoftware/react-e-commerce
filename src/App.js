@@ -10,6 +10,7 @@ import registrationReducer from './reducers/registrationReducer';
 import cartReducer from './reducers/cartReducer';
 import productListReducer from './reducers/productListReducer';
 import Footer from './components/Footer';
+import SearchBar from './components/SearchBar';
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
   combineReducers({
@@ -22,14 +23,13 @@ const store = createStore(
 );
 
 sagaMiddleWare.run(rootSaga);
-
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
         <Routes />
       </Provider>
-    </div>
+         </div>
   );
 }
 

@@ -29,29 +29,10 @@ const Footer = () => {
 
   const contacts = FooterData[2].contactus;
 
-  arr2.push(<LiComponent key={'contact-us-details'} data="Contact Us" />);
-  contacts.map((contact) => {
-    return arr2.push(<LiComponent key={contact.id} data={contact.name} />);
-  });
-
-  let a1 = [];
-  a1.push(
-    <ColumnWrapper key={'column-categories'} data={<UlComponent liElement={arr} />} xs={4} />
-  );
-  a1.push(<ColumnWrapper key={'column-partners'} data={<UlComponent liElement={arr1} />} xs={4} />);
-  a1.push(
-    <ColumnWrapper key={'column-contact-us'} data={<UlComponent liElement={arr2} />} xs={4} />
-  );
-  a1.push(
-    <div key={'footer-bootom'} className="footer-bottom">
-      &copy;Copyright XYZ.ltd {new Date().getFullYear()}
-    </div>
-  );
-
-  return (
-    <footer className="bg-dark text-white">
-      <ContainerWrapper data={<RowWrapper data={a1} />} fluid={true} />
-    </footer>
-  );
+    return (
+        <footer className="bg-dark text-white fixed-bottom">
+            <ContainerWrapper data={<RowWrapper data={a1} />} fluid={true} />
+        </footer>
+    );
 };
 export default Footer;
