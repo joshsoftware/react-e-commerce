@@ -7,6 +7,7 @@ import ProductComponent from '../components/ProductComponent';
 const ProductContainer = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   if (!userDetails.token) {
+    console.log('in products', userDetails.token);
     return <Redirect to="/login" />;
   }
   return (

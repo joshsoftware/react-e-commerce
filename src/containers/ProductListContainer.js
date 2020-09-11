@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const ProductListContainer = () => {
   // const [state, dispatch] = useReducer(productListReducer);
   const dispatch = useDispatch();
-  const { productList } = useSelector(state => state.productListReducer)
+  const { productList } = useSelector((state) => state.productListReducer);
   let arr = [];
   console.log('array lenght is: ', productList.length);
   for (let i = 0; i < productList.length; i += 3) {

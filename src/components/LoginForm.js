@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'reactstrap';
 import ButtonWrapper from './ButtonWrapper';
 import FormEmailField from './FormEmailField';
 import FormPasswordField from './FormPasswordField';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
+import { setAccessToken, loginOAuthRequest } from '../actions/formActions';
 
 const LoginForm = ({ validateData, dispatch, formState }) => {
   const { email, password, emailError, passwordError, isLoading } = formState;
-
-  const [token, setToken] = useState('');
+  const dispatchOAuth = useDispatch();
+  const { access_token } = useSelector((state) => state.loginReducer);
+  // const [token, setToken] = useState('');
 
   const responseGoogle = (response) => {
     console.log(response);
-    setToken(response.tokenObj.access_token);
-    console.log(token);
+    setAccessToken(response.tokenObj.access_token);
+    dispatchOAuth(loginOAuthRequest({ access_token }));
   };
 
   return (
