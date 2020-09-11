@@ -1,7 +1,14 @@
-import apiHelper from './apiHelper';
+import axios from 'axios';
 
 const getProductListApi = () => {
-  return apiHelper('get', 'https://api.taiga.io/api/v1/auth');
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1'
+  };
+  return axios({
+    method: 'get',
+    url: 'http://e5f7ca866cd7.ngrok.io/products',
+    headers: headers
+  });
 };
 
 export { getProductListApi };

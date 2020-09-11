@@ -7,7 +7,7 @@ import { getProductList } from '../actions/productListActions';
 const ProductListContainer = () => {
   const dispatch = useDispatch();
   dispatch(getProductList());
-  const { productList } = useSelector((state) => state.prodcutListReducer)
+  const { productList } = useSelector((state) => state.productListReducer);
   let arr = [];
   console.log('array lenght is: ', productList.length);
   for (let i = 0; i < productList.length; i += 3) {

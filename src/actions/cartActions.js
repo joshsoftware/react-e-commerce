@@ -7,9 +7,10 @@ export const setCartItems = (cartItems) => {
   };
 };
 
-export const getCartItems = () => {
+export const getCartItems = (token) => {
   return {
-    type: CART_REDUCER.GET_CART_ITEMS
+    type: CART_REDUCER.GET_CART_ITEMS,
+    value: token
   };
 };
 

@@ -1,13 +1,25 @@
+import axios from 'axios';
 import apiHelper from './apiHelper';
-import { useSelector } from 'react-redux';
 
-const getCartItemsApi = () => {
-  const { userDetails } = useSelector((state) => state.loginReducer);
+const getCartItemsApi = (token) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
-    Token: userDetails.token
+    Token: token
   };
-  return apiHelper('get', 'https://api.taiga.io/api/v1/auth', headers);
+  return axios({
+    method: 'get',
+    url: 'http://e5f7ca866cd7.ngrok.io/cart',
+    headers: headers
+  });
 };
 
 export { getCartItemsApi };
+
+export const deleteCartItemApi = ({ token, product_id }) => {
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token,
+    product_id: product_id
+  };
+  return apiHelper('delete', 'https://2a28c783a98e.ngrok.io/cart', headers);
+};
