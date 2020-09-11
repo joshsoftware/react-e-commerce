@@ -12,7 +12,8 @@ import CartDropdownContainer from '../containers/CartDropdownContainer';
 import { deleteCartItem } from '../actions/cartActions';
 
 const CartItem = ({ item, dispatch }) => {
-  const { product_title, image_url, product_price, stock, quantity, id } = item;
+  let { product_title, image_url, product_price, stock, quantity, id } = item;
+  stock = 5;
   let column_content = [];
   let i = 0;
   let item_details = [];

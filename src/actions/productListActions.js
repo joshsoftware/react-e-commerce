@@ -7,7 +7,8 @@ export const setProductList = (product_list) => {
   };
 };
 
-export const getProductList = (product_list) => {
+export const getProductList = () => {
+  console.log('getProductList function');
   return {
     type: PRODUCT_LIST_REDUCER.GET_PRODUCT_LIST
   };

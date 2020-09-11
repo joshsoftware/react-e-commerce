@@ -6,8 +6,11 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CART_REDUCER.SET_CART_ITEMS:
-      return { ...state, cartItemsList: action.value };
+    case CART_REDUCER.SET_CART_ITEMS: {
+      let newTotalPrice = 0;
+      action.value.map((product) => (newTotalPrice += product.product_price));
+      return { ...state, cartItemsList: action.value, totalPrice: newTotalPrice };
+    }
     case CART_REDUCER.GET_CART_ITEMS:
       return state;
     case CART_REDUCER.DELETE_CART_ITEM: {
