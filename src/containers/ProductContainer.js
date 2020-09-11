@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import ProductListContainer from './ProductListContainer';
 import ProductComponent from '../components/ProductComponent';
 import { getCartItems } from '../actions/cartActions';
+import Footer from '../components/Footer';
 
 const ProductContainer = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
@@ -19,6 +20,7 @@ const ProductContainer = () => {
     <>
       <ProductComponent />
       <ProductListContainer />
+      <Footer />
     </>
   );
 };

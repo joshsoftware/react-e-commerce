@@ -21,5 +21,5 @@ export const deleteCartItemApi = ({ token, product_id }) => {
     Token: token,
     product_id: product_id
   };
-  return apiHelper('delete', 'https://2a28c783a98e.ngrok.io/cart', headers);
+  return apiHelper('delete', 'http://e5f7ca866cd7.ngrok.io/cart', headers);
 };
