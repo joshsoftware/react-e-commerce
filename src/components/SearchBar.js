@@ -16,16 +16,16 @@ const SearchBar = ({ placeholder, setSearch, filterProduct }) => {
     <>
       {/* <RowWrapper>
            <ColumnWrapper sm={2}>   */}
-                <FormInput placeholder={placeholder} onChange={setSearchWrapper} />
-                <ButtonWrapper buttonText={'Search'} onClick={filterProductWrapper} />
-            {/* </ColumnWrapper>
+      <FormInput placeholder={placeholder} onChange={setSearchWrapper} />
+      <ButtonWrapper buttonText={'Search'} onClick={filterProductWrapper} />
+      {/* </ColumnWrapper>
       </RowWrapper> */}
     </>
   );
 };
 export default SearchBar;
 SearchBar.propTypes = {
-    placeholder: PropTypes.string,
-    setSearch: PropTypes.func,
-    filterProduct: PropTypes.func
-  };
+  placeholder: PropTypes.string,
+  setSearch: PropTypes.func,
+  filterProduct: PropTypes.func
+};

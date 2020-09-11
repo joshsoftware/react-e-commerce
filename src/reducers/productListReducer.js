@@ -8,7 +8,7 @@ const productListReducer = (state = initialState, action) => {
     case PRODUCT_LIST_REDUCER.SET_PRODUCT_LIST:
       return { ...state, productList: action.value };
     case PRODUCT_LIST_REDUCER.GET_PRODUCT_LIST:
-      return state
+      return state;
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import RegistrationComponent from '../components/RegistrationComponent';
-import { setErrors, resetErrors, registrationRequest, setRegistered } from '../actions/formActions';
+import { setErrors, resetErrors, registrationRequest } from '../actions/formActions';
 
 const RegistrationContainer = () => {
   const dispatch = useDispatch();

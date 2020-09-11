@@ -29,10 +29,10 @@ const Footer = () => {
 
   const contacts = FooterData[2].contactus;
 
-    return (
-        <footer className="bg-dark text-white fixed-bottom">
-            <ContainerWrapper data={<RowWrapper data={a1} />} fluid={true} />
-        </footer>
-    );
+  return (
+    <footer className="bg-dark text-white fixed-bottom">
+      <ContainerWrapper data={<RowWrapper data={arr1} />} fluid={true} />
+    </footer>
+  );
 };
 export default Footer;
