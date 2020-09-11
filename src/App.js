@@ -9,7 +9,7 @@ import loginReducer from './reducers/LoginReducer';
 import registrationReducer from './reducers/registrationReducer';
 import cartReducer from './reducers/cartReducer';
 import productListReducer from './reducers/productListReducer';
-
+import Footer from './components/Footer';
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
   combineReducers({
@@ -26,6 +26,7 @@ sagaMiddleWare.run(rootSaga);
 function App() {
   return (
     <div className="App">
+      
       <Provider store={store}>
         <Routes />
       </Provider>
