@@ -7,7 +7,7 @@ const login = ({ email, password }) => {
   console.log('in api', email, password);
   return apiHelper(
     'post',
-    'https://2a28c783a98e.ngrok.io/login',
+    'http://e5f7ca866cd7.ngrok.io/login',
     {
       email,
       password,
