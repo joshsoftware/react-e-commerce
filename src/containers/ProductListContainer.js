@@ -1,11 +1,13 @@
-import React, { useReducer } from 'react';
-import productList from '../productList';
+import React from 'react';
 import ProductRowContainer from './ProductRowContainer';
 import ContainerComponent from '../components/ContainerWrapper';
-import productListReducer from '../reducers/productListReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductList } from '../actions/productListActions';
 
 const ProductListContainer = () => {
-  const [state, dispatch] = useReducer(productListReducer);
+  const dispatch = useDispatch();
+  dispatch(getProductList());
+  const { productList } = useSelector((state) => state.prodcutListReducer)
   let arr = [];
   console.log('array lenght is: ', productList.length);
   for (let i = 0; i < productList.length; i += 3) {

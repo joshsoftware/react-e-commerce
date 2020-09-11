@@ -6,8 +6,10 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CART_REDUCER.SET_CARTITEMS:
+    case CART_REDUCER.SET_CART_ITEMS:
       return { ...state, cartItemsList: action.value };
+    case CART_REDUCER.GET_CART_ITEMS:
+      return state;
     case CART_REDUCER.DELETE_CART_ITEM: {
       let newCartItemsList = [...state.cartItemsList];
       let index = state.cartItemsList.findIndex((cartItem) => cartItem.id === action.value);
@@ -34,7 +36,7 @@ const cartReducer = (state = initialState, action) => {
     }
     default:
       return state;
-  }
+  };
 };
 
 export default cartReducer;

@@ -8,12 +8,15 @@ import loginReducer from "./reducers/LoginReducer";
 import registrationReducer from "./reducers/registrationReducer";
 import rootSaga from "./sagas/rootSaga";
 import cartReducer from './reducers/cartReducer';
+import prodcutListReducer from './reducers/productListReducer';
+
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
   combineReducers({
     loginReducer,
     registrationReducer,
-    // cartReducer
+    cartReducer,
+    prodcutListReducer
   }),
   applyMiddleware(sagaMiddleWare)
 );

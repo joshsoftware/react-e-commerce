@@ -1,16 +1,22 @@
 import { CART_REDUCER } from '../shared/actionConstants';
 
-export const setCartItems = (data) => {
+export const setCartItems = (cartItems) => {
   return {
-    type: CART_REDUCER.SET_CARTITEMS,
-    value: data
+    type: CART_REDUCER.SET_CART_ITEMS,
+    value: cartItems
   };
 };
 
-export const deleteCartItem = (item_id) => {
+export const getCartItems = () => {
+  return {
+    type: CART_REDUCER.GET_CART_ITEMS
+  };
+};
+
+export const deleteCartItem = (itemId) => {
   return {
     type: CART_REDUCER.DELETE_CART_ITEM,
-    value: item_id
+    value: itemId
   };
 };
 

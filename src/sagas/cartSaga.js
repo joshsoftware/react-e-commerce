@@ -4,9 +4,12 @@ import { getCartItemsApi } from '../apis/cartApi';
 import { setCartItems } from '../actions/cartActions';
 
 //worker saga
-function* projectWorkerSaga(action) {
+function* cartWorkerSaga() {
   try {
     const { data } = yield call(getCartItemsApi);
+    for(let i=0, i< data.length, i++){
+      
+    }
     yield put(setCartItems(data));
   } catch (error) {
     console.log(error);
@@ -14,6 +17,6 @@ function* projectWorkerSaga(action) {
 }
 
 //watcher saga
-export default function* projectWatcherSaga() {
-  yield takeLatest(CART_REDUCER.GET_PROJECTS, projectWorkerSaga);
+export default function* cartWatcherSaga() {
+  yield takeLatest(CART_REDUCER.GET_CART_ITEMS, cartWorkerSaga);
 }
