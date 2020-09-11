@@ -12,8 +12,10 @@ const ProductRowContainer = ({ products }) => {
   console.log('cartitemslist', cartItemsList);
   let arr = [];
   let productExists = (product) => {
+    console.log('iexie');
     let index = cartItemsList.findIndex((cartItem) => cartItem.id === product.id);
     if (index === -1) {
+      console.log('in index === -1');
       dispatch(addCartItem(product));
     } else {
       dispatch(updateItemQuantity({ id: product.id, newQuantity: product.quantity + 1 }));

@@ -1,11 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import ProductListContainer from './ProductListContainer';
 import ProductComponent from '../components/ProductComponent';
+import { getCartItems } from '../actions/cartActions';
 
 const ProductContainer = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCartItems(userDetails.token));
+  }, []);
   if (!userDetails.token) {
     console.log('in products', userDetails.token);
     return <Redirect to="/login" />;
