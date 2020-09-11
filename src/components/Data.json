@@ -1,0 +1,27 @@
+[
+    {
+      "label": "Color",
+      "sublabel": ["Red", "Blue", "Pink"],
+      "open": false
+    },
+    {
+      "label": "Price",
+      "sublabel": ["Below 500", "Between 500 - 2000", "Above 2000"],
+      "open": false
+    },
+    {
+      "label": "Brand",
+      "sublabel": ["LeeCooper", "Reebok", "Zivame"],
+      "open": false
+    },
+    {
+      "label": "Accessories",
+      "sublabel": ["Tshirts", "Shirts", "Pants", "Jeans", "Tops"],
+      "open": false
+    },
+    {
+      "label": "Size",
+      "sublabel": ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+      "open": false
+    }
+  ]
