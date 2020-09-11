@@ -160,13 +160,6 @@ export const setUserDetails = (data) => {
   };
 };
 
-export const setAccessToken = (data) => {
-  return {
-    type: FORM_ACTIONS.SET_ACCESS_TOKEN,
-    value: data
-  };
-};
-
 export const loginFailed = (error) => {
   return {
     type: FORM_ACTIONS.LOGIN_FAILED,

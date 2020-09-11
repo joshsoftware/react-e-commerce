@@ -3,21 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
-import {
-  setErrors,
-  resetErrors,
-  setIsLoading,
-  loginRequest
-} from '../actions/formActions';
+import { setErrors, resetErrors, setIsLoading, loginRequest } from '../actions/formActions';
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
   const result = useSelector((state) => state.loginReducer);
-  const {
-    email,
-    password,
-    userDetails
-  } = result;
+  const { email, password, userDetails } = result;
 
   let schema = yup.object().shape({
     email: yup.string().email().required(),

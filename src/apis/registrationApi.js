@@ -6,12 +6,10 @@ const registration = ({ firstname, lastname, email, password, country, state, ci
   console.log(first_name, last_name);
   const headers = {
     Accept: 'application/vnd.e-commerce.v1'
-    // 'Access-Control-Allow-Origin': '*',
-    // 'Content-Type':'application/x-www-form-urlencoded'
   };
   return apiHelper(
     'post',
-    'https://c94cee404c6d.ngrok.io/register',
+    'https://2a28c783a98e.ngrok.io/register',
     {
       first_name,
       last_name,

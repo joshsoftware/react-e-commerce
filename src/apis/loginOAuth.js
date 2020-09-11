@@ -1,6 +1,6 @@
 import apiHelper from './apiHelper';
 
-const loginOAuth = ({ access_token }) => {
+const loginOAuth = (access_token) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1'
   };

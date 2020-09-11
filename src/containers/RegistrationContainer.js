@@ -3,17 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import RegistrationComponent from '../components/RegistrationComponent';
-import {
-  setErrors,
-  resetErrors,
-  // setField,
-  // setIsLoading,
-  registrationRequest,
-  setRegistered
-} from '../actions/formActions';
+import { setErrors, resetErrors, registrationRequest, setRegistered } from '../actions/formActions';
 
 const RegistrationContainer = () => {
-  // const [registrationState, dispatch] = useReducer(registrationReducer, initialState);
   const dispatch = useDispatch();
   const registrationState = useSelector((state) => state.registrationReducer);
   const { firstname, lastname, email, password, country, state, city, address } = registrationState;
@@ -28,7 +20,6 @@ const RegistrationContainer = () => {
     address: yup.string()
   });
 
-  // const { firstname, lastname, email, password, country, state, city, address } = registrationState;
   const validateData = () => {
     dispatch(resetErrors());
     schema
@@ -59,16 +50,12 @@ const RegistrationContainer = () => {
               address
             })
           );
-          // dispatch(setIsLoading(true));
           console.log('form submitted');
         }
       });
-
-    // dispatch(setIsLoading(false));
   };
 
   if (registrationState.registered) {
-    dispatch(setRegistered(false));
     return <Redirect to="/login" />;
   }
 
