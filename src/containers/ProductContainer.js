@@ -1,14 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import ProductListContainer from './ProductListContainer';
 import ProductComponent from '../components/ProductComponent';
-// import ButtonWrapper from '../components/ButtonWrapper';
-import { Link } from 'react-router-dom';
 
 const ProductContainer = () => {
+  const { userDetails } = useSelector((state) => state.loginReducer);
+  if (!userDetails.token) {
+    console.log('in products', userDetails.token);
+    return <Redirect to="/login" />;
+  }
   return (
     <>
       <ProductComponent />
-      <Link to="/cart">CART</Link>
       <ProductListContainer />
     </>
   );

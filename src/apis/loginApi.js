@@ -1,12 +1,19 @@
-import apiHelper from "./apiHelper";
+import apiHelper from './apiHelper';
 
 const login = ({ email, password }) => {
-  let username = email;
-  console.log("in api", email, password)
-  return apiHelper("post", "https://api.taiga.io/api/v1/auth", {
-    username,
-    password,
-    type: "normal",
-  });
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1'
+  };
+  console.log('in api', email, password);
+  return apiHelper(
+    'post',
+    'https://2a28c783a98e.ngrok.io/login',
+    {
+      email,
+      password,
+      type: 'normal'
+    },
+    headers
+  );
 };
 export default login;

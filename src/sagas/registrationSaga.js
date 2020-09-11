@@ -1,17 +1,16 @@
-import { FORM_ACTIONS } from "../shared/actionConstants";
-import { takeLatest, call, put } from "redux-saga/effects";
-import { setRegistered, registrationFailed } from "../actions/formActions";
-import registration from "../apis/registrationApi";
+import { FORM_ACTIONS } from '../shared/actionConstants';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import { setRegistered, registrationFailed } from '../actions/formActions';
+import registration from '../apis/registrationApi';
 
 //worker saga
 function* registrationWorkerSaga(action) {
-  console.log('worker')
+  console.log('worker');
   try {
-    console.log('here1')
+    console.log('here1');
     const { data } = yield call(registration, action.value);
     console.log(data);
     yield put(setRegistered(true));
-    
   } catch (error) {
     console.log('error', error);
     yield put(registrationFailed(error));
@@ -20,6 +19,6 @@ function* registrationWorkerSaga(action) {
 
 //watcher saga
 export default function* registrationSaga() {
-  console.log('watcher')
+  console.log('watcher');
   yield takeLatest(FORM_ACTIONS.REGISTRATION_REQUEST, registrationWorkerSaga);
 }

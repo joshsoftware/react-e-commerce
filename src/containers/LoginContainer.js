@@ -1,32 +1,23 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
-import { Redirect } from "react-router-dom";
-// import loginReducer, { initialState } from '../reducers/LoginReducer';
+import { Redirect } from 'react-router-dom';
 import { setErrors, resetErrors, setIsLoading, loginRequest } from '../actions/formActions';
 
 const LoginContainer = () => {
-  // const [loginState, dispatch] = useReducer(loginReducer, initialState);
   const dispatch = useDispatch();
   const result = useSelector((state) => state.loginReducer);
-  const {
-    email,
-    password,
-    // usernameError,
-    // passwordError,
-    userDetails,
-  } = result;
+  const { email, password, userDetails } = result;
 
   let schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required()
   });
 
-  // const { email, password } = loginState;
   const validateData = () => {
     dispatch(resetErrors());
-    // dispatch(setIsLoading(true));
+    dispatch(setIsLoading(true));
     schema.isValid({ email, password }).then(function (valid) {
       if (!valid) {
         schema.validate({ email, password }, { abortEarly: false }).catch((err) => {
@@ -39,12 +30,12 @@ const LoginContainer = () => {
         console.log('login done', email, password);
       }
     });
-    // dispatch(setIsLoading(false));
+    dispatch(setIsLoading(false));
   };
 
-  // if (userDetails.auth_token) {
-  //   return (<Redirect to='/product' />)
-  // }
+  if (userDetails.token) {
+    return <Redirect to="/products" />;
+  }
 
   return <LoginComponent validateData={validateData} dispatch={dispatch} formState={result} />;
 };

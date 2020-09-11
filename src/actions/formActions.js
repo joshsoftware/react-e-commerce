@@ -1,4 +1,10 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
+import logout from '../apis/logoutApi';
+
+export const logoutRequest = (token, dispatch) => {
+  dispatch(setUserDetails({}));
+  return logout(token);
+};
 
 export const setFirstnameError = () => {
   return {
@@ -122,41 +128,55 @@ export const setField = (field, value) => {
 export const registrationRequest = (data) => {
   return {
     type: FORM_ACTIONS.REGISTRATION_REQUEST,
-    value: data,
+    value: data
   };
 };
 
 export const setRegistered = (data) => {
   return {
     type: FORM_ACTIONS.SET_REGISTERED,
-    value: data,
+    value: data
   };
 };
 
 export const registrationFailed = (error) => {
   return {
     type: FORM_ACTIONS.REGISTRATION_FAILED,
-    value: error,
+    value: error
   };
 };
 
 export const loginRequest = (data) => {
   return {
     type: FORM_ACTIONS.LOGIN_REQUEST,
-    value: data,
+    value: data
   };
 };
 
 export const setUserDetails = (data) => {
   return {
     type: FORM_ACTIONS.SET_USER_DETAILS,
-    value: data,
+    value: data
   };
 };
 
 export const loginFailed = (error) => {
   return {
     type: FORM_ACTIONS.LOGIN_FAILED,
-    value: error,
+    value: error
+  };
+};
+
+export const loginOAuthRequest = (data) => {
+  return {
+    type: FORM_ACTIONS.LOGINOAUTH_REQUEST,
+    value: data
+  };
+};
+
+export const loginOAuthFailed = (error) => {
+  return {
+    type: FORM_ACTIONS.LOGINOAUTH_FAILED,
+    value: error
   };
 };

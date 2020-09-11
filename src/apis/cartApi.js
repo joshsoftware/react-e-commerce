@@ -1,7 +1,6 @@
 import apiHelper from './apiHelper';
 import { useSelector } from 'react-redux';
 
-
 const getCartItemsApi = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const headers = {

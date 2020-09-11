@@ -7,9 +7,6 @@ import { setCartItems } from '../actions/cartActions';
 function* cartWorkerSaga() {
   try {
     const { data } = yield call(getCartItemsApi);
-    for(let i=0, i< data.length, i++){
-      
-    }
     yield put(setCartItems(data));
   } catch (error) {
     console.log(error);
