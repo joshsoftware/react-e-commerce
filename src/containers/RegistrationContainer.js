@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import RegistrationComponent from '../components/RegistrationComponent';
-import { setErrors, resetErrors, registrationRequest } from '../actions/formActions';
+import { setErrors, resetErrors, registrationRequest, setIsLoading } from '../actions/formActions';
+import { initialState } from '../reducers/registrationReducer';
 
 const RegistrationContainer = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const RegistrationContainer = () => {
   });
 
   const validateData = () => {
+    dispatch(setIsLoading(true));
     dispatch(resetErrors());
     schema
       .isValid({ firstname, lastname, email, password, country, state, city, address })
@@ -37,22 +39,35 @@ const RegistrationContainer = () => {
               });
             });
         } else {
+          let form_country='', form_state='', form_city=''
           console.log('in else');
+          if (
+            country !== initialState.country &&
+            state !== initialState.state &&
+            city !== initialState.city
+          ) {
+            form_country = country
+            form_state = state
+            form_city = city 
+          }
+          dispatch(setIsLoading(true));
           dispatch(
             registrationRequest({
               firstname,
               lastname,
               email,
               password,
-              country,
-              state,
-              city,
+              form_country,
+              form_state,
+              form_city,
               address
             })
           );
           console.log('form submitted');
+          dispatch(setIsLoading(false));
         }
       });
+    dispatch(setIsLoading(false));
   };
 
   if (registrationState.registered) {

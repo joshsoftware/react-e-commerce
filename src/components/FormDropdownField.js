@@ -4,6 +4,7 @@ import RegistrationDropdownContainer from '../containers/RegistrationDropdownCon
 import FormLabel from './FormLabel';
 import CountryDropdownContainer from '../containers/CountryDropdownContainer';
 import StateDropdownContainer from '../containers/StateDropdownContainer';
+import { initialState } from '../reducers/registrationReducer';
 let country = {
     field: 'exampleCountry',
     labelText: 'Country'
@@ -79,6 +80,7 @@ const FormDropdownField = (props) => {
         states={country_object.states}
         setCities={setCities}
         dispatch={props.dispatch}
+        disabled={props.country === initialState.country ? true : false }
       />
       <br />
       <FormLabel field={city.field} labelText={city.labelText} />
@@ -87,6 +89,7 @@ const FormDropdownField = (props) => {
         type="city"
         state={props.city}
         dispatch={props.dispatch}
+        disabled={props.state === initialState.state ? true : false }
       />
     </>
   );

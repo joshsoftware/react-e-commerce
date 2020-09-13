@@ -5,6 +5,7 @@ import DropdownItemWrapper from '../components/DropdownItemWrapper';
 import DropdownToggleWrapper from '../components/DropdownToggleWrapper';
 import DropdownMenuWrapper from '../components/DropdownMenuWrapper';
 import DropDownWrapper from '../components/DropDownWrapper';
+import { initialState } from '../reducers/registrationReducer';
 
 const StateDropdownContainer = ({ data, type, dispatch, state, states, setCities, disabled }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -17,7 +18,7 @@ const StateDropdownContainer = ({ data, type, dispatch, state, states, setCities
     dispatch(setField(type, field_value));
     let ar = [];
     setCities([]);
-    dispatch(setField('city', ''));
+    dispatch(setField('city', initialState.city));
     states.map((map_state) => {
       if (map_state.name === field_value) {
         map_state.cities.map((map_city) => {
