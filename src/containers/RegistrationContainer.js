@@ -39,16 +39,18 @@ const RegistrationContainer = () => {
               });
             });
         } else {
-          let form_country='', form_state='', form_city=''
+          let form_country = '',
+            form_state = '',
+            form_city = '';
           console.log('in else');
           if (
             country !== initialState.country &&
             state !== initialState.state &&
             city !== initialState.city
           ) {
-            form_country = country
-            form_state = state
-            form_city = city 
+            form_country = country;
+            form_state = state;
+            form_city = city;
           }
           dispatch(setIsLoading(true));
           dispatch(

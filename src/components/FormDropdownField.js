@@ -80,7 +80,7 @@ const FormDropdownField = (props) => {
         states={country_object.states}
         setCities={setCities}
         dispatch={props.dispatch}
-        disabled={props.country === initialState.country ? true : false }
+        disabled={props.country === initialState.country ? true : false}
       />
       <br />
       <FormLabel field={city.field} labelText={city.labelText} />
@@ -89,7 +89,7 @@ const FormDropdownField = (props) => {
         type="city"
         state={props.city}
         dispatch={props.dispatch}
-        disabled={props.state === initialState.state ? true : false }
+        disabled={props.state === initialState.state ? true : false}
       />
     </>
   );

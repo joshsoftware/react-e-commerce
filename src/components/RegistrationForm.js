@@ -30,8 +30,8 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     <>
       <h3>Register</h3>
       <hr />
-      <Form 
-          onSubmit={e => {
+      <Form
+        onSubmit={(e) => {
           e.preventDefault();
           validateData();
         }}>

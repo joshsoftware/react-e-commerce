@@ -22,19 +22,20 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
       <h3>Login</h3>
       <hr />
       <Form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           validateData();
         }}>
         <FormEmailField email={email} emailError={emailError} dispatch={dispatch} />
         <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} />
-        <ButtonWrapper 
-          buttonText={'Login'} 
+        <ButtonWrapper
+          buttonText={'Login'}
           onSubmit={(e) => {
             e.preventDefault();
             validateData();
-          }} 
-          disabled={isLoading} />
+          }}
+          disabled={isLoading}
+        />
         <hr />
         <GoogleLogin
           clientId={process.env.REACT_APP_CLIENT_ID}
