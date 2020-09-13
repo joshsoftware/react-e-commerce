@@ -1,27 +1,37 @@
-import React from 'react';
-// import '../Footer.css'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import UlComponent from './UlComponent';
 import LiComponent from './LiComponent';
 import ContainerWrapper from './ContainerWrapper';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';
-import FooterData from '../FooterData';
+import { getFooterElementList } from '../actions/footerAction';
 
 const Footer = () => {
-  
+  const dispatch = useDispatch()
+  console.log(getFooterElementList());
+  useEffect(() => {
+    console.log("useEffect11111");
+    dispatch(getFooterElementList());
+    console.log("useEffect");
+  }, []);
+//   dispatch(getFooterElementList());
+//   console.log(useSelector(state => state.footerElementListReducer));
+  const {elementList}= useSelector(state => state.footerElementListReducer)
+  console.log("hiiiiii"+elementList);
   let arr = [];
   let arr1 = [];
   let arr2 = [];
-  const categories = FooterData[0].categories;
-
+   const categories = elementList[0].categories;  
+  console.log("categories");
     arr.push(<LiComponent key={'categories-element'} data="Categories" />);
     categories.map((category) => {
-        return arr.push(
+        return arr.push(    
             <LiComponent key={category.id} data={<a href={category.url}>{category.name}</a>} />
         );
     });
 
-  const partner = FooterData[1].partners;
+  const partner = elementList[1].partners;
     
     arr1.push(<LiComponent key={'partners-element'} data="Partners" />);
     partner.map((partner) => {
@@ -30,7 +40,7 @@ const Footer = () => {
         );
     });
                 
-  const contacts = FooterData[2].contactus;
+  const contacts = elementList[2].contactus;
 
     arr2.push(<LiComponent key={'contact-us-details'} data="Contact Us" />);
     contacts.map((contact) => {

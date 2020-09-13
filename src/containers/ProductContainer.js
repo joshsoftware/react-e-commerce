@@ -12,10 +12,10 @@ const ProductContainer = () => {
   useEffect(() => {
     dispatch(getCartItems(userDetails.token));
   }, []);
-  if (!userDetails.token) {
-    console.log('in products', userDetails.token);
-    return <Redirect to="/login" />;
-  }
+  // if (!userDetails.token) {
+  //   console.log('in products', userDetails.token);
+  //   return <Redirect to="/login" />;
+  // }
   return (
     <>
       <ProductComponent />

@@ -4,6 +4,7 @@ import registrationSaga from './registrationSaga';
 import loginOAuthSaga from './loginOAuthSaga';
 import cartWatcherSaga from './cartSaga';
 import productWatcherSaga from './productSaga';
+import footerWatcherSaga from './footerSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -11,6 +12,7 @@ export default function* rootSaga() {
     registrationSaga(),
     loginOAuthSaga(),
     cartWatcherSaga(),
-    productWatcherSaga()
+    productWatcherSaga(),
+    footerWatcherSaga()   
   ]);
 }
