@@ -8,7 +8,7 @@ const getCartItemsApi = (token) => {
   };
   return axios({
     method: 'get',
-    url: 'http://e5f7ca866cd7.ngrok.io/cart',
+    url: 'https://66e5f4171704.ngrok.io/cart',
     headers: headers
   });
 };
@@ -21,5 +21,5 @@ export const deleteCartItemApi = ({ token, product_id }) => {
     Token: token,
     product_id: product_id
   };
-  return apiHelper('delete', 'http://e5f7ca866cd7.ngrok.io/cart', headers);
+  return apiHelper('delete', 'https://66e5f4171704.ngrok.io/cart', headers);
 };

@@ -1,25 +1,28 @@
 import apiHelper from './apiHelper';
 
-const userprofileupdate = ({
+const userprofileupdateApi = ({
   firstname,
   lastname,
   password,
-  country,
-  state,
-  city,
+  form_country,
+  form_state,
+  form_city,
   address,
   token
 }) => {
   let first_name = firstname,
-    last_name = lastname;
-  console.log(first_name, last_name);
+    last_name = lastname,
+    country = form_country,
+    state = form_state,
+    city = form_city;
+  console.log(first_name, last_name, token);
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token
   };
   return apiHelper(
-    'put',
-    'http://e5f7ca866cd7.ngrok.io/user/update',
+    'patch',
+    'https://66e5f4171704.ngrok.io/user/update',
     {
       first_name,
       last_name,
@@ -32,4 +35,4 @@ const userprofileupdate = ({
     headers
   );
 };
-export default userprofileupdate;
+export default userprofileupdateApi;

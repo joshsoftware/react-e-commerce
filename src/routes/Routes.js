@@ -5,6 +5,7 @@ import LoginContainer from '../containers/LoginContainer';
 import ProductContainer from '../containers/ProductContainer';
 import CartContainer from '../containers/CartContainer';
 import UserProfile from '../components/UserProfile';
+import UserProfileUpdateContainer from '../containers/UserProfileUpdateContainer';
 
 const Routes = () => {
   return (
@@ -24,6 +25,9 @@ const Routes = () => {
         </Route>
         <Route path="/profile" exact={true}>
           <UserProfile />
+        </Route>
+        <Route path="/profile/update" exact={true}>
+          <UserProfileUpdateContainer />
         </Route>
       </Switch>
     </Router>

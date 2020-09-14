@@ -7,7 +7,7 @@ const getUserProfileApi = (token) => {
   };
   return axios({
     method: 'get',
-    url: 'https://31dc46b31830.ngrok.io/user',
+    url: 'https://66e5f4171704.ngrok.io/user',
     headers: headers
   });
 };

@@ -131,6 +131,26 @@ export const registrationRequest = (data) => {
     value: data
   };
 };
+export const updateFailed = (error) => {
+  return {
+    type: FORM_ACTIONS.UPDATE_FAILED,
+    value: error
+  };
+};
+
+export const updateRequest = (data) => {
+  return {
+    type: FORM_ACTIONS.UPDATE_REQUEST,
+    value: data
+  };
+};
+
+export const setUpdated = (data) => {
+  return {
+    type: FORM_ACTIONS.SET_UPDATED,
+    value: data
+  };
+};
 
 export const setRegistered = (data) => {
   return {

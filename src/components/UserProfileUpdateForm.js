@@ -1,14 +1,10 @@
 import React from 'react';
 import { Form } from 'reactstrap';
-// import { Link } from 'react-router-dom';
 import ButtonWrapper from './ButtonWrapper';
-// import FormEmailField from './FormEmailField';
 import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
-import { setField } from '../actions/formActions';
-import { initialState } from '../reducers/registrationReducer';
 
 const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
   const {
@@ -21,27 +17,20 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
     password,
     firstnameError,
     lastnameError,
-    // emailError,
     passwordError,
     addressError,
     isLoading
   } = formState;
-  const resetData = () => {
-    if (
-      country === initialState.country ||
-      state === initialState.state ||
-      city === initialState.city
-    ) {
-      dispatch(setField('country', ''));
-      dispatch(setField('state', ''));
-      dispatch(setField('city', ''));
-    }
-  };
+
   return (
     <>
       <h3>Update User Profile</h3>
       <hr />
-      <Form>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          validateData();
+        }}>
         <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} />
         <FormTextField
           firstname={firstname}
@@ -56,8 +45,8 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
         <br />
         <ButtonWrapper
           buttonText={'Update'}
-          onClick={() => {
-            resetData();
+          onSubmit={(e) => {
+            e.preventDefault();
             validateData();
           }}
           disabled={isLoading}
@@ -69,3 +58,9 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
 };
 
 export default UserProfileUpdateForm;
+
+UserProfileUpdateForm.propTypes = {
+  validateData: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  formState: PropTypes.object.isRequired
+};

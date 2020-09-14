@@ -3,55 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-// import { createStore } from 'redux';
-import cartReducer from './reducers/cartReducer';
 import './index.css';
-import loginReducer from './reducers/LoginReducer';
-import registrationReducer from './reducers/registrationReducer';
-import productListReducer from './reducers/productListReducer';
-import footerElementListReducer from './reducers/footerReducer';
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas/rootSaga';
-import userprofileReducer from './reducers/userprofileReducer';
-import userprofileupdateReducer from './reducers/userprofileupdateReducer';
-// const sagaMiddleware = createSagaMiddleware();
-// const combinReducer = createCombineReducer(footerElementListReducer)
-
-// const store = createStore(cartReducer);
-
-// const store = createStore(
-//   combineReducers({
-//     cartReducer,
-//     footerElementListReducer,
-//     userprofileReducer
-
-//   }),
-//   applyMiddleware(sagaMiddleware)
-// );
-// sagaMiddleware.run(rootSaga);
-const sagaMiddleWare = createSagaMiddleware();
-const store = createStore(
-  combineReducers({
-    loginReducer,
-    registrationReducer,
-    cartReducer,
-    productListReducer,
-    footerElementListReducer,
-    userprofileReducer,
-    userprofileupdateReducer
-  }),
-  applyMiddleware(sagaMiddleWare)
-);
-
-sagaMiddleWare.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,18 +1,14 @@
 import React, { useEffect } from 'react';
 import { Card } from 'reactstrap';
-import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-// import CardComponent from './CardComponent';
-// import CardBodyWrapper from './CardBodyWrapper';
 import CardTextWrapper from './CardTextWrapper';
 import CardTitleWrapper from './CardTitleWrapper';
-import ButtonWrapper from './ButtonWrapper';
-// import UserDetails from '../UserDetails';
-//import UpdateUserProfile from './UpdateUserProfile';
 import RowWrapper from './RowWrapper';
 import ColumnWrapper from './ColumnWrapper';
 import FormLabel from './FormLabel';
 import { getUserProfile } from '../actions/userprofileAction';
+
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { profile } = useSelector((state) => state.userprofileReducer);
@@ -21,9 +17,6 @@ const UserProfile = () => {
     dispatch(getUserProfile(userDetails.token));
   }, []);
   console.log('UserProfileData', profile, userDetails.token);
-  const pageshow = () => {
-    <Redirect to="/products" />;
-  };
 
   let userprofile_content = [];
   userprofile_content.push(<CardTitleWrapper title={<h1>{'USER PROFILE'}</h1>} />);
@@ -42,14 +35,13 @@ const UserProfile = () => {
   userprofile_content.push(<FormLabel labelText={'Address'} />);
   userprofile_content.push(<CardTextWrapper text={profile.address} />);
   return (
-    <div>
+    <div className="text-center">
       <RowWrapper
         data={
           <ColumnWrapper sm={{ size: 6, offset: 3 }} data={<Card> {userprofile_content}</Card>} />
         }
       />
-      <ButtonWrapper buttonText={'Edit'} onClick={pageshow} />
-      {/* </Card> */}
+      <Link to="/profile/update">edit</Link>
     </div>
   );
 };

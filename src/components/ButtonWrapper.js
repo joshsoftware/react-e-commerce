@@ -21,5 +21,6 @@ ButtonWrapper.propTypes = {
   disabled: PropTypes.bool,
   style: PropTypes.string,
   onSubmit: PropTypes.func,
-  buttonText: PropTypes.string
+  buttonText: PropTypes.string,
+  onClick: PropTypes.func
 };

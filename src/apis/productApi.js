@@ -6,7 +6,7 @@ const getProductListApi = () => {
   };
   return axios({
     method: 'get',
-    url: 'http://e5f7ca866cd7.ngrok.io/products',
+    url: 'https://66e5f4171704.ngrok.io/products',
     headers: headers
   });
 };

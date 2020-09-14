@@ -10,10 +10,8 @@ import registrationReducer from './reducers/registrationReducer';
 import cartReducer from './reducers/cartReducer';
 import footerElementListReducer from './reducers/footerReducer';
 import productListReducer from './reducers/productListReducer';
-import UserProfile from './components/UserProfile';
-import UserProfileUpdateForm from './components/UserProfileUpdateForm';
 import userprofileReducer from './reducers/userprofileReducer';
-import UserProfileUpdateContainer from './containers/UserProfileUpdateContainer';
+import userprofileupdateReducer from './reducers/userprofileupdateReducer';
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
   combineReducers({
@@ -22,16 +20,17 @@ const store = createStore(
     cartReducer,
     productListReducer,
     footerElementListReducer,
-    userprofileReducer
+    userprofileReducer,
+    userprofileupdateReducer
   }),
   applyMiddleware(sagaMiddleWare)
 );
 
 sagaMiddleWare.run(rootSaga);
+
 function App() {
   return (
     <div className="App">
-      <UserProfileUpdateContainer />
       <Provider store={store}>
         <Routes />
       </Provider>
