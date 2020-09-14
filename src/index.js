@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import cartReducer from './reducers/cartReducer';
+import './index.css';
 
 const store = createStore(cartReducer);
 ReactDOM.render(
