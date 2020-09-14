@@ -1,6 +1,6 @@
 import { FOOTER_ELEMENT_LIST_REDUCER } from '../shared/actionConstants';
 const initialState = {
-  elementList: [{categories:[]},{partners:[]},{contactus:[]}]
+  elementList: [{ categories: [] }, { partners: [] }, { contactus: [] }]
 };
 
 const footerElementListReducer = (state = initialState, action) => {
@@ -8,12 +8,12 @@ const footerElementListReducer = (state = initialState, action) => {
   switch (action.type) {
     case FOOTER_ELEMENT_LIST_REDUCER.SET_FOOTER_ELEMENT_LIST:
       const newState = { ...state };
-     
-      // return newState.map(product => {    
+
+      // return newState.map(product => {
       //     return {...product}
       // });
-      return { elementList:action.value};
-      
+      return { elementList: action.value };
+
     case FOOTER_ELEMENT_LIST_REDUCER.GET_FOOTER_ELEMENT_LIST:
       return state;
     default:

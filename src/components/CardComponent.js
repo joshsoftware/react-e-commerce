@@ -6,7 +6,6 @@ import CardTitleWrapper from './CardTitleWrapper';
 import CardTextWrapper from './CardTextWrapper';
 import { PropTypes } from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
-
 const CardComponent = ({ product, productExists }) => {
   const { image_url, product_title, product_price, quantity, stock } = product;
   let body_content = [];
