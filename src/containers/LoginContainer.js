@@ -34,7 +34,7 @@ const LoginContainer = () => {
   };
 
   if (userDetails.token) {
-    return <Redirect to="/profile" />;
+    return <Redirect to="/products" />;
   }
   return <LoginComponent validateData={validateData} dispatch={dispatch} formState={result} />;
 };
