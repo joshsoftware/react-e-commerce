@@ -1,26 +1,22 @@
 import React from 'react';
 import { Form } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import ButtonWrapper from './ButtonWrapper';
-import FormEmailField from './FormEmailField';
 import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
 import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
 
-const RegistrationForm = ({ validateData, dispatch, formState }) => {
+const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
   const {
     firstname,
     lastname,
-    email,
-    password,
     country,
     state,
     city,
     address,
+    password,
     firstnameError,
     lastnameError,
-    emailError,
     passwordError,
     addressError,
     isLoading
@@ -28,14 +24,13 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
 
   return (
     <>
-      <h3>Register</h3>
+      <h3>Update User Profile</h3>
       <hr />
       <Form
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
         }}>
-        <FormEmailField email={email} emailError={emailError} dispatch={dispatch} />
         <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} />
         <FormTextField
           firstname={firstname}
@@ -49,7 +44,7 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
         <FormDropdownField country={country} state={state} city={city} dispatch={dispatch} />
         <br />
         <ButtonWrapper
-          buttonText={'Register'}
+          buttonText={'Update'}
           onSubmit={(e) => {
             e.preventDefault();
             validateData();
@@ -58,19 +53,13 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
         />
       </Form>
       <br />
-      <h6>
-        Already registered?
-        <span className="input-group-btn">
-          <Link to="/login"> Click to login</Link>
-        </span>
-      </h6>
     </>
   );
 };
 
-export default RegistrationForm;
+export default UserProfileUpdateForm;
 
-RegistrationForm.propTypes = {
+UserProfileUpdateForm.propTypes = {
   validateData: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   formState: PropTypes.object.isRequired

@@ -2,18 +2,21 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
-import RegistrationComponent from '../components/RegistrationComponent';
-import { setErrors, resetErrors, registrationRequest, setIsLoading } from '../actions/formActions';
-import { initialState } from '../reducers/registrationReducer';
-
-const RegistrationContainer = () => {
+// import RegistrationComponent from '../components/RegistrationComponent';
+import { setErrors, resetErrors, updateRequest } from '../actions/formActions';
+import UserProfileUpdateComponent from '../components/UserProfileUpdateComponent';
+import { initialState } from '../reducers/userprofileupdateReducer';
+const UserProfileUpdateContainer = () => {
   const dispatch = useDispatch();
-  const registrationState = useSelector((state) => state.registrationReducer);
-  const { firstname, lastname, email, password, country, state, city, address } = registrationState;
+
+  const { userDetails } = useSelector((state) => state.loginReducer);
+  console.log('welcome to dAta' + userDetails);
+  const { token } = userDetails;
+  const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
+  const { firstname, lastname, password, country, state, city, address } = userprofileupdatestate;
   const schema = yup.object().shape({
     firstname: yup.string().required(),
     lastname: yup.string(),
-    email: yup.string().email().required(),
     password: yup.string().min(8).required(),
     country: yup.string(),
     state: yup.string(),
@@ -22,15 +25,14 @@ const RegistrationContainer = () => {
   });
 
   const validateData = () => {
-    dispatch(setIsLoading(true));
     dispatch(resetErrors());
     schema
-      .isValid({ firstname, lastname, email, password, country, state, city, address })
+      .isValid({ firstname, lastname, password, country, state, city, address })
       .then(function (valid) {
         if (!valid) {
           schema
             .validate(
-              { firstname, lastname, email, password, country, state, city, address },
+              { firstname, lastname, password, country, state, city, address },
               { abortEarly: false }
             )
             .catch((err) => {
@@ -52,37 +54,35 @@ const RegistrationContainer = () => {
             form_state = state;
             form_city = city;
           }
-          dispatch(setIsLoading(true));
+          console.log('userupdate profile' + userDetails.token);
           dispatch(
-            registrationRequest({
+            updateRequest({
               firstname,
               lastname,
-              email,
-              password,
               form_country,
               form_state,
               form_city,
-              address
+              password,
+              address,
+              token
             })
           );
           console.log('form submitted');
-          dispatch(setIsLoading(false));
         }
       });
-    dispatch(setIsLoading(false));
   };
 
-  if (registrationState.registered) {
-    return <Redirect to="/login" />;
+  if (userprofileupdatestate.updated) {
+    return <Redirect to="/profile" />;
   }
 
   return (
-    <RegistrationComponent
+    <UserProfileUpdateComponent
       validateData={validateData}
       dispatch={dispatch}
-      formState={registrationState}
+      formState={userprofileupdatestate}
     />
   );
 };
 
-export default RegistrationContainer;
+export default UserProfileUpdateContainer;

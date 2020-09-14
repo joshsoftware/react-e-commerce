@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import { setErrors, resetErrors, setIsLoading, loginRequest } from '../actions/formActions';
-import { getCartItems } from '../actions/cartActions';
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
@@ -35,7 +34,7 @@ const LoginContainer = () => {
   };
 
   if (userDetails.token) {
-    return <Redirect to="/products" />;
+    return <Redirect to="/profile" />;
   }
   return <LoginComponent validateData={validateData} dispatch={dispatch} formState={result} />;
 };

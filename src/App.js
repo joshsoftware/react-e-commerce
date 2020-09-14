@@ -8,19 +8,26 @@ import rootSaga from './sagas/rootSaga';
 import loginReducer from './reducers/LoginReducer';
 import registrationReducer from './reducers/registrationReducer';
 import cartReducer from './reducers/cartReducer';
+import footerElementListReducer from './reducers/footerReducer';
 import productListReducer from './reducers/productListReducer';
+import userprofileReducer from './reducers/userprofileReducer';
+import userprofileupdateReducer from './reducers/userprofileupdateReducer';
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
   combineReducers({
     loginReducer,
     registrationReducer,
     cartReducer,
-    productListReducer
+    productListReducer,
+    footerElementListReducer,
+    userprofileReducer,
+    userprofileupdateReducer
   }),
   applyMiddleware(sagaMiddleWare)
 );
 
 sagaMiddleWare.run(rootSaga);
+
 function App() {
   return (
     <div className="App">

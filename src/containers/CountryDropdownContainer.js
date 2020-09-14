@@ -5,6 +5,7 @@ import DropdownItemWrapper from '../components/DropdownItemWrapper';
 import DropdownToggleWrapper from '../components/DropdownToggleWrapper';
 import DropdownMenuWrapper from '../components/DropdownMenuWrapper';
 import DropDownWrapper from '../components/DropDownWrapper';
+import { initialState } from '../reducers/registrationReducer';
 
 const CountryDropdownContainer = ({
   data,
@@ -27,9 +28,9 @@ const CountryDropdownContainer = ({
     dispatch(setField(type, field_value));
     let ar = [];
     setStates([]);
-    dispatch(setField('state', ''));
+    dispatch(setField('state', initialState.state));
     setCities([]);
-    dispatch(setField('city', ''));
+    dispatch(setField('city', initialState.city));
     countries.map((map_country) => {
       if (map_country.name === field_value) {
         map_country.states.map((map_state) => {

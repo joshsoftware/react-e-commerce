@@ -1,31 +1,31 @@
 import apiHelper from './apiHelper';
 
-const registration = ({
+const userprofileupdateApi = ({
   firstname,
   lastname,
-  email,
   password,
   form_country,
   form_state,
   form_city,
-  address
+  address,
+  token
 }) => {
   let first_name = firstname,
     last_name = lastname,
     country = form_country,
     state = form_state,
     city = form_city;
-  console.log('reg api', country, state, city);
+  console.log(first_name, last_name, token);
   const headers = {
-    Accept: 'application/vnd.e-commerce.v1'
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
   };
   return apiHelper(
-    'post',
-    'https://66e5f4171704.ngrok.io/register',
+    'patch',
+    'https://66e5f4171704.ngrok.io/user/update',
     {
       first_name,
       last_name,
-      email,
       password,
       country,
       state,
@@ -35,4 +35,4 @@ const registration = ({
     headers
   );
 };
-export default registration;
+export default userprofileupdateApi;

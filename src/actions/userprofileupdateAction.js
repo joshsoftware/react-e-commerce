@@ -1,10 +1,10 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
-import logout from '../apis/logoutApi';
+// import logout from '../apis/logoutApi';
 
-export const logoutRequest = (token, dispatch) => {
-  dispatch(setUserDetails({}));
-  return logout(token);
-};
+// export const logoutRequest = (token, dispatch) => {
+//   dispatch(setUserDetails({}));
+//   return logout(token);
+// };
 
 export const setFirstnameError = () => {
   return {
@@ -16,13 +16,6 @@ export const setFirstnameError = () => {
 export const setLastnameError = () => {
   return {
     type: FORM_ACTIONS.SET_LASTNAME_ERROR,
-    value: null
-  };
-};
-
-export const setEmailError = () => {
-  return {
-    type: FORM_ACTIONS.SET_EMAIL_ERROR,
     value: null
   };
 };
@@ -64,13 +57,6 @@ export const setFirstname = (val) => {
 export const setLastname = (val) => {
   return {
     type: FORM_ACTIONS.SET_LASTNAME,
-    value: val.target.value
-  };
-};
-
-export const setEmail = (val) => {
-  return {
-    type: FORM_ACTIONS.SET_EMAIL,
     value: val.target.value
   };
 };
@@ -131,26 +117,6 @@ export const registrationRequest = (data) => {
     value: data
   };
 };
-export const updateFailed = (error) => {
-  return {
-    type: FORM_ACTIONS.UPDATE_FAILED,
-    value: error
-  };
-};
-
-export const updateRequest = (data) => {
-  return {
-    type: FORM_ACTIONS.UPDATE_REQUEST,
-    value: data
-  };
-};
-
-export const setUpdated = (data) => {
-  return {
-    type: FORM_ACTIONS.SET_UPDATED,
-    value: data
-  };
-};
 
 export const setRegistered = (data) => {
   return {
@@ -187,16 +153,16 @@ export const loginFailed = (error) => {
   };
 };
 
-export const loginOAuthRequest = (data) => {
-  return {
-    type: FORM_ACTIONS.LOGINOAUTH_REQUEST,
-    value: data
-  };
-};
+// export const loginOAuthRequest = (data) => {
+//   return {
+//     type: FORM_ACTIONS.LOGINOAUTH_REQUEST,
+//     value: data
+//   };
+// };
 
-export const loginOAuthFailed = (error) => {
-  return {
-    type: FORM_ACTIONS.LOGINOAUTH_FAILED,
-    value: error
-  };
-};
+// export const loginOAuthFailed = (error) => {
+//   return {
+//     type: FORM_ACTIONS.LOGINOAUTH_FAILED,
+//     value: error
+//   };
+// };
