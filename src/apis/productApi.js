@@ -1,16 +1,14 @@
 import axios from 'axios';
-
-export const getProductListApi = () => {
+export const getProductListApi = (page) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1'
   };
   return axios({
     method: 'get',
-    url: 'https://66e5f4171704.ngrok.io/products',
+    url: `https://66e5f4171704.ngrok.io/products?limit=6&page=${page}`,
     headers: headers
   });
 };
-
 export const getProductByIdApi = (id) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1'
@@ -22,7 +20,6 @@ export const getProductByIdApi = (id) => {
     headers: headers
   });
 };
-
 export const updateProductStockApi = ({ id, stockChange }) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1'
