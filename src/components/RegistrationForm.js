@@ -7,8 +7,6 @@ import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
 import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
-import { setField } from '../actions/formActions';
-import { initialState } from '../reducers/registrationReducer';
 
 const RegistrationForm = ({ validateData, dispatch, formState }) => {
   const {
@@ -27,22 +25,16 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     addressError,
     isLoading
   } = formState;
-  const resetData = () => {
-    if (
-      country === initialState.country ||
-      state === initialState.state ||
-      city === initialState.city
-    ) {
-      dispatch(setField('country', ''));
-      dispatch(setField('state', ''));
-      dispatch(setField('city', ''));
-    }
-  };
+
   return (
     <>
       <h3>Register</h3>
       <hr />
-      <Form>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          validateData();
+        }}>
         <FormEmailField email={email} emailError={emailError} dispatch={dispatch} />
         <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} />
         <FormTextField
@@ -57,9 +49,9 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
         <FormDropdownField country={country} state={state} city={city} dispatch={dispatch} />
         <br />
         <ButtonWrapper
-          buttonText={'Submit'}
-          onClick={() => {
-            resetData();
+          buttonText={'Register'}
+          onSubmit={(e) => {
+            e.preventDefault();
             validateData();
           }}
           disabled={isLoading}
