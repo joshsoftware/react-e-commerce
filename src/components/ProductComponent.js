@@ -7,7 +7,7 @@ const ProductComponent = () => {
       <NavigationBarComponent color="dark" expand="md" />
       <SideBarComponent />
     </>
-  )
+  );
 };
 
 export default ProductComponent;
