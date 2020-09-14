@@ -5,7 +5,7 @@ export const getProductListApi = (page) => {
   };
   return axios({
     method: 'get',
-    url: `https://66e5f4171704.ngrok.io/products?limit=6&page=${page}`,
+    url: `https://66e5f4171704.ngrok.io/products?limit=9&page=${page}`,
     headers: headers
   });
 };
