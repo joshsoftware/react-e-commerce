@@ -8,7 +8,7 @@ import { PropTypes } from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
 
 const CardComponent = ({ product, productExists }) => {
-  const { image_url, product_title, product_price, quantity, stock } = product;
+  const { image_url, product_title, product_price, stock } = product;
   let body_content = [];
   body_content.push(<CardTitleWrapper title={product_title} />);
   body_content.push(<CardTextWrapper text={'$' + product_price} />);
@@ -16,13 +16,13 @@ const CardComponent = ({ product, productExists }) => {
   card_content.push(<CardImgWrapper src={image_url} />);
   card_content.push(<CardBodyWrapper body_content={body_content} />);
   card_content.push(
-    quantity >= stock ? (
+    stock <= 0 ? (
       <ButtonWrapper buttonText={'Out of stock'} disabled={true} color={'danger'} />
     ) : (
       <ButtonWrapper buttonText={'Add to Cart'} onClick={() => productExists(product)} />
     )
   );
-  return <Card>{card_content}</Card>;
+  return <Card className="h-100">{card_content}</Card>;
 };
 export default CardComponent;
 CardComponent.propTypes = {

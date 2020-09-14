@@ -8,8 +8,21 @@ export const setProductList = (product_list) => {
 };
 
 export const getProductList = () => {
-  console.log('getProductList function');
   return {
     type: PRODUCT_LIST_REDUCER.GET_PRODUCT_LIST
+  };
+};
+
+export const getProduct = (id) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.GET_PRODUCT,
+    value: id
+  };
+};
+
+export const updateProductList = (data) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.UPDATE_PRODUCT_LIST,
+    value: data
   };
 };
