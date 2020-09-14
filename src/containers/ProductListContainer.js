@@ -6,6 +6,8 @@ import ContainerWrapper from '../components/ContainerWrapper';
 const ProductListContainer = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const { totalPages } = useSelector((state) => state.productListReducer);
+  console.log('hdhfk',totalPages)
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==
@@ -13,7 +15,11 @@ const ProductListContainer = () => {
       loading
     )
       return;
-    setLoading(true);
+    console.log(page);
+    if(page+1<=totalPages || totalPages === 0)
+    {
+      setLoading(true);
+    }
   };
   useEffect(() => {
     setLoading(true);
