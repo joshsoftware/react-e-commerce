@@ -1,12 +1,19 @@
 import React from 'react';
 import { FormGroup } from 'reactstrap';
-import FormLabelComponent from './FormLabelComponent';
+import FormLabel from './FormLabelComponent';
 import PropTypes from 'prop-types';
 
-const FormGroupComponent = ({ label, id }) => {
+const FormGroupComponent = ({ label, mainLabel, setLabel, setProducts, products }) => {
   return (
     <FormGroup check>
-      <FormLabelComponent check labelText={label} for={id} />
+      <FormLabel
+        check
+        labelText={label}
+        mainLabel={mainLabel}
+        setLabel={setLabel}
+        setProducts={setProducts}
+        products={products}
+      />
     </FormGroup>
   );
 };
@@ -14,6 +21,5 @@ const FormGroupComponent = ({ label, id }) => {
 export default FormGroupComponent;
 
 FormGroupComponent.propTypes = {
-  label: PropTypes.string.isRequired,
-  id: PropTypes.number
+  label: PropTypes.string.isRequired
 };

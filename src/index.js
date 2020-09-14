@@ -6,7 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import cartReducer from './reducers/cartReducer';
+<<<<<<< HEAD
 import "./index.css";
+=======
+import './index.css';
+
+>>>>>>> e9f53fa452b397924110c73ee906ef7e41e73e4d
 const store = createStore(cartReducer);
 ReactDOM.render(
   <React.StrictMode>

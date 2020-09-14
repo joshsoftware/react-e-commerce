@@ -1,25 +1,51 @@
 import axios from 'axios';
-import apiHelper from './apiHelper';
 
-const getCartItemsApi = (token) => {
+export const getCartItemsApi = (token) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token
   };
   return axios({
     method: 'get',
-    url: 'http://e5f7ca866cd7.ngrok.io/cart',
+    url: 'https://66e5f4171704.ngrok.io/cart',
     headers: headers
   });
 };
 
-export { getCartItemsApi };
-
 export const deleteCartItemApi = ({ token, product_id }) => {
+  console.log('product id', product_id);
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
-    Token: token,
-    product_id: product_id
+    Token: token
   };
-  return apiHelper('delete', 'http://e5f7ca866cd7.ngrok.io/cart', headers);
+  return axios({
+    method: 'delete',
+    url: `https://66e5f4171704.ngrok.io/cart?productId=${product_id}`,
+    headers: headers
+  });
+};
+
+export const updateCartItemsApi = ({ token, product_id, quantity }) => {
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
+  };
+  console.log('quantity and product_id', quantity, product_id);
+  return axios({
+    method: 'put',
+    url: `https://66e5f4171704.ngrok.io/cart?productId=${product_id}&quantity=${quantity}`,
+    headers: headers
+  });
+};
+
+export const addCartItemApi = ({ token, product_id }) => {
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
+  };
+  return axios({
+    method: 'post',
+    url: `https://66e5f4171704.ngrok.io/cart?productId=${product_id}`,
+    headers: headers
+  });
 };

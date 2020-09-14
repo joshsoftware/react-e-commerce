@@ -83,16 +83,16 @@ code {
   }
 
   .bm-burger-button {
-	position: fixed;
+	position: absolute;
 	width: 36px;
 	height: 30px;
-	left: 36px;
+	left: 260px;
 	top: 36px;
   }
   
   /* Color/shape of burger icon bars */
   .bm-burger-bars {
-	background: #373a47;
+	background: #f10317;
   }
   
   /* Color/shape of burger icon bars on hover*/
@@ -110,3 +110,5 @@ code {
   .bm-cross {
 	background: #bdc3c7;
   }
+
+  

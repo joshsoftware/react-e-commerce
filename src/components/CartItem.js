@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './CartItem.css';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';
@@ -10,18 +10,19 @@ import CardTitleWrapper from './CardTitleWrapper';
 import CardTextWrapper from './CardTextWrapper';
 import CartDropdownContainer from '../containers/CartDropdownContainer';
 import { deleteCartItem } from '../actions/cartActions';
+import { deleteCartItemApi } from '../apis/cartApi';
+import { useSelector } from 'react-redux';
+import { getProductByIdApi } from '../apis/productApi';
 
 const CartItem = ({ item, dispatch }) => {
-  let { product_title, image_url, product_price, stock, quantity, id } = item;
-  stock = 5;
+  let { product_title, image_url, product_price, quantity, id } = item;
+  const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
   let i = 0;
   let item_details = [];
   item_details.push(<CardTitleWrapper key={i++} title={product_title} />);
   item_details.push(<CardTextWrapper key={i++} text={'Price : $ ' + product_price} />);
-  item_details.push(
-    <CartDropdownContainer id={id} dispatch={dispatch} quantity={quantity} stock={stock} />
-  );
+  item_details.push(<CartDropdownContainer id={id} dispatch={dispatch} quantity={quantity} />);
   column_content.push(
     <ColumnWrapper
       key={i++}
@@ -39,7 +40,15 @@ const CartItem = ({ item, dispatch }) => {
     <ColumnWrapper
       key={i++}
       className={'col_three'}
-      data={<ButtonWrapper buttonText={'X'} onClick={() => dispatch(deleteCartItem(id))} />}
+      data={
+        <ButtonWrapper
+          buttonText={'X'}
+          onClick={() => {
+            deleteCartItemApi({ token: userDetails.token, product_id: id });
+            dispatch(deleteCartItem(id));
+          }}
+        />
+      }
     />
   );
 
@@ -58,7 +67,6 @@ CartItem.propTypes = {
     product_title: PropTypes.string,
     product_price: PropTypes.number,
     quantity: PropTypes.number,
-    stock: PropTypes.number,
     id: PropTypes.number
   }),
   dispatch: PropTypes.func.isRequired

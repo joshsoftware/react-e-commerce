@@ -14,10 +14,10 @@ export const getCartItems = (token) => {
   };
 };
 
-export const deleteCartItem = (itemId) => {
+export const deleteCartItem = (data) => {
   return {
     type: CART_REDUCER.DELETE_CART_ITEM,
-    value: itemId
+    value: data
   };
 };
 

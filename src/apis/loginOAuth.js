@@ -7,7 +7,7 @@ const loginOAuth = (access_token) => {
   console.log('in api', access_token);
   return apiHelper(
     'post',
-    'http://e5f7ca866cd7.ngrok.io/auth/google',
+    'https://66e5f4171704.ngrok.io/auth/google',
     {
       access_token
     },

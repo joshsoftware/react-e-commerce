@@ -5,20 +5,27 @@ import PropTypes from 'prop-types';
 import CardComponent from '../components/CardComponent';
 import { addCartItem, updateItemQuantity } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateCartItemsApi, addCartItemApi } from '../apis/cartApi';
+import { updateProductStockApi } from '../apis/productApi';
 
 const ProductRowContainer = ({ products }) => {
   const dispatch = useDispatch();
+  const { userDetails } = useSelector((state) => state.loginReducer);
   const { cartItemsList } = useSelector((state) => state.cartReducer);
-  console.log('cartitemslist', cartItemsList);
   let arr = [];
   let productExists = (product) => {
-    console.log('iexie');
     let index = cartItemsList.findIndex((cartItem) => cartItem.id === product.id);
+    updateProductStockApi({ id: product.id, stockChange: 1 });
     if (index === -1) {
-      console.log('in index === -1');
+      addCartItemApi({ token: userDetails.token, product_id: product.id });
       dispatch(addCartItem(product));
     } else {
-      dispatch(updateItemQuantity({ id: product.id, newQuantity: product.quantity + 1 }));
+      updateCartItemsApi({
+        token: userDetails.token,
+        product_id: product.id,
+        quantity: cartItemsList[index].quantity + 1
+      });
+      dispatch(updateItemQuantity({ id: product.id, flag: 'addToCart' }));
     }
   };
   arr = products.map((product) => {

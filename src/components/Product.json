@@ -1,0 +1,50 @@
+[
+    {
+        "item": 1,
+        "category": "Clothes",
+        "color": "Red",
+        "size": "L",
+        "product_price": "1000",
+        "brand": "LeeCooper" 
+    },
+    {
+        "item": 2,
+        "category": "Clothes",
+        "color": "Pink",
+        "size": "S",
+        "product_price": "400",
+        "brand": "Zivame" 
+    },
+    {
+        "item": 3,
+        "category": "Sports",
+        "color": "Blue",
+        "size": "S",
+        "product_price": "1500",
+        "brand": "Reebok" 
+    },
+    {
+        "item": 4,
+        "category": "Clothes",
+        "color": "Magenta",
+        "size": "L",
+        "product_price": "200",
+        "brand": "Pantaloons" 
+    },
+    {
+        "item": 5,
+        "category": "Electronics",
+        "color": "Grey",
+        "size": "",
+        "product_price": "200",
+        "brand": "Whirpool" 
+    },
+    {
+        "item": 6,
+        "category": "Electronics",
+        "color": "Black",
+        "size": "",
+        "product_price": "200",
+        "brand": "Whirpool" 
+    }
+]
