@@ -53,7 +53,6 @@ const cartReducer = (state = initialState, action) => {
       let newCartItemsList = [...state.cartItemsList, cartObject(action.value)];
       let newTotalPrice = state.totalPrice;
       newTotalPrice += action.value.product_price;
-      console.log('add to cart', newCartItemsList);
       return { ...state, cartItemsList: newCartItemsList, totalPrice: newTotalPrice };
     }
     default:

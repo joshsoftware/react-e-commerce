@@ -13,7 +13,6 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
   const dispatchOAuth = useDispatch();
 
   const responseGoogle = (response) => {
-    console.log(response);
     dispatchOAuth(loginOAuthRequest(response.tokenObj.access_token));
   };
 

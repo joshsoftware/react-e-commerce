@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './CartItem.css';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';
@@ -12,7 +12,6 @@ import CartDropdownContainer from '../containers/CartDropdownContainer';
 import { deleteCartItem } from '../actions/cartActions';
 import { deleteCartItemApi } from '../apis/cartApi';
 import { useSelector } from 'react-redux';
-import { getProductByIdApi } from '../apis/productApi';
 
 const CartItem = ({ item, dispatch }) => {
   let { product_title, image_url, product_price, quantity, id } = item;

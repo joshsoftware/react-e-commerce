@@ -5,17 +5,39 @@ import { getProductList } from '../actions/productListActions';
 import ContainerWrapper from '../components/ContainerWrapper';
 
 const ProductListContainer = () => {
-  // const [page, setPage] = useState(1);
-  // const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight ||
+      loading
+    )
+      return;
+    setLoading(true);
+  };
+
   useEffect(() => {
-    // const loadProducts = async () => {
-    //   setLoading(true);
-    dispatch(getProductList());
-    //   setLoading(false);
-    // };
-    // loadProducts();
+    setLoading(true);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const dispatch = useDispatch();
+
+  const changeStates = async () => {
+    setTimeout(() => {
+      setPage(page + 1);
+      setLoading(false);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    if (loading === true) {
+      dispatch(getProductList(page));
+      changeStates();
+    }
+  }, [loading]);
   const { productList } = useSelector((state) => state.productListReducer);
   let arr = [];
   for (let i = 0; i < productList.length; i += 3) {

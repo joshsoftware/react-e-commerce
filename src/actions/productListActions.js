@@ -7,9 +7,10 @@ export const setProductList = (product_list) => {
   };
 };
 
-export const getProductList = () => {
+export const getProductList = (page) => {
   return {
-    type: PRODUCT_LIST_REDUCER.GET_PRODUCT_LIST
+    type: PRODUCT_LIST_REDUCER.GET_PRODUCT_LIST,
+    value: page
   };
 };
 
