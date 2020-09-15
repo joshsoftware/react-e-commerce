@@ -30,10 +30,11 @@ const ProductRowContainer = ({ products }) => {
   };
   arr = products.map((product) => {
     if (product !== undefined) {
+      let index = cartItemsList.findIndex((cartItem) => cartItem.id === product.id);
       return (
         <ColumnWrapper
           key={product.id}
-          data={<CardComponent product={product} productExists={productExists} />}
+          data={<CardComponent index={index} product={product} productExists={productExists} />}
         />
       );
     }

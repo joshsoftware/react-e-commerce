@@ -4,7 +4,7 @@ import { getProductListApi } from '../apis/productApi';
 import { setProductList } from '../actions/productListActions';
 function* productsWorkerSaga(action) {
   try {
-    console.log('Inn Sama',action.value)
+    console.log('Inn Sama', action.value);
     const { data } = yield call(getProductListApi, action.value);
     yield put(setProductList(data));
   } catch (error) {

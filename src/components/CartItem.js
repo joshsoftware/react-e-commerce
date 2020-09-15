@@ -8,11 +8,12 @@ import PropTypes from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
 import CardTitleWrapper from './CardTitleWrapper';
 import CardTextWrapper from './CardTextWrapper';
-import CartDropdownContainer from '../containers/CartDropdownContainer';
+//import CartDropdownContainer from '../containers/CartDropdownContainer';
 import { deleteCartItem } from '../actions/cartActions';
 import { deleteCartItemApi } from '../apis/cartApi';
 import { useSelector } from 'react-redux';
 import { getProductByIdApi } from '../apis/productApi';
+import InputSpinnerContainer from '../containers/InputSpinnerContainer';
 
 const CartItem = ({ item, dispatch }) => {
   let { product_title, image_url, product_price, quantity, id } = item;
@@ -22,7 +23,7 @@ const CartItem = ({ item, dispatch }) => {
   let item_details = [];
   item_details.push(<CardTitleWrapper key={i++} title={product_title} />);
   item_details.push(<CardTextWrapper key={i++} text={'Price : $ ' + product_price} />);
-  item_details.push(<CartDropdownContainer id={id} dispatch={dispatch} quantity={quantity} />);
+  item_details.push(<InputSpinnerContainer id={id} dispatch={dispatch} quantity={quantity} />);
   column_content.push(
     <ColumnWrapper
       key={i++}
