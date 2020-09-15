@@ -30,10 +30,11 @@ const ProductRowContainer = ({ products }) => {
   };
   arr = products.map((product) => {
     if (product !== undefined) {
-      if(product.disabled === false){
+      if (product.disabled === false) {
         let index = cartItemsList.findIndex((cartItem) => cartItem.id === product.id);
         return (
           <ColumnWrapper
+            className={'col-md-4 col-xs-4 col-sm-4 col-lg-4'}
             key={product.id}
             data={<CardComponent index={index} product={product} productExists={productExists} />}
           />

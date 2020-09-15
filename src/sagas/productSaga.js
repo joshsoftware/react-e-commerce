@@ -7,7 +7,7 @@ function* productsWorkerSaga(action) {
     console.log('Inn Sama', action.value);
     const { data } = yield call(getProductListApi, action.value);
     console.log('product data is', data);
-    yield put(setProductList(data));
+    yield put(setProductList(data.products));
   } catch (error) {
     console.log(error);
   }

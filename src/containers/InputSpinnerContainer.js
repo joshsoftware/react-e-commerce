@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { updateProductStockApi, getProductByIdApi } from '../apis/productApi';
 import InputSpinnerWrapper from '../components/InputSpinnerWrapper';
 import ButtonWrapper from '../components/ButtonWrapper';
-import { Alert } from 'reactstrap';
 import ColumnWrapper from '../components/ColumnWrapper';
 import RowWrapper from '../components/RowWrapper';
 
@@ -66,7 +65,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
         break;
       }
     }
-    if (check_flag == false) {
+    if (check_flag === false) {
       alert('Invalid Input');
       setQuantity(quantity);
       return;

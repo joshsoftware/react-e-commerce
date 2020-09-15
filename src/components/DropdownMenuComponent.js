@@ -13,7 +13,7 @@ const DropdownMenuComponent = () => {
   return (
     <DropdownMenu right>
       <Link to="/profile">{ele1}</Link>
-      
+
       <DropdownItemWrapper
         option="Logout"
         onClick={() => {

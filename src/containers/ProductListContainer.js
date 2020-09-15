@@ -48,7 +48,7 @@ const ProductListContainer = () => {
   const { productList, alert } = useSelector((state) => state.productListReducer);
   let arr = [];
   useEffect(() => {
-    if(alert === true){
+    if (alert === true) {
       setVisible(true);
     }
   }, [alert]);
@@ -57,8 +57,15 @@ const ProductListContainer = () => {
       <ProductRowContainer key={productList[i].id} products={productList.slice(i, i + 3)} />
     );
   }
-  arr.push(<AlertWrapper color="info" isOpen={visible} toggle={toggle} data={"No Items matches your choice"}/>)
-  
+  arr.push(
+    <AlertWrapper
+      color="info"
+      isOpen={visible}
+      toggle={toggle}
+      data={'No Items matches your choice'}
+    />
+  );
+
   return <ContainerWrapper data={arr} fluid={true} />;
 };
 export default ProductListContainer;

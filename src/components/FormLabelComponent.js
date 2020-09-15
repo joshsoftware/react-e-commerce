@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import Data from './Data';
-import { getProductList, setProductList, setSubProductList, setFilters, applyFilters, setAlert } from '../actions/productListActions';
+import { setFilters, applyFilters, setAlert } from '../actions/productListActions';
 
 const FormLabel = ({ field, labelText, mainLabel, setLabel, setProducts, products }) => {
   const dispatch = useDispatch();
@@ -26,20 +26,19 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel, setProducts, product
     const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
     if (accessories.includes(labelText) && !checked) {
       addFilters(labelText);
-    }
-    else{
-      if(accessories.includes(labelText)){
+    } else {
+      if (accessories.includes(labelText)) {
         setLabel(Data);
       }
     }
     let flag = false;
-    for(let i = 0; i < productList.length; i++){
-      if(productList[i].disabled === false){
+    for (let i = 0; i < productList.length; i++) {
+      if (productList[i].disabled === false) {
         flag = true;
-        break
+        break;
       }
     }
-    if(flag === false){
+    if (flag === false) {
       dispatch(setAlert(true));
     }
   };
@@ -51,13 +50,19 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel, setProducts, product
     let color_arr = [];
     let brand_arr = [];
     arr.map((filteredProduct) => {
-      if(filteredProduct.disabled === false){
-        size_arr.push(filteredProduct.size)
-        color_arr.push(filteredProduct.color)
-        brand_arr.push(filteredProduct.brand)
+      if (filteredProduct.disabled === false) {
+        size_arr.push(filteredProduct.size);
+        color_arr.push(filteredProduct.color);
+        brand_arr.push(filteredProduct.brand);
       }
     });
-    const price_arr = ["Under 1000", "1000 - 5000", "5000 - 10,000", "10,000 - 20,000", "Over 20,000"]
+    const price_arr = [
+      'Under 1000',
+      '1000 - 5000',
+      '5000 - 10,000',
+      '10,000 - 20,000',
+      'Over 20,000'
+    ];
     size_arr = Array.from(new Set(size_arr));
     color_arr = Array.from(new Set(color_arr));
     brand_arr = Array.from(new Set(brand_arr));
@@ -84,18 +89,17 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel, setProducts, product
       label: 'Price',
       sublabel: price_arr,
       open: false
-    }
+    };
     LabelsToShow.push(Data[0]);
-    if(labelText === "Electronics" || labelText === "Mobile" || labelText === "Watch"){
+    if (labelText === 'Electronics' || labelText === 'Mobile' || labelText === 'Watch') {
       LabelsToShow.push(new_object_color);
-    }
-    else if(labelText !== "Books"){
+    } else if (labelText !== 'Books') {
       LabelsToShow.push(new_object_size);
       LabelsToShow.push(new_object_color);
     }
     LabelsToShow.push(new_object_brand);
     LabelsToShow.push(new_object_price);
-    
+
     if (!checked) {
       setLabel(LabelsToShow);
     }
