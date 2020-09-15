@@ -10,7 +10,7 @@ import CardTextWrapper from './CardTextWrapper';
 import { deleteCartItem } from '../actions/cartActions';
 import { deleteCartItemApi } from '../apis/cartApi';
 import { useSelector } from 'react-redux';
-import { Alert } from 'reactstrap';
+import InputSpinnerContainer from '../containers/InputSpinnerContainer';
 
 const CartItem = ({ item, dispatch }) => {
   let { product_title, image_url, product_price, quantity, tax, discount, id } = item;
@@ -18,46 +18,9 @@ const CartItem = ({ item, dispatch }) => {
   let column_content = [];
   let i = 0;
   let item_details = [];
-  let item_price_details_key = [];
-  item_price_details_key.push(
-    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Price     :  '} />
-  );
-  item_price_details_key.push(
-    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Discount  : '} />
-  );
-  item_price_details_key.push(
-    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Tax       :  '} />
-  );
-  item_price_details_key.push(
-    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Total:'} />
-  );
-
-  let item_price_details_value = [];
-  item_price_details_value.push(
-    <CardTextWrapper key={i++} text={'$' + product_price * quantity} />
-  );
-  item_price_details_value.push(
-    <CardTextWrapper key={i++} text={'-$' + ((discount * product_price) / 100) * quantity} />
-  );
-  item_price_details_value.push(
-    <CardTextWrapper key={i++} text={'+$' + ((tax * product_price) / 100) * quantity} />
-  );
-  item_price_details_value.push(
-    <CardTextWrapper
-      key={i++}
-      text={
-        '$' +
-        (product_price - (discount * product_price) / 100 + (tax * product_price) / 100) * quantity
-      }
-    />
-  );
-
-  item_details.push(
-    <Alert className={' p-0 '} color="info">
-      {' '}
-      {product_title}{' '}
-    </Alert>
-  );
+  item_details.push(<CardTitleWrapper key={i++} title={product_title} />);
+  item_details.push(<CardTextWrapper key={i++} text={'Price : $ ' + product_price} />);
+  item_details.push(<InputSpinnerContainer id={id} dispatch={dispatch} quantity={quantity} />);
   column_content.push(
     <ColumnWrapper
       key={i++}

@@ -7,10 +7,6 @@ const ProductListContainer = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const { totalPages } = useSelector((state) => state.productListReducer);
-<<<<<<< HEAD
-  console.log('hdhfk', totalPages);
-=======
->>>>>>> 30d509507b15e5079fece652bd0cbeb7815b49bb
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==
