@@ -30,12 +30,14 @@ const ProductRowContainer = ({ products }) => {
   };
   arr = products.map((product) => {
     if (product !== undefined) {
-      return (
-        <ColumnWrapper
-          key={product.id}
-          data={<CardComponent product={product} productExists={productExists} />}
-        />
-      );
+      if(product.disabled === false){
+        return (
+          <ColumnWrapper
+            key={product.id}
+            data={<CardComponent product={product} productExists={productExists} />}
+          />
+        );
+      }
     }
   });
   return <RowWrapper data={arr} />;

@@ -9,7 +9,7 @@ const registration = ({ firstname, lastname, email, password, country, state, ci
   };
   return apiHelper(
     'post',
-    'https://66e5f4171704.ngrok.io/register',
+    'https://69cc90ef47d8.ngrok.io/register',
     {
       first_name,
       last_name,

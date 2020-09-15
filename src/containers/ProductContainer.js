@@ -13,7 +13,7 @@ const ProductContainer = () => {
   }, []);
   if (!userDetails.token) {
     console.log('in products', userDetails.token);
-    return <Redirect to="/login" />;
+    //return <Redirect to="/login" />;
   }
   return (
     <>

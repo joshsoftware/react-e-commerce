@@ -2,7 +2,7 @@
     {
       "id": "category",
       "label": "Accessories",
-      "sublabel": ["Clothes", "Mobile", "Electronics", "Sports", "Books"],
+      "sublabel": ["Clothes", "Mobile", "Electronics", "Sports", "Books", "Watch"],
       "open": false
     }
   ]
