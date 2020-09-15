@@ -27,7 +27,6 @@ const LoginContainer = () => {
         });
       } else {
         dispatch(loginRequest({ email, password }));
-        console.log('login done', email, password);
       }
     });
     dispatch(setIsLoading(false));

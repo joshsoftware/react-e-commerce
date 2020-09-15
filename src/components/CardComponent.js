@@ -14,7 +14,7 @@ const CardComponent = ({ product, productExists }) => {
   body_content.push(<CardTitleWrapper title={product_title} />);
   body_content.push(<CardTextWrapper text={'$' + product_price} />);
   let card_content = [];
-  card_content.push(<CardImgWrapper className={'cart-image'} src={image_url} />);
+  card_content.push(<CardImgWrapper className={'cart-image img-fluid'} src={image_url} />);
   card_content.push(<CardBodyWrapper body_content={body_content} />);
   card_content.push(
     stock <= 0 ? (

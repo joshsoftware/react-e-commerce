@@ -1,14 +1,9 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-const ButtonWrapper = ({ style, onClick, onSubmit, buttonText, color, disabled }) => {
+const ButtonWrapper = ({ style, onClick, buttonText, color, disabled, outline }) => {
   return (
-    <Button
-      className={style}
-      onClick={onClick}
-      onSubmit={onSubmit}
-      color={color}
-      disabled={disabled}>
+    <Button className={style} onClick={onClick} color={color} outline={outline} disabled={disabled}>
       {buttonText}
     </Button>
   );
@@ -17,6 +12,7 @@ const ButtonWrapper = ({ style, onClick, onSubmit, buttonText, color, disabled }
 export default ButtonWrapper;
 
 ButtonWrapper.propTypes = {
+  outline: PropTypes.bool,
   color: PropTypes.string,
   disabled: PropTypes.bool,
   style: PropTypes.string,

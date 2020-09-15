@@ -14,11 +14,9 @@ const CartDropdownContainer = ({ id, quantity, dispatch }) => {
   let [stock, setStock] = useState('');
   let [flag, setFlag] = useState(false);
   const getProduct = async () => {
-    console.log('in getProduct');
     const { data } = await getProductByIdApi(id);
     setStock(data.stock);
     setFlag(false);
-    console.log('stock is', stock);
   };
   useEffect(() => {
     if (flag === true) {
