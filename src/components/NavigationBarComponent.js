@@ -14,7 +14,7 @@ const NavigationBarComponent = (props) => {
 
   return (
     <Navbar color={color} expand={expand}>
-      <NavbarBrandComponent url={'/'} logo={logo} />
+      <NavbarBrandComponent url={'/products'} logo={logo} />
       <NavbarTogglerComponent toggle={toggle} />
       <NavComponent />
     </Navbar>

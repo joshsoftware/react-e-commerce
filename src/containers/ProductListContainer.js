@@ -3,10 +3,14 @@ import ProductRowContainer from './ProductRowContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductList } from '../actions/productListActions';
 import ContainerWrapper from '../components/ContainerWrapper';
+import AlertWrapper from '../components/AlertWrapper';
+
 const ProductListContainer = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const { totalPages } = useSelector((state) => state.productListReducer);
+  const [visible, setVisible] = useState(false);
+
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==
@@ -19,12 +23,15 @@ const ProductListContainer = () => {
       setLoading(true);
     }
   };
+
+  const toggle = () => setVisible(false);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  const dispatch = useDispatch();
   const changeStates = async () => {
     setTimeout(() => {
       setPage(page + 1);
@@ -38,13 +45,20 @@ const ProductListContainer = () => {
       changeStates();
     }
   }, [loading]);
-  const { productList } = useSelector((state) => state.productListReducer);
+  const { productList, alert } = useSelector((state) => state.productListReducer);
   let arr = [];
+  useEffect(() => {
+    if(alert === true){
+      setVisible(true);
+    }
+  }, [alert]);
   for (let i = 0; i < productList.length; i += 3) {
     arr.push(
       <ProductRowContainer key={productList[i].id} products={productList.slice(i, i + 3)} />
     );
   }
+  arr.push(<AlertWrapper color="info" isOpen={visible} toggle={toggle} data={"No Items matches your choice"}/>)
+  
   return <ContainerWrapper data={arr} fluid={true} />;
 };
 export default ProductListContainer;
