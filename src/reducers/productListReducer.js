@@ -3,7 +3,6 @@ const initialState = {
   productList: [],
   totalPages: 0
 };
-
 const productListReducer = (state = initialState, action) => {
   switch (action.type) {
     case PRODUCT_LIST_REDUCER.SET_PRODUCT_LIST: {
@@ -20,5 +19,4 @@ const productListReducer = (state = initialState, action) => {
       return state;
   }
 };
-
 export default productListReducer;

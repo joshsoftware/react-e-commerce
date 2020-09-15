@@ -20,7 +20,17 @@
     margin: auto;
 }
 
-.col_three {
+.col_five {
     text-align: center;
     margin: auto;
+}
+.cart-image {
+    height: 250px;
+}
+.col_three {
+    text-align: right;
+    
+}
+.col_four {
+    text-align: left;
 }
