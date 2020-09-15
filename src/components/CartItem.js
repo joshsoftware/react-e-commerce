@@ -11,6 +11,7 @@ import { deleteCartItem } from '../actions/cartActions';
 import { deleteCartItemApi } from '../apis/cartApi';
 import { useSelector } from 'react-redux';
 import { Alert } from 'reactstrap';
+import InputSpinnerContainer from '../containers/InputSpinnerContainer';
 
 const CartItem = ({ item, dispatch }) => {
   let { product_title, image_url, product_price, quantity, tax, discount, id } = item;
@@ -58,6 +59,7 @@ const CartItem = ({ item, dispatch }) => {
       {product_title}{' '}
     </Alert>
   );
+  item_details.push(<InputSpinnerContainer id={id} dispatch={dispatch} quantity={quantity} />);
   column_content.push(
     <ColumnWrapper
       key={i++}
