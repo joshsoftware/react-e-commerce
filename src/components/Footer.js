@@ -60,7 +60,7 @@ const Footer = () => {
   );
 
   return (
-    <footer className="bg-dark text-white fixed-bottom">
+    <footer className="bg-dark text-white bottom">
       <ContainerWrapper data={<RowWrapper data={a1} />} fluid={true} />
     </footer>
   );

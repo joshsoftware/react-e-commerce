@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom';
 import { setErrors, resetErrors, updateRequest } from '../actions/formActions';
 import UserProfileUpdateComponent from '../components/UserProfileUpdateComponent';
 import { initialState } from '../reducers/userprofileupdateReducer';
+import NavigationBarComponent from '../components/NavigationBarComponent';
+import Footer from '../components/Footer';
 const UserProfileUpdateContainer = () => {
   const dispatch = useDispatch();
 
@@ -77,11 +79,15 @@ const UserProfileUpdateContainer = () => {
   }
 
   return (
-    <UserProfileUpdateComponent
-      validateData={validateData}
-      dispatch={dispatch}
-      formState={userprofileupdatestate}
-    />
+    <>
+      <NavigationBarComponent color="dark" expand="md" />
+      <UserProfileUpdateComponent
+        validateData={validateData}
+        dispatch={dispatch}
+        formState={userprofileupdatestate}
+      />
+      <Footer />
+    </>
   );
 };
 

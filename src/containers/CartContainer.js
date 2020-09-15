@@ -16,7 +16,7 @@ const CartContainer = () => {
       <NavigationBarComponent color="dark" expand="md" />
       <CartHeader />
       <CartItemListContainer />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
