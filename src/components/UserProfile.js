@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Card } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import CardTextWrapper from './CardTextWrapper';
 import CardTitleWrapper from './CardTitleWrapper';
 import RowWrapper from './RowWrapper';
 import ColumnWrapper from './ColumnWrapper';
@@ -17,31 +16,32 @@ const UserProfile = () => {
     dispatch(getUserProfile(userDetails.token));
   }, []);
   console.log('UserProfileData', profile, userDetails.token);
-
+  profile.first_name = 'devyani';
   let userprofile_content = [];
-  userprofile_content.push(<CardTitleWrapper title={<h1>{'USER PROFILE'}</h1>} />);
-  userprofile_content.push(<FormLabel labelText={'First Name'} />);
-  userprofile_content.push(<CardTextWrapper text={profile.first_name} />);
-  userprofile_content.push(<FormLabel labelText={'Last Name'} />);
-  userprofile_content.push(<CardTextWrapper text={profile.last_name} />);
-  userprofile_content.push(<FormLabel labelText={'Contact'} />);
-  userprofile_content.push(<CardTextWrapper text={profile.mobile} />);
-  userprofile_content.push(<FormLabel labelText={'State'} />);
-  userprofile_content.push(<CardTextWrapper text={profile.state} />);
-  userprofile_content.push(<FormLabel labelText={'City'} />);
-  userprofile_content.push(<CardTextWrapper text={profile.city} />);
-  userprofile_content.push(<FormLabel labelText={'Country'} />);
-  userprofile_content.push(<CardTextWrapper text={profile.country} />);
-  userprofile_content.push(<FormLabel labelText={'Address'} />);
-  userprofile_content.push(<CardTextWrapper text={profile.address} />);
+  userprofile_content.push(
+    <CardTitleWrapper title={<h1 className={'bg-dark text-white'}>{'USER PROFILE'}</h1>} />
+  );
+  userprofile_content.push(<FormLabel labelText={'First Name: ' + profile.first_name} />);
+  userprofile_content.push(<FormLabel labelText={'Last Name: ' + profile.last_name} />);
+  userprofile_content.push(<FormLabel labelText={'Contact: ' + profile.mobile} />);
+  userprofile_content.push(<FormLabel labelText={'State: ' + profile.state} />);
+  userprofile_content.push(<FormLabel labelText={'City: ' + profile.city} />);
+  userprofile_content.push(<FormLabel labelText={'Country: ' + profile.contry} />);
+  userprofile_content.push(<FormLabel labelText={'Address: ' + profile.addtress} />);
   return (
-    <div className="text-center">
+    <div className="text-center p-5">
       <RowWrapper
         data={
-          <ColumnWrapper sm={{ size: 6, offset: 3 }} data={<Card> {userprofile_content}</Card>} />
+          <ColumnWrapper
+            sm={{ size: 6, offset: 3 }}
+            data={<Card className={'border border-dark'}> {userprofile_content}</Card>}
+          />
         }
       />
-      <Link to="/profile/update">edit</Link>
+      <Link className={'bg-dark text-white'} to="/profile/update">
+        {' '}
+        Edit Profile{' '}
+      </Link>
     </div>
   );
 };
