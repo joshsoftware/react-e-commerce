@@ -44,11 +44,18 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
   }, [flag]);
   const { userDetails } = useSelector((state) => state.loginReducer);
   let itemFunc = (item_quantity) => {
-    updateProductStockApi({ id: id, stockChange: quantity - item_quantity });
+    console.log('Item Quantity',item_quantity);
+    console.log('Quantity',quantity);
+    console.log('Stock', stock);
+    updateProductStockApi({ id: id, stockChange: item_quantity - quantity });
     updateCartItemsApi({ token: userDetails.token, product_id: id, quantity: item_quantity });
     dispatch(updateItemQuantity({ id: id, newQuantity: item_quantity }));
   };
-
+  const resetState = () => {
+    setTimeout(() => {
+      setQuantity(valid_quantity);
+    }, 500);
+  }
   function updateQuantity(e) {
     setQuantity(e.target.value);
     let input = e.target.value;
@@ -83,9 +90,14 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
       setQuantity(input);
       let new_quantity = parseInt(input);
       if (new_quantity > 0) {
+        setQuantity(parseInt(input));
         setValidQuantity(parseInt(input));
       }
+      else{
+        console.log(input);
+      }
     }
+    window.addEventListener("click", resetState); 
   }
   useEffect(() => {
     itemFunc(valid_quantity);
@@ -98,6 +110,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
     <ColumnWrapper
       data={
         <InputSpinnerWrapper
+          defaultValue={valid_quantity}
           size={5}
           min={1}
           max={stock}

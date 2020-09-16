@@ -1,9 +1,10 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-const InputSpinner = ({ size, min, max, spinner, value, type, className, step, onChange }) => {
+const InputSpinner = ({ defaultValue, size, min, max, spinner, value, type, className, step, onChange }) => {
   return (
     <input
+      defaultValue={defaultValue}
       size={size}
       type={type}
       min={min}
@@ -21,6 +22,7 @@ const InputSpinner = ({ size, min, max, spinner, value, type, className, step, o
 export default InputSpinner;
 
 InputSpinner.propTypes = {
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   min: PropTypes.number,
   max: PropTypes.number,
   type: PropTypes.string,

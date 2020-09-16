@@ -9,6 +9,7 @@ import ButtonWrapper from './ButtonWrapper';
 import CardTextWrapper from './CardTextWrapper';
 import { deleteCartItem } from '../actions/cartActions';
 import { deleteCartItemApi } from '../apis/cartApi';
+import { updateProductStockApi } from '../apis/productApi';
 import { useSelector } from 'react-redux';
 import { Alert } from 'reactstrap';
 import InputSpinnerContainer from '../containers/InputSpinnerContainer';
@@ -90,6 +91,7 @@ const CartItem = ({ item, dispatch }) => {
           color={'danger'}
           onClick={() => {
             deleteCartItemApi({ token: userDetails.token, product_id: id });
+            updateProductStockApi({ product_id: id, stock: -quantity })
             dispatch(deleteCartItem(id));
           }}
         />
