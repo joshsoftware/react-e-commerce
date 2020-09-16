@@ -54,17 +54,18 @@ export const setAlert = (alert) => {
     value: alert
   };
 };
+export const resetProductList = () => {
+  return {
+    type: PRODUCT_LIST_REDUCER.RESET_PRODUCT_LIST
+  };
+};
 
-// export const setCopyProductList = (product_list) => {
-//   return {
-//     type: PRODUCT_LIST_REDUCER.SET_COPY_PRODUCT_LIST,
-//     value: product_list
-//   };
-// };
-
-// export const setSubProductList = (product_list) => {
-//   return {
-//     type: PRODUCT_LIST_REDUCER.SET_SUB_PRODUCT_LIST,
-//     value: product_list
-//   };
-// };
+export const setMinMax = (min, max) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.SET_MIN_MAX,
+    value: {
+      min: min,
+      max: max
+    }
+  };
+};

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProductRowContainer from './ProductRowContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductList } from '../actions/productListActions';
+import { getProductList, resetProductList } from '../actions/productListActions';
 import ContainerWrapper from '../components/ContainerWrapper';
 import AlertWrapper from '../components/AlertWrapper';
 import './productContainer.css';
@@ -27,6 +27,7 @@ const ProductListContainer = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(resetProductList())
     setLoading(true);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -43,11 +44,15 @@ const ProductListContainer = () => {
       changeStates();
     }
   }, [loading]);
+  
   const { productList, alert } = useSelector((state) => state.productListReducer);
   let arr = [];
   useEffect(() => {
     if (alert === true) {
       setVisible(true);
+    }
+    else{
+      setVisible(false);
     }
   }, [alert]);
   let tempProductList = [];
@@ -66,10 +71,11 @@ const ProductListContainer = () => {
   }
   arr.push(
     <AlertWrapper
+      className="text-center"
       color="info"
       isOpen={visible}
       toggle={toggle}
-      data={'No Items matches your choice'}
+      data={"No items matches your choice!!"}
     />
   );
 

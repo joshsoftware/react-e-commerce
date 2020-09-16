@@ -6,7 +6,7 @@ import Data from './Data';
 
 const MenuComponent = ({ className }) => {
   return (
-    <Menu width={'15%'} noOverlay className={className}>
+    <Menu width={'15%'} Overlay className={className}>
       <MenuItem Data={Data} />
     </Menu>
   );

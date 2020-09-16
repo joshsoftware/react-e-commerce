@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import Data from './Data';
-import { setFilters, applyFilters, setAlert } from '../actions/productListActions';
+import { setFilters, applyFilters, setAlert, setMinMax } from '../actions/productListActions';
 
 const FormLabel = ({ field, labelText, mainLabel, setLabel, setProducts, products }) => {
   const dispatch = useDispatch();
@@ -28,6 +28,8 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel, setProducts, product
       addFilters(labelText);
     } else {
       if (accessories.includes(labelText)) {
+        dispatch(setFilters({}))
+        dispatch(applyFilters());
         setLabel(Data);
       }
     }
@@ -49,19 +51,26 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel, setProducts, product
     let size_arr = [];
     let color_arr = [];
     let brand_arr = [];
+    let min = 1000000, max = 0;
     arr.map((filteredProduct) => {
       if (filteredProduct.disabled === false) {
         size_arr.push(filteredProduct.size);
         color_arr.push(filteredProduct.color);
         brand_arr.push(filteredProduct.brand);
+        if(min >= filteredProduct.product_price){
+          min = filteredProduct.product_price;
+        }
+        if(max <= filteredProduct.product_price){
+          max = filteredProduct.product_price;
+        }
       }
     });
+    let offset = (max - min)/3;
+    dispatch(setMinMax(min, max));
     const price_arr = [
-      'Under 1000',
-      '1000 - 5000',
-      '5000 - 10,000',
-      '10,000 - 20,000',
-      'Over 20,000'
+      `${min} - ${Math.floor(min+offset)}`,
+      `${Math.floor(min+offset+1)} - ${Math.floor(min+offset*2)}`,
+      `${Math.floor((min+offset*2)+1)} - ${max}`
     ];
     size_arr = Array.from(new Set(size_arr));
     color_arr = Array.from(new Set(color_arr));
