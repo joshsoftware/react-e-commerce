@@ -1,18 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const AlertWrapper = ({
-  className,
-  closeClassName,
-  color,
-  isOpen,
-  toggle,
-  tag,
-  fade,
-  transition,
-  data
-}) => {
+const AlertWrapper = ({ className, closeClassName, color, isOpen, toggle, tag, fade, data }) => {
   return (
     <Alert
       className={className}
@@ -21,8 +11,7 @@ const AlertWrapper = ({
       isOpen={isOpen}
       toggle={toggle}
       tag={tag}
-      fade={fade}
-      transition={transition}>
+      fade={fade}>
       {data}
     </Alert>
   );
@@ -38,6 +27,5 @@ AlertWrapper.propTypes = {
   toggle: PropTypes.func,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   fade: PropTypes.bool,
-  //transition: PropTypes.shape(Fade.propTypes),
   data: PropTypes.string
 };

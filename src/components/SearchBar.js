@@ -2,14 +2,12 @@ import React from 'react';
 import ButtonWrapper from './ButtonWrapper';
 import FormInput from './FormInput';
 import PropTypes from 'prop-types';
-import RowWrapper from './RowWrapper';
-import ColumnWrapper from './ColumnWrapper';
 const SearchBar = ({ placeholder, setSearch, filterProduct }) => {
   const setSearchWrapper = (e) => {
     setSearch(e.target.value);
   };
   const filterProductWrapper = () => {
-    let arr = filterProduct();
+    //let arr = filterProduct();
   };
   return (
     <>

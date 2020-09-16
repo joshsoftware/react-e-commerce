@@ -4,6 +4,7 @@ import FormGroupComponent from './FormGroupComponent';
 
 const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products }) => {
   const [filterby, setFilterby] = useState('');
+
   const setSublabel = (props) => {
     setFilterby(props);
   };
@@ -44,5 +45,8 @@ export default ItemComponent;
 ItemComponent.propTypes = {
   label: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
-  toggle: PropTypes.func.isRequired
+  toggle: PropTypes.func.isRequired,
+  setLabel: PropTypes.func,
+  setProducts: PropTypes.func,
+  products: PropTypes.object
 };

@@ -25,8 +25,18 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
           e.preventDefault();
           validateData();
         }}>
-        <FormEmailField email={email} emailError={emailError} dispatch={dispatch} isRequired={true}/>
-        <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} isRequired={true}/>
+        <FormEmailField
+          email={email}
+          emailError={emailError}
+          dispatch={dispatch}
+          isRequired={true}
+        />
+        <FormPasswordField
+          password={password}
+          passwordError={passwordError}
+          dispatch={dispatch}
+          isRequired={true}
+        />
         <ButtonWrapper
           buttonText={'Login'}
           onSubmit={(e) => {

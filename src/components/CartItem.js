@@ -103,7 +103,7 @@ const CartItem = ({ item, dispatch }) => {
           color={'danger'}
           onClick={() => {
             deleteCartItemApi({ token: userDetails.token, product_id: id });
-            updateProductStockApi({ product_id: id, stock: -quantity })
+            updateProductStockApi({ product_id: id, stock: -quantity });
             dispatch(deleteCartItem(id));
           }}
         />

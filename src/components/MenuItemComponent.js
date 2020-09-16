@@ -3,7 +3,7 @@ import ItemComponent from './ItemComponent';
 import Data from './Data';
 import Product from './Product';
 
-const MenuItem = ({ data }) => {
+const MenuItem = () => {
   const [labels, setLabel] = useState(Data);
   const [products, setProducts] = useState(Product);
 

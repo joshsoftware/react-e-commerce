@@ -64,7 +64,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
     setTimeout(() => {
       setQuantity(valid_quantity);
     }, 500);
-  }
+  };
   function updateQuantity(e) {
     setQuantity(e.target.value);
     let input = e.target.value;
@@ -103,7 +103,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
         setValidQuantity(parseInt(input));
       }
     }
-    window.addEventListener("click", resetState); 
+    window.addEventListener('click', resetState);
   }
   useEffect(() => {
     itemFunc(valid_quantity);

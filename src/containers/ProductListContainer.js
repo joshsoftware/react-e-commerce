@@ -17,7 +17,7 @@ const ProductListContainer = () => {
       window.innerHeight + document.documentElement.scrollTop !==
         document.documentElement.offsetHeight ||
       loading
-    ){
+    ) {
       return;
     }
     setLoading(true);
@@ -27,7 +27,7 @@ const ProductListContainer = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(resetProductList())
+    dispatch(resetProductList());
     setLoading(true);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -44,27 +44,29 @@ const ProductListContainer = () => {
       changeStates();
     }
   }, [loading]);
-  
+
   const { productList, alert } = useSelector((state) => state.productListReducer);
   let arr = [];
   useEffect(() => {
     if (alert === true) {
       setVisible(true);
-    }
-    else{
+    } else {
       setVisible(false);
     }
   }, [alert]);
   let tempProductList = [];
-  for(let i=0;i<productList.length;i++){
-    if(productList[i].disabled === false){
+  for (let i = 0; i < productList.length; i++) {
+    if (productList[i].disabled === false) {
       tempProductList.push(productList[i]);
     }
   }
   for (let i = 0; i < tempProductList.length; i += 4) {
-    if(tempProductList[i] !== undefined){
+    if (tempProductList[i] !== undefined) {
       arr.push(
-        <ProductRowContainer key={tempProductList[i].id} products={tempProductList.slice(i, i + 4)} />
+        <ProductRowContainer
+          key={tempProductList[i].id}
+          products={tempProductList.slice(i, i + 4)}
+        />
       );
     }
   }
@@ -74,7 +76,7 @@ const ProductListContainer = () => {
       color="info"
       isOpen={visible}
       toggle={toggle}
-      data={"No items matches your choice!!"}
+      data={'No items matches your choice!!'}
     />
   );
 

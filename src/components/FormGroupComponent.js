@@ -21,5 +21,9 @@ const FormGroupComponent = ({ label, mainLabel, setLabel, setProducts, products 
 export default FormGroupComponent;
 
 FormGroupComponent.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  mainLabel: PropTypes.string,
+  setLabel: PropTypes.string,
+  setProducts: PropTypes.func,
+  products: PropTypes.object
 };

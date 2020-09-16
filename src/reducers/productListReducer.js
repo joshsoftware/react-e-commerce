@@ -22,7 +22,7 @@ const productListReducer = (state = initialState, action) => {
       };
     }
     case PRODUCT_LIST_REDUCER.RESET_PRODUCT_LIST: {
-     return initialState
+      return initialState;
     }
     case PRODUCT_LIST_REDUCER.UPDATE_PRODUCT_LIST: {
       let newProductList = state.productList;
@@ -33,7 +33,7 @@ const productListReducer = (state = initialState, action) => {
     case PRODUCT_LIST_REDUCER.SET_FILTERS:
       return { ...state, filters: action.value };
     case PRODUCT_LIST_REDUCER.SET_MIN_MAX:
-      return { ...state, min: action.value.min, max: action.value.max}
+      return { ...state, min: action.value.min, max: action.value.max };
     case PRODUCT_LIST_REDUCER.APPLY_FILTERS: {
       let newProductList = state.productList;
       newProductList.map((product) => {
@@ -49,22 +49,30 @@ const productListReducer = (state = initialState, action) => {
         } else {
           product.disabled = false;
         }
-        let min = state.min, max = state.max, offset = (max-min)/3;
+        let min = state.min,
+          max = state.max,
+          offset = (max - min) / 3;
         switch (state.filters.price) {
-          case `${min} - ${Math.floor(min+offset)}`: {
-            if (product.product_price < min || product.product_price > Math.floor(min+offset)) {
+          case `${min} - ${Math.floor(min + offset)}`: {
+            if (product.product_price < min || product.product_price > Math.floor(min + offset)) {
               product.disabled = true;
             }
             break;
           }
-          case `${Math.floor(min+offset+1)} - ${Math.floor(min+offset*2)}`: {
-            if (product.product_price < Math.floor(min+offset) || product.product_price > Math.floor(min+offset*2)) {
+          case `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`: {
+            if (
+              product.product_price < Math.floor(min + offset) ||
+              product.product_price > Math.floor(min + offset * 2)
+            ) {
               product.disabled = true;
             }
             break;
           }
-          case `${Math.floor((min+offset*2)+1)} - ${max}`: {
-            if (product.product_price < Math.floor((min+offset*2)+1) || product.product_price > max) {
+          case `${Math.floor(min + offset * 2 + 1)} - ${max}`: {
+            if (
+              product.product_price < Math.floor(min + offset * 2 + 1) ||
+              product.product_price > max
+            ) {
               product.disabled = true;
             }
             break;

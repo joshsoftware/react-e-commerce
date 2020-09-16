@@ -53,8 +53,11 @@ const FormTextField = (props) => {
     invalid: props.addressError !== null ? true : false,
     message: props.addressError
   };
-  if(props.isRequired === true) {firstname = {...firstname, labelText: 'First Name*' }}
-  else {firstname = {...firstname, labelText: 'First Name' }}
+  if (props.isRequired === true) {
+    firstname = { ...firstname, labelText: 'First Name*' };
+  } else {
+    firstname = { ...firstname, labelText: 'First Name' };
+  }
   return (
     <>
       <FormField formfield={firstname} />
@@ -73,5 +76,6 @@ FormTextField.propTypes = {
   firstnameError: PropTypes.string,
   lastnameError: PropTypes.string,
   addressError: PropTypes.string,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  isRequired: PropTypes.bool
 };

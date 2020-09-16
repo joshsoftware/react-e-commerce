@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchBar from '../Components/SearchBar';
 const SearchBarContainer = () => {
   const [search, setSearch] = useState('');
-  const filterdata = () => {
+  const filterdata = (product) => {
     const filterProduct = product.filter((product) => {
       return product.category.toLowerCase().includes(search.toLowerCase());
     });
