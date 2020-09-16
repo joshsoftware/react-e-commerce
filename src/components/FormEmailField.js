@@ -20,6 +20,8 @@ const FormEmailField = (props) => {
     invalid: props.emailError !== null ? true : false,
     message: props.emailError
   };
+  if(props.isRequired === true) {email = {...email, labelText: 'Email*' }}
+  else {email = {...email, labelText: 'Email' }}
   return <FormField formfield={email} />;
 };
 

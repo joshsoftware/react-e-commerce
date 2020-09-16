@@ -45,7 +45,7 @@ export const addCartItemApi = ({ token, product_id }) => {
   };
   return axios({
     method: 'post',
-    url: `https://69cc90ef47d8.ngrok.io/cart?productId=${product_id}`,
+    url: `https://c1f16287d8c6.ngrok.io/cart?productId=${product_id}`,
     headers: headers
   });
 };

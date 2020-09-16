@@ -20,7 +20,9 @@ const FormPasswordField = (props) => {
     invalid: props.passwordError !== null ? true : false,
     message: props.passwordError
   };
-  return <FormField formfield={password} />;
+  if(props.isRequired === true) {password = {...password, labelText: 'Password*' }}
+  else {password = {...password, labelText: 'Password' }}
+  return <FormField formfield={password} autoComplete={props.autoComplete}/>;
 };
 
 export default FormPasswordField;
@@ -28,5 +30,6 @@ export default FormPasswordField;
 FormPasswordField.propTypes = {
   password: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
-  passwordError: PropTypes.string
+  passwordError: PropTypes.string,
+  autoComplete: PropTypes.string
 };

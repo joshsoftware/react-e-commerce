@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
-// import RegistrationComponent from '../components/RegistrationComponent';
 import { setErrors, resetErrors, updateRequest } from '../actions/formActions';
 import UserProfileUpdateComponent from '../components/UserProfileUpdateComponent';
 import { initialState } from '../reducers/userprofileupdateReducer';
@@ -12,12 +11,11 @@ const UserProfileUpdateContainer = () => {
   const dispatch = useDispatch();
 
   const { userDetails } = useSelector((state) => state.loginReducer);
-  console.log('welcome to dAta' + userDetails);
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
   const { firstname, lastname, password, country, state, city, address } = userprofileupdatestate;
   const schema = yup.object().shape({
-    firstname: yup.string().required(),
+    firstname: yup.string(),
     lastname: yup.string(),
     password: yup.string().min(8).required(),
     country: yup.string(),
@@ -46,7 +44,6 @@ const UserProfileUpdateContainer = () => {
           let form_country = '',
             form_state = '',
             form_city = '';
-          console.log('in else');
           if (
             country !== initialState.country &&
             state !== initialState.state &&
@@ -56,7 +53,6 @@ const UserProfileUpdateContainer = () => {
             form_state = state;
             form_city = city;
           }
-          console.log('userupdate profile' + userDetails.token);
           dispatch(
             updateRequest({
               firstname,
@@ -77,7 +73,9 @@ const UserProfileUpdateContainer = () => {
   if (userprofileupdatestate.updated) {
     return <Redirect to="/profile" />;
   }
-
+  if (!userDetails.token) {
+    return <Redirect to="/login" />;
+  }
   return (
     <>
       <NavigationBarComponent color="dark" expand="md" />
