@@ -15,27 +15,25 @@ const CardComponent = ({ index, product, productExists }) => {
   const { cartItemsList } = useSelector((state) => state.cartReducer);
   const { id, image_url, product_title, product_price, stock } = product;
   let body_content = [];
-  body_content.push(<CardTitleWrapper title={product_title} />);
+  body_content.push(<CardTitleWrapper className={'font-weight-bold'} title={product_title} />);
   body_content.push(<CardTextWrapper text={'$' + product_price} />);
   let card_content = [];
-  card_content.push(<CardImgWrapper className={'cart-image img-fluid'} src={image_url} />);
+  card_content.push(
+    <CardImgWrapper className={'img_style_card cart-image img-fluid m-20'} src={image_url} />
+  );
   card_content.push(<CardBodyWrapper body_content={body_content} />);
-  if (stock <= 0) {
+  if (index !== -1) {
     card_content.push(
-      <ButtonWrapper buttonText={'Out of stock'} disabled={true} color={'danger'} />
+      <InputSpinnerContainer id={id} quantity={cartItemsList[index].quantity} dispatch={dispatch} />
     );
   } else {
-    if (index === -1) {
+    if (stock <= 0) {
       card_content.push(
-        <ButtonWrapper buttonText={'Add to Cart'} onClick={() => productExists(product)} />
+        <ButtonWrapper buttonText={'Out of stock'} disabled={true} color={'danger'} />
       );
     } else {
       card_content.push(
-        <InputSpinnerContainer
-          id={id}
-          quantity={cartItemsList[index].quantity}
-          dispatch={dispatch}
-        />
+        <ButtonWrapper buttonText={'Add to Cart'} onClick={() => productExists(product)} />
       );
     }
   }
@@ -43,8 +41,10 @@ const CardComponent = ({ index, product, productExists }) => {
 };
 export default CardComponent;
 CardComponent.propTypes = {
+  index: PropTypes.number,
   productExists: PropTypes.func.isRequired,
   product: PropTypes.shape({
+    id: PropTypes.number,
     image_url: PropTypes.string.isRequired,
     product_title: PropTypes.string.isRequired,
     product_price: PropTypes.number.isRequired,

@@ -5,7 +5,7 @@ export const getProductListApi = (page) => {
   };
   return axios({
     method: 'get',
-    url: `${process.env.REACT_APP_SERVER_URL}products?limit=6&page=${page}`,
+    url: `${process.env.REACT_APP_SERVER_URL}products?limit=8&page=${page}`,
     headers: headers
   });
 };

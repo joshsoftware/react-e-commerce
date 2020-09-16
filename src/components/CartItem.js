@@ -12,6 +12,7 @@ import { deleteCartItemApi } from '../apis/cartApi';
 import { useSelector } from 'react-redux';
 import { Alert } from 'reactstrap';
 import InputSpinnerContainer from '../containers/InputSpinnerContainer';
+import { updateProductStockApi } from '../apis/productApi';
 
 const CartItem = ({ item, dispatch }) => {
   let { product_title, image_url, product_price, quantity, tax, discount, id } = item;
@@ -90,6 +91,7 @@ const CartItem = ({ item, dispatch }) => {
           color={'danger'}
           onClick={() => {
             deleteCartItemApi({ token: userDetails.token, product_id: id });
+            updateProductStockApi({ product_id: id, stock: -quantity });
             dispatch(deleteCartItem(id));
           }}
         />

@@ -7,6 +7,7 @@ import { addCartItem, updateItemQuantity } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCartItemsApi, addCartItemApi } from '../apis/cartApi';
 import { updateProductStockApi } from '../apis/productApi';
+import './productContainer.css';
 
 const ProductRowContainer = ({ products }) => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const ProductRowContainer = ({ products }) => {
         let index = cartItemsList.findIndex((cartItem) => cartItem.id === product.id);
         return (
           <ColumnWrapper
-            className={'col-md-4 col-xs-4 col-sm-4 col-lg-4'}
+            className={'col-md-3 col-xs-3 col-sm-3 col-lg-3'}
             key={product.id}
             data={<CardComponent index={index} product={product} productExists={productExists} />}
           />
@@ -42,7 +43,7 @@ const ProductRowContainer = ({ products }) => {
       }
     }
   });
-  return <RowWrapper data={arr} />;
+  return <RowWrapper className={'product-row'} data={arr} />;
 };
 
 export default ProductRowContainer;

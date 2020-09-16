@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductList } from '../actions/productListActions';
 import ContainerWrapper from '../components/ContainerWrapper';
 import AlertWrapper from '../components/AlertWrapper';
+import './productContainer.css';
 
 const ProductListContainer = () => {
   const [loading, setLoading] = useState(false);
@@ -56,10 +57,10 @@ const ProductListContainer = () => {
     }
   }
   console.log('tempProductList is:', tempProductList);
-  for (let i = 0; i < tempProductList.length; i += 3) {
+  for (let i = 0; i < tempProductList.length; i += 4) {
     if(tempProductList[i] !== undefined){
       arr.push(
-        <ProductRowContainer key={tempProductList[i].id} products={tempProductList.slice(i, i + 3)} />
+        <ProductRowContainer key={tempProductList[i].id} products={tempProductList.slice(i, i + 4)} />
       );
     }
   }
@@ -72,6 +73,6 @@ const ProductListContainer = () => {
     />
   );
 
-  return <ContainerWrapper data={arr} fluid={true} />;
+  return <ContainerWrapper styleClass={'product-container'} data={arr} fluid={true} />;
 };
 export default ProductListContainer;

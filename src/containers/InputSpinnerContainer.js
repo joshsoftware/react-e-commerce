@@ -44,7 +44,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
   }, [flag]);
   const { userDetails } = useSelector((state) => state.loginReducer);
   let itemFunc = (item_quantity) => {
-    updateProductStockApi({ id: id, stockChange: quantity - item_quantity });
+    updateProductStockApi({ id: id, stockChange: item_quantity - quantity });
     updateCartItemsApi({ token: userDetails.token, product_id: id, quantity: item_quantity });
     dispatch(updateItemQuantity({ id: id, newQuantity: item_quantity }));
   };
