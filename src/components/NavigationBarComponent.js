@@ -13,7 +13,7 @@ const NavigationBarComponent = (props) => {
   const { color, expand } = props;
 
   return (
-    <Navbar color={color} expand={expand}>
+    <Navbar color={color} expand={expand} className={'fixed-top'}>
       <NavbarBrandComponent url={'/products'} logo={logo} />
       <NavbarTogglerComponent toggle={toggle} />
       <NavComponent />

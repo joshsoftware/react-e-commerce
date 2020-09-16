@@ -7,7 +7,7 @@ const login = ({ email, password }) => {
   console.log('in api', email, password);
   return apiHelper(
     'post',
-    'https://69cc90ef47d8.ngrok.io/login',
+    `${process.env.REACT_APP_SERVER_URL}login`,
     {
       email,
       password,

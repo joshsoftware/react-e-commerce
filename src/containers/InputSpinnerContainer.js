@@ -9,15 +9,28 @@ import ButtonWrapper from '../components/ButtonWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
 import RowWrapper from '../components/RowWrapper';
 
-const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
+const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertText }) => {
   let [stock, setStock] = useState('');
   let [updated_quantity, setQuantity] = useState(quantity);
   let [valid_quantity, setValidQuantity] = useState(quantity);
   let [flag, setFlag] = useState(true);
+
+  const timeoutFunction = () => {
+    setTimeout(() => {
+      setVisible(false);
+    }, 5000);
+  };
+
+  const setAlert = (text) => {
+    setVisible(true);
+    setAlertText(text);
+    timeoutFunction();
+  };
   const increaseQuantity = () => {
     let new_quantity = parseInt(updated_quantity);
     if (new_quantity + 1 > stock) {
-      alert('Stock Empty');
+      // alert('Stock Empty');
+      setAlert('Stock Empty');
       return;
     }
     setQuantity(new_quantity + 1);
@@ -26,7 +39,8 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
   const decreaseQuantity = () => {
     let new_quantity = parseInt(updated_quantity);
     if (new_quantity - 1 < 1) {
-      alert('Atleast One Item Should Be There In The Cart!');
+      // alert('Atleast One Item Should Be There In The Cart!'); 
+      setAlert('Minimum one item!');
       return;
     }
     setQuantity(new_quantity - 1);
@@ -44,7 +58,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
   }, [flag]);
   const { userDetails } = useSelector((state) => state.loginReducer);
   let itemFunc = (item_quantity) => {
-    updateProductStockApi({ id: id, stockChange: quantity - item_quantity });
+    updateProductStockApi({ id: id, stockChange: item_quantity - quantity });
     updateCartItemsApi({ token: userDetails.token, product_id: id, quantity: item_quantity });
     dispatch(updateItemQuantity({ id: id, newQuantity: item_quantity }));
   };
@@ -54,7 +68,8 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
     let input = e.target.value;
     let length = input.length;
     if (input === ' ') {
-      alert('Invalid Input!');
+      // alert('Invalid Input!');
+      setAlert('Invalid Input!');
       setQuantity(quantity);
       return;
     }
@@ -66,17 +81,19 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
       }
     }
     if (check_flag === false) {
-      alert('Invalid Input');
+      // alert('Invalid Input');
+      setAlert('Invalid Input');
       setQuantity(quantity);
       return;
     } else {
       if (input > stock) {
-        alert('This Much Stock Not Available!');
+        // alert('This Much Stock Not Available!');
+        setAlert('This Much Stock Not Available!');
         setQuantity(quantity);
         return;
       }
       if (input === '0') {
-        alert('Atleast One Item Should Be There In The Cart!');
+        setAlert('Atleast One Item Should Be There In The Cart!');
         setQuantity(quantity);
         return;
       }
@@ -96,6 +113,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
   );
   row_data.push(
     <ColumnWrapper
+      className={'m-0 p-0'}
       data={
         <InputSpinnerWrapper
           size={5}
@@ -115,12 +133,14 @@ const InputSpinnerContainer = ({ id, quantity, dispatch }) => {
   row_data.push(
     <ColumnWrapper data={<ButtonWrapper onClick={increaseQuantity} buttonText={'+'} />} />
   );
-  return <RowWrapper data={row_data} noGutters={true} />;
+  return <RowWrapper className={'d-inline-flex'} data={row_data} noGutters={true} />;
 };
 
 export default InputSpinnerContainer;
 
 InputSpinnerContainer.propTypes = {
+  setVisible: PropTypes.func,
+  setAlertText: PropTypes.func,
   dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired

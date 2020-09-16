@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CartItem.css';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';
@@ -12,8 +12,12 @@ import { deleteCartItemApi } from '../apis/cartApi';
 import { useSelector } from 'react-redux';
 import { Alert } from 'reactstrap';
 import InputSpinnerContainer from '../containers/InputSpinnerContainer';
+import { updateProductStockApi } from '../apis/productApi';
+import AlertWrapper from './AlertWrapper';
 
 const CartItem = ({ item, dispatch }) => {
+  const [alertText, setAlertText] = useState('');
+  const [visible, setVisible] = useState(false);
   let { product_title, image_url, product_price, quantity, tax, discount, id } = item;
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
@@ -59,7 +63,16 @@ const CartItem = ({ item, dispatch }) => {
       {product_title}{' '}
     </Alert>
   );
-  item_details.push(<InputSpinnerContainer id={id} dispatch={dispatch} quantity={quantity} />);
+  item_details.push(
+    <InputSpinnerContainer
+      id={id}
+      dispatch={dispatch}
+      quantity={quantity}
+      setVisible={setVisible}
+      setAlertText={setAlertText}
+    />
+  );
+  item_details.push(<AlertWrapper color="danger" isOpen={visible} data={alertText} />);
   column_content.push(
     <ColumnWrapper
       key={i++}
@@ -90,6 +103,7 @@ const CartItem = ({ item, dispatch }) => {
           color={'danger'}
           onClick={() => {
             deleteCartItemApi({ token: userDetails.token, product_id: id });
+            updateProductStockApi({ product_id: id, stock: -quantity })
             dispatch(deleteCartItem(id));
           }}
         />
