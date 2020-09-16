@@ -5,7 +5,7 @@ export const getProductListApi = (page) => {
   };
   return axios({
     method: 'get',
-    url: `https://69cc90ef47d8.ngrok.io/products?limit=9&page=${page}`,
+    url: `${process.env.REACT_APP_SERVER_URL}products?limit=6&page=${page}`,
     headers: headers
   });
 };
@@ -16,7 +16,7 @@ export const getProductByIdApi = (id) => {
   console.log('id', id);
   return axios({
     method: 'get',
-    url: `https://69cc90ef47d8.ngrok.io/product/${id}`,
+    url: `${process.env.REACT_APP_SERVER_URL}product/${id}`,
     headers: headers
   });
 };
@@ -26,7 +26,7 @@ export const updateProductStockApi = ({ id, stockChange }) => {
   };
   return axios({
     method: 'put',
-    url: `https://69cc90ef47d8.ngrok.io/product/stock?product_id=${id}&stock=${stockChange}`,
+    url: `${process.env.REACT_APP_SERVER_URL}product/stock?product_id=${id}&stock=${stockChange}`,
     headers: headers
   });
 };

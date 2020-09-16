@@ -6,7 +6,7 @@ const getFooterListApi = () => {
   };
   return axios({
     method: 'get',
-    url: 'https://69cc90ef47d8.ngrok.io/footer',
+    url: `${process.env.REACT_APP_SERVER_URL}footer`,
     headers: headers
   });
 };

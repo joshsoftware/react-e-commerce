@@ -1,18 +1,24 @@
 import { PRODUCT_LIST_REDUCER } from '../shared/actionConstants';
 const initialState = {
   productList: [],
+  totalPages: 0,
   requiredProduct: {},
   filters: {},
   alert: false
 };
 const productListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PRODUCT_LIST_REDUCER.SET_PRODUCT_LIST:
-      let newProductList = action.value;
+    case PRODUCT_LIST_REDUCER.SET_PRODUCT_LIST: {
+      let newProductList = action.value.products;
       newProductList.forEach((element) => {
         element.disabled = false;
       });
-      return { ...state, productList: newProductList };
+      return {
+        ...state,
+        productList: [...state.productList, ...newProductList],
+        totalPages: action.value.total_pages
+      };
+    }
     case PRODUCT_LIST_REDUCER.UPDATE_PRODUCT_LIST: {
       let newProductList = state.productList;
       let index = state.productList.findIndex((product) => product.id === action.value.id);

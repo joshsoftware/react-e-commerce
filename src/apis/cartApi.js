@@ -7,7 +7,7 @@ export const getCartItemsApi = (token) => {
   };
   return axios({
     method: 'get',
-    url: 'https://69cc90ef47d8.ngrok.io/cart',
+    url: `${process.env.REACT_APP_SERVER_URL}cart`,
     headers: headers
   });
 };
@@ -20,7 +20,7 @@ export const deleteCartItemApi = ({ token, product_id }) => {
   };
   return axios({
     method: 'delete',
-    url: `https://69cc90ef47d8.ngrok.io/cart?productId=${product_id}`,
+    url: `${process.env.REACT_APP_SERVER_URL}cart?productId=${product_id}`,
     headers: headers
   });
 };
@@ -33,7 +33,7 @@ export const updateCartItemsApi = ({ token, product_id, quantity }) => {
   console.log('quantity and product_id', quantity, product_id);
   return axios({
     method: 'put',
-    url: `https://69cc90ef47d8.ngrok.io/cart?productId=${product_id}&quantity=${quantity}`,
+    url: `${process.env.REACT_APP_SERVER_URL}cart?productId=${product_id}&quantity=${quantity}`,
     headers: headers
   });
 };
@@ -45,7 +45,7 @@ export const addCartItemApi = ({ token, product_id }) => {
   };
   return axios({
     method: 'post',
-    url: `https://69cc90ef47d8.ngrok.io/cart?productId=${product_id}`,
+    url: `${process.env.REACT_APP_SERVER_URL}cart?productId=${product_id}`,
     headers: headers
   });
 };

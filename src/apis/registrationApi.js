@@ -21,7 +21,7 @@ const registration = ({
   };
   return apiHelper(
     'post',
-    'https://69cc90ef47d8.ngrok.io/register',
+    `${process.env.REACT_APP_SERVER_URL}register`,
     {
       first_name,
       last_name,
