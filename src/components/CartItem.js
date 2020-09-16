@@ -9,6 +9,7 @@ import ButtonWrapper from './ButtonWrapper';
 import CardTextWrapper from './CardTextWrapper';
 import { deleteCartItem } from '../actions/cartActions';
 import { deleteCartItemApi } from '../apis/cartApi';
+import { updateProductStockApi } from '../apis/productApi';
 import { useSelector } from 'react-redux';
 import { Alert } from 'reactstrap';
 import InputSpinnerContainer from '../containers/InputSpinnerContainer';

@@ -29,7 +29,6 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
   const increaseQuantity = () => {
     let new_quantity = parseInt(updated_quantity);
     if (new_quantity + 1 > stock) {
-      // alert('Stock Empty');
       setAlert('Stock Empty');
       return;
     }
@@ -39,7 +38,6 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
   const decreaseQuantity = () => {
     let new_quantity = parseInt(updated_quantity);
     if (new_quantity - 1 < 1) {
-      // alert('Atleast One Item Should Be There In The Cart!'); 
       setAlert('Minimum one item!');
       return;
     }
@@ -62,13 +60,16 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
     updateCartItemsApi({ token: userDetails.token, product_id: id, quantity: item_quantity });
     dispatch(updateItemQuantity({ id: id, newQuantity: item_quantity }));
   };
-
+  const resetState = () => {
+    setTimeout(() => {
+      setQuantity(valid_quantity);
+    }, 500);
+  }
   function updateQuantity(e) {
     setQuantity(e.target.value);
     let input = e.target.value;
     let length = input.length;
     if (input === ' ') {
-      // alert('Invalid Input!');
       setAlert('Invalid Input!');
       setQuantity(quantity);
       return;
@@ -81,13 +82,11 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
       }
     }
     if (check_flag === false) {
-      // alert('Invalid Input');
       setAlert('Invalid Input');
       setQuantity(quantity);
       return;
     } else {
       if (input > stock) {
-        // alert('This Much Stock Not Available!');
         setAlert('This Much Stock Not Available!');
         setQuantity(quantity);
         return;
@@ -100,9 +99,14 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
       setQuantity(input);
       let new_quantity = parseInt(input);
       if (new_quantity > 0) {
+        setQuantity(parseInt(input));
         setValidQuantity(parseInt(input));
       }
+      else{
+        console.log(input);
+      }
     }
+    window.addEventListener("click", resetState); 
   }
   useEffect(() => {
     itemFunc(valid_quantity);
@@ -116,6 +120,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
       className={'m-0 p-0'}
       data={
         <InputSpinnerWrapper
+          defaultValue={valid_quantity}
           size={5}
           min={1}
           max={stock}
