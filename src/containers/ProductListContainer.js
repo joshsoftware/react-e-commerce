@@ -51,6 +51,9 @@ const ProductListContainer = () => {
     if (alert === true) {
       setVisible(true);
     }
+    else{
+      setVisible(false);
+    }
   }, [alert]);
   for (let i = 0; i < productList.length; i += 3) {
     arr.push(
@@ -59,10 +62,11 @@ const ProductListContainer = () => {
   }
   arr.push(
     <AlertWrapper
+      className="text-center"
       color="info"
       isOpen={visible}
       toggle={toggle}
-      data={'No Items matches your choice'}
+      data={"No items matches your choice!!"}
     />
   );
 

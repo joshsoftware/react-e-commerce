@@ -55,16 +55,12 @@ export const setAlert = (alert) => {
   };
 };
 
-// export const setCopyProductList = (product_list) => {
-//   return {
-//     type: PRODUCT_LIST_REDUCER.SET_COPY_PRODUCT_LIST,
-//     value: product_list
-//   };
-// };
-
-// export const setSubProductList = (product_list) => {
-//   return {
-//     type: PRODUCT_LIST_REDUCER.SET_SUB_PRODUCT_LIST,
-//     value: product_list
-//   };
-// };
+export const setMinMax = (min, max) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.SET_MIN_MAX,
+    value: {
+      min: min,
+      max: max
+    }
+  };
+};
