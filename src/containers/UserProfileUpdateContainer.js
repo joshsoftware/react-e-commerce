@@ -65,7 +65,6 @@ const UserProfileUpdateContainer = () => {
               token
             })
           );
-          console.log('form submitted');
         }
       });
   };

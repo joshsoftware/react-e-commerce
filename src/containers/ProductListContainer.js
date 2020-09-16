@@ -61,7 +61,6 @@ const ProductListContainer = () => {
       tempProductList.push(productList[i]);
     }
   }
-  console.log('tempProductList is:', tempProductList);
   for (let i = 0; i < tempProductList.length; i += 4) {
     if(tempProductList[i] !== undefined){
       arr.push(

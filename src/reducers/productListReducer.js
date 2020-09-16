@@ -50,7 +50,6 @@ const productListReducer = (state = initialState, action) => {
           product.disabled = false;
         }
         let min = state.min, max = state.max, offset = (max-min)/3;
-        console.log("min, max, offset", min, max, offset)
         switch (state.filters.price) {
           case `${min} - ${Math.floor(min+offset)}`: {
             if (product.product_price < min || product.product_price > Math.floor(min+offset)) {

@@ -13,7 +13,6 @@ export const getCartItemsApi = (token) => {
 };
 
 export const deleteCartItemApi = ({ token, product_id }) => {
-  console.log('product id', product_id);
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token
@@ -30,7 +29,6 @@ export const updateCartItemsApi = ({ token, product_id, quantity }) => {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token
   };
-  console.log('quantity and product_id', quantity, product_id);
   return axios({
     method: 'put',
     url: `${process.env.REACT_APP_SERVER_URL}cart?productId=${product_id}&quantity=${quantity}`,

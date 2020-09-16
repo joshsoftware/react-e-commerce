@@ -16,6 +16,5 @@ function* loginWorkerSaga(action) {
 
 //watcher saga
 export default function* loginSaga() {
-  console.log('login watcher');
   yield takeLatest(FORM_ACTIONS.LOGIN_REQUEST, loginWorkerSaga);
 }

@@ -42,7 +42,6 @@ const RegistrationContainer = () => {
           let form_country = '',
             form_state = '',
             form_city = '';
-          console.log('in else');
           if (
             country !== initialState.country &&
             state !== initialState.state &&
@@ -65,7 +64,6 @@ const RegistrationContainer = () => {
               address
             })
           );
-          console.log('form submitted');
           dispatch(setIsLoading(false));
         }
       });

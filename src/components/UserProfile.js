@@ -21,8 +21,6 @@ const UserProfile = () => {
   if (!userDetails.token) {
     return <Redirect to="/login" />;
   }
-  // console.log('UserProfileData', profile, userDetails.token);
-  // profile.first_name = 'devyani';
   let userprofile_content = [];
   userprofile_content.push(
     <CardTitleWrapper title={<h1 className={'bg-dark text-white'}>{'USER PROFILE'}</h1>} />

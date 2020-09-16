@@ -13,7 +13,6 @@ export const getProductByIdApi = (id) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1'
   };
-  console.log('id', id);
   return axios({
     method: 'get',
     url: `${process.env.REACT_APP_SERVER_URL}product/${id}`,

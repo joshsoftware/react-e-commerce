@@ -102,9 +102,6 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
         setQuantity(parseInt(input));
         setValidQuantity(parseInt(input));
       }
-      else{
-        console.log(input);
-      }
     }
     window.addEventListener("click", resetState); 
   }

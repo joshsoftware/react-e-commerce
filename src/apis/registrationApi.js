@@ -15,7 +15,6 @@ const registration = ({
     country = form_country,
     state = form_state,
     city = form_city;
-  console.log('reg api', country, state, city);
   const headers = {
     Accept: 'application/vnd.e-commerce.v1'
   };

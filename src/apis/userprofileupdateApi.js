@@ -15,7 +15,6 @@ const userprofileupdateApi = ({
     country = form_country,
     state = form_state,
     city = form_city;
-  console.log(first_name, last_name, token);
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token

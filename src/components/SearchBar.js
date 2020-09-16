@@ -10,16 +10,11 @@ const SearchBar = ({ placeholder, setSearch, filterProduct }) => {
   };
   const filterProductWrapper = () => {
     let arr = filterProduct();
-    console.log(arr);
   };
   return (
     <>
-      {/* <RowWrapper>
-           <ColumnWrapper sm={2}>   */}
       <FormInput placeholder={placeholder} onChange={setSearchWrapper} />
       <ButtonWrapper buttonText={'Search'} onClick={filterProductWrapper} />
-      {/* </ColumnWrapper>
-      </RowWrapper> */}
     </>
   );
 };

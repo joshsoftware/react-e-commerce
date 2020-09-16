@@ -9,21 +9,14 @@ import { getFooterElementList } from '../actions/footerAction';
 
 const Footer = () => {
   const dispatch = useDispatch();
-  console.log(getFooterElementList());
   useEffect(() => {
-    console.log('useEffect11111');
     dispatch(getFooterElementList());
-    console.log('useEffect');
   }, []);
-  //   dispatch(getFooterElementList());
-  //   console.log(useSelector(state => state.footerElementListReducer));
   const { elementList } = useSelector((state) => state.footerElementListReducer);
-  console.log('hiiiiii' + elementList);
   let arr = [];
   let arr1 = [];
   let arr2 = [];
   const categories = elementList[0].categories;
-  console.log('categories');
   arr.push(<LiComponent key={'categories-element'} data="Categories" />);
   categories.map((category) => {
     return arr.push(
