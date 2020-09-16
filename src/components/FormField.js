@@ -15,7 +15,8 @@ const FormField = ({ formfield }) => {
     message,
     value,
     onChange,
-    invalid
+    invalid,
+    autoComplete
   } = formfield;
   return (
     <FormGroup>
@@ -27,6 +28,7 @@ const FormField = ({ formfield }) => {
         value={value}
         onChange={onChange}
         invalid={invalid}
+        autoComplete={autoComplete}
       />
       <FormFeedbackWrapper message={message} />
     </FormGroup>

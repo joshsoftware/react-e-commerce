@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Card } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import CardTitleWrapper from './CardTitleWrapper';
 import RowWrapper from './RowWrapper';
 import ColumnWrapper from './ColumnWrapper';
@@ -17,6 +18,9 @@ const UserProfile = () => {
   useEffect(() => {
     dispatch(getUserProfile(userDetails.token));
   }, []);
+  if (!userDetails.token) {
+    return <Redirect to="/login" />;
+  }
   // console.log('UserProfileData', profile, userDetails.token);
   // profile.first_name = 'devyani';
   let userprofile_content = [];

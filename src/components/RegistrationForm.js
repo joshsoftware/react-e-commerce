@@ -35,8 +35,8 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
           e.preventDefault();
           validateData();
         }}>
-        <FormEmailField email={email} emailError={emailError} dispatch={dispatch} />
-        <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} />
+        <FormEmailField email={email} emailError={emailError} dispatch={dispatch} isRequired={true}/>
+        <FormPasswordField password={password} passwordError={passwordError} dispatch={dispatch} isRequired={true}/>
         <FormTextField
           firstname={firstname}
           lastname={lastname}
@@ -45,6 +45,7 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
           lastnameError={lastnameError}
           addressError={addressError}
           dispatch={dispatch}
+          isRequired={true}
         />
         <FormDropdownField country={country} state={state} city={city} dispatch={dispatch} />
         <br />

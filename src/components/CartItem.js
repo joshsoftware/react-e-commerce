@@ -13,7 +13,6 @@ import { updateProductStockApi } from '../apis/productApi';
 import { useSelector } from 'react-redux';
 import { Alert } from 'reactstrap';
 import InputSpinnerContainer from '../containers/InputSpinnerContainer';
-import { updateProductStockApi } from '../apis/productApi';
 import AlertWrapper from './AlertWrapper';
 
 const CartItem = ({ item, dispatch }) => {
