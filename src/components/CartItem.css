@@ -34,8 +34,19 @@
 }
 .col_three {
     text-align: right;
+    margin: auto;
     
 }
 .col_four {
-    text-align: left;
+    text-align: center;
+    margin: auto;
+}
+
+.card_footer {
+    padding-left: 20px !important;
+}
+
+.btn_cursor {
+    cursor: not-allowed !important;
+    pointer-events: all !important;
 }

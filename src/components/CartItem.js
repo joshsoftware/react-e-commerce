@@ -18,7 +18,7 @@ import AlertWrapper from './AlertWrapper';
 const CartItem = ({ item, dispatch }) => {
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);
-  let { product_title, image_url, product_price, quantity, tax, discount, id } = item;
+  let { product_title, image_url, product_price, quantity, id } = item;
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
   let i = 0;
@@ -28,42 +28,15 @@ const CartItem = ({ item, dispatch }) => {
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Price     :  '} />
   );
   item_price_details_key.push(
-    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Discount  : '} />
-  );
-  item_price_details_key.push(
-    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Tax       :  '} />
+    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Quantity  : '} />
   );
   item_price_details_key.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Total:'} />
   );
 
   let item_price_details_value = [];
+  item_price_details_value.push(<CardTextWrapper key={i++} text={'$' + product_price} />);
   item_price_details_value.push(
-    <CardTextWrapper key={i++} text={'$' + product_price * quantity} />
-  );
-  item_price_details_value.push(
-    <CardTextWrapper key={i++} text={'-$' + ((discount * product_price) / 100) * quantity} />
-  );
-  item_price_details_value.push(
-    <CardTextWrapper key={i++} text={'+$' + ((tax * product_price) / 100) * quantity} />
-  );
-  item_price_details_value.push(
-    <CardTextWrapper
-      key={i++}
-      text={
-        '$' +
-        (product_price - (discount * product_price) / 100 + (tax * product_price) / 100) * quantity
-      }
-    />
-  );
-
-  item_details.push(
-    <Alert className={' p-0 '} color="info">
-      {' '}
-      {product_title}{' '}
-    </Alert>
-  );
-  item_details.push(
     <InputSpinnerContainer
       id={id}
       dispatch={dispatch}
@@ -72,7 +45,16 @@ const CartItem = ({ item, dispatch }) => {
       setAlertText={setAlertText}
     />
   );
-  item_details.push(<AlertWrapper color="danger" isOpen={visible} data={alertText} />);
+  item_price_details_value.push(
+    <CardTextWrapper key={i++} text={'$' + product_price * quantity} />
+  );
+
+  item_details.push(
+    <Alert className={' p-0 '} color="info">
+      {' '}
+      {product_title}{' '}
+    </Alert>
+  );
   column_content.push(
     <ColumnWrapper
       key={i++}
@@ -91,6 +73,12 @@ const CartItem = ({ item, dispatch }) => {
   );
   column_content.push(
     <ColumnWrapper key={i++} className={'col_four'} data={item_price_details_value} />
+  );
+  column_content.push(
+    <ColumnWrapper
+      className={'col_two'}
+      data={<AlertWrapper className={'p-0 m-0'} color="danger" isOpen={visible} data={alertText} />}
+    />
   );
   column_content.push(
     <ColumnWrapper

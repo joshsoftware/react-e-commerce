@@ -110,32 +110,32 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
   }, [valid_quantity]);
   let row_data = [];
   row_data.push(
-    <ColumnWrapper data={<ButtonWrapper onClick={decreaseQuantity} buttonText={'-'} />} />
+    <ButtonWrapper style={'border-0 d-inline-block btn-sm'} outline={true} onClick={decreaseQuantity} buttonText={'-'} />
   );
   row_data.push(
-    <ColumnWrapper
-      className={'m-0 p-0'}
-      data={
-        <InputSpinnerWrapper
-          defaultValue={valid_quantity}
-          size={5}
-          min={1}
-          max={stock}
-          spinner={'true'}
-          value={updated_quantity}
-          className={'input-spinner m-0 p-0'}
-          step={1}
-          onChange={(e) => {
-            updateQuantity(e);
-          }}
-        />
-      }
+    <InputSpinnerWrapper
+      defaultValue={valid_quantity}
+      size={5}
+      min={1}
+      max={stock}
+      spinner={'true'}
+      value={updated_quantity}
+      className={'input-spinner d-inline-block m-0 p-0 border-0 text-center'}
+      step={1}
+      onChange={(e) => {
+        updateQuantity(e);
+      }}
     />
   );
   row_data.push(
-    <ColumnWrapper data={<ButtonWrapper onClick={increaseQuantity} buttonText={'+'} />} />
+    <ButtonWrapper
+      style={'border-0 d-inline-block btn-sm'}
+      outline={true}
+      onClick={increaseQuantity}
+      buttonText={'+'}
+    />
   );
-  return <RowWrapper className={'d-inline-flex'} data={row_data} noGutters={true} />;
+  return <div className={'d-inline-block'}>{row_data}</div>;
 };
 
 export default InputSpinnerContainer;
