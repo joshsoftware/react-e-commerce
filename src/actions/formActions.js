@@ -1,4 +1,4 @@
-import { FORM_ACTIONS } from '../shared/actionConstants';
+import { FORM_ACTIONS, PRODUCT_ACTIONS } from '../shared/actionConstants';
 import logout from '../apis/logoutApi';
 
 export const logoutRequest = (token, dispatch) => {
@@ -198,5 +198,19 @@ export const loginOAuthFailed = (error) => {
   return {
     type: FORM_ACTIONS.LOGINOAUTH_FAILED,
     value: error
+  };
+};
+
+export const addProductRequest = (data) => {
+  return {
+    type: FORM_ACTIONS.ADD_PRODUCT_REQUEST,
+    value: data
+  };
+};
+
+export const setProductAdded = (data) => {
+  return {
+    type: PRODUCT_ACTIONS.SET_PRODUCT_ADDED,
+    value: data
   };
 };

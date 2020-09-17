@@ -6,6 +6,7 @@ import ProductContainer from '../containers/ProductContainer';
 import CartContainer from '../containers/CartContainer';
 import UserProfile from '../components/UserProfile';
 import UserProfileUpdateContainer from '../containers/UserProfileUpdateContainer';
+import AddProductContainer from '../containers/AddProductContainer';
 
 const Routes = () => {
   return (
@@ -28,6 +29,9 @@ const Routes = () => {
         </Route>
         <Route path="/profile/update" exact={true}>
           <UserProfileUpdateContainer />
+        </Route>
+        <Route path="/admindashboard/products/add" exact={true}>
+          <AddProductContainer />
         </Route>
       </Switch>
     </Router>

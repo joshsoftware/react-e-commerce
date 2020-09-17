@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import FormCardComponent from './FormCardComponent';
 import CardBodyWrapper from './CardBodyWrapper';
 import UserProfileUpdateForm from './UserProfileUpdateForm';
+import AddProductForm from './AddProductForm';
 const FormCard = ({ type, validateData, dispatch, formState }) => {
   if (type === 'registration') {
     return (
@@ -38,13 +39,29 @@ const FormCard = ({ type, validateData, dispatch, formState }) => {
         }
       />
     );
-  } else {
+  } else if (type === 'login') {
     return (
       <FormCardComponent
         data={
           <CardBodyWrapper
             body_content={
               <LoginForm validateData={validateData} dispatch={dispatch} formState={formState} />
+            }
+          />
+        }
+      />
+    );
+  } else if (type === 'add-product') {
+    return (
+      <FormCardComponent
+        data={
+          <CardBodyWrapper
+            body_content={
+              <AddProductForm
+                validateData={validateData}
+                dispatch={dispatch}
+                formState={formState}
+              />
             }
           />
         }
