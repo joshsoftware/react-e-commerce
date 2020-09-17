@@ -27,7 +27,7 @@ const UserProfile = () => {
   );
   userprofile_content.push(<FormLabel labelText={'First Name: ' + profile.first_name} />);
   userprofile_content.push(<FormLabel labelText={'Last Name: ' + profile.last_name} />);
-  userprofile_content.push(<FormLabel labelText={'Contact: ' + profile.mobile} />);
+  userprofile_content.push(<FormLabel labelText={'Email: ' + profile.email} />);
   userprofile_content.push(<FormLabel labelText={'Country: ' + profile.country} />);
   userprofile_content.push(<FormLabel labelText={'State: ' + profile.state} />);
   userprofile_content.push(<FormLabel labelText={'City: ' + profile.city} />);

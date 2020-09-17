@@ -6,7 +6,7 @@ import { setUserProfile } from '../actions/userprofileAction';
 function* userprofileWorkerSaga(action) {
   try {
     const { data } = yield call(getUserProfileApi, action.value);
-    yield put(setUserProfile(data));
+    yield put(setUserProfile(data.data));
   } catch (error) {
     console.log(error);
   }
