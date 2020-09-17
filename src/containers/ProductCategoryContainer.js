@@ -64,6 +64,8 @@ const ProductCategoryContainer = ({ dispatch, formState }) => {
   let ar2 = [];
   if (['Clothes', 'Electronics', 'Mobile', 'Watch', 'Sports'].includes(formState.category)) {
     ar2.push(<FormField key={0} formfield={color} />);
+  }
+  if (['Clothes', 'Sports'].includes(formState.category)) {
     ar2.push(<FormField key={1} formfield={size} />);
   }
   return (

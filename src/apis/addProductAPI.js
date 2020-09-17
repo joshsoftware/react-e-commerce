@@ -12,14 +12,16 @@ const addProduct = ({
   category,
   color,
   size,
-  imageUrl
+  imageUrl,
+  token
 }) => {
   let product_title = productTitle,
     product_price = productPrice,
     category_id = categoryId,
     image_url = imageUrl;
   const headers = {
-    Accept: 'application/vnd.e-commerce.v1'
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
   };
   return apiHelper(
     'post',

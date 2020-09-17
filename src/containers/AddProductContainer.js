@@ -7,7 +7,7 @@ import { setErrors, resetErrors, addProductRequest } from '../actions/formAction
 
 const AddProductContainer = () => {
   const dispatch = useDispatch();
-  // const {userDetails}  = useSelector(state => state.loginReducer)
+  const {userDetails}  = useSelector(state => state.loginReducer)
   const addProductState = useSelector((state) => state.addProductReducer);
   const {
     productTitle,
@@ -38,10 +38,10 @@ const AddProductContainer = () => {
     imageUrl: yup.string().required()
   });
 
-  // if(!userDetails.isAdmin)
-  // {
-  //   return <Redirect to="/products" />
-  // }
+  if(!userDetails.isAdmin)
+  {
+    return <Redirect to="/products" />
+  }
 
   const validateData = () => {
     console.log('in validate data');
@@ -88,6 +88,7 @@ const AddProductContainer = () => {
             });
         } else {
           console.log('form submitted', addProductState);
+          let token = userDetails.token
           dispatch(
             addProductRequest({
               productTitle,
@@ -101,7 +102,8 @@ const AddProductContainer = () => {
               category,
               color,
               size,
-              imageUrl
+              imageUrl,
+              token
             })
           );
           return <Redirect to="/admindashboard" />;
