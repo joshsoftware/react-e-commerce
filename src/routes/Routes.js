@@ -7,6 +7,7 @@ import CartContainer from '../containers/CartContainer';
 import UserProfile from '../components/UserProfile';
 import UserProfileUpdateContainer from '../containers/UserProfileUpdateContainer';
 import AdminDashboardContainer from '../containers/AdminDashboardContainer';
+import AddProductContainer from '../containers/AddProductContainer';
 
 const Routes = () => {
   return (
@@ -32,6 +33,9 @@ const Routes = () => {
         </Route>
         <Route path="/admindashboard" exact={true}>
           <AdminDashboardContainer />
+        </Route>
+        <Route path="/admin/addproduct" exact={true}>
+          <AddProductContainer />
         </Route>
       </Switch>
     </Router>
