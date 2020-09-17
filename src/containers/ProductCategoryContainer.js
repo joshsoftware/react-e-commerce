@@ -58,7 +58,7 @@ const ProductCategoryContainer = ({ dispatch, formState, isRequired }) => {
   };
   if (isRequired === true) {
     category = { ...category, labelText: 'Category *' };
-  }else{
+  } else {
     category = { ...category, labelText: 'Category' };
   }
   const [categories, setCategories] = useState([]);

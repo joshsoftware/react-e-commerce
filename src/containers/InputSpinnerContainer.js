@@ -110,7 +110,12 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
   }, [valid_quantity]);
   let row_data = [];
   row_data.push(
-    <ButtonWrapper style={'border-0 d-inline-block btn-sm'} outline={true} onClick={decreaseQuantity} buttonText={'-'} />
+    <ButtonWrapper
+      style={'border-0 d-inline-block btn-sm'}
+      outline={true}
+      onClick={decreaseQuantity}
+      buttonText={'-'}
+    />
   );
   row_data.push(
     <InputSpinnerWrapper
