@@ -47,10 +47,10 @@ const AdminDashboardContainer = () => {
     }, 2000);
   };
   const { productList } = useSelector((state) => state.productListReducer);
-  if(!userDetails.token) {
+  if (!userDetails.token) {
     return <Redirect to="/login" />;
   }
-  
+
   let addButton = <ButtonWrapper className={'add_button'} buttonText={'Add Product'} />;
 
   let column_content = [];

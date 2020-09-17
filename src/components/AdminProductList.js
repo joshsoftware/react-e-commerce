@@ -19,16 +19,23 @@ const AdminProductList = ({ item, dispatch }) => {
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);
   let { product_title, image_url, product_price, id } = item;
-  console.log('Price',product_price);
+  console.log('Price', product_price);
 
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
   let i = 0;
-  let updateButton = <ButtonWrapper onClick={ ()=> { dispatch(setUpdateProductId(id)) } } buttonText={'Update Product'} />;
+  let updateButton = (
+    <ButtonWrapper
+      onClick={() => {
+        dispatch(setUpdateProductId(id));
+      }}
+      buttonText={'Update Product'}
+    />
+  );
   let item_details = [];
   let item_price_details_key = [];
   item_price_details_key.push(
-    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Price:  $ '+ product_price} />
+    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Price:  $ ' + product_price} />
   );
   item_details.push(
     <Alert className={' p-0 '} color="info">
@@ -75,9 +82,7 @@ const AdminProductList = ({ item, dispatch }) => {
     <ColumnWrapper
       key={i++}
       className={'col_five'}
-      data={
-        <Link to='/admin/updateproduct' > {updateButton} </Link>
-      }
+      data={<Link to="/admin/updateproduct"> {updateButton} </Link>}
     />
   );
 

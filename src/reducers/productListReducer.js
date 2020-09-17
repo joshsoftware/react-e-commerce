@@ -85,8 +85,8 @@ const productListReducer = (state = initialState, action) => {
     }
 
     case PRODUCT_LIST_REDUCER.ADD_PRODUCT: {
-      let newProductList = [...state.productList, ...action.value]
-      return { ...state, productList: newProductList } 
+      let newProductList = [...state.productList, ...action.value];
+      return { ...state, productList: newProductList };
     }
     case PRODUCT_LIST_REDUCER.DELETE_PRODUCT: {
       let newProductList = state.productList;
@@ -101,15 +101,14 @@ const productListReducer = (state = initialState, action) => {
       let newProductList = state.productList;
       //console.log('Old', newProductList);
       let index = newProductList.findIndex((product) => product.id === action.value.id);
-      newProductList[index]=action.value;
+      newProductList[index] = action.value;
       //console.log('New',newProductList);
       return {
         ...state,
         productList: newProductList
       };
     }
-    case PRODUCT_LIST_REDUCER.SET_UPDATE_PRODUCT_ID:
-    {
+    case PRODUCT_LIST_REDUCER.SET_UPDATE_PRODUCT_ID: {
       return { ...state, updateProductId: action.value };
     }
     case PRODUCT_LIST_REDUCER.SET_ALERT:
