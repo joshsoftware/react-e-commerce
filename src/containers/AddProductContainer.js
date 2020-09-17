@@ -104,7 +104,7 @@ const AddProductContainer = () => {
               imageUrl
             })
           );
-          return <Redirect to="/admindashboard/products" />;
+          return <Redirect to="/admindashboard" />;
         }
       });
   };

@@ -30,7 +30,7 @@ const Routes = () => {
         <Route path="/profile/update" exact={true}>
           <UserProfileUpdateContainer />
         </Route>
-        <Route path="/admindashboard/products/add" exact={true}>
+        <Route path="/admin/addproduct" exact={true}>
           <AddProductContainer />
         </Route>
       </Switch>
