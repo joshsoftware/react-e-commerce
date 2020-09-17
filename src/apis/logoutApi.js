@@ -1,10 +1,14 @@
-import apiHelper from './apiHelper';
+import axios from 'axios';
 
-const logout = ({ token }) => {
+const logout = ( token ) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
-    token: token
+    Token: token
   };
-  return apiHelper('delete', '', headers);
+  return axios ({
+    method: 'delete',
+    url: `${process.env.REACT_APP_SERVER_URL}logout`,
+    headers: headers
+  });
 };
 export default logout;
