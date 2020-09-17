@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'reactstrap';
+import { Card, CardFooter } from 'reactstrap';
 import CardBodyWrapper from './CardBodyWrapper';
 import CardImgWrapper from './CardImgWrapper';
 import CardTitleWrapper from './CardTitleWrapper';
@@ -24,12 +24,24 @@ const CardComponent = ({ index, product, productExists }) => {
   card_content.push(<CardBodyWrapper body_content={body_content} />);
   if (index !== -1) {
     card_content.push(
-      <InputSpinnerContainer id={id} quantity={cartItemsList[index].quantity} dispatch={dispatch} />
+      <CardFooter className={'m-0 p-0 card_footer justify-content-center'}>
+        <div className={'d-inline-block px-2 font-weight-bold'}>Set Quantity : </div>
+        <InputSpinnerContainer
+          id={id}
+          quantity={cartItemsList[index].quantity}
+          dispatch={dispatch}
+        />
+      </CardFooter>
     );
   } else {
     if (stock <= 0) {
       card_content.push(
-        <ButtonWrapper buttonText={'Out of stock'} disabled={true} color={'danger'} />
+        <ButtonWrapper
+          className={'btn_cursor'}
+          buttonText={'Out of stock'}
+          disabled={true}
+          color={'danger'}
+        />
       );
     } else {
       card_content.push(
