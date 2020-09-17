@@ -201,6 +201,7 @@ export const loginOAuthFailed = (error) => {
   };
 };
 
+<<<<<<< HEAD
 export const addProductRequest = (data) => {
   return {
     type: FORM_ACTIONS.ADD_PRODUCT_REQUEST,
@@ -224,5 +225,25 @@ export const setProductUpdated = (data) => {
   return {
     type: PRODUCT_ACTIONS.SET_PRODUCT_UPDATED,
     value: data
+=======
+export const searchRequest = (data) => {
+  return {
+    type: FORM_ACTIONS.SEARCH_REQUEST,
+    value: data
+  };
+};
+
+export const searchFailed = (error) => {
+  return {
+    type: FORM_ACTIONS.SEARCH_FAILED,
+    value: error
+  };
+};
+
+export const setSearchproduct = (val) => {
+  return {
+    type: FORM_ACTIONS.SET_SEARCHPRODUCT,
+    value: val
+>>>>>>> 8cfc2221e10124633409d3d0d9e3880f5f959cff
   };
 };

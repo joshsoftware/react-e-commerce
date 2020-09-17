@@ -14,6 +14,7 @@ import userprofileReducer from './reducers/userprofileReducer';
 import userprofileupdateReducer from './reducers/userprofileupdateReducer';
 import addProductReducer from './reducers/addProductReducer';
 import updateProductReducer from './reducers/updateProductReducer';
+import searbarReducer from './reducers/searchbarReducer';
 
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
@@ -21,6 +22,7 @@ const store = createStore(
     loginReducer,
     registrationReducer,
     cartReducer,
+    searbarReducer,
     productListReducer,
     footerElementListReducer,
     userprofileReducer,

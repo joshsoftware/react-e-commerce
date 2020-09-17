@@ -7,7 +7,7 @@ import registration from '../apis/registrationApi';
 function* registrationWorkerSaga(action) {
   try {
     const { data } = yield call(registration, action.value);
-    console.log(data);
+    console.log('in registration', data);
     yield put(setRegistered(true));
   } catch (error) {
     console.log('error', error);
