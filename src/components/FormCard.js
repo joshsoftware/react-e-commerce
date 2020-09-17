@@ -6,6 +6,7 @@ import FormCardComponent from './FormCardComponent';
 import CardBodyWrapper from './CardBodyWrapper';
 import UserProfileUpdateForm from './UserProfileUpdateForm';
 import AddProductForm from './AddProductForm';
+import UpdateProductForm from './UpdateProductForm';
 const FormCard = ({ type, validateData, dispatch, formState }) => {
   if (type === 'registration') {
     return (
@@ -58,6 +59,22 @@ const FormCard = ({ type, validateData, dispatch, formState }) => {
           <CardBodyWrapper
             body_content={
               <AddProductForm
+                validateData={validateData}
+                dispatch={dispatch}
+                formState={formState}
+              />
+            }
+          />
+        }
+      />
+    );
+  } else if (type === 'update-product') {
+    return (
+      <FormCardComponent
+        data={
+          <CardBodyWrapper
+            body_content={
+              <UpdateProductForm
                 validateData={validateData}
                 dispatch={dispatch}
                 formState={formState}
