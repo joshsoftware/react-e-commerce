@@ -207,10 +207,22 @@ export const addProductRequest = (data) => {
     value: data
   };
 };
-
+export const updateProductRequest = (data) => {
+  return {
+    type: FORM_ACTIONS.UPDATE_PRODUCT_REQUEST,
+    value: data
+  };
+};
 export const setProductAdded = (data) => {
   return {
     type: PRODUCT_ACTIONS.SET_PRODUCT_ADDED,
+    value: data
+  };
+};
+
+export const setProductUpdated = (data) => {
+  return {
+    type: PRODUCT_ACTIONS.SET_PRODUCT_UPDATED,
     value: data
   };
 };

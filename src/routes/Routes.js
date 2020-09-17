@@ -8,6 +8,7 @@ import UserProfile from '../components/UserProfile';
 import UserProfileUpdateContainer from '../containers/UserProfileUpdateContainer';
 import AdminDashboardContainer from '../containers/AdminDashboardContainer';
 import AddProductContainer from '../containers/AddProductContainer';
+import UpdateProductContainer from '../containers/UpdateProductContainer';
 
 const Routes = () => {
   return (
@@ -36,6 +37,9 @@ const Routes = () => {
         </Route>
         <Route path="/admin/addproduct" exact={true}>
           <AddProductContainer />
+        </Route>
+        <Route path="/admin/updateproduct" exact={true}>
+          <UpdateProductContainer />
         </Route>
       </Switch>
     </Router>

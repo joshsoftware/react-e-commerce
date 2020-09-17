@@ -13,6 +13,7 @@ import productListReducer from './reducers/productListReducer';
 import userprofileReducer from './reducers/userprofileReducer';
 import userprofileupdateReducer from './reducers/userprofileupdateReducer';
 import addProductReducer from './reducers/addProductReducer';
+import updateProductReducer from './reducers/updateProductReducer';
 
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
@@ -24,7 +25,8 @@ const store = createStore(
     footerElementListReducer,
     userprofileReducer,
     userprofileupdateReducer,
-    addProductReducer
+    addProductReducer,
+    updateProductReducer
   }),
   applyMiddleware(sagaMiddleWare)
 );

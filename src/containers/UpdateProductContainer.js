@@ -2,13 +2,16 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
-import AddProductComponent from '../components/AddProductComponent';
-import { setErrors, resetErrors, addProductRequest } from '../actions/formActions';
+import UpdateProductComponent from '../components/UpdateProductComponent';
+import { setErrors, resetErrors, updateProductRequest } from '../actions/formActions';
+//import { productListReducer } from '../reducers/productListReducer';
 
-const AddProductContainer = () => {
+const UpdateProductContainer = () => {
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.loginReducer);
-  const addProductState = useSelector((state) => state.addProductReducer);
+  const updateProductState = useSelector((state) => state.updateProductReducer);
+  const { updateProductId } = useSelector((state) => state.productListReducer);
+
   const {
     productTitle,
     description,
@@ -22,7 +25,8 @@ const AddProductContainer = () => {
     color,
     size,
     imageUrl
-  } = addProductState;
+  } = updateProductState;
+
   const schema = yup.object().shape({
     productTitle: yup.string().required(),
     description: yup.string().required(),
@@ -86,10 +90,11 @@ const AddProductContainer = () => {
               });
             });
         } else {
-          console.log('form submitted', addProductState);
+          //console.log('form submitted', addProductState);
           let token = userDetails.token;
           dispatch(
-            addProductRequest({
+            updateProductRequest({
+              updateProductId,
               productTitle,
               description,
               productPrice,
@@ -111,12 +116,12 @@ const AddProductContainer = () => {
   };
 
   return (
-    <AddProductComponent
+    <UpdateProductComponent
       validateData={validateData}
       dispatch={dispatch}
-      formState={addProductState}
+      formState={updateProductState}
     />
   );
 };
 
-export default AddProductContainer;
+export default UpdateProductContainer;

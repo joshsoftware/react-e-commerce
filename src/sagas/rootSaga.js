@@ -8,6 +8,7 @@ import footerWatcherSaga from './footerSaga';
 import userprofileWatcherSaga from './userprofileSaga';
 import userprofileupdateWatcherSaga from './userprofileupdateSaga';
 import addProductSaga from './addProductSaga';
+import updateProductSaga from './updateProductSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     footerWatcherSaga(),
     userprofileWatcherSaga(),
     userprofileupdateWatcherSaga(),
-    addProductSaga()
+    addProductSaga(),
+    updateProductSaga()
   ]);
 }
