@@ -31,8 +31,11 @@ const LoginContainer = () => {
     });
     dispatch(setIsLoading(false));
   };
-
-  if (userDetails.token) {
+  if( userDetails.token && userDetails.isAdmin )
+  {
+    return <Redirect to='/admindashboard' />;
+  }
+  else if ( userDetails.token ) {
     return <Redirect to="/products" />;
   }
   return <LoginComponent validateData={validateData} dispatch={dispatch} formState={result} />;

@@ -29,3 +29,15 @@ export const updateProductStockApi = ({ id, stockChange }) => {
     headers: headers
   });
 };
+
+export const deleteProductApi = ({ token, product_id }) => {
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
+  };
+  return axios({
+    method: 'delete',
+    url: `${process.env.REACT_APP_SERVER_URL}product/${product_id}`,
+    headers: headers
+  });
+};

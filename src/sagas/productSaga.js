@@ -10,7 +10,14 @@ function* productsWorkerSaga(action) {
     console.log(error);
   }
 }
-
+// function* adminProductWorkerSaga(action) {
+//   try {
+//     const { data } = yield call(getProductListApi, action.value);
+//     yield put(setProductList(data));
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 export default function* productWatcherSaga() {
   yield takeLatest(PRODUCT_LIST_REDUCER.GET_PRODUCT_LIST, productsWorkerSaga);
 }

@@ -1,4 +1,5 @@
 import { PRODUCT_LIST_REDUCER } from '../shared/actionConstants';
+//import productList from '../productList.json';
 const initialState = {
   productList: [],
   totalPages: 0,
@@ -6,7 +7,8 @@ const initialState = {
   filters: {},
   alert: false,
   min: 0,
-  max: 0
+  max: 0,
+  updateProductId: null
 };
 const productListReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -81,8 +83,38 @@ const productListReducer = (state = initialState, action) => {
       });
       return { ...state, productList: newProductList };
     }
+
+    case PRODUCT_LIST_REDUCER.ADD_PRODUCT: {
+      let newProductList = [...state.productList, ...action.value]
+      return { ...state, productList: newProductList } 
+    }
+    case PRODUCT_LIST_REDUCER.DELETE_PRODUCT: {
+      let newProductList = state.productList;
+      let index = newProductList.findIndex((product) => product.id === action.value);
+      newProductList.splice(index, 1);
+      return {
+        ...state,
+        productList: newProductList
+      };
+    }
+    case PRODUCT_LIST_REDUCER.UPDATE_PRODUCT: {
+      let newProductList = state.productList;
+      //console.log('Old', newProductList);
+      let index = newProductList.findIndex((product) => product.id === action.value.id);
+      newProductList[index]=action.value;
+      //console.log('New',newProductList);
+      return {
+        ...state,
+        productList: newProductList
+      };
+    }
+    case PRODUCT_LIST_REDUCER.SET_UPDATE_PRODUCT_ID:
+    {
+      return { ...state, updateProductId: action.value };
+    }
     case PRODUCT_LIST_REDUCER.SET_ALERT:
       return { ...state, alert: action.value };
+
     default:
       return state;
   }

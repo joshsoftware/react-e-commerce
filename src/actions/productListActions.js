@@ -69,3 +69,35 @@ export const setMinMax = (min, max) => {
     }
   };
 };
+
+export const deleteProductApi = (product_id) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.DELETE_PRODUCT,
+    value: product_id
+  };
+};
+export const addProduct = (product) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.ADD_PRODUCT,
+    value: product
+  };
+};
+export const setUpdateProductId = (product_id) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.SET_UPDATE_PRODUCT_ID,
+    value: product_id
+  };
+};
+export const updateProduct = (product) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.UPDATE_PRODUCT,
+    value: product
+  };
+};
+
+export const deleteProduct = (product_id) => {
+  return {
+    type: PRODUCT_LIST_REDUCER.DELETE_PRODUCT,
+    value: product_id
+  };
+};
