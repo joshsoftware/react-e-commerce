@@ -8,56 +8,56 @@ import { setField } from '../actions/formActions';
 
 let productTitle = {
     field: 'exampleProductTitle',
-    labelText: 'Product Title *',
+    labelText: 'Product Title',
     type: 'productTitle',
     name: 'productTitle',
     placeholder: 'title'
   },
   description = {
     field: 'exampleDescription',
-    labelText: 'Description *',
+    labelText: 'Description',
     type: 'description',
     name: 'description',
     placeholder: 'description'
   },
   productPrice = {
     field: 'exampleProductPrice',
-    labelText: 'Product Price *',
+    labelText: 'Product Price',
     type: 'productPrice',
     name: 'productPrice',
     placeholder: '0.00'
   },
   discount = {
     field: 'exampleDiscount',
-    labelText: 'Discount *',
+    labelText: 'Discount',
     type: 'discount',
     name: 'discount',
     placeholder: '0.00'
   },
   tax = {
     field: 'exampleTax',
-    labelText: 'Tax *',
+    labelText: 'Tax',
     type: 'tax',
     name: 'tax',
     placeholder: '0.00'
   },
   stock = {
     field: 'exampleStock',
-    labelText: 'Stock *',
+    labelText: 'Stock',
     type: 'stock',
     name: 'stock',
     placeholder: '0'
   },
   brand = {
     field: 'exampleBrand',
-    labelText: 'Brand *',
+    labelText: 'Brand',
     type: 'brand',
     name: 'brand',
     placeholder: 'brand'
   },
   imageUrl = {
     field: 'exampleImageURL',
-    labelText: 'ImageURL *',
+    labelText: 'ImageURL',
     type: 'imageUrl',
     name: 'imageUrl',
     placeholder: '**.**'
@@ -153,7 +153,7 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
         <FormField formfield={tax} />
         <FormField formfield={stock} />
         <FormField formfield={brand} />
-        <ProductCategoryContainer dispatch={dispatch} formState={formState} />
+        <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={false} />
         <FormField formfield={imageUrl} />
 
         <ButtonWrapper

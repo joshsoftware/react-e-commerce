@@ -8,15 +8,18 @@ import AdminProductList from '../components/AdminProductList';
 import ContainerWrapper from '../components/ContainerWrapper';
 import { getProductList } from '../actions/productListActions';
 import addProductReducer from '../reducers/addProductReducer';
-import { setProductAdded } from '../actions/formActions';
+import updateProductReducer from '../reducers/updateProductReducer';
+import { setProductAdded, setProductUpdated } from '../actions/formActions';
 import '../components/CartItem.css';
 
 const AdminDashboardContainer = () => {
   const dispatch = useDispatch();
   const addProductDispatch = useDispatch(addProductReducer);
+  const updateProductDispatch = useDispatch(updateProductReducer);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   addProductDispatch(setProductAdded(false));
+  updateProductDispatch(setProductUpdated(false));
   const { totalPages } = useSelector((state) => state.productListReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
 

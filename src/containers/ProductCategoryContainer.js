@@ -8,7 +8,7 @@ import ContainerWrapper from '../components/ContainerWrapper';
 
 let category = {
     field: 'exampleCategory',
-    labelText: 'Category *',
+    labelText: 'Category',
     type: 'category',
     name: 'category',
     placeholder: 'category'
@@ -28,7 +28,7 @@ let category = {
     placeholder: 'XS, S, L, XL'
   };
 
-const ProductCategoryContainer = ({ dispatch, formState }) => {
+const ProductCategoryContainer = ({ dispatch, formState, isRequired }) => {
   category = {
     ...category,
     value: formState.category,
@@ -56,6 +56,11 @@ const ProductCategoryContainer = ({ dispatch, formState }) => {
     invalid: formState.sizeError !== null ? true : false,
     message: formState.sizeError
   };
+  if (isRequired === true) {
+    category = { ...category, labelText: 'Category *' };
+  }else{
+    category = { ...category, labelText: 'Category' };
+  }
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     let ar = ['Clothes', 'Electronics', 'Mobile', 'Watch', 'Books', 'Sports'];

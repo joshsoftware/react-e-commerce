@@ -153,7 +153,7 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
         <FormField formfield={tax} />
         <FormField formfield={stock} />
         <FormField formfield={brand} />
-        <ProductCategoryContainer dispatch={dispatch} formState={formState} />
+        <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={true} />
         <FormField formfield={imageUrl} />
 
         <ButtonWrapper

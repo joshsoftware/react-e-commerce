@@ -28,18 +28,18 @@ const UpdateProductContainer = () => {
   } = updateProductState;
 
   const schema = yup.object().shape({
-    productTitle: yup.string().required(),
-    description: yup.string().required(),
-    productPrice: yup.number().required().min(0),
-    discount: yup.number().required().min(0),
-    tax: yup.number().required().min(0),
-    stock: yup.number().required().min(0).integer(),
-    brand: yup.string().required(),
-    categoryId: yup.string().required(),
-    category: yup.string().required(),
+    productTitle: yup.string(),
+    description: yup.string(),
+    productPrice: yup.number().min(0),
+    discount: yup.number().min(0),
+    tax: yup.number().min(0),
+    stock: yup.number().min(0).integer(),
+    brand: yup.string(),
+    categoryId: yup.string(),
+    category: yup.string(),
     color: yup.string(),
     size: yup.string(),
-    imageUrl: yup.string().required()
+    imageUrl: yup.string()
   });
 
   if (!userDetails.isAdmin) {
@@ -110,10 +110,13 @@ const UpdateProductContainer = () => {
               token
             })
           );
-          return <Redirect to="/admindashboard" />;
         }
       });
   };
+
+  if (updateProductState.productUpdated) {
+    return <Redirect to="/admindashboard" />;
+  }
 
   return (
     <UpdateProductComponent

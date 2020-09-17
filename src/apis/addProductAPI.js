@@ -38,11 +38,6 @@ const addProduct = ({
     size: size,
     image_url: image_url
   };
-  return apiHelper(
-    'post',
-    `${process.env.REACT_APP_SERVER_URL}createProduct`,
-    data,
-    headers
-  );
+  return apiHelper('post', `${process.env.REACT_APP_SERVER_URL}createProduct`, data, headers);
 };
 export { addProduct };

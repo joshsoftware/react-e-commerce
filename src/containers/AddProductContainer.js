@@ -108,8 +108,7 @@ const AddProductContainer = () => {
         }
       });
   };
-  if(addProductState.productAdded)
-  {
+  if (addProductState.productAdded) {
     return <Redirect to="/admindashboard" />;
   }
   return (

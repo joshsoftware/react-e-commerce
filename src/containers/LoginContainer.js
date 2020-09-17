@@ -3,7 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
-import { setErrors, resetErrors, setIsLoading, loginRequest, setRegistered } from '../actions/formActions';
+import {
+  setErrors,
+  resetErrors,
+  setIsLoading,
+  loginRequest,
+  setRegistered
+} from '../actions/formActions';
 import registrationReducer from '../reducers/registrationReducer';
 
 const LoginContainer = () => {
