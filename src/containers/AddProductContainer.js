@@ -106,11 +106,13 @@ const AddProductContainer = () => {
               token
             })
           );
-          return <Redirect to="/admindashboard" />;
         }
       });
   };
-
+  if(addProductState.productAdded)
+  {
+    return <Redirect to="/admindashboard" />;
+  }
   return (
     <AddProductComponent
       validateData={validateData}
