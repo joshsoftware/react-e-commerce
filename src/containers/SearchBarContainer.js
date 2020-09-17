@@ -7,13 +7,11 @@ import { initialState } from '../reducers/searchbarReducer';
 const SearchBarContainer = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state) => state.searbarReducer);
-  console.log('hiii*********', searchState);
   const { searchproduct } = searchState;
   const onsearchchange = (event) => {
     dispatch(setSearchproduct(event.target.value));
   };
   const searchData = () => {
-    console.log('in searchdata');
     dispatch(searchRequest(searchproduct));
   };
   return (

@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const searchbarReducer = (state = initialState, action) => {
-  console.log('**', action);
   switch (action.type) {
     case FORM_ACTIONS.SET_SEARCHPRODUCT:
       return { ...state, searchproduct: action.value };
