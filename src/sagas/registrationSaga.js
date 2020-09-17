@@ -9,7 +9,7 @@ function* registrationWorkerSaga(action) {
   try {
     console.log('here1');
     const { data } = yield call(registration, action.value);
-    console.log(data);
+    console.log('in registration', data);
     yield put(setRegistered(true));
   } catch (error) {
     console.log('error', error);

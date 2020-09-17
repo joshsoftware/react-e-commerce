@@ -12,12 +12,16 @@ import footerElementListReducer from './reducers/footerReducer';
 import productListReducer from './reducers/productListReducer';
 import userprofileReducer from './reducers/userprofileReducer';
 import userprofileupdateReducer from './reducers/userprofileupdateReducer';
+// import SearchBar from './components/SearchBar';
+import searbarReducer from './reducers/searchbarReducer';
+import SearchBarContainer from './containers/SearchBarContainer';
 const sagaMiddleWare = createSagaMiddleware();
 const store = createStore(
   combineReducers({
     loginReducer,
     registrationReducer,
     cartReducer,
+    searbarReducer,
     productListReducer,
     footerElementListReducer,
     userprofileReducer,
@@ -32,6 +36,7 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
+        <SearchBarContainer />
         <Routes />
       </Provider>
     </div>

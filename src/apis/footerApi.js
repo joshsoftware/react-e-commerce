@@ -6,7 +6,7 @@ const getFooterListApi = () => {
   };
   return axios({
     method: 'get',
-    url: 'https://69cc90ef47d8.ngrok.io/footer',
+    url: 'https://19019d7e17bf.ngrok.io/footer',
     headers: headers
   });
 };

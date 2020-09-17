@@ -22,7 +22,7 @@ const userprofileupdateApi = ({
   };
   return apiHelper(
     'patch',
-    'https://69cc90ef47d8.ngrok.io/user/update',
+    'https://19019d7e17bf.ngrok.io/user/update',
     {
       first_name,
       last_name,

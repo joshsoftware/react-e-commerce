@@ -8,12 +8,12 @@ import { createStore } from 'redux';
 import cartReducer from './reducers/cartReducer';
 import './index.css';
 
-const store = createStore(cartReducer);
+// const store = createStore(cartReducer);
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    {/* <Provider store={store}> */}
+    <App />
+    {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -200,3 +200,24 @@ export const loginOAuthFailed = (error) => {
     value: error
   };
 };
+
+export const searchRequest = (data) => {
+  return {
+    type: FORM_ACTIONS.SEARCH_REQUEST,
+    value: data
+  };
+};
+
+export const searchFailed = (error) => {
+  return {
+    type: FORM_ACTIONS.SEARCH_FAILED,
+    value: error
+  };
+};
+
+export const setSearchproduct = (val) => {
+  return {
+    type: FORM_ACTIONS.SET_SEARCHPRODUCT,
+    value: val
+  };
+};
