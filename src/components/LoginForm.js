@@ -7,6 +7,7 @@ import FormPasswordField from './FormPasswordField';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
 import { loginOAuthRequest } from '../actions/formActions';
+import { Link } from 'react-router-dom';
 
 const LoginForm = ({ validateData, dispatch, formState }) => {
   const { email, password, emailError, passwordError, isLoading } = formState;
@@ -54,6 +55,13 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
           cookiePolicy={'single_host_origin'}
         />
       </Form>
+      <br />
+      <h6>
+        Not registered?
+        <span className="input-group-btn">
+          <Link to="/register"> Click to register</Link>
+        </span>
+      </h6>
     </>
   );
 };
