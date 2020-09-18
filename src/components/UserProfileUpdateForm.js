@@ -56,7 +56,6 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
             e.preventDefault();
             validateData();
           }}
-          disabled={isLoading}
         />
       </Form>
       <br />

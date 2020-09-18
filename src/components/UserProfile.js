@@ -10,11 +10,15 @@ import FormLabel from './FormLabel';
 import { getUserProfile } from '../actions/userprofileAction';
 import NavigationBarComponent from './NavigationBarComponent';
 import Footer from './Footer';
+import userprofileupdateReducer from '../reducers/userprofileupdateReducer';
+import { setUpdated } from '../actions/formActions';
 
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { profile } = useSelector((state) => state.userprofileReducer);
   const dispatch = useDispatch();
+  const userProfileUpdateDispatch = useDispatch(userprofileupdateReducer);
+  userProfileUpdateDispatch(setUpdated(false));
   useEffect(() => {
     dispatch(getUserProfile(userDetails.token));
   }, []);

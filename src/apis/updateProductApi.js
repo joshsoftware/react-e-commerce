@@ -20,7 +20,7 @@ const updateProduct = ({
     product_price = productPrice,
     category_id = categoryId,
     image_url = [];
-  image_url.push(imageUrl);
+  if (imageUrl !== '') image_url.push(imageUrl);
   //product_id = updateProductId;
 
   const headers = {
