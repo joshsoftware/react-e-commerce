@@ -14,6 +14,11 @@ const ProductListContainer = () => {
   const { totalPages } = useSelector((state) => state.productListReducer);
 
   const handleScroll = () => {
+    console.log(
+      window.innerHeight,
+      document.documentElement.scrollTop,
+      document.documentElement.offsetHeight
+    );
     if (
       window.innerHeight + document.documentElement.scrollTop !==
         document.documentElement.offsetHeight ||

@@ -83,10 +83,11 @@ code {
   }
 
   .bm-burger-button {
-	position: absolute;
+	position: relative;
 	width: 36px;
 	height: 30px;
-	top: 96px;
+	left: 36px;
+	top: 8px;
   }
   
   /* Color/shape of burger icon bars */
@@ -114,5 +115,14 @@ code {
   .bm-overlay {
 	background: rgba(0, 0, 0, 0.3);
   }
+
+  .footerClass {
+	background: #404040;
+  }
+
+  .navClass {
+	background: #404040;
+  }
+  
 
   

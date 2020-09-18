@@ -1,12 +1,17 @@
 import React from 'react';
 import './CartHeader.css';
+import PropTypes from 'prop-types';
 
-const CartHeader = () => {
+const CartHeader = ({ header }) => {
   return (
     <div className={'header'}>
-      <h1>Shopping Cart</h1>
+      <h1>{header}</h1>
     </div>
   );
 };
 
 export default CartHeader;
+
+CartHeader.propTypes = {
+  header: PropTypes.string
+};

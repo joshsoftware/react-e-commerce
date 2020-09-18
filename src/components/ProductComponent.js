@@ -1,18 +1,31 @@
 import React from 'react';
 import NavigationBarComponent from './NavigationBarComponent';
-import SideBarComponent from './SideBarComponent';
 import SearchBarContainer from '../containers/SearchBarContainer';
+import SideBarComponent from './SideBarComponent';
+import ColumnWrapper from './ColumnWrapper';
+import RowWrapper from './RowWrapper';
+import ContainerWrapper from './ContainerWrapper';
 const ProductComponent = () => {
   return (
     <>
-      <NavigationBarComponent color="dark" expand="md" />
+      <NavigationBarComponent className="navClass fixed-top" expand="md" />
       <br />
       <br />
       <br />
-      <br />
-      <br />
-      <SearchBarContainer />
       <SideBarComponent />
+      <ContainerWrapper
+        data={
+          <RowWrapper
+            data={
+              <>
+                <ColumnWrapper className={'col-4'} />
+                <ColumnWrapper className={'col-6'} data={<SearchBarContainer />} />
+                <ColumnWrapper />
+              </>
+            }
+          />
+        }
+      />
     </>
   );
 };
