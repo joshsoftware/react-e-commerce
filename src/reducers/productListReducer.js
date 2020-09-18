@@ -4,7 +4,13 @@ const initialState = {
   productList: [],
   totalPages: 0,
   requiredProduct: {},
-  filters: {},
+  filters: {
+    'category': [],
+    'size': [],
+    'color': [],
+    'brand': [],
+    'product_price': []
+  },
   alert: false,
   min: 0,
   max: 0,
@@ -32,8 +38,28 @@ const productListReducer = (state = initialState, action) => {
       newProductList[index].stock = action.value.stock;
       return { ...state, productList: newProductList };
     }
-    case PRODUCT_LIST_REDUCER.SET_FILTERS:
-      return { ...state, filters: action.value };
+    
+    
+    case PRODUCT_LIST_REDUCER.SET_FILTERS: {
+      let newFilters = state.filters, filterObj = action.value
+      console.log("in set",filterObj, Object.keys(filterObj));
+      
+      newFilters[`${Object.keys(filterObj)[0]}`].push(filterObj[`${Object.keys(filterObj)[0]}`])
+      return { ...state, filters: newFilters };
+    }
+
+
+
+    case PRODUCT_LIST_REDUCER.DELETE_FILTERS: {
+      let newFilters = state.filters, filterObj = action.value
+      console.log("in delete",filterObj, Object.keys(filterObj));
+      let index = newFilters[`${Object.keys(filterObj)[0]}`].indexOf(filterObj[`${Object.keys(filterObj)[0]}`]);
+      newFilters[`${Object.keys(filterObj)[0]}`].splice(index, 1);
+      return { ...state, filters: newFilters };
+    }
+
+
+    
     case PRODUCT_LIST_REDUCER.SET_MIN_MAX:
       return { ...state, min: action.value.min, max: action.value.max };
     case PRODUCT_LIST_REDUCER.APPLY_FILTERS: {

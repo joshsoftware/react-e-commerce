@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import Data from './Data';
-import { setFilters, applyFilters, setAlert, setMinMax } from '../actions/productListActions';
+import { setFilters, applyFilters, setAlert, setMinMax, deleteFilters } from '../actions/productListActions';
 
 const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   const dispatch = useDispatch();
@@ -14,23 +14,26 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   const filterFunction = (labelText) => {
     dispatch(setAlert(false));
     setChecked(!checked);
-    let selectedFilters = filters;
+    let selectedFilters = {}
+    selectedFilters[`${mainLabel}`] = labelText;
+    console.log('selected filter', selectedFilters);
     if (!checked) {
-      selectedFilters[`${mainLabel}`] = labelText;
-      dispatch(setFilters(selectedFilters));
-      dispatch(applyFilters());
+      dispatch(setFilters(selectedFilters)); // {'category': 'cloth'}
+      console.log(filters);
+      // dispatch(applyFilters());
     } else {
-      delete selectedFilters[`${mainLabel}`];
-      dispatch(applyFilters());
+      dispatch(deleteFilters(selectedFilters));
+      console.log(filters);
+      // dispatch(applyFilters());
     }
     const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
     if (accessories.includes(labelText) && !checked) {
       addFilters(labelText);
     } else {
       if (accessories.includes(labelText)) {
-        dispatch(setFilters({}));
-        dispatch(applyFilters());
-        setLabel(Data);
+        // dispatch(deleteFilters(selectedFilters));
+        // dispatch(applyFilters());
+        // setLabel(Data);
       }
     }
     let flag = false;
