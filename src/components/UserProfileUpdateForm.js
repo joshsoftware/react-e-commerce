@@ -18,8 +18,7 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
     firstnameError,
     lastnameError,
     passwordError,
-    addressError,
-    isLoading
+    addressError
   } = formState;
 
   return (
@@ -56,7 +55,6 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
             e.preventDefault();
             validateData();
           }}
-          disabled={isLoading}
         />
       </Form>
       <br />

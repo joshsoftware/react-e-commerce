@@ -33,6 +33,7 @@ const ProductListContainer = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const changeStates = async () => {
     setTimeout(() => {
       setPage(page + 1);

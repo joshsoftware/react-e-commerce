@@ -64,5 +64,7 @@ CardComponent.propTypes = {
     product_price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
     stock: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  setVisible: PropTypes.func.isRequired,
+  setAlertText: PropTypes.func.isRequired
 };

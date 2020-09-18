@@ -4,9 +4,12 @@ import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
 import AddProductComponent from '../components/AddProductComponent';
 import { setErrors, resetErrors, addProductRequest } from '../actions/formActions';
+import productListReducer from '../reducers/productListReducer';
+import { resetProductList } from '../actions/productListActions';
 
 const AddProductContainer = () => {
   const dispatch = useDispatch();
+  const productListDispatch = useDispatch(productListReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   const addProductState = useSelector((state) => state.addProductReducer);
   const {
@@ -105,6 +108,7 @@ const AddProductContainer = () => {
               token
             })
           );
+          productListDispatch(resetProductList());
         }
       });
   };

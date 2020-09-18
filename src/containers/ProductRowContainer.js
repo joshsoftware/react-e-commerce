@@ -57,5 +57,7 @@ const ProductRowContainer = ({ products, setVisible, setAlertText }) => {
 export default ProductRowContainer;
 
 ProductRowContainer.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object).isRequired
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setVisible: PropTypes.func.isRequired,
+  setAlertText: PropTypes.func.isRequired
 };
