@@ -6,9 +6,9 @@ import ImageComponent from './ImageComponent';
 const NavbarBrandComponent = ({ url, logo }) => {
   return (
     <>
-    <NavbarBrand>
-      <ImageComponent style={{ width: '70px' }} src={logo} className="rounded-circle" alt="img" />
-    </NavbarBrand>
+      <NavbarBrand>
+        <ImageComponent style={{ width: '70px' }} src={logo} className="rounded-circle" alt="img" />
+      </NavbarBrand>
     </>
   );
 };

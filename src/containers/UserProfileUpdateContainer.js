@@ -78,7 +78,7 @@ const UserProfileUpdateContainer = () => {
   return (
     <>
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
-      <br/>
+      <br />
       <UserProfileUpdateComponent
         validateData={validateData}
         dispatch={dispatch}

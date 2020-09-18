@@ -15,12 +15,12 @@ const NavigationBarComponent = (props) => {
 
   return (
     <>
-    <SideBarComponent/>
-    <Navbar className={className} expand={expand}>
-      <NavbarBrandComponent url={'/products'} logo={logo} />
-      <NavbarTogglerComponent toggle={toggle} />
-      <NavComponent />
-    </Navbar>
+      <SideBarComponent />
+      <Navbar className={className} expand={expand}>
+        <NavbarBrandComponent url={'/products'} logo={logo} />
+        <NavbarTogglerComponent toggle={toggle} />
+        <NavComponent />
+      </Navbar>
     </>
   );
 };

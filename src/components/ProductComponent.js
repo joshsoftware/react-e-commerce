@@ -8,15 +8,18 @@ const ProductComponent = () => {
   return (
     <>
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
-      <br/>
-      <br/>
-      <br/>
-      <RowWrapper className="sticky-top" data={
-        <>
-        <ColumnWrapper xs={4} data={<SideBarComponent/> }/>
-        <ColumnWrapper xs={8} data={<SearchBarContainer/> }/>
-        </>
-      }/>
+      <br />
+      <br />
+      <br />
+      <RowWrapper
+        className="sticky-top"
+        data={
+          <>
+            <ColumnWrapper xs={4} data={<SideBarComponent />} />
+            <ColumnWrapper xs={8} data={<SearchBarContainer />} />
+          </>
+        }
+      />
     </>
   );
 };

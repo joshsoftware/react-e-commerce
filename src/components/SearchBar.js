@@ -8,12 +8,27 @@ const SearchBar = ({ searchData, onsearchchange }) => {
   // let a=formState.searchproduct.value();
   return (
     <>
-    <RowWrapper className="p-auto" data={
-      <>
-      <ColumnWrapper data={<FormInput className="form-control mr-sm-2 col-xs-2" type="search" placeholder={'search'} onChange={onsearchchange} />}/>
-      <ColumnWrapper className="col-*-2" data={<ButtonWrapper buttonText={'Search'} onClick={searchData} />}/>
-      </>
-    }/>
+      <RowWrapper
+        className="p-auto"
+        data={
+          <>
+            <ColumnWrapper
+              data={
+                <FormInput
+                  className="form-control mr-sm-2 col-xs-2"
+                  type="search"
+                  placeholder={'search'}
+                  onChange={onsearchchange}
+                />
+              }
+            />
+            <ColumnWrapper
+              className="col-*-2"
+              data={<ButtonWrapper buttonText={'Search'} onClick={searchData} />}
+            />
+          </>
+        }
+      />
     </>
   );
 };
