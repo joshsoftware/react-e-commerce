@@ -47,6 +47,12 @@ export const resetErrors = () => {
   };
 };
 
+export const resetState = () => {
+  return {
+    type: FORM_ACTIONS.RESET_STATE
+  };
+};
+
 export const setErrors = (ele) => {
   return {
     type: `SET_${ele.path.toUpperCase()}_ERROR`,

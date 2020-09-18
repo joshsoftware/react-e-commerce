@@ -8,7 +8,8 @@ import {
   resetErrors,
   setIsLoading,
   loginRequest,
-  setRegistered
+  setRegistered,
+  resetState
 } from '../actions/formActions';
 import registrationReducer from '../reducers/registrationReducer';
 
@@ -36,6 +37,7 @@ const LoginContainer = () => {
         });
       } else {
         dispatch(loginRequest({ email, password }));
+        dispatch(resetState());
       }
     });
     dispatch(setIsLoading(false));

@@ -30,6 +30,8 @@ const registrationReducer = (state = initialState, action) => {
         addressError: null
       };
     }
+    case FORM_ACTIONS.RESET_STATE:
+      return initialState;
     case FORM_ACTIONS.SET_FIRSTNAME:
       return { ...state, firstname: action.value };
     case FORM_ACTIONS.SET_LASTNAME:
