@@ -9,7 +9,7 @@ import { updateCartItemsApi, addCartItemApi } from '../apis/cartApi';
 import { updateProductStockApi } from '../apis/productApi';
 import './productContainer.css';
 
-const ProductRowContainer = ({ products }) => {
+const ProductRowContainer = ({ products, setVisible, setAlertText }) => {
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { cartItemsList } = useSelector((state) => state.cartReducer);
@@ -37,7 +37,15 @@ const ProductRowContainer = ({ products }) => {
           <ColumnWrapper
             className={'col-md-3 col-xs-3 col-sm-3 col-lg-3'}
             key={product.id}
-            data={<CardComponent index={index} product={product} productExists={productExists} />}
+            data={
+              <CardComponent
+                index={index}
+                product={product}
+                productExists={productExists}
+                setVisible={setVisible}
+                setAlertText={setAlertText}
+              />
+            }
           />
         );
       }

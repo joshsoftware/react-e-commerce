@@ -10,6 +10,7 @@ const ProductListContainer = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [visible, setVisible] = useState(false);
+  const [alertText, setAlertText] = useState('No items matches your choice!!');
   const { totalPages } = useSelector((state) => state.productListReducer);
 
   const handleScroll = () => {
@@ -66,17 +67,19 @@ const ProductListContainer = () => {
         <ProductRowContainer
           key={tempProductList[i].id}
           products={tempProductList.slice(i, i + 4)}
+          setVisible={setVisible}
+          setAlertText={setAlertText}
         />
       );
     }
   }
   arr.push(
     <AlertWrapper
-      className="text-center"
+      className="text-center fixed-top"
       color="info"
       isOpen={visible}
       toggle={toggle}
-      data={'No items matches your choice!!'}
+      data={alertText}
     />
   );
 

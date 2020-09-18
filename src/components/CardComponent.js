@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './CartItem.css';
 import InputSpinnerContainer from '../containers/InputSpinnerContainer';
 
-const CardComponent = ({ index, product, productExists }) => {
+const CardComponent = ({ index, product, productExists, setVisible, setAlertText }) => {
   const dispatch = useDispatch();
   const { cartItemsList } = useSelector((state) => state.cartReducer);
   const { id, image_url, product_title, product_price, stock } = product;
@@ -30,6 +30,8 @@ const CardComponent = ({ index, product, productExists }) => {
           id={id}
           quantity={cartItemsList[index].quantity}
           dispatch={dispatch}
+          setVisible={setVisible}
+          setAlertText={setAlertText}
         />
       </CardFooter>
     );
