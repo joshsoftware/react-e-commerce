@@ -10,7 +10,7 @@ import { getProductList } from '../actions/productListActions';
 import addProductReducer from '../reducers/addProductReducer';
 import updateProductReducer from '../reducers/updateProductReducer';
 import { setProductAdded, setProductUpdated } from '../actions/formActions';
-import '../components/CartItem.css';
+import './AdminDashboardContainer.css';
 
 const AdminDashboardContainer = () => {
   const dispatch = useDispatch();
@@ -23,21 +23,9 @@ const AdminDashboardContainer = () => {
   const { totalPages } = useSelector((state) => state.productListReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
 
-  useEffect(() => {
-    if (loading === true && (page <= totalPages || totalPages === 0)) {
-      dispatch(getProductList(page));
-      changeStates();
-    }
-  }, [loading]);
-  useEffect(() => {
-    setLoading(true);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const handleScroll = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
+      window.innerHeight + document.documentElement.scrollTop-12 !==
         document.documentElement.offsetHeight ||
       loading
     ) {
@@ -46,18 +34,32 @@ const AdminDashboardContainer = () => {
     setLoading(true);
   };
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    setLoading(true);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const changeStates = async () => {
     setTimeout(() => {
       setPage(page + 1);
       setLoading(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    if (loading === true && (page <= totalPages || totalPages === 0)) {
+      dispatch(getProductList(page));
+      changeStates();
+    }
+  }, [loading]);
+
   const { productList } = useSelector((state) => state.productListReducer);
   if (!userDetails.token) {
     return <Redirect to="/login" />;
   }
 
-  let addButton = <ButtonWrapper className={'add_button'} buttonText={'Add Product'} />;
+  let addButton = <ButtonWrapper style={'dash_button'} buttonText={'Add Product'} />;
 
   let column_content = [];
   let row_content = [];
@@ -69,7 +71,7 @@ const AdminDashboardContainer = () => {
 
   column_content.push(<Link to="/admin/addproduct"> {addButton} </Link>);
   row_content.push(<ColumnWrapper />);
-  row_content.push(<ColumnWrapper data={column_content} />);
+  row_content.push(<ColumnWrapper className={'col_dash'} data={column_content} />);
   row_content.push(<ColumnWrapper />);
 
   return (

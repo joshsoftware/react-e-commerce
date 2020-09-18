@@ -1,0 +1,8 @@
+.col_dash{
+  justify-content: center;
+  display: flex;
+}
+.dash_button{
+  font-weight: bolder;
+  height: 50px;
+}
