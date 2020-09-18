@@ -12,6 +12,7 @@ const ProductComponent = () => {
       <br />
       <br />
       <br />
+      <br />
       <SideBarComponent />
       <ContainerWrapper
         data={
