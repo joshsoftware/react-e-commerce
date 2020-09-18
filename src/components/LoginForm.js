@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form } from 'reactstrap';
 import ButtonWrapper from './ButtonWrapper';
@@ -12,11 +12,9 @@ import { Link } from 'react-router-dom';
 const LoginForm = ({ validateData, dispatch, formState }) => {
   const { email, password, emailError, passwordError, isLoading } = formState;
   const dispatchOAuth = useDispatch();
-
   const responseGoogle = (response) => {
     dispatchOAuth(loginOAuthRequest(response.tokenObj.access_token));
   };
-
   return (
     <>
       <h3>Login</h3>

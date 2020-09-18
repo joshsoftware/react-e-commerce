@@ -5,13 +5,24 @@ import { getProductList, resetProductList } from '../actions/productListActions'
 import ContainerWrapper from '../components/ContainerWrapper';
 import AlertWrapper from '../components/AlertWrapper';
 import './productContainer.css';
+import alertReducer from '../reducers/alertReducer';
+import { alertLogin } from '../actions/alertActions';
 
 const ProductListContainer = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [visible, setVisible] = useState(false);
-  const [alertText, setAlertText] = useState('No items matches your choice!!');
+  const [alertText1, setAlertText] = useState('No items matches your choice!!');
   const { totalPages } = useSelector((state) => state.productListReducer);
+
+  const { loginAlert, alertText } = useSelector((state) => state.alertReducer);
+  const dispatch = useDispatch();
+  const alertDispatch = useDispatch(alertReducer);
+  const timeOutFunction = async () => {
+    setTimeout(() => {
+      alertDispatch(alertLogin({ alert: false, alertText: '' }));
+    }, 10000);
+  };
 
   const handleScroll = () => {
     console.log(
@@ -31,10 +42,11 @@ const ProductListContainer = () => {
 
   const toggle = () => setVisible(false);
 
-  const dispatch = useDispatch();
   useEffect(() => {
+    setAlertText(alertText);
     dispatch(resetProductList());
     setLoading(true);
+    timeOutFunction();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -83,9 +95,9 @@ const ProductListContainer = () => {
     <AlertWrapper
       className="text-center fixed-top"
       color="info"
-      isOpen={visible}
+      isOpen={visible || loginAlert ? true : false}
       toggle={toggle}
-      data={alertText}
+      data={alertText1}
     />
   );
 

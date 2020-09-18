@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
@@ -12,9 +12,14 @@ import {
   resetState
 } from '../actions/formActions';
 import registrationReducer from '../reducers/registrationReducer';
+import AlertWrapper from '../components/AlertWrapper';
+import alertReducer from '../reducers/alertReducer';
+import { alertLogin, alertMessage } from '../actions/alertActions';
 
 const LoginContainer = () => {
+  const { alert, alertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
+  const alertDispatch = useDispatch(alertReducer);
   const registrationDispatch = useDispatch(registrationReducer);
   registrationDispatch(setRegistered(false));
   const result = useSelector((state) => state.loginReducer);
@@ -24,6 +29,16 @@ const LoginContainer = () => {
     email: yup.string().email().required(),
     password: yup.string().required()
   });
+  const timeOutFunction = async () => {
+    setTimeout(() => {
+      alertDispatch(alertMessage({ alert: false, alertText: '' }));
+      alertDispatch(alertLogin({ alert: true, alertText: 'Successfully Login' }));
+    }, 10000);
+  };
+
+  useEffect(() => {
+    timeOutFunction();
+  }, []);
 
   const validateData = () => {
     dispatch(resetErrors());
@@ -47,7 +62,17 @@ const LoginContainer = () => {
   } else if (userDetails.token) {
     return <Redirect to="/products" />;
   }
-  return <LoginComponent validateData={validateData} dispatch={dispatch} formState={result} />;
+  return (
+    <>
+      <AlertWrapper
+        className="text-center fixed-top"
+        color="info"
+        isOpen={alert}
+        data={alertText}
+      />
+      <LoginComponent validateData={validateData} dispatch={dispatch} formState={result} />;
+    </>
+  );
 };
 
 export default LoginContainer;

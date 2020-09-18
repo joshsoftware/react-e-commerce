@@ -13,6 +13,7 @@ import { setProductAdded, setProductUpdated } from '../actions/formActions';
 import './AdminDashboardContainer.css';
 
 const AdminDashboardContainer = () => {
+  const [visible, setVisible] = useState();
   const dispatch = useDispatch();
   const addProductDispatch = useDispatch(addProductReducer);
   const updateProductDispatch = useDispatch(updateProductReducer);
