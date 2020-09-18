@@ -16,7 +16,7 @@ const InputSpinner = ({
   return (
     <input
       defaultValue={defaultValue}
-      size={1}
+      size={size}
       type={type}
       min={min}
       max={max}

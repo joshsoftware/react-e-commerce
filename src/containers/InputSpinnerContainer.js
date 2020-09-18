@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux';
 import { updateProductStockApi, getProductByIdApi } from '../apis/productApi';
 import InputSpinnerWrapper from '../components/InputSpinnerWrapper';
 import ButtonWrapper from '../components/ButtonWrapper';
-import ColumnWrapper from '../components/ColumnWrapper';
-import RowWrapper from '../components/RowWrapper';
 
 const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertText }) => {
   let [stock, setStock] = useState('');
@@ -120,7 +118,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
   row_data.push(
     <InputSpinnerWrapper
       defaultValue={valid_quantity}
-      size={5}
+      size={1}
       min={1}
       max={stock}
       spinner={'true'}

@@ -92,5 +92,6 @@ export default ProductCategoryContainer;
 
 ProductCategoryContainer.propTypes = {
   formState: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  isRequired: PropTypes.bool
 };

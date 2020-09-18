@@ -6,12 +6,10 @@ import { setProductList } from '../actions/productListActions';
 
 //worker saga
 function* searchbarWorkerSaga(action) {
-  console.log('worker in saga of searchbar', action.value);
   try {
-    console.log('here1234');
     const { data } = yield call(searchbar, action.value);
     console.log(data);
-    yield put(setProductList(data.products));
+    yield put(setProductList(data));
   } catch (error) {
     console.log('error', error);
     yield put(searchFailed(error));
@@ -20,6 +18,5 @@ function* searchbarWorkerSaga(action) {
 
 //watcher saga
 export default function* searchbarSaga() {
-  console.log('watcher searchbar');
   yield takeLatest(FORM_ACTIONS.SEARCH_REQUEST, searchbarWorkerSaga);
 }

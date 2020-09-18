@@ -12,3 +12,8 @@ const SearchBar = ({ searchData, onsearchchange }) => {
   );
 };
 export default SearchBar;
+
+SearchBar.propTypes = {
+  searchData: PropTypes.string,
+  onsearchchange: PropTypes.func
+};

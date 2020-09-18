@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as yup from 'yup';
 import SearchBar from '../components/SearchBar';
-import { searchRequest, setSearchproduct, searchFailed } from '../actions/formActions';
-import { initialState } from '../reducers/searchbarReducer';
+import { searchRequest, setSearchproduct } from '../actions/formActions';
+
 const SearchBarContainer = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state) => state.searbarReducer);
