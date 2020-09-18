@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
-import { Card } from 'reactstrap';
+import { Card, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import CardTitleWrapper from './CardTitleWrapper';
-import RowWrapper from './RowWrapper';
-import ColumnWrapper from './ColumnWrapper';
-import FormLabel from './FormLabel';
 import { getUserProfile } from '../actions/userprofileAction';
 import NavigationBarComponent from './NavigationBarComponent';
 import Footer from './Footer';
+import ContainerWrapper from './ContainerWrapper';
+import RenderData from './RenderData';
+import CartHeader from './CartHeader';
+import ButtonWrapper from './ButtonWrapper';
+import RowWrapper from './RowWrapper';
 
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
@@ -21,33 +22,24 @@ const UserProfile = () => {
   if (!userDetails.token) {
     return <Redirect to="/login" />;
   }
+  console.log("profile", profile);
+  
   let userprofile_content = [];
-  userprofile_content.push(
-    <CardTitleWrapper title={<h1 className={'bg-dark text-white'}>{'USER PROFILE'}</h1>} />
-  );
-  userprofile_content.push(<FormLabel labelText={'First Name: ' + profile.first_name} />);
-  userprofile_content.push(<FormLabel labelText={'Last Name: ' + profile.last_name} />);
-  userprofile_content.push(<FormLabel labelText={'Email: ' + profile.email} />);
-  userprofile_content.push(<FormLabel labelText={'Country: ' + profile.country} />);
-  userprofile_content.push(<FormLabel labelText={'State: ' + profile.state} />);
-  userprofile_content.push(<FormLabel labelText={'City: ' + profile.city} />);
-  userprofile_content.push(<FormLabel labelText={'Address: ' + profile.address} />);
+  let editButton = <RowWrapper data={<ButtonWrapper style="m-auto" buttonText={'Edit Profile'} />} />;
+  userprofile_content.push(<RenderData label='Email ' userdata={profile.email}/>);
+  userprofile_content.push(<RenderData label='Country ' userdata= {profile.country === "" ? "Not Selected" : profile.country}/>);
+  userprofile_content.push(<RenderData label='State ' userdata={profile.state === "" ? "Not Selected" : profile.state}/>);
+  userprofile_content.push(<RenderData label='City ' userdata={ profile.city === "" ? "Not Selected" : profile.city}/>);
+  userprofile_content.push(<RenderData label='Address ' userdata={ profile.address === "" ? "Not Selected" : profile.address}/>);
   return (
     <>
-      <NavigationBarComponent color="dark" expand="md" />
-      <div className="text-center p-5">
-        <RowWrapper
-          data={
-            <ColumnWrapper
-              sm={{ size: 6, offset: 3 }}
-              data={<Card className={'border'}> {userprofile_content}</Card>}
-            />
-          }
-        />
+      <NavigationBarComponent className="navClass fixed-top" expand="md" />
+        <CartHeader header={`Welcome ${profile.first_name} ${profile.last_name}`}/>
+        <ContainerWrapper data={userprofile_content} />
         <Link className={'bg-dark text-white'} to="/profile/update">
-          Edit Profile
+          {editButton}
         </Link>
-      </div>
+
       <Footer />
     </>
   );
