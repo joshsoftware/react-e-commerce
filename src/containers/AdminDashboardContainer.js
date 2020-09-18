@@ -7,8 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import AdminProductList from '../components/AdminProductList';
 import ContainerWrapper from '../components/ContainerWrapper';
 import { getProductList } from '../actions/productListActions';
-import '../components/CartItem.css';
-
+import './AdminDashboardContainer.css'
 const AdminDashboardContainer = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -53,7 +52,7 @@ const AdminDashboardContainer = () => {
     return <Redirect to="/login" />;
   }
 
-  let addButton = <ButtonWrapper className={'add_button'} buttonText={'Add Product'} />;
+  let addButton = <ButtonWrapper style={'dash_button'} buttonText={'Add Product'} />;
 
   let column_content = [];
   let row_content = [];
@@ -65,7 +64,7 @@ const AdminDashboardContainer = () => {
 
   column_content.push(<Link to="/admin/addproduct"> {addButton} </Link>);
   row_content.push(<ColumnWrapper />);
-  row_content.push(<ColumnWrapper data={column_content} />);
+  row_content.push(<ColumnWrapper className={'col_dash'} data={column_content} />);
   row_content.push(<ColumnWrapper />);
 
   return (
