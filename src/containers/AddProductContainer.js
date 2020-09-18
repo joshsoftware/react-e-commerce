@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
 import AddProductComponent from '../components/AddProductComponent';
-import { setErrors, resetErrors, addProductRequest } from '../actions/formActions';
+import { setErrors, resetErrors, addProductRequest, resetState } from '../actions/formActions';
 import productListReducer from '../reducers/productListReducer';
 import { resetProductList } from '../actions/productListActions';
 
@@ -108,6 +108,7 @@ const AddProductContainer = () => {
               token
             })
           );
+          dispatch(resetState());
           productListDispatch(resetProductList());
         }
       });

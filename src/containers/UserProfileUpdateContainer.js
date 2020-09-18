@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
-import { setErrors, resetErrors, updateRequest } from '../actions/formActions';
+import { setErrors, resetErrors, updateRequest, resetState } from '../actions/formActions';
 import UserProfileUpdateComponent from '../components/UserProfileUpdateComponent';
 import { initialState } from '../reducers/userprofileupdateReducer';
 import NavigationBarComponent from '../components/NavigationBarComponent';
@@ -65,6 +65,7 @@ const UserProfileUpdateContainer = () => {
               token
             })
           );
+          dispatch(resetState());
         }
       });
   };

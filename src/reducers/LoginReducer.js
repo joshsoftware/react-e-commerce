@@ -12,6 +12,8 @@ const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case FORM_ACTIONS.RESET_ERRORS:
       return { ...state, emailError: null, passwordError: null };
+      case FORM_ACTIONS.RESET_STATE:
+      return {...initialState, userDetails: state.userDetails};
     case FORM_ACTIONS.SET_EMAIL:
       return { ...state, email: action.value };
     case FORM_ACTIONS.SET_PASSWORD:
