@@ -29,5 +29,6 @@ export default NavigationBarComponent;
 
 NavigationBarComponent.propTypes = {
   color: PropTypes.string.isRequired,
-  expand: PropTypes.string
+  expand: PropTypes.string,
+  className: PropTypes.string
 };

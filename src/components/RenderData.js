@@ -1,6 +1,7 @@
 import React from 'react';
 import RowWrapper from './RowWrapper';
 import ColumnWrapper from './ColumnWrapper';
+import PropTypes from 'prop-types';
 
 const RenderData = ({ label, userdata }) => {
   return (
@@ -20,3 +21,8 @@ const RenderData = ({ label, userdata }) => {
 };
 
 export default RenderData;
+
+RenderData.propTypes = {
+  label: PropTypes.string,
+  userdata: PropTypes.string
+};
