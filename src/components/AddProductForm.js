@@ -5,6 +5,9 @@ import { Form } from 'reactstrap';
 import PropTypes from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
 import { setField } from '../actions/formActions';
+import { useDispatch } from 'react-redux';
+import alertReducer from '../reducers/alertReducer';
+import { alertMessage } from '../actions/alertActions';
 
 let productTitle = {
     field: 'exampleProductTitle',
@@ -137,6 +140,7 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
     message: formState.imageUrlError
   };
 
+  const alertDispatch = useDispatch(alertReducer);
   return (
     <>
       <h3>Add Product</h3>
@@ -145,6 +149,7 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
+          alertDispatch(alertMessage({ alert: true, alertText: 'Product Added Successfully' }));
         }}>
         <FormField formfield={productTitle} />
         <FormField formfield={description} />

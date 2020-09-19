@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form } from 'reactstrap';
 import ButtonWrapper from './ButtonWrapper';
@@ -8,13 +8,17 @@ import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
 import { loginOAuthRequest } from '../actions/formActions';
 import { Link } from 'react-router-dom';
+import alertReducer from '../reducers/alertReducer';
+import { alertLogin } from '../actions/alertActions';
 
 const LoginForm = ({ validateData, dispatch, formState }) => {
   const { email, password, emailError, passwordError, isLoading } = formState;
   const dispatchOAuth = useDispatch();
   const responseGoogle = (response) => {
+    alertDispatch(alertLogin({ alert: true, alertText: 'Successfully Login' }));
     dispatchOAuth(loginOAuthRequest(response.tokenObj.access_token));
   };
+  const alertDispatch = useDispatch(alertReducer);
   return (
     <>
       <h3>Login</h3>
@@ -23,6 +27,7 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
+          alertDispatch(alertLogin({ alert: true, alertText: 'Successfully Login' }));
         }}>
         <FormEmailField
           email={email}

@@ -18,7 +18,7 @@ const CartContainer = () => {
   }
   return (
     <>
-      <NavigationBarComponent color="dark" expand="md" />
+      <NavigationBarComponent className="navClass fixed-top" expand="md" />
       <CartHeader header="SHOPPING CART" />
       <CartItemListContainer />
       <Footer />

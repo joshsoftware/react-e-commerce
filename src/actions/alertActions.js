@@ -21,3 +21,10 @@ export const alertUserProfile = (alertObj) => {
     value: alertObj
   };
 };
+
+export const alertRegistration = (alertObj) => {
+  return {
+    type: ALERT_ACTIONS.ALERT_REGISTRATION,
+    value: alertObj
+  };
+};

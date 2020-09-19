@@ -12,10 +12,10 @@ const ProductListContainer = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [visible, setVisible] = useState(false);
-  const [alertText1, setAlertText] = useState('No items matches your choice!!');
+  const [alertText, setAlertText] = useState('No items matches your choice!!');
   const { totalPages } = useSelector((state) => state.productListReducer);
 
-  const { loginAlert, alertText } = useSelector((state) => state.alertReducer);
+  const { loginAlert, loginAlertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
   const timeOutFunction = async () => {
@@ -40,16 +40,18 @@ const ProductListContainer = () => {
     setLoading(true);
   };
 
-  const toggle = () => setVisible(false);
-
   useEffect(() => {
-    setAlertText(alertText);
     dispatch(resetProductList());
     setLoading(true);
-    timeOutFunction();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    console.log(loginAlertText);
+    setAlertText(loginAlertText);
+    timeOutFunction();
+  }, [loginAlert]);
 
   const changeStates = async () => {
     setTimeout(() => {
@@ -94,10 +96,9 @@ const ProductListContainer = () => {
   arr.push(
     <AlertWrapper
       className="text-center fixed-top"
-      color="info"
-      isOpen={visible || loginAlert ? true : false}
-      toggle={toggle}
-      data={alertText1}
+      color={visible ? 'danger' : 'info'}
+      isOpen={visible || loginAlert}
+      data={alertText}
     />
   );
 

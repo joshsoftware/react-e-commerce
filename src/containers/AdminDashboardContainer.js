@@ -12,11 +12,13 @@ import updateProductReducer from '../reducers/updateProductReducer';
 import { setProductAdded, setProductUpdated } from '../actions/formActions';
 import './AdminDashboardContainer.css';
 import alertReducer from '../reducers/alertReducer';
-import { alertMessage } from '../actions/alertActions';
+import { alertLogin, alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
 
 const AdminDashboardContainer = () => {
-  const { alert, alertText } = useSelector((state) => state.alertReducer);
+  const { alert, loginAlert, alertText, loginAlertText } = useSelector(
+    (state) => state.alertReducer
+  );
   const alertDispatch = useDispatch(alertReducer);
   const dispatch = useDispatch();
   const addProductDispatch = useDispatch(addProductReducer);
@@ -31,7 +33,8 @@ const AdminDashboardContainer = () => {
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertMessage({ alert: false, alertText: '' }));
-    }, 10000);
+      alertDispatch(alertLogin({ alert: false, alertText: '' }));
+    }, 5000);
   };
 
   const handleScroll = () => {
@@ -48,7 +51,6 @@ const AdminDashboardContainer = () => {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     setLoading(true);
-    // timeOutFunction();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -57,6 +59,12 @@ const AdminDashboardContainer = () => {
       timeOutFunction();
     }
   }, [alert]);
+
+  useEffect(() => {
+    if (loginAlert === true) {
+      timeOutFunction();
+    }
+  }, [loginAlert]);
 
   const changeStates = async () => {
     setTimeout(() => {
@@ -102,8 +110,8 @@ const AdminDashboardContainer = () => {
           <AlertWrapper
             className="text-center"
             color={alertText === 'Product deleted Successfully' ? 'danger' : 'info'}
-            isOpen={alert}
-            data={alertText}
+            isOpen={alert || loginAlert}
+            data={alertText === '' ? loginAlertText : alertText}
           />
         }
       />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './CartItem.css';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';

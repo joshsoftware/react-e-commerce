@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginComponent from '../components/LoginComponent';
 import * as yup from 'yup';
@@ -14,10 +14,11 @@ import {
 import registrationReducer from '../reducers/registrationReducer';
 import AlertWrapper from '../components/AlertWrapper';
 import alertReducer from '../reducers/alertReducer';
-import { alertLogin, alertMessage } from '../actions/alertActions';
+import { alertMessage, alertRegistration } from '../actions/alertActions';
 
 const LoginContainer = () => {
-  const { alert, alertText } = useSelector((state) => state.alertReducer);
+  const [alertState, setAlertState] = useState('');
+  const { alert, alertText, registrationAlert , registrationAlertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
   const registrationDispatch = useDispatch(registrationReducer);
@@ -32,13 +33,19 @@ const LoginContainer = () => {
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertMessage({ alert: false, alertText: '' }));
-      alertDispatch(alertLogin({ alert: true, alertText: 'Successfully Login' }));
+      alertDispatch(alertRegistration({ alert: false, alertText: '' }));
     }, 10000);
   };
 
   useEffect(() => {
+    setAlertState(alertText);
     timeOutFunction();
-  }, []);
+  }, [alert]);
+
+  useEffect(() => {
+    setAlertState(registrationAlertText);
+    timeOutFunction();
+  }, [registrationAlert]);
 
   const validateData = () => {
     dispatch(resetErrors());
@@ -66,9 +73,9 @@ const LoginContainer = () => {
     <>
       <AlertWrapper
         className="text-center fixed-top"
-        color="info"
-        isOpen={alert}
-        data={alertText}
+        color={alertText === 'Login Failed : Enter Correct Credentials' ? 'danger' : 'info'}
+        isOpen={alert || registrationAlert}
+        data={alertState}
       />
       <LoginComponent validateData={validateData} dispatch={dispatch} formState={result} />;
     </>

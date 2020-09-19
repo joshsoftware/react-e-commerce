@@ -1,5 +1,4 @@
 import { PRODUCT_LIST_REDUCER } from '../shared/actionConstants';
-//import productList from '../productList.json';
 const initialState = {
   productList: [],
   totalPages: 0,

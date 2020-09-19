@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
@@ -11,9 +11,14 @@ import {
   resetState
 } from '../actions/formActions';
 import { initialState } from '../reducers/registrationReducer';
+import AlertWrapper from '../components/AlertWrapper';
+import { alertMessage } from '../actions/alertActions';
+import alertReducer from '../reducers/alertReducer';
 
 const RegistrationContainer = () => {
+  const { alert, alertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
+  const alertDispatch = useDispatch(alertReducer);
   const registrationState = useSelector((state) => state.registrationReducer);
   const { firstname, lastname, email, password, country, state, city, address } = registrationState;
   const schema = yup.object().shape({
@@ -77,16 +82,33 @@ const RegistrationContainer = () => {
     dispatch(setIsLoading(false));
   };
 
+  const timeOutFunction = async () => {
+    setTimeout(() => {
+      alertDispatch(alertMessage({ alert: false, alertText: '' }));
+    }, 10000);
+  };
+
+  useEffect(() => {
+    timeOutFunction();
+  }, [alert]);
   if (registrationState.registered) {
     return <Redirect to="/login" />;
   }
 
   return (
-    <RegistrationComponent
-      validateData={validateData}
-      dispatch={dispatch}
-      formState={registrationState}
-    />
+    <>
+      <AlertWrapper
+        className="text-center fixed-top"
+        color={'danger'}
+        isOpen={alert}
+        data={alertText}
+      />
+      <RegistrationComponent
+        validateData={validateData}
+        dispatch={dispatch}
+        formState={registrationState}
+      />
+    </>
   );
 };
 

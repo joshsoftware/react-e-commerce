@@ -1,6 +1,7 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setUserDetails, loginFailed } from '../actions/formActions';
+import { alertMessage } from '../actions/alertActions';
 import login from '../apis/loginApi';
 
 //worker saga
@@ -9,7 +10,7 @@ function* loginWorkerSaga(action) {
     const { data } = yield call(login, action.value);
     yield put(setUserDetails(data));
   } catch (error) {
-    console.log(error);
+    yield put(alertMessage({ alert: true, alertText: 'Login Failed : Enter Correct Credentials' }));
     yield put(loginFailed(error));
   }
 }

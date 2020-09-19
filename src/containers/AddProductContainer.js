@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
@@ -6,18 +6,12 @@ import AddProductComponent from '../components/AddProductComponent';
 import { setErrors, resetErrors, addProductRequest, resetState } from '../actions/formActions';
 import productListReducer from '../reducers/productListReducer';
 import { resetProductList } from '../actions/productListActions';
-import alertReducer from '../reducers/alertReducer';
-import { alertMessage } from '../actions/alertActions';
 
 const AddProductContainer = () => {
   const dispatch = useDispatch();
   const productListDispatch = useDispatch(productListReducer);
-  const alertDispatch = useDispatch(alertReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   const addProductState = useSelector((state) => state.addProductReducer);
-  useEffect(() => {
-    alertDispatch(alertMessage({ alert: true, alertText: 'Product Added Successfully' }));
-  }, []);
   const {
     productTitle,
     description,
