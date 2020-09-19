@@ -18,11 +18,13 @@ const ProductListContainer = () => {
   const { loginAlert, loginAlertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
+
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertLogin({ alert: false, alertText: '' }));
     }, 10000);
   };
+  
 
   const handleScroll = () => {
     console.log(
@@ -59,6 +61,7 @@ const ProductListContainer = () => {
       setLoading(false);
     }, 2000);
   };
+
   useEffect(() => {
     if (loading === true && (page <= totalPages || totalPages === 0)) {
       dispatch(getProductList(page));
@@ -68,6 +71,7 @@ const ProductListContainer = () => {
 
   const { productList, alert } = useSelector((state) => state.productListReducer);
   let arr = [];
+
   useEffect(() => {
     if (alert === true) {
       setVisible(true);
@@ -75,6 +79,7 @@ const ProductListContainer = () => {
       setVisible(false);
     }
   }, [alert]);
+
   let tempProductList = [];
   for (let i = 0; i < productList.length; i++) {
     if (productList[i].disabled === false) {

@@ -12,7 +12,6 @@ const initialState = {
 const alertReducer = (state = initialState, action) => {
   switch (action.type) {
     case ALERT_ACTIONS.ALERT_MESSAGE: {
-      console.log('alert reducer', action.value);
       return { ...state, alert: action.value.alert, alertText: action.value.alertText };
     }
     case ALERT_ACTIONS.ALERT_REGISTRATION: {
@@ -23,11 +22,11 @@ const alertReducer = (state = initialState, action) => {
       };
     }
     case ALERT_ACTIONS.ALERT_LOGIN: {
-      console.log('in reducer', action.value);
       return { ...state, loginAlert: action.value.alert, loginAlertText: action.value.alertText };
     }
     case ALERT_ACTIONS.ALERT_USER_PROFILE:
-      return { ...state, userProfileAlert: action.value.alert, alertText: action.value.alertText };
+      //console.log('in reducer', action.value);
+      return { ...state, userProfileAlert: action.value, alertText: action.value.alertText };
     default:
       return state;
   }

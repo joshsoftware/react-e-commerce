@@ -12,41 +12,50 @@ import RenderData from './RenderData';
 import CartHeader from './CartHeader';
 import ButtonWrapper from './ButtonWrapper';
 import RowWrapper from './RowWrapper';
-import AlertWrapper from './AlertWrapper';
 import alertReducer from '../reducers/alertReducer';
-import { alertUserProfile } from '../actions/alertActions';
+import {  alertMessage } from '../actions/alertActions';
+import AlertWrapper from '../components/AlertWrapper';
 
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { profile } = useSelector((state) => state.userprofileReducer);
-  const { userProfileAlert, alertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
-  const alertDispatch = useDispatch(alertReducer);
+;  const { alert, alertText } = useSelector((state) => state.alertReducer);
+const alertDispatch = useDispatch(alertReducer);
+
   const userProfileUpdateDispatch = useDispatch(userprofileupdateReducer);
+  
   userProfileUpdateDispatch(setUpdated(false));
   const timeOutFunction = async () => {
     setTimeout(() => {
-      alertDispatch(alertUserProfile({ alert: false, alertText: '' }));
+      alertDispatch(alertMessage({ alert: false, alertText: '' }));
     }, 10000);
   };
   useEffect(() => {
-    dispatch(getUserProfile(userDetails.token));
+    console.log('fddgfdhf',alertText);
+    //setAlertText(loginAlertText);
     timeOutFunction();
+  }, [alert]);
+
+  useEffect(() => {
+    dispatch(getUserProfile(userDetails.token));
   }, []);
+
   if (!userDetails.token) {
     return <Redirect to="/login" />;
   }
-  console.log('profile', profile);
 
   let userprofile_content = [];
+
   let editButton = (
     <RowWrapper data={<ButtonWrapper style="m-auto" buttonText={'Edit Profile'} />} />
   );
-  userprofile_content.push(<RenderData label="Email " userdata={profile.email} />);
   userprofile_content.push(
-    <RenderData
-      label="Country "
-      userdata={profile.country === '' ? 'Not Selected' : profile.country}
+    <RenderData label="Email " userdata={profile.email}
+    />
+    );
+  userprofile_content.push(
+    <RenderData label="Country " userdata={profile.country === '' ? 'Not Selected' : profile.country}
     />
   );
   userprofile_content.push(
@@ -56,20 +65,19 @@ const UserProfile = () => {
     <RenderData label="City " userdata={profile.city === '' ? 'Not Selected' : profile.city} />
   );
   userprofile_content.push(
-    <RenderData
-      label="Address "
-      userdata={profile.address === '' ? 'Not Selected' : profile.address}
+    <RenderData label="Address " userdata={profile.address === '' ? 'Not Selected' : profile.address}
     />
   );
   return (
     <>
-      <AlertWrapper
+    <AlertWrapper
         className="text-center fixed-top"
         color="info"
-        isOpen={userProfileAlert}
+        isOpen={alert}
         data={alertText}
-    />
+/>
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
+   
       <CartHeader header={`Welcome ${profile.first_name} ${profile.last_name}`} />
       <ContainerWrapper data={userprofile_content} />
       <Link className={'bg-dark text-white'} to="/profile/update">
