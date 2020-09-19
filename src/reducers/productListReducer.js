@@ -89,6 +89,7 @@ const productListReducer = (state = initialState, action) => {
       return { ...state, productList: newProductList };
     }
     case PRODUCT_LIST_REDUCER.DELETE_PRODUCT: {
+      console.log('product reducer', action.value);
       let newProductList = state.productList;
       let index = newProductList.findIndex((product) => product.id === action.value);
       newProductList.splice(index, 1);

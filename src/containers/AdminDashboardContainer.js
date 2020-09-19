@@ -11,9 +11,13 @@ import addProductReducer from '../reducers/addProductReducer';
 import updateProductReducer from '../reducers/updateProductReducer';
 import { setProductAdded, setProductUpdated } from '../actions/formActions';
 import './AdminDashboardContainer.css';
+import alertReducer from '../reducers/alertReducer';
+import { alertMessage } from '../actions/alertActions';
+import AlertWrapper from '../components/AlertWrapper';
 
 const AdminDashboardContainer = () => {
-  const [visible, setVisible] = useState();
+  const { alert, alertText } = useSelector((state) => state.alertReducer);
+  const alertDispatch = useDispatch(alertReducer);
   const dispatch = useDispatch();
   const addProductDispatch = useDispatch(addProductReducer);
   const updateProductDispatch = useDispatch(updateProductReducer);
@@ -24,10 +28,16 @@ const AdminDashboardContainer = () => {
   const { totalPages } = useSelector((state) => state.productListReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
 
+  const timeOutFunction = async () => {
+    setTimeout(() => {
+      alertDispatch(alertMessage({ alert: false, alertText: '' }));
+    }, 10000);
+  };
+
   const handleScroll = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop - 12 !==
-        document.documentElement.offsetHeight ||
+      window.innerHeight + Math.trunc(document.documentElement.scrollTop) <=
+        document.documentElement.offsetHeight - 15 ||
       loading
     ) {
       return;
@@ -38,8 +48,15 @@ const AdminDashboardContainer = () => {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     setLoading(true);
+    // timeOutFunction();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (alert === true) {
+      timeOutFunction();
+    }
+  }, [alert]);
 
   const changeStates = async () => {
     setTimeout(() => {
@@ -65,10 +82,12 @@ const AdminDashboardContainer = () => {
   let column_content = [];
   let row_content = [];
   let products = [];
-
-  products = productList.map((product) => (
-    <AdminProductList key={product.id} item={product} dispatch={dispatch} />
-  ));
+  products.push(<RowWrapper data={row_content} />);
+  products.push(
+    productList.map((product) => (
+      <AdminProductList key={product.id} item={product} dispatch={dispatch} />
+    ))
+  );
 
   column_content.push(<Link to="/admin/addproduct"> {addButton} </Link>);
   row_content.push(<ColumnWrapper />);
@@ -77,7 +96,17 @@ const AdminDashboardContainer = () => {
 
   return (
     <>
-      <RowWrapper data={row_content} />
+      <ContainerWrapper
+        className={'fixed-top'}
+        data={
+          <AlertWrapper
+            className="text-center"
+            color={alertText === 'Product deleted Successfully' ? 'danger' : 'info'}
+            isOpen={alert}
+            data={alertText}
+          />
+        }
+      />
       <ContainerWrapper data={products} />
     </>
   );

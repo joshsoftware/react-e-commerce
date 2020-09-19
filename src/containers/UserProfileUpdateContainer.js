@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
@@ -7,9 +7,14 @@ import UserProfileUpdateComponent from '../components/UserProfileUpdateComponent
 import { initialState } from '../reducers/userprofileupdateReducer';
 import NavigationBarComponent from '../components/NavigationBarComponent';
 import Footer from '../components/Footer';
+import alertReducer from '../reducers/alertReducer';
+import { alertUserProfile } from '../actions/alertActions';
 const UserProfileUpdateContainer = () => {
   const dispatch = useDispatch();
-
+  const alertDispatch = useDispatch(alertReducer);
+  useEffect(() => {
+    alertDispatch(alertUserProfile({ alert: true, alertText: 'Profile Successfully updated' }));
+  }, []);
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);

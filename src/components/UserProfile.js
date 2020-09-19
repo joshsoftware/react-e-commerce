@@ -12,15 +12,26 @@ import RenderData from './RenderData';
 import CartHeader from './CartHeader';
 import ButtonWrapper from './ButtonWrapper';
 import RowWrapper from './RowWrapper';
+import AlertWrapper from './AlertWrapper';
+import alertReducer from '../reducers/alertReducer';
+import { alertUserProfile } from '../actions/alertActions';
 
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { profile } = useSelector((state) => state.userprofileReducer);
+  const { userProfileAlert, alertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
+  const alertDispatch = useDispatch(alertReducer);
   const userProfileUpdateDispatch = useDispatch(userprofileupdateReducer);
   userProfileUpdateDispatch(setUpdated(false));
+  const timeOutFunction = async () => {
+    setTimeout(() => {
+      alertDispatch(alertUserProfile({ alert: false, alertText: '' }));
+    }, 10000);
+  };
   useEffect(() => {
     dispatch(getUserProfile(userDetails.token));
+    timeOutFunction();
   }, []);
   if (!userDetails.token) {
     return <Redirect to="/login" />;
@@ -52,6 +63,12 @@ const UserProfile = () => {
   );
   return (
     <>
+      <AlertWrapper
+        className="text-center fixed-top"
+        color="info"
+        isOpen={userProfileAlert}
+        data={alertText}
+    />
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
       <CartHeader header={`Welcome ${profile.first_name} ${profile.last_name}`} />
       <ContainerWrapper data={userprofile_content} />
