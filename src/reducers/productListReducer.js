@@ -11,6 +11,7 @@ const initialState = {
     'brand': [],
     'product_price': []
   },
+  filteredProducts: [],
   alert: false,
   min: 0,
   max: 0,
@@ -26,6 +27,7 @@ const productListReducer = (state = initialState, action) => {
       return {
         ...state,
         productList: [...state.productList, ...newProductList],
+        filteredProducts: newProductList,
         totalPages: action.value.total_pages
       };
     }
@@ -48,7 +50,17 @@ const productListReducer = (state = initialState, action) => {
       return { ...state, filters: newFilters };
     }
 
-
+    case PRODUCT_LIST_REDUCER.SET_FILTERED_PRODUCTS: {
+      let newFilteredProducts = []
+      state.productList.map((product) => {
+        if(product.disabled === false) {
+          newFilteredProducts.push(product);
+        }
+      })
+      console.log('filtered',newFilteredProducts);
+      
+      return {...state, filteredProducts: newFilteredProducts}
+    }
 
     case PRODUCT_LIST_REDUCER.DELETE_FILTERS: {
       let newFilters = state.filters, filterObj = action.value

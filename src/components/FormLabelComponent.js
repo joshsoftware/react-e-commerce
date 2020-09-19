@@ -4,16 +4,20 @@ import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import Data from './Data';
-import { setFilters, applyFilters, setAlert, setMinMax, deleteFilters } from '../actions/productListActions';
+import { setFilters, applyFilters, setAlert, setMinMax, deleteFilters, setFilteredProducts } from '../actions/productListActions';
 
 const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   const dispatch = useDispatch();
-  const { productList, filters } = useSelector((state) => state.productListReducer);
+  const { productList, filteredProducts, filters } = useSelector((state) => state.productListReducer);
   useEffect(() => {
     dispatch(applyFilters());
   }, [productList])
+
   const [checked, setChecked] = useState(false);
+  
   const filterFunction = (labelText) => {
+    console.log('main label', mainLabel);
+    
     dispatch(setAlert(false));
     setChecked(!checked);
     let selectedFilters = {}
@@ -23,24 +27,34 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
       dispatch(setFilters(selectedFilters)); // {'category': 'cloth'}
       console.log(filters);
       dispatch(applyFilters());
+      // dispatch(setFilteredProducts());
+      addFilters(labelText);
     } else {
       dispatch(deleteFilters(selectedFilters));
       console.log(filters);
       dispatch(applyFilters());
+      // dispatch(setFilteredProducts());
+      addFilters(labelText);
     }
     const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
+
     if (accessories.includes(labelText) && !checked) {
+      dispatch(applyFilters());
+      // dispatch(setFilteredProducts());
       addFilters(labelText);
     } else {
-      addFilters(labelText);
       if (accessories.includes(labelText)) {
-        // dispatch(deleteFilters(selectedFilters));
+        
+        dispatch(deleteFilters(selectedFilters));
         dispatch(applyFilters());
+        // dispatch(setFilteredProducts());
+        addFilters(labelText);
         if(filters.category.length === 0) {
           setLabel(Data);
         }
       }
     }
+    
     let flag = false;
     for (let i = 0; i < productList.length; i++) {
       if (productList[i].disabled === false) {
@@ -57,7 +71,9 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
     console.log('in add', filters.category);
     
     const LabelsToShow = [];
-    let arr = productList;
+    let arr = productList;//filteredProducts;
+    console.log('inside add filters', arr);
+    
     let size_arr = [];
     let color_arr = [];
     let brand_arr = [];
@@ -130,9 +146,9 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
     LabelsToShow.push(new_object_brand);
     LabelsToShow.push(new_object_price);
 
-    // if (!checked) {
+    if (!checked) {
       setLabel(LabelsToShow);
-    // }
+    }
   };
 
   if (labelText === '') {

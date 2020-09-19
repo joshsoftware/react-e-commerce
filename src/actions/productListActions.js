@@ -7,6 +7,12 @@ export const setProductList = (product_list) => {
   };
 };
 
+export const setFilteredProducts = () => {
+  return {
+    type: PRODUCT_LIST_REDUCER.SET_FILTERED_PRODUCTS
+  };
+};
+
 export const getProductList = (page) => {
   return {
     type: PRODUCT_LIST_REDUCER.GET_PRODUCT_LIST,
