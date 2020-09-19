@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Label } from 'reactstrap';
 import PropTypes from 'prop-types';
 import FormInput from './FormInput';
@@ -9,7 +9,9 @@ import { setFilters, applyFilters, setAlert, setMinMax, deleteFilters } from '..
 const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   const dispatch = useDispatch();
   const { productList, filters } = useSelector((state) => state.productListReducer);
-
+  useEffect(() => {
+    dispatch(applyFilters());
+  }, [productList])
   const [checked, setChecked] = useState(false);
   const filterFunction = (labelText) => {
     dispatch(setAlert(false));
@@ -20,20 +22,23 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
     if (!checked) {
       dispatch(setFilters(selectedFilters)); // {'category': 'cloth'}
       console.log(filters);
-      // dispatch(applyFilters());
+      dispatch(applyFilters());
     } else {
       dispatch(deleteFilters(selectedFilters));
       console.log(filters);
-      // dispatch(applyFilters());
+      dispatch(applyFilters());
     }
     const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
     if (accessories.includes(labelText) && !checked) {
       addFilters(labelText);
     } else {
+      addFilters(labelText);
       if (accessories.includes(labelText)) {
         // dispatch(deleteFilters(selectedFilters));
-        // dispatch(applyFilters());
-        // setLabel(Data);
+        dispatch(applyFilters());
+        if(filters.category.length === 0) {
+          setLabel(Data);
+        }
       }
     }
     let flag = false;
@@ -49,6 +54,8 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   };
 
   const addFilters = (labelText) => {
+    console.log('in add', filters.category);
+    
     const LabelsToShow = [];
     let arr = productList;
     let size_arr = [];
@@ -71,11 +78,19 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
     });
     let offset = (max - min) / 3;
     dispatch(setMinMax(min, max));
-    const price_arr = [
-      `${min} - ${Math.floor(min + offset)}`,
-      `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`,
-      `${Math.floor(min + offset * 2 + 1)} - ${max}`
-    ];
+    let price_arr = [];
+    if( offset!==0 ) {
+      price_arr = [
+        `${min} - ${Math.floor(min + offset)}`,
+        `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`,
+        `${Math.floor(min + offset * 2 + 1)} - ${max}`
+      ];
+    }
+    else
+    {
+      price_arr = [`${min}`];
+    }
+    
     size_arr = Array.from(new Set(size_arr));
     color_arr = Array.from(new Set(color_arr));
     brand_arr = Array.from(new Set(brand_arr));
@@ -104,18 +119,20 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
       open: false
     };
     LabelsToShow.push(Data[0]);
-    if (labelText === 'Electronics' || labelText === 'Mobile' || labelText === 'Watch') {
+    // "Clothes", "Mobile", "Electronics", "Sports", "Books", "Watch"
+    // console.log('categories', filters.category, filters.category.includes('Clothes'));
+    if (filters.category.includes('Clothes') || filters.category.includes('Sports') || filters.category.includes('Electronics') || filters.category.includes('Mobile') || filters.category.includes('Watch')) {
       LabelsToShow.push(new_object_color);
-    } else if (labelText !== 'Books') {
+    } 
+    if (filters.category.includes('Clothes') || filters.category.includes('Sports')) {
       LabelsToShow.push(new_object_size);
-      LabelsToShow.push(new_object_color);
     }
     LabelsToShow.push(new_object_brand);
     LabelsToShow.push(new_object_price);
 
-    if (!checked) {
+    // if (!checked) {
       setLabel(LabelsToShow);
-    }
+    // }
   };
 
   if (labelText === '') {

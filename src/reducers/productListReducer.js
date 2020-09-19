@@ -1,5 +1,5 @@
 import { PRODUCT_LIST_REDUCER } from '../shared/actionConstants';
-//import productList from '../productList.json';
+
 const initialState = {
   productList: [],
   totalPages: 0,
@@ -57,19 +57,31 @@ const productListReducer = (state = initialState, action) => {
       newFilters[`${Object.keys(filterObj)[0]}`].splice(index, 1);
       return { ...state, filters: newFilters };
     }
-
-
     
     case PRODUCT_LIST_REDUCER.SET_MIN_MAX:
       return { ...state, min: action.value.min, max: action.value.max };
+
     case PRODUCT_LIST_REDUCER.APPLY_FILTERS: {
       let newProductList = state.productList;
       newProductList.map((product) => {
         let flag = false;
+        // Object.keys(state.filters).map((key) => {
+        //   if (product[key] !== state.filters[key] && key !== 'price') {
+        //     flag = true;
+        //     return;
+        //   }
+        // });
+        // Object.keys(state.filters).map((key) => {
+        //   console.log("filters", key, product[key], state.filters[key].includes(product[key]));
+        // })
+        
         Object.keys(state.filters).map((key) => {
-          if (product[key] !== state.filters[key] && key !== 'price') {
-            flag = true;
-            return;
+          if (state.filters[key].length > 0) {
+            // console.log("-------->", state.filters[key], product[key]);
+            if (state.filters[key].includes(product[key]) === false) {
+              flag = true   // size s  color blue     filter l, m, s    blue, red, black 
+              return;
+            }
           }
         });
         if (flag === true) {
@@ -77,35 +89,46 @@ const productListReducer = (state = initialState, action) => {
         } else {
           product.disabled = false;
         }
-        let min = state.min,
-          max = state.max,
-          offset = (max - min) / 3;
-        switch (state.filters.price) {
-          case `${min} - ${Math.floor(min + offset)}`: {
-            if (product.product_price < min || product.product_price > Math.floor(min + offset)) {
-              product.disabled = true;
-            }
-            break;
-          }
-          case `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`: {
-            if (
-              product.product_price < Math.floor(min + offset) ||
-              product.product_price > Math.floor(min + offset * 2)
-            ) {
-              product.disabled = true;
-            }
-            break;
-          }
-          case `${Math.floor(min + offset * 2 + 1)} - ${max}`: {
-            if (
-              product.product_price < Math.floor(min + offset * 2 + 1) ||
-              product.product_price > max
-            ) {
-              product.disabled = true;
-            }
-            break;
-          }
-        }
+        // let min = state.min,
+        //   max = state.max,
+        //   offset = (max - min) / 3;
+        // if(offset !==0 ) {
+        //   switch (state.filters.price) {
+        //     case `${min} - ${Math.floor(min + offset)}`: {
+        //       if (product.product_price < min || product.product_price > Math.floor(min + offset)) {
+        //         product.disabled = true;
+        //       }
+        //       break;
+        //     }
+        //     case `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`: {
+        //       if (
+        //         product.product_price < Math.floor(min + offset) ||
+        //         product.product_price > Math.floor(min + offset * 2)
+        //       ) {
+        //         product.disabled = true;
+        //       }
+        //       break;
+        //     }
+        //     case `${Math.floor(min + offset * 2 + 1)} - ${max}`: {
+        //       if (
+        //         product.product_price < Math.floor(min + offset * 2 + 1) ||
+        //         product.product_price > max
+        //       ) {
+        //         product.disabled = true;
+        //       }
+        //       break;
+        //     }
+        //   }
+        // }
+        // else {
+        //   if(product.product_price !== min) {
+        //     product.disabled = true;
+        //   }
+        //   else {
+        //     product.disabled = false;
+        //   }
+        // }
+        // console.log("product", product, state.filters);
       });
       return { ...state, productList: newProductList };
     }
