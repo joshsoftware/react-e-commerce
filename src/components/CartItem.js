@@ -14,12 +14,18 @@ import { useSelector } from 'react-redux';
 import { Alert } from 'reactstrap';
 import InputSpinnerContainer from '../containers/InputSpinnerContainer';
 import AlertWrapper from './AlertWrapper';
+import alertReducer from '../reducers/alertReducer';
+import { useDispatch } from 'react-redux';
+import {  alertMessage } from '../actions/alertActions';
+
 
 const CartItem = ({ item, dispatch }) => {
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);
   let { product_title, image_url, product_price, quantity, id } = item;
   const { userDetails } = useSelector((state) => state.loginReducer);
+  const alertDispatch = useDispatch(alertReducer);
+
   let column_content = [];
   let i = 0;
   let item_details = [];
@@ -93,6 +99,7 @@ const CartItem = ({ item, dispatch }) => {
             deleteCartItemApi({ token: userDetails.token, product_id: id });
             updateProductStockApi({ product_id: id, stock: -quantity });
             dispatch(deleteCartItem(id));
+            alertDispatch(alertMessage({ alert: true, alertText: 'Item removed Successfully!!' }));
           }}
         />
       }

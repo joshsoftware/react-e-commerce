@@ -6,10 +6,26 @@ import CartHeader from '../components/CartHeader';
 import NavigationBarComponent from '../components/NavigationBarComponent';
 import Footer from '../components/Footer';
 import { getCartItems } from '../actions/cartActions';
+import AlertWrapper from '../components/AlertWrapper';
+import alertReducer from '../reducers/alertReducer';
+import { alertLogin } from '../actions/alertActions';
 
 const CartContainer = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
+  const { alert, alertText } = useSelector((state) => state.alertReducer);
+const alertDispatch = useDispatch(alertReducer);
+
+  const timeOutFunction = async () => {
+    setTimeout(() => {
+      alertDispatch(alertLogin({ alert: false, alertText: '' }));
+    }, 2000);
+  };
+  useEffect(() => {
+    console.log('fddgfdhf',alertText);
+    timeOutFunction();
+  }, [alert]);
+  
   useEffect(() => {
     dispatch(getCartItems(userDetails.token));
   }, []);
@@ -18,8 +34,16 @@ const CartContainer = () => {
   }
   return (
     <>
+       
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
+    
       <CartHeader header="SHOPPING CART" />
+      <AlertWrapper
+        className="text-center "
+        color="danger"
+        isOpen={alert}
+        data={alertText}
+      />
       <CartItemListContainer />
       <Footer />
     </>
