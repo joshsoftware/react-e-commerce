@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './CartItem.css';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';
@@ -10,17 +10,15 @@ import CardTextWrapper from './CardTextWrapper';
 import { deleteProduct } from '../actions/productListActions';
 import { setUpdateProductId } from '../actions/productListActions';
 import { deleteProductApi } from '../apis/productApi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from 'reactstrap';
-import AlertWrapper from './AlertWrapper';
 import { Link } from 'react-router-dom';
+import { alertMessage } from '../actions/alertActions';
+import alertReducer from '../reducers/alertReducer';
 
 const AdminProductList = ({ item, dispatch }) => {
-  const [alertText, setAlertText] = useState('');
-  const [visible, setVisible] = useState(false);
   let { product_title, image_url, product_price, id } = item;
-  console.log('Price', product_price);
-
+  const alertDispatch = useDispatch(alertReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
   let i = 0;
@@ -43,7 +41,6 @@ const AdminProductList = ({ item, dispatch }) => {
       {product_title}{' '}
     </Alert>
   );
-  item_details.push(<AlertWrapper color="danger" isOpen={visible} data={alertText} />);
   column_content.push(
     <ColumnWrapper
       key={i++}
@@ -73,6 +70,7 @@ const AdminProductList = ({ item, dispatch }) => {
           onClick={() => {
             deleteProductApi({ token: userDetails.token, product_id: id });
             dispatch(deleteProduct(id));
+            alertDispatch(alertMessage({ alert: true, alertText: 'Product deleted Successfully' }));
           }}
         />
       }

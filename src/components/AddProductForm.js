@@ -5,6 +5,13 @@ import { Form } from 'reactstrap';
 import PropTypes from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
 import { setField } from '../actions/formActions';
+import { useDispatch } from 'react-redux';
+import alertReducer from '../reducers/alertReducer';
+import { alertMessage } from '../actions/alertActions';
+import RowWrapper from '../components/RowWrapper';
+import ColumnWrapper from '../components/ColumnWrapper';
+import { Link } from 'react-router-dom';
+import '../containers/AdminDashboardContainer.css';
 
 let productTitle = {
     field: 'exampleProductTitle',
@@ -137,14 +144,32 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
     message: formState.imageUrlError
   };
 
+  const alertDispatch = useDispatch(alertReducer);
+
+  let row_content = [];
+  let BackTo = <ButtonWrapper style={'dash_button'} buttonText={'Back-To'} />;
+  row_content.push(
+    <ColumnWrapper
+      data={
+        <Link className={'bg-dark text-white float-left'} to="/admindashboard">
+          {' '}
+          {BackTo}{' '}
+        </Link>
+      }
+    />
+  );
+  row_content.push(<ColumnWrapper />);
+  row_content.push(<ColumnWrapper />);
   return (
     <>
+      <RowWrapper data={row_content} />
       <h3>Add Product</h3>
       <hr />
       <Form
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
+          alertDispatch(alertMessage({ alert: true, alertText: 'Product Added Successfully' }));
         }}>
         <FormField formfield={productTitle} />
         <FormField formfield={description} />

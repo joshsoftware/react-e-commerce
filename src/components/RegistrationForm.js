@@ -7,6 +7,9 @@ import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
 import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
+import alertReducer from '../reducers/alertReducer';
+import { useDispatch } from 'react-redux';
+import { alertRegistration } from '../actions/alertActions';
 
 const RegistrationForm = ({ validateData, dispatch, formState }) => {
   const {
@@ -25,7 +28,7 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     addressError,
     isLoading
   } = formState;
-
+  const alertDispatch = useDispatch(alertReducer);
   return (
     <>
       <h3>Register</h3>
@@ -34,6 +37,7 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
+          alertDispatch(alertRegistration({ alert: true, alertText: 'Successfully Registered' }));
         }}>
         <FormEmailField
           email={email}

@@ -6,7 +6,6 @@ import UpdateProductComponent from '../components/UpdateProductComponent';
 import { setErrors, resetErrors, updateProductRequest, resetState } from '../actions/formActions';
 import productListReducer from '../reducers/productListReducer';
 import { resetProductList } from '../actions/productListActions';
-//import { productListReducer } from '../reducers/productListReducer';
 
 const UpdateProductContainer = () => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { NavbarBrand } from 'reactstrap';
 import PropTypes from 'prop-types';
 import ImageComponent from './ImageComponent';
 
-const NavbarBrandComponent = ({ url, logo }) => {
+const NavbarBrandComponent = ({ logo }) => {
   return (
     <>
       <NavbarBrand>

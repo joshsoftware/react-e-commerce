@@ -50,3 +50,7 @@
     cursor: not-allowed !important;
     pointer-events: all !important;
 }
+
+.update_profile {
+    margin-top: 120px;
+}
