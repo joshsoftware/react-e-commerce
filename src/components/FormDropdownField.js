@@ -5,6 +5,8 @@ import FormLabel from './FormLabel';
 import CountryDropdownContainer from '../containers/CountryDropdownContainer';
 import StateDropdownContainer from '../containers/StateDropdownContainer';
 import { initialState } from '../reducers/registrationReducer';
+import { countryRequest } from '../actions/formActions';
+
 let country = {
     field: 'exampleCountry',
     labelText: 'Country'
@@ -52,11 +54,18 @@ const FormDropdownField = (props) => {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   useEffect(() => {
-    let ar = [];
-    data.map((map_country) => {
-      ar.push(map_country.name);
-    });
-    setCountries(ar);
+    countryRequest()
+      .then((res) => {
+        data = res.data;
+        let ar = [];
+        data.map((map_country) => {
+          ar.push(map_country.name);
+        });
+        setCountries(ar);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
   }, []);
   return (
     <>

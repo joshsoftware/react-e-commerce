@@ -1,9 +1,14 @@
 import { FORM_ACTIONS, PRODUCT_ACTIONS } from '../shared/actionConstants';
 import logout from '../apis/logoutApi';
+import { countryData } from '../apis/regionApi';
 
 export const logoutRequest = (token, dispatch) => {
   dispatch(setUserDetails({}));
   return logout(token);
+};
+
+export const countryRequest = () => {
+  return countryData();
 };
 
 export const setFirstnameError = () => {
