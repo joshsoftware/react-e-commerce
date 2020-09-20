@@ -9,12 +9,13 @@ import ContainerWrapper from '../components/ContainerWrapper';
 import { getProductList } from '../actions/productListActions';
 import addProductReducer from '../reducers/addProductReducer';
 import updateProductReducer from '../reducers/updateProductReducer';
-import { setProductAdded, setProductUpdated } from '../actions/formActions';
+import loginReducer from '../reducers/LoginReducer';
+import { setProductAdded, setProductUpdated, setUserDetails } from '../actions/formActions';
 import './AdminDashboardContainer.css';
 import alertReducer from '../reducers/alertReducer';
 import { alertLogin, alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
-import { logoutRequest } from '../actions/formActions';
+import logout from '../apis/logoutApi';
 
 const AdminDashboardContainer = () => {
   const { alert, loginAlert, alertText, loginAlertText } = useSelector(
@@ -24,6 +25,7 @@ const AdminDashboardContainer = () => {
   const dispatch = useDispatch();
   const addProductDispatch = useDispatch(addProductReducer);
   const updateProductDispatch = useDispatch(updateProductReducer);
+  const loginDispatch = useDispatch(loginReducer);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   addProductDispatch(setProductAdded(false));
@@ -97,11 +99,18 @@ const AdminDashboardContainer = () => {
       <AdminProductList key={product.id} item={product} dispatch={dispatch} />
     ))
   );
-  let logout = (
+  let logoutVar = (
     <ButtonWrapper
       style={'dash_button'}
       onClick={() => {
-        logoutRequest(userDetails.token, dispatch);
+        let token = userDetails.token;
+          logout(token)
+          .then(() => {
+            dispatch(setUserDetails({}));
+          })
+          .catch((error) => {
+            console.log('error', error);
+          });
       }}
       buttonText={'Logout'}
     />
@@ -114,7 +123,7 @@ const AdminDashboardContainer = () => {
       data={
         <Link className={'bg-dark text-white float-left'} to="/login">
           {' '}
-          {logout}{' '}
+          {logoutVar}{' '}
         </Link>
       }
     />
