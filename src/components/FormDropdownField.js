@@ -20,34 +20,7 @@ let country = {
     labelText: 'City'
   };
 
-let data = [
-  {
-    name: 'India',
-    states: [
-      {
-        name: 'punjab',
-        cities: [{ name: 'amritsar' }, { name: 'chandigarh' }]
-      },
-      {
-        name: 'j&k',
-        cities: [{ name: 'srinagar' }, { name: 'jammu' }]
-      }
-    ]
-  },
-  {
-    name: 'Pakistan',
-    states: [
-      {
-        name: 'Balochistan',
-        cities: [{ name: 'Alik Ghund' }, { name: 'Barkhan' }]
-      },
-      {
-        name: 'Gilgit-Baltistan',
-        cities: [{ name: 'Skardu' }, { name: 'Gilgit' }]
-      }
-    ]
-  }
-];
+let data = [];
 const FormDropdownField = (props) => {
   const [countries, setCountries] = useState([]);
   const [country_object, setCountryObject] = useState([]);
