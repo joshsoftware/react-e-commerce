@@ -40,7 +40,6 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
           password={password}
           passwordError={passwordError}
           dispatch={dispatch}
-          isRequired={true}
           autoComplete="new-password"
         />
         <FormTextField

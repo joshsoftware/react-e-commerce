@@ -21,9 +21,13 @@ const UserProfileUpdateContainer = () => {
   const schema = yup.object().shape({
     firstname: yup.string(),
     lastname: yup.string(),
-    password: yup.string().min(8).required(),
-    country: yup.string(),
-    state: yup.string(),
+    password: yup.string().test('size', 'password must be at least 8 characters', (value) => {
+      if (value === '' || value.length >= 8) {
+        return true;
+      } else {
+        return false;
+      }
+    }),
     city: yup.string(),
     address: yup.string()
   });
