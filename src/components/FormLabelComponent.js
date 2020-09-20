@@ -1,38 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Label } from 'reactstrap';
 import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import Data from './Data';
-import { setFilters, applyFilters, setAlert, setMinMax } from '../actions/productListActions';
+import { setFilters, applyFilters, setAlert, deleteFilters, setFilteredProducts, applyPriceFilter } from '../actions/productListActions';
+import ButtonWrapper from './ButtonWrapper';
 
 const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   const dispatch = useDispatch();
-  const { productList, filters } = useSelector((state) => state.productListReducer);
+  const { productList, filteredProducts, filters } = useSelector((state) => state.productListReducer);
+  useEffect(() => {
+    dispatch(applyFilters());
+  }, [productList])
 
+  let LabelsToShow = [];
   const [checked, setChecked] = useState(false);
+  
   const filterFunction = (labelText) => {
+    
     dispatch(setAlert(false));
     setChecked(!checked);
-    let selectedFilters = filters;
+    let selectedFilters = {}
+    selectedFilters[`${mainLabel}`] = labelText;
     if (!checked) {
-      selectedFilters[`${mainLabel}`] = labelText;
       dispatch(setFilters(selectedFilters));
       dispatch(applyFilters());
+      dispatch(applyPriceFilter());
+      dispatch(setFilteredProducts());
     } else {
-      delete selectedFilters[`${mainLabel}`];
+      dispatch(deleteFilters(selectedFilters));
       dispatch(applyFilters());
+      dispatch(applyPriceFilter());
+      dispatch(setFilteredProducts());
     }
     const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
+
     if (accessories.includes(labelText) && !checked) {
+      dispatch(applyFilters());
+      dispatch(applyPriceFilter());
       addFilters(labelText);
     } else {
       if (accessories.includes(labelText)) {
-        dispatch(setFilters({}));
+        
+        dispatch(deleteFilters(selectedFilters));
         dispatch(applyFilters());
-        setLabel(Data);
+        dispatch(applyPriceFilter());
+        addFilters(labelText);
+        if(filters.category.length === 0) {
+          setLabel(Data);
+        }
       }
     }
+    
     let flag = false;
     for (let i = 0; i < productList.length; i++) {
       if (productList[i].disabled === false) {
@@ -46,8 +66,10 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   };
 
   const addFilters = (labelText) => {
-    const LabelsToShow = [];
+    
     let arr = productList;
+    console.log('inside add filters', arr);
+    LabelsToShow = []
     let size_arr = [];
     let color_arr = [];
     let brand_arr = [];
@@ -58,21 +80,8 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
         size_arr.push(filteredProduct.size);
         color_arr.push(filteredProduct.color);
         brand_arr.push(filteredProduct.brand);
-        if (min >= filteredProduct.product_price) {
-          min = filteredProduct.product_price;
-        }
-        if (max <= filteredProduct.product_price) {
-          max = filteredProduct.product_price;
-        }
       }
     });
-    let offset = (max - min) / 3;
-    dispatch(setMinMax(min, max));
-    const price_arr = [
-      `${min} - ${Math.floor(min + offset)}`,
-      `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`,
-      `${Math.floor(min + offset * 2 + 1)} - ${max}`
-    ];
     size_arr = Array.from(new Set(size_arr));
     color_arr = Array.from(new Set(color_arr));
     brand_arr = Array.from(new Set(brand_arr));
@@ -97,15 +106,15 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
     const new_object_price = {
       id: 'price',
       label: 'Price',
-      sublabel: price_arr,
-      open: false
+      sublabel: [],
+      open: true
     };
     LabelsToShow.push(Data[0]);
-    if (labelText === 'Electronics' || labelText === 'Mobile' || labelText === 'Watch') {
+    if (filters.category.includes('Clothes') || filters.category.includes('Sports') || filters.category.includes('Electronics') || filters.category.includes('Mobile') || filters.category.includes('Watch')) {
       LabelsToShow.push(new_object_color);
-    } else if (labelText !== 'Books') {
+    } 
+    if (filters.category.includes('Clothes') || filters.category.includes('Sports')) {
       LabelsToShow.push(new_object_size);
-      LabelsToShow.push(new_object_color);
     }
     LabelsToShow.push(new_object_brand);
     LabelsToShow.push(new_object_price);

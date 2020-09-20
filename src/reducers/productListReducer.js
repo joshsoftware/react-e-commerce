@@ -3,10 +3,17 @@ const initialState = {
   productList: [],
   totalPages: 0,
   requiredProduct: {},
-  filters: {},
+  filters: {
+    'category': [],
+    'size': [],
+    'color': [],
+    'brand': [],
+    'product_price': []
+  },
+  filteredProducts: [],
   alert: false,
   min: 0,
-  max: 0,
+  max: 10000000,
   updateProductId: null
 };
 const productListReducer = (state = initialState, action) => {
@@ -19,6 +26,7 @@ const productListReducer = (state = initialState, action) => {
       return {
         ...state,
         productList: [...state.productList, ...newProductList],
+        filteredProducts: newProductList,
         totalPages: action.value.total_pages
       };
     }
@@ -31,18 +39,51 @@ const productListReducer = (state = initialState, action) => {
       newProductList[index].stock = action.value.stock;
       return { ...state, productList: newProductList };
     }
-    case PRODUCT_LIST_REDUCER.SET_FILTERS:
-      return { ...state, filters: action.value };
-    case PRODUCT_LIST_REDUCER.SET_MIN_MAX:
-      return { ...state, min: action.value.min, max: action.value.max };
+    
+    
+    case PRODUCT_LIST_REDUCER.SET_FILTERS: {
+      let newFilters = state.filters, filterObj = action.value
+      console.log("in set",filterObj, Object.keys(filterObj));
+      
+      newFilters[`${Object.keys(filterObj)[0]}`].push(filterObj[`${Object.keys(filterObj)[0]}`])
+      return { ...state, filters: newFilters };
+    }
+
+    case PRODUCT_LIST_REDUCER.SET_FILTERED_PRODUCTS: {
+      let newFilteredProducts = []
+      state.productList.map((product) => {
+        if(product.disabled === false) {
+          newFilteredProducts.push(product);
+        }
+      })
+      console.log('filtered',newFilteredProducts);
+      
+      return {...state, filteredProducts: newFilteredProducts}
+    }
+
+    case PRODUCT_LIST_REDUCER.DELETE_FILTERS: {
+      let newFilters = state.filters, filterObj = action.value
+      console.log("in delete",filterObj, Object.keys(filterObj));
+      let index = newFilters[`${Object.keys(filterObj)[0]}`].indexOf(filterObj[`${Object.keys(filterObj)[0]}`]);
+      newFilters[`${Object.keys(filterObj)[0]}`].splice(index, 1);
+      return { ...state, filters: newFilters };
+    }
+    
+    case PRODUCT_LIST_REDUCER.SET_MIN_MAX:{
+      console.log("min, max in reducer", action.value.min, action.value.min)
+      return { ...state, min: parseFloat(action.value.min), max: parseFloat(action.value.max) };
+    }
+
     case PRODUCT_LIST_REDUCER.APPLY_FILTERS: {
       let newProductList = state.productList;
       newProductList.map((product) => {
         let flag = false;
         Object.keys(state.filters).map((key) => {
-          if (product[key] !== state.filters[key] && key !== 'price') {
-            flag = true;
-            return;
+          if (state.filters[key].length > 0) {
+            if (state.filters[key].includes(product[key]) === false) {
+              flag = true   
+              return;
+            }
           }
         });
         if (flag === true) {
@@ -50,36 +91,18 @@ const productListReducer = (state = initialState, action) => {
         } else {
           product.disabled = false;
         }
-        let min = state.min,
-          max = state.max,
-          offset = (max - min) / 3;
-        switch (state.filters.price) {
-          case `${min} - ${Math.floor(min + offset)}`: {
-            if (product.product_price < min || product.product_price > Math.floor(min + offset)) {
-              product.disabled = true;
-            }
-            break;
-          }
-          case `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`: {
-            if (
-              product.product_price < Math.floor(min + offset) ||
-              product.product_price > Math.floor(min + offset * 2)
-            ) {
-              product.disabled = true;
-            }
-            break;
-          }
-          case `${Math.floor(min + offset * 2 + 1)} - ${max}`: {
-            if (
-              product.product_price < Math.floor(min + offset * 2 + 1) ||
-              product.product_price > max
-            ) {
-              product.disabled = true;
-            }
-            break;
-          }
-        }
       });
+      return { ...state, productList: newProductList };
+    }
+
+    case PRODUCT_LIST_REDUCER.APPLY_PRICE_FILTER: {
+      let min = state.min, max = state.max, newProductList = state.productList;
+        console.log("min, max", min, max)
+        newProductList.map((product) => {
+          if(product.product_price < min || product.product_price > max){
+            product.disabled = true;
+          }
+        })
       return { ...state, productList: newProductList };
     }
 
@@ -99,10 +122,8 @@ const productListReducer = (state = initialState, action) => {
     }
     case PRODUCT_LIST_REDUCER.UPDATE_PRODUCT: {
       let newProductList = state.productList;
-      //console.log('Old', newProductList);
       let index = newProductList.findIndex((product) => product.id === action.value.id);
       newProductList[index] = action.value;
-      //console.log('New',newProductList);
       return {
         ...state,
         productList: newProductList
