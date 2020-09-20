@@ -95,7 +95,12 @@ const CartItem = ({ item, dispatch }) => {
           outline
           color={'danger'}
           onClick={() => {
-            alertDispatch(alertMessage({ alert: true, alertText: 'Item removed Successfully!!' }));
+            alertDispatch(
+              alertMessage({
+                alert: true,
+                alertText: product_title + '... was removed from Shopping Cart'
+              })
+            );
             deleteCartItemApi({ token: userDetails.token, product_id: id });
             updateProductStockApi({ product_id: id, stock: -quantity });
             dispatch(deleteCartItem(id));

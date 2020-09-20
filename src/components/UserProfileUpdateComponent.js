@@ -4,11 +4,12 @@ import ContainerWrapper from './ContainerWrapper';
 import RowWrapper from './RowWrapper';
 import ColumnWrapper from './ColumnWrapper';
 import PropTypes from 'prop-types';
+import './CartItem.css';
 
 const UserProfileUpdateComponent = ({ validateData, dispatch, formState }) => {
   return (
     <ContainerWrapper
-      styleClass={'pt-3 text-center h-100 '}
+      styleClass={'pt-3 text-center update_profile'}
       data={
         <RowWrapper
           data={
