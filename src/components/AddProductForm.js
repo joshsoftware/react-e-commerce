@@ -39,14 +39,14 @@ let productTitle = {
     labelText: 'Discount *',
     type: 'discount',
     name: 'discount',
-    placeholder: '0.00'
+    placeholder: '0.00%'
   },
   tax = {
     field: 'exampleTax',
     labelText: 'Tax *',
     type: 'tax',
     name: 'tax',
-    placeholder: '0.00'
+    placeholder: '0.00%'
   },
   stock = {
     field: 'exampleStock',

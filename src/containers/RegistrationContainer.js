@@ -18,6 +18,10 @@ import alertReducer from '../reducers/alertReducer';
 const RegistrationContainer = () => {
   const { alert, alertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetState());
+  }
+  , [])
   const alertDispatch = useDispatch(alertReducer);
   const registrationState = useSelector((state) => state.registrationReducer);
   const { firstname, lastname, email, password, country, state, city, address } = registrationState;

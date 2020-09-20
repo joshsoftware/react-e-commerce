@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
@@ -10,6 +10,10 @@ import Footer from '../components/Footer';
 
 const UserProfileUpdateContainer = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetState());
+  }
+  , [])
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);

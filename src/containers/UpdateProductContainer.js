@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
@@ -9,6 +9,10 @@ import { resetProductList } from '../actions/productListActions';
 
 const UpdateProductContainer = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetState());
+  }
+  , [])
   const productListDispatch = useDispatch(productListReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   const updateProductState = useSelector((state) => state.updateProductReducer);
@@ -32,10 +36,28 @@ const UpdateProductContainer = () => {
   const schema = yup.object().shape({
     productTitle: yup.string(),
     description: yup.string(),
-    productPrice: yup.number().min(0),
-    discount: yup.number().min(0),
-    tax: yup.number().min(0),
-    stock: yup.number().min(0).integer(),
+    productPrice: yup.number().typeError('you must specify a number')
+      .test('positive', 'price must be greater than 0', (value) => { 
+        if( value <= 0 ) {
+          return false;
+        }
+        return true;  
+      }),
+    discount: yup.number().typeError('you must specify a number')
+      .test('positive', 'discount must be greater than 0 and less than 100', (value) => { 
+        if( value <= 0 || value > 100 ) {
+          return false;
+        }
+        return true;  
+      }),
+    tax: yup.number().typeError('you must specify a number')
+      .test('positive', 'tax must be greater than 0 and less than 100', (value) => { 
+        if( value <= 0 || value > 100 ) {
+          return false;
+        }
+        return true;  
+      }),
+    stock: yup.number().min(0).integer().typeError('you must specify a number'),
     brand: yup.string(),
     categoryId: yup.string(),
     category: yup.string(),
