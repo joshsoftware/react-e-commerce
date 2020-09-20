@@ -3,7 +3,7 @@ import { FormGroup } from 'reactstrap';
 import FormLabel from './FormLabelComponent';
 import PropTypes from 'prop-types';
 
-const FormGroupComponent = ({ label, mainLabel, setLabel, setProducts, products }) => {
+const FormGroupComponent = ({ label, mainLabel, setLabel }) => {
   return (
     <FormGroup check>
       <FormLabel
@@ -11,8 +11,6 @@ const FormGroupComponent = ({ label, mainLabel, setLabel, setProducts, products 
         labelText={label}
         mainLabel={mainLabel}
         setLabel={setLabel}
-        setProducts={setProducts}
-        products={products}
       />
     </FormGroup>
   );
@@ -23,7 +21,5 @@ export default FormGroupComponent;
 FormGroupComponent.propTypes = {
   label: PropTypes.string.isRequired,
   mainLabel: PropTypes.string,
-  setLabel: PropTypes.string,
-  setProducts: PropTypes.func,
-  products: PropTypes.object
+  setLabel: PropTypes.string
 };

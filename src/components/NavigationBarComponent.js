@@ -26,7 +26,7 @@ const NavigationBarComponent = (props) => {
 export default NavigationBarComponent;
 
 NavigationBarComponent.propTypes = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   expand: PropTypes.string,
   className: PropTypes.string
 };

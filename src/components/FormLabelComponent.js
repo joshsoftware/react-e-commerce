@@ -14,7 +14,7 @@ import {
   resetFilter
 } from '../actions/productListActions';
 
-const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
+const FormLabel = ({ labelText, mainLabel, setLabel }) => {
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.productListReducer);
   const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch', 'All'];
@@ -168,7 +168,7 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
       );
     } else {
       return (
-        <Label for={field}>
+        <Label>
           <FormInput
             type="checkbox"
             onChange={() => {
@@ -186,6 +186,5 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
 export default FormLabel;
 
 FormLabel.propTypes = {
-  field: PropTypes.string,
   labelText: PropTypes.string
 };

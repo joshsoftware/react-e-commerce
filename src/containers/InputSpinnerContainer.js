@@ -50,6 +50,9 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
   useEffect(() => {
     if (flag === true) {
       getProduct();
+      return () => {
+        getProduct();
+      }
     }
   }, [flag]);
   const { userDetails } = useSelector((state) => state.loginReducer);
