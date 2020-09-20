@@ -16,8 +16,7 @@ import InputSpinnerContainer from '../containers/InputSpinnerContainer';
 import AlertWrapper from './AlertWrapper';
 import alertReducer from '../reducers/alertReducer';
 import { useDispatch } from 'react-redux';
-import {  alertMessage } from '../actions/alertActions';
-
+import { alertMessage } from '../actions/alertActions';
 
 const CartItem = ({ item, dispatch }) => {
   const [alertText, setAlertText] = useState('');
@@ -96,10 +95,10 @@ const CartItem = ({ item, dispatch }) => {
           outline
           color={'danger'}
           onClick={() => {
+            alertDispatch(alertMessage({ alert: true, alertText: 'Item removed Successfully!!' }));
             deleteCartItemApi({ token: userDetails.token, product_id: id });
             updateProductStockApi({ product_id: id, stock: -quantity });
             dispatch(deleteCartItem(id));
-            alertDispatch(alertMessage({ alert: true, alertText: 'Item removed Successfully!!' }));
           }}
         />
       }

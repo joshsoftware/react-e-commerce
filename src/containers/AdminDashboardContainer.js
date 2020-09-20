@@ -14,6 +14,7 @@ import './AdminDashboardContainer.css';
 import alertReducer from '../reducers/alertReducer';
 import { alertLogin, alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
+import { logoutRequest } from '../actions/formActions';
 
 const AdminDashboardContainer = () => {
   const { alert, loginAlert, alertText, loginAlertText } = useSelector(
@@ -34,7 +35,7 @@ const AdminDashboardContainer = () => {
     setTimeout(() => {
       alertDispatch(alertMessage({ alert: false, alertText: '' }));
       alertDispatch(alertLogin({ alert: false, alertText: '' }));
-    }, 5000);
+    }, 2000);
   };
 
   const handleScroll = () => {
@@ -96,9 +97,28 @@ const AdminDashboardContainer = () => {
       <AdminProductList key={product.id} item={product} dispatch={dispatch} />
     ))
   );
+  let logout = (
+    <ButtonWrapper
+      style={'dash_button'}
+      onClick={() => {
+        logoutRequest(userDetails.token, dispatch);
+      }}
+      buttonText={'Logout'}
+    />
+  );
 
   column_content.push(<Link to="/admin/addproduct"> {addButton} </Link>);
-  row_content.push(<ColumnWrapper />);
+
+  row_content.push(
+    <ColumnWrapper
+      data={
+        <Link className={'bg-dark text-white float-left'} to="/login">
+          {' '}
+          {logout}{' '}
+        </Link>
+      }
+    />
+  );
   row_content.push(<ColumnWrapper className={'col_dash'} data={column_content} />);
   row_content.push(<ColumnWrapper />);
 

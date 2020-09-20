@@ -8,6 +8,10 @@ import { setField } from '../actions/formActions';
 import alertReducer from '../reducers/alertReducer';
 import { useDispatch } from 'react-redux';
 import { alertMessage } from '../actions/alertActions';
+import RowWrapper from '../components/RowWrapper';
+import ColumnWrapper from '../components/ColumnWrapper';
+import { Link } from 'react-router-dom';
+import '../containers/AdminDashboardContainer.css';
 
 let productTitle = {
     field: 'exampleProductTitle',
@@ -140,8 +144,23 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
     message: formState.imageUrlError
   };
   const alertDispatch = useDispatch(alertReducer);
+  let row_content = [];
+  let BackTo = <ButtonWrapper style={'dash_button'} buttonText={'Back-To'} />;
+  row_content.push(
+    <ColumnWrapper
+      data={
+        <Link className={'bg-dark text-white float-left'} to="/admindashboard">
+          {' '}
+          {BackTo}{' '}
+        </Link>
+      }
+    />
+  );
+  row_content.push(<ColumnWrapper />);
+  row_content.push(<ColumnWrapper />);
   return (
     <>
+      <RowWrapper data={row_content} />
       <h3>Update Product</h3>
       <hr />
       <Form

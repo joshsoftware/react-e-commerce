@@ -22,7 +22,7 @@ const ProductListContainer = () => {
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertLogin({ alert: false, alertText: '' }));
-    }, 10000);
+    }, 2000);
   };
   const handleScroll = () => {
     console.log(

@@ -18,7 +18,9 @@ import { alertMessage, alertRegistration } from '../actions/alertActions';
 
 const LoginContainer = () => {
   const [alertState, setAlertState] = useState('');
-  const { alert, alertText, registrationAlert , registrationAlertText } = useSelector((state) => state.alertReducer);
+  const { alert, alertText, registrationAlert, registrationAlertText } = useSelector(
+    (state) => state.alertReducer
+  );
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
   const registrationDispatch = useDispatch(registrationReducer);
