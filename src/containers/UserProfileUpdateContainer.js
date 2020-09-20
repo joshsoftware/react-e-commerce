@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
@@ -8,17 +8,13 @@ import { initialState } from '../reducers/userprofileupdateReducer';
 import NavigationBarComponent from '../components/NavigationBarComponent';
 import Footer from '../components/Footer';
 
-
 const UserProfileUpdateContainer = () => {
-
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
   const { firstname, lastname, password, country, state, city, address } = userprofileupdatestate;
 
-  
-  
   const schema = yup.object().shape({
     firstname: yup.string(),
     lastname: yup.string(),
@@ -83,12 +79,6 @@ const UserProfileUpdateContainer = () => {
   }
   return (
     <>
-     {/* <AlertWrapper
-        className="text-center fixed-top"
-        color="info"
-        isOpen={true}
-        data={alertText}
-    /> */}
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
       <br />
       <UserProfileUpdateComponent

@@ -24,8 +24,6 @@ const ProductListContainer = () => {
       alertDispatch(alertLogin({ alert: false, alertText: '' }));
     }, 10000);
   };
-  
-
   const handleScroll = () => {
     console.log(
       window.innerHeight,
