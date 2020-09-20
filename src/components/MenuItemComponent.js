@@ -13,7 +13,7 @@ const MenuItem = () => {
         if (i === index) {
           label.open = !label.open;
         } else {
-          if(label.label !== "Price" || label.label !== "Accessories"){
+          if (label.label !== 'Price' || label.label !== 'Accessories') {
             label.open = false;
           }
         }

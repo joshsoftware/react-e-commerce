@@ -4,11 +4,11 @@ const initialState = {
   totalPages: 0,
   requiredProduct: {},
   filters: {
-    'category': [],
-    'size': [],
-    'color': [],
-    'brand': [],
-    'product_price': []
+    category: [],
+    size: [],
+    color: [],
+    brand: [],
+    product_price: []
   },
   filteredProducts: [],
   alert: false,
@@ -39,51 +39,46 @@ const productListReducer = (state = initialState, action) => {
       newProductList[index].stock = action.value.stock;
       return { ...state, productList: newProductList };
     }
-    
-    
     case PRODUCT_LIST_REDUCER.SET_FILTERS: {
-      let newFilters = state.filters, filterObj = action.value
-      console.log("in set",filterObj, Object.keys(filterObj));
-      
-      newFilters[`${Object.keys(filterObj)[0]}`].push(filterObj[`${Object.keys(filterObj)[0]}`])
+      let newFilters = state.filters,
+        filterObj = action.value;
+      newFilters[`${Object.keys(filterObj)[0]}`].push(filterObj[`${Object.keys(filterObj)[0]}`]);
       return { ...state, filters: newFilters };
     }
-
     case PRODUCT_LIST_REDUCER.RESET_FILTER: {
-      console.log("inside reset filter", initialState.filters)
-      return { ...state, filters: {
-        'category': [],
-        'size': [],
-        'color': [],
-        'brand': [],
-        'product_price': []
-      } };
+      return {
+        ...state,
+        filters: {
+          category: [],
+          size: [],
+          color: [],
+          brand: [],
+          product_price: []
+        }
+      };
     }
     case PRODUCT_LIST_REDUCER.SET_FILTERED_PRODUCTS: {
-      let newFilteredProducts = []
+      let newFilteredProducts = [];
       state.productList.map((product) => {
-        if(product.disabled === false) {
+        if (product.disabled === false) {
           newFilteredProducts.push(product);
         }
-      })
-      console.log('filtered',newFilteredProducts);
-      
-      return {...state, filteredProducts: newFilteredProducts}
-    }
+      });
 
+      return { ...state, filteredProducts: newFilteredProducts };
+    }
     case PRODUCT_LIST_REDUCER.DELETE_FILTERS: {
-      let newFilters = state.filters, filterObj = action.value
-      console.log("in delete",filterObj, Object.keys(filterObj));
-      let index = newFilters[`${Object.keys(filterObj)[0]}`].indexOf(filterObj[`${Object.keys(filterObj)[0]}`]);
+      let newFilters = state.filters,
+        filterObj = action.value;
+      let index = newFilters[`${Object.keys(filterObj)[0]}`].indexOf(
+        filterObj[`${Object.keys(filterObj)[0]}`]
+      );
       newFilters[`${Object.keys(filterObj)[0]}`].splice(index, 1);
       return { ...state, filters: newFilters };
     }
-    
-    case PRODUCT_LIST_REDUCER.SET_MIN_MAX:{
-      console.log("min, max in reducer", action.value.min, action.value.min)
+    case PRODUCT_LIST_REDUCER.SET_MIN_MAX: {
       return { ...state, min: parseFloat(action.value.min), max: parseFloat(action.value.max) };
     }
-
     case PRODUCT_LIST_REDUCER.APPLY_FILTERS: {
       let newProductList = state.productList;
       newProductList.map((product) => {
@@ -91,7 +86,7 @@ const productListReducer = (state = initialState, action) => {
         Object.keys(state.filters).map((key) => {
           if (state.filters[key].length > 0) {
             if (state.filters[key].includes(product[key]) === false) {
-              flag = true   
+              flag = true;
               return;
             }
           }
@@ -104,24 +99,22 @@ const productListReducer = (state = initialState, action) => {
       });
       return { ...state, productList: newProductList };
     }
-
     case PRODUCT_LIST_REDUCER.APPLY_PRICE_FILTER: {
-      let min = state.min, max = state.max, newProductList = state.productList;
-        console.log("min, max", min, max)
-        newProductList.map((product) => {
-          if(product.product_price < min || product.product_price > max){
-            product.disabled = true;
-          }
-        })
+      let min = state.min,
+        max = state.max,
+        newProductList = state.productList;
+      newProductList.map((product) => {
+        if (product.product_price < min || product.product_price > max) {
+          product.disabled = true;
+        }
+      });
       return { ...state, productList: newProductList };
     }
-
     case PRODUCT_LIST_REDUCER.ADD_PRODUCT: {
       let newProductList = [...state.productList, ...action.value];
       return { ...state, productList: newProductList };
     }
     case PRODUCT_LIST_REDUCER.DELETE_PRODUCT: {
-      console.log('product reducer', action.value);
       let newProductList = state.productList;
       let index = newProductList.findIndex((product) => product.id === action.value);
       newProductList.splice(index, 1);
@@ -144,7 +137,6 @@ const productListReducer = (state = initialState, action) => {
     }
     case PRODUCT_LIST_REDUCER.SET_ALERT:
       return { ...state, alert: action.value };
-
     default:
       return state;
   }

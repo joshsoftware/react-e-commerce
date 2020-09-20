@@ -11,8 +11,7 @@ const AddProductContainer = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetState());
-  }
-  , [])
+  }, []);
   const productListDispatch = useDispatch(productListReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   const addProductState = useSelector((state) => state.addProductReducer);
@@ -30,30 +29,39 @@ const AddProductContainer = () => {
     size,
     imageUrl
   } = addProductState;
-  
+
   const schema = yup.object().shape({
     productTitle: yup.string().required(),
     description: yup.string().required(),
-    productPrice: yup.number().required().typeError('you must specify a number')
-      .test('positive', 'price must be greater than 0', (value) => { 
-        if( value <= 0 ) {
+    productPrice: yup
+      .number()
+      .required()
+      .typeError('you must specify a number')
+      .test('positive', 'price must be greater than 0', (value) => {
+        if (value <= 0) {
           return false;
         }
-        return true;  
+        return true;
       }),
-    discount: yup.number().required().typeError('you must specify a number')
-      .test('positive', 'discount must be greater than 0 and less than 100', (value) => { 
-        if( value <= 0 || value > 100 ) {
+    discount: yup
+      .number()
+      .required()
+      .typeError('you must specify a number')
+      .test('positive', 'discount must be greater than 0 and less than 100', (value) => {
+        if (value <= 0 || value > 100) {
           return false;
         }
-        return true;  
+        return true;
       }),
-    tax: yup.number().required().typeError('you must specify a number')
-      .test('positive', 'tax must be greater than 0 and less than 100', (value) => { 
-        if( value <= 0 || value > 100 ) {
+    tax: yup
+      .number()
+      .required()
+      .typeError('you must specify a number')
+      .test('positive', 'tax must be greater than 0 and less than 100', (value) => {
+        if (value <= 0 || value > 100) {
           return false;
         }
-        return true;  
+        return true;
       }),
     stock: yup.number().required().min(0).integer().typeError('you must specify a number'),
     brand: yup.string().required(),
@@ -69,7 +77,6 @@ const AddProductContainer = () => {
   }
 
   const validateData = () => {
-    console.log('in validate data');
     dispatch(resetErrors());
     schema
       .isValid({
@@ -112,7 +119,6 @@ const AddProductContainer = () => {
               });
             });
         } else {
-          console.log('form submitted', addProductState);
           let token = userDetails.token;
           dispatch(
             addProductRequest({

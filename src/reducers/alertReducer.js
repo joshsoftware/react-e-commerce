@@ -25,7 +25,6 @@ const alertReducer = (state = initialState, action) => {
       return { ...state, loginAlert: action.value.alert, loginAlertText: action.value.alertText };
     }
     case ALERT_ACTIONS.ALERT_USER_PROFILE:
-      //console.log('in reducer', action.value);
       return { ...state, userProfileAlert: action.value, alertText: action.value.alertText };
     default:
       return state;

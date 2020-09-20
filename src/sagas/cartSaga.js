@@ -8,7 +8,7 @@ function* cartWorkerSaga(action) {
     const { data } = yield call(getCartItemsApi, action.value);
     yield put(setCartItems(data));
   } catch (error) {
-    console.log(error);
+    console.log('error', error);
   }
 }
 

@@ -20,13 +20,12 @@ const DropdownMenuWrapper = ({ data, tag, right, flip, className, positionFixed 
               styles: {
                 ...data.styles,
                 overflow: 'auto',
-                maxHeight: '100px',
-              },
+                maxHeight: '100px'
+              }
             };
-          },
-        },
-      }}
-      >
+          }
+        }
+      }}>
       {data}
     </DropdownMenu>
   );

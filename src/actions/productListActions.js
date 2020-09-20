@@ -102,7 +102,6 @@ export const updateProduct = (product) => {
 };
 
 export const deleteProduct = (product_id) => {
-  console.log('delete product');
   return {
     type: PRODUCT_LIST_REDUCER.DELETE_PRODUCT,
     value: product_id
