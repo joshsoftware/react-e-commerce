@@ -44,7 +44,7 @@ const FormDropdownField = (props) => {
     <>
       <FormLabel field={country.field} labelText={country.labelText} />
       <CountryDropdownContainer
-        data={countries}
+        data={countries.sort()}
         type="country"
         state={props.country}
         countries={data}
@@ -56,7 +56,7 @@ const FormDropdownField = (props) => {
       <br />
       <FormLabel field={state.field} labelText={state.labelText} />
       <StateDropdownContainer
-        data={states}
+        data={states.sort()}
         type="state"
         state={props.state}
         states={country_object.states}
@@ -67,7 +67,7 @@ const FormDropdownField = (props) => {
       <br />
       <FormLabel field={city.field} labelText={city.labelText} />
       <RegistrationDropdownContainer
-        data={cities}
+        data={cities.sort()}
         type="city"
         state={props.city}
         dispatch={props.dispatch}

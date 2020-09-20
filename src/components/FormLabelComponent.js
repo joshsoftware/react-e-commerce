@@ -5,11 +5,10 @@ import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import Data from './Data';
 import { setFilters, applyFilters, setAlert, deleteFilters, setFilteredProducts, applyPriceFilter } from '../actions/productListActions';
-import ButtonWrapper from './ButtonWrapper';
 
 const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   const dispatch = useDispatch();
-  const { productList, filteredProducts, filters } = useSelector((state) => state.productListReducer);
+  const { productList, filters } = useSelector((state) => state.productListReducer);
   useEffect(() => {
     dispatch(applyFilters());
   }, [productList])
@@ -18,51 +17,55 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   const [checked, setChecked] = useState(false);
   
   const filterFunction = (labelText) => {
-    
-    dispatch(setAlert(false));
-    setChecked(!checked);
-    let selectedFilters = {}
-    selectedFilters[`${mainLabel}`] = labelText;
-    if (!checked) {
-      dispatch(setFilters(selectedFilters));
-      dispatch(applyFilters());
-      dispatch(applyPriceFilter());
-      dispatch(setFilteredProducts());
-    } else {
-      dispatch(deleteFilters(selectedFilters));
-      dispatch(applyFilters());
-      dispatch(applyPriceFilter());
-      dispatch(setFilteredProducts());
-    }
-    const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
-
-    if (accessories.includes(labelText) && !checked) {
-      dispatch(applyFilters());
-      dispatch(applyPriceFilter());
-      addFilters(labelText);
-    } else {
-      if (accessories.includes(labelText)) {
-        
+    try {
+      dispatch(setAlert(false));
+      setChecked(!checked);
+      let selectedFilters = {}
+      selectedFilters[`${mainLabel}`] = labelText;
+      if (!checked) {
+        dispatch(setFilters(selectedFilters));
+        dispatch(applyFilters());
+        dispatch(applyPriceFilter());
+        dispatch(setFilteredProducts());
+      } else {
         dispatch(deleteFilters(selectedFilters));
         dispatch(applyFilters());
         dispatch(applyPriceFilter());
+        dispatch(setFilteredProducts());
+      }
+      const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
+
+      if (accessories.includes(labelText) && !checked) {
+        dispatch(applyFilters());
+        dispatch(applyPriceFilter());
         addFilters(labelText);
-        if(filters.category.length === 0) {
-          setLabel(Data);
+      } else {
+        if (accessories.includes(labelText)) {
+          
+          dispatch(deleteFilters(selectedFilters));
+          dispatch(applyFilters());
+          dispatch(applyPriceFilter());
+          addFilters(labelText);
+          if(filters.category.length === 0) {
+            setLabel(Data);
+          }
         }
       }
-    }
-    
-    let flag = false;
-    for (let i = 0; i < productList.length; i++) {
-      if (productList[i].disabled === false) {
-        flag = true;
-        break;
+      
+      let flag = false;
+      for (let i = 0; i < productList.length; i++) {
+        if (productList[i].disabled === false) {
+          flag = true;
+          break;
+        }
+      }
+      if (flag === false) {
+        dispatch(setAlert(true));
       }
     }
-    if (flag === false) {
-      dispatch(setAlert(true));
-    }
+    catch (error) {
+      console.log("error", error);
+    } 
   };
 
   const addFilters = (labelText) => {

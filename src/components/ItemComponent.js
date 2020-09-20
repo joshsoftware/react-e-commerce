@@ -36,7 +36,7 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
       setMin("0");
     }
     if(max === ""){
-      setMax(`${Number.MAX_SAFE_INTEGER}`);
+      setMax("500,000");
     }
     if(min<0){
       
@@ -88,9 +88,9 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
         </div>
         <div className="sublabel">
           <Form>
-          <FormInput type="text" placeholder="Min" value={min} onChange={(e) => setMin(e.target.value)}/>
+          <FormInput type="text" placeholder="Min 0" value={min} onChange={(e) => setMin(e.target.value)}/>
           To
-          <FormInput type="text" placeholder="Max" value={max} onChange={(e) => setMax(e.target.value)}/>
+          <FormInput type="text" placeholder="Max 500,000" value={max} onChange={(e) => setMax(e.target.value)}/>
           <ButtonWrapper buttonText="Find" color="info" onClick={() => {setPrice();
           dispatch(applyFilters());
           dispatch(applyPriceFilter());}}/>
