@@ -23,8 +23,8 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
 
         return label;
       })
-    )
-  }
+    );
+  };
 
   const toggleCategories = () => {
     setLabel(
@@ -37,8 +37,8 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
 
         return label;
       })
-    )
-  }
+    );
+  };
 
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
@@ -52,59 +52,59 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
   const setPrice = () => {
     setMinError(null);
     setMaxError(null);
-    if(parseFloat(min)>parseFloat(max)) {
-      setMaxError("max should be greater than min");
+    if (parseFloat(min) > parseFloat(max)) {
+      setMaxError('max should be greater than min');
     }
-    if(parseFloat(min) < 0) {
-      setMinError("Must be positive");
+    if (parseFloat(min) < 0) {
+      setMinError('Must be positive');
     }
-    if(parseFloat(max) < 0) {
-      setMaxError("Must be positive");
+    if (parseFloat(max) < 0) {
+      setMaxError('Must be positive');
     }
     var reg = /^-?\d+$/;
-    if(!reg.test(min))
-    {
-      setMinError("min must be number");
+    if (!reg.test(min)) {
+      setMinError('min must be number');
     }
-    if(!reg.test(max))
-    {
-      setMaxError("max must be number");
+    if (!reg.test(max)) {
+      setMaxError('max must be number');
     }
-    if(min === ""){
-      setMin("0");
+    if (min === '') {
+      setMin('0');
       setMinError(null);
     }
-    if(max === ""){
-      setMax("500,000");
+    if (max === '') {
+      setMax('500000');
       setMaxError(null);
     }
 
     dispatch(setMinMax(min, max));
-    if(minError === null && maxError === null) {
+    if (minError === null && maxError === null) {
       dispatch(applyFilters());
       dispatch(applyPriceFilter());
     }
-  }
+  };
 
-  if(label.label !== "Price"){
-    if(label.label === "Accessories"){
-      return(
+  if (label.label !== 'Price') {
+    if (label.label === 'Accessories') {
+      return (
         <div
-        className={'faq ' + (label.open ? 'open' : '')}
-        key={index}
-        onClick={() => toggleCategories(index)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={() => toggle(index)}>
+          className={'faq ' + (label.open ? 'open' : '')}
+          key={index}
+          onClick={() => toggleCategories(index)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={() => toggle(index)}>
           <div
             className="label"
+            role="menuitem"
+            tabIndex="0"
             onClick={() => {
-              console.log("id : ",label.id)
               setSublabel(label.id);
-            }}>
+            }}
+            onKeyDown={() => setSublabel(label.id)}>
             {label.label}
           </div>
-          
+
           {label.sublabel.map((sublabel, i) => (
             <div className="sublabel" key={i}>
               <FormGroupComponent
@@ -117,7 +117,7 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
             </div>
           ))}
         </div>
-      )
+      );
     } else {
       return (
         <div
@@ -129,12 +129,17 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
           onKeyDown={() => toggle(index)}>
           <div
             className="label"
+            role="menuitem"
+            tabIndex="0"
             onClick={() => {
+              setSublabel(label.id);
+            }}
+            onKeyDown={() => {
               setSublabel(label.id);
             }}>
             {label.label}
           </div>
-            
+
           {label.sublabel.map((sublabel, i) => (
             <div className="sublabel" key={i}>
               <FormGroupComponent
@@ -149,32 +154,47 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
         </div>
       );
     }
-  } else{
+  } else {
     return (
       <div
         className={'faq ' + (label.open ? 'open' : '')}
         key={index}
         onClick={() => toggleSecond(index)}
+        onKeyDown={() => {
+          toggleSecond(index);
+        }}
         role="button"
-        tabIndex={0}
-        >
-        <div className="label">
-          {label.label}
-        </div>
+        tabIndex={0}>
+        <div className="label">{label.label}</div>
         <div className="sublabel">
           <Form>
             <FormGroup>
-              <FormInput type="text" placeholder="Min 0" value={min} onChange={(e) => setMin(e.target.value)} invalid={minError !== null ? true : false}/>
-              <FormFeedbackWrapper message={minError}/>
-            </FormGroup>  
+              <FormInput
+                type="text"
+                placeholder="Min 0"
+                value={min}
+                onChange={(e) => setMin(e.target.value)}
+                invalid={minError !== null ? true : false}
+              />
+              <FormFeedbackWrapper message={minError} />
+            </FormGroup>
             To
             <FormGroup>
-              <FormInput type="text" placeholder="Max 500,000" value={max} onChange={(e) => setMax(e.target.value)} invalid={maxError !== null ? true : false}/>
-              <FormFeedbackWrapper message={maxError}/>
+              <FormInput
+                type="text"
+                placeholder="Max 500,000"
+                value={max}
+                onChange={(e) => setMax(e.target.value)}
+                invalid={maxError !== null ? true : false}
+              />
+              <FormFeedbackWrapper message={maxError} />
             </FormGroup>
-            <ButtonWrapper buttonText="Find" color="info" onClick={() => {
-              setPrice();
-            }}
+            <ButtonWrapper
+              buttonText="Find"
+              color="info"
+              onClick={() => {
+                setPrice();
+              }}
             />
           </Form>
         </div>
