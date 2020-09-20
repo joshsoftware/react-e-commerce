@@ -95,8 +95,8 @@ const AdminDashboardContainer = () => {
   let products = [];
   products.push(<RowWrapper data={row_content} />);
   products.push(
-    productList.map((product) => (
-      <AdminProductList key={product.id} item={product} dispatch={dispatch} />
+    productList.map((product, index) => (
+      <AdminProductList key={index} item={product} dispatch={dispatch} />
     ))
   );
   let logoutVar = (
