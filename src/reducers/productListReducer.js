@@ -49,6 +49,16 @@ const productListReducer = (state = initialState, action) => {
       return { ...state, filters: newFilters };
     }
 
+    case PRODUCT_LIST_REDUCER.RESET_FILTER: {
+      console.log("inside reset filter", initialState.filters)
+      return { ...state, filters: {
+        'category': [],
+        'size': [],
+        'color': [],
+        'brand': [],
+        'product_price': []
+      } };
+    }
     case PRODUCT_LIST_REDUCER.SET_FILTERED_PRODUCTS: {
       let newFilteredProducts = []
       state.productList.map((product) => {

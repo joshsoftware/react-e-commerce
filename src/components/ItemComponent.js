@@ -9,7 +9,7 @@ import { Form, FormGroup } from 'reactstrap';
 import FormFeedbackWrapper from './FormFeedbackWrapper';
 
 const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, labels }) => {
-  const [filterby, setFilterby] = useState('');
+  const [filterby, setFilterby] = useState('category');
   const dispatch = useDispatch();
 
   const toggleSecond = () => {
@@ -25,6 +25,21 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
       })
     )
   }
+
+  const toggleCategories = () => {
+    setLabel(
+      labels.map((label, i) => {
+        if (i === index) {
+          label.open = true;
+        } else {
+          label.open = false;
+        }
+
+        return label;
+      })
+    )
+  }
+
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
   const [minError, setMinError] = useState(null);
@@ -72,35 +87,68 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
   }
 
   if(label.label !== "Price"){
-    return (
-      <div
+    if(label.label === "Accessories"){
+      return(
+        <div
         className={'faq ' + (label.open ? 'open' : '')}
         key={index}
-        onClick={() => toggle(index)}
+        onClick={() => toggleCategories(index)}
         role="button"
         tabIndex={0}
         onKeyDown={() => toggle(index)}>
-        <div
-          className="label"
-          onClick={() => {
-            setSublabel(label.id);
-          }}>
-          {label.label}
-        </div>
-          
-        {label.sublabel.map((sublabel, i) => (
-          <div className="sublabel" key={i}>
-            <FormGroupComponent
-              label={sublabel}
-              mainLabel={filterby}
-              setLabel={setLabel}
-              setProducts={setProducts}
-              products={products}
-            />
+          <div
+            className="label"
+            onClick={() => {
+              console.log("id : ",label.id)
+              setSublabel(label.id);
+            }}>
+            {label.label}
           </div>
-        ))}
-      </div>
-    );
+          
+          {label.sublabel.map((sublabel, i) => (
+            <div className="sublabel" key={i}>
+              <FormGroupComponent
+                label={sublabel}
+                mainLabel={filterby}
+                setLabel={setLabel}
+                setProducts={setProducts}
+                products={products}
+              />
+            </div>
+          ))}
+        </div>
+      )
+    } else {
+      return (
+        <div
+          className={'faq ' + (label.open ? 'open' : '')}
+          key={index}
+          onClick={() => toggle(index)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={() => toggle(index)}>
+          <div
+            className="label"
+            onClick={() => {
+              setSublabel(label.id);
+            }}>
+            {label.label}
+          </div>
+            
+          {label.sublabel.map((sublabel, i) => (
+            <div className="sublabel" key={i}>
+              <FormGroupComponent
+                label={sublabel}
+                mainLabel={filterby}
+                setLabel={setLabel}
+                setProducts={setProducts}
+                products={products}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    }
   } else{
     return (
       <div

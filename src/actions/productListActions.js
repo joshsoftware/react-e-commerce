@@ -114,3 +114,9 @@ export const applyPriceFilter = () => {
     type: PRODUCT_LIST_REDUCER.APPLY_PRICE_FILTER
   };
 };
+
+export const resetFilter = () => {
+  return {
+    type: PRODUCT_LIST_REDUCER.RESET_FILTER
+  };
+};
