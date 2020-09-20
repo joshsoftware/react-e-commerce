@@ -101,7 +101,7 @@ const ProductListContainer = () => {
       className="text-center fixed-top"
       color={visible && !alertText.includes('added') ? 'danger' : 'info'}
       isOpen={visible || loginAlert}
-      data={alertText}
+      data={alertText === '' ? 'No items matches your choice!!' : alertText}
     />
   );
 
