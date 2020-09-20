@@ -13,18 +13,17 @@ import CartHeader from './CartHeader';
 import ButtonWrapper from './ButtonWrapper';
 import RowWrapper from './RowWrapper';
 import alertReducer from '../reducers/alertReducer';
-import {  alertMessage } from '../actions/alertActions';
+import { alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
 
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { profile } = useSelector((state) => state.userprofileReducer);
   const dispatch = useDispatch();
-;  const { alert, alertText } = useSelector((state) => state.alertReducer);
-const alertDispatch = useDispatch(alertReducer);
+  const { alert, alertText } = useSelector((state) => state.alertReducer);
+  const alertDispatch = useDispatch(alertReducer);
 
   const userProfileUpdateDispatch = useDispatch(userprofileupdateReducer);
-  
   userProfileUpdateDispatch(setUpdated(false));
   const timeOutFunction = async () => {
     setTimeout(() => {
@@ -32,8 +31,7 @@ const alertDispatch = useDispatch(alertReducer);
     }, 10000);
   };
   useEffect(() => {
-    console.log('fddgfdhf',alertText);
-    //setAlertText(loginAlertText);
+    console.log('fddgfdhf', alertText);
     timeOutFunction();
   }, [alert]);
 
@@ -50,12 +48,11 @@ const alertDispatch = useDispatch(alertReducer);
   let editButton = (
     <RowWrapper data={<ButtonWrapper style="m-auto" buttonText={'Edit Profile'} />} />
   );
+  userprofile_content.push(<RenderData label="Email " userdata={profile.email} />);
   userprofile_content.push(
-    <RenderData label="Email " userdata={profile.email}
-    />
-    );
-  userprofile_content.push(
-    <RenderData label="Country " userdata={profile.country === '' ? 'Not Selected' : profile.country}
+    <RenderData
+      label="Country "
+      userdata={profile.country === '' ? 'Not Selected' : profile.country}
     />
   );
   userprofile_content.push(
@@ -65,24 +62,27 @@ const alertDispatch = useDispatch(alertReducer);
     <RenderData label="City " userdata={profile.city === '' ? 'Not Selected' : profile.city} />
   );
   userprofile_content.push(
-    <RenderData label="Address " userdata={profile.address === '' ? 'Not Selected' : profile.address}
+    <RenderData
+      label="Address "
+      userdata={profile.address === '' ? 'Not Selected' : profile.address}
     />
+  );
+  userprofile_content.push(
+    <Link className={'bg-dark text-white'} to="/profile/update">
+      {editButton}
+    </Link>
   );
   return (
     <>
-    <AlertWrapper
+      <AlertWrapper
         className="text-center fixed-top"
         color="info"
         isOpen={alert}
         data={alertText}
-/>
+      />
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
-   
       <CartHeader header={`Welcome ${profile.first_name} ${profile.last_name}`} />
       <ContainerWrapper data={userprofile_content} />
-      <Link className={'bg-dark text-white'} to="/profile/update">
-        {editButton}
-      </Link>
 
       <Footer />
     </>

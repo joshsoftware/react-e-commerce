@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 const UserProfileUpdateComponent = ({ validateData, dispatch, formState }) => {
   return (
     <ContainerWrapper
-      styleClass={'pt-3 text-center h-100'}
+      styleClass={'pt-3 text-center h-100 '}
       data={
         <RowWrapper
           data={

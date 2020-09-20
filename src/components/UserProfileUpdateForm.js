@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
 import alertReducer from '../reducers/alertReducer';
 import { useDispatch } from 'react-redux';
-import {  alertMessage } from '../actions/alertActions';
+import { alertMessage } from '../actions/alertActions';
 
 const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
   const alertDispatch = useDispatch(alertReducer);
@@ -24,7 +24,7 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
     passwordError,
     addressError
   } = formState;
-  
+
   return (
     <>
       <h3>Update User Profile</h3>
