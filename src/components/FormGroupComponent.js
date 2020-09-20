@@ -6,12 +6,7 @@ import PropTypes from 'prop-types';
 const FormGroupComponent = ({ label, mainLabel, setLabel }) => {
   return (
     <FormGroup check>
-      <FormLabel
-        check
-        labelText={label}
-        mainLabel={mainLabel}
-        setLabel={setLabel}
-      />
+      <FormLabel check labelText={label} mainLabel={mainLabel} setLabel={setLabel} />
     </FormGroup>
   );
 };

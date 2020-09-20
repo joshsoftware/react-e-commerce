@@ -52,7 +52,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
       getProduct();
       return () => {
         getProduct();
-      }
+      };
     }
   }, [flag]);
   const { userDetails } = useSelector((state) => state.loginReducer);

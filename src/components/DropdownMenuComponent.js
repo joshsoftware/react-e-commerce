@@ -20,12 +20,12 @@ const DropdownMenuComponent = () => {
         onClick={() => {
           let token = userDetails.token;
           logout(token)
-          .then(() => {
-            dispatch(setUserDetails({}));
-          })
-          .catch((error) => {
-            console.log('error', error);
-          });
+            .then(() => {
+              dispatch(setUserDetails({}));
+            })
+            .catch((error) => {
+              console.log('error', error);
+            });
         }}
       />
     </DropdownMenu>

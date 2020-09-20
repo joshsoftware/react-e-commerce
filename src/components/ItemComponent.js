@@ -211,8 +211,5 @@ ItemComponent.propTypes = {
   toggle: PropTypes.func.isRequired,
   setLabel: PropTypes.func,
   setProducts: PropTypes.func,
-  products: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array
-  ]) 
+  products: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };

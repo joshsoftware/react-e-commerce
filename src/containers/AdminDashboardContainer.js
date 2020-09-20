@@ -104,9 +104,9 @@ const AdminDashboardContainer = () => {
       style={'dash_button'}
       onClick={() => {
         let token = userDetails.token;
-          logout(token)
+        logout(token)
           .then(() => {
-            dispatch(setUserDetails({}));
+            loginDispatch(setUserDetails({}));
           })
           .catch((error) => {
             console.log('error', error);
