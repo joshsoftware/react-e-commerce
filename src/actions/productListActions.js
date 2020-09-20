@@ -107,3 +107,9 @@ export const deleteProduct = (product_id) => {
     value: product_id
   };
 };
+
+export const applyPriceFilter = () => {
+  return {
+    type: PRODUCT_LIST_REDUCER.APPLY_PRICE_FILTER
+  };
+};

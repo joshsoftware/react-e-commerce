@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import Data from './Data';
-import { setFilters, applyFilters, setAlert, setMinMax, deleteFilters, setFilteredProducts } from '../actions/productListActions';
+import { setFilters, applyFilters, setAlert, deleteFilters, setFilteredProducts, applyPriceFilter } from '../actions/productListActions';
+import ButtonWrapper from './ButtonWrapper';
 
 const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   const dispatch = useDispatch();
@@ -13,41 +14,38 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
     dispatch(applyFilters());
   }, [productList])
 
+  let LabelsToShow = [];
   const [checked, setChecked] = useState(false);
   
   const filterFunction = (labelText) => {
-    console.log('main label', mainLabel);
     
     dispatch(setAlert(false));
     setChecked(!checked);
     let selectedFilters = {}
     selectedFilters[`${mainLabel}`] = labelText;
-    console.log('selected filter', selectedFilters);
     if (!checked) {
-      dispatch(setFilters(selectedFilters)); // {'category': 'cloth'}
-      console.log(filters);
+      dispatch(setFilters(selectedFilters));
       dispatch(applyFilters());
-      // dispatch(setFilteredProducts());
-      addFilters(labelText);
+      dispatch(applyPriceFilter());
+      dispatch(setFilteredProducts());
     } else {
       dispatch(deleteFilters(selectedFilters));
-      console.log(filters);
       dispatch(applyFilters());
-      // dispatch(setFilteredProducts());
-      addFilters(labelText);
+      dispatch(applyPriceFilter());
+      dispatch(setFilteredProducts());
     }
     const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
 
     if (accessories.includes(labelText) && !checked) {
       dispatch(applyFilters());
-      // dispatch(setFilteredProducts());
+      dispatch(applyPriceFilter());
       addFilters(labelText);
     } else {
       if (accessories.includes(labelText)) {
         
         dispatch(deleteFilters(selectedFilters));
         dispatch(applyFilters());
-        // dispatch(setFilteredProducts());
+        dispatch(applyPriceFilter());
         addFilters(labelText);
         if(filters.category.length === 0) {
           setLabel(Data);
@@ -68,12 +66,10 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   };
 
   const addFilters = (labelText) => {
-    console.log('in add', filters.category);
     
-    const LabelsToShow = [];
-    let arr = productList;//filteredProducts;
+    let arr = productList;
     console.log('inside add filters', arr);
-    
+    LabelsToShow = []
     let size_arr = [];
     let color_arr = [];
     let brand_arr = [];
@@ -84,29 +80,8 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
         size_arr.push(filteredProduct.size);
         color_arr.push(filteredProduct.color);
         brand_arr.push(filteredProduct.brand);
-        if (min >= filteredProduct.product_price) {
-          min = filteredProduct.product_price;
-        }
-        if (max <= filteredProduct.product_price) {
-          max = filteredProduct.product_price;
-        }
       }
     });
-    let offset = (max - min) / 3;
-    dispatch(setMinMax(min, max));
-    let price_arr = [];
-    if( offset!==0 ) {
-      price_arr = [
-        `${min} - ${Math.floor(min + offset)}`,
-        `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`,
-        `${Math.floor(min + offset * 2 + 1)} - ${max}`
-      ];
-    }
-    else
-    {
-      price_arr = [`${min}`];
-    }
-    
     size_arr = Array.from(new Set(size_arr));
     color_arr = Array.from(new Set(color_arr));
     brand_arr = Array.from(new Set(brand_arr));
@@ -131,12 +106,10 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
     const new_object_price = {
       id: 'price',
       label: 'Price',
-      sublabel: price_arr,
-      open: false
+      sublabel: [],
+      open: true
     };
     LabelsToShow.push(Data[0]);
-    // "Clothes", "Mobile", "Electronics", "Sports", "Books", "Watch"
-    // console.log('categories', filters.category, filters.category.includes('Clothes'));
     if (filters.category.includes('Clothes') || filters.category.includes('Sports') || filters.category.includes('Electronics') || filters.category.includes('Mobile') || filters.category.includes('Watch')) {
       LabelsToShow.push(new_object_color);
     } 

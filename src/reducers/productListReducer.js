@@ -14,7 +14,7 @@ const initialState = {
   filteredProducts: [],
   alert: false,
   min: 0,
-  max: 0,
+  max: 10000000,
   updateProductId: null
 };
 const productListReducer = (state = initialState, action) => {
@@ -70,28 +70,19 @@ const productListReducer = (state = initialState, action) => {
       return { ...state, filters: newFilters };
     }
     
-    case PRODUCT_LIST_REDUCER.SET_MIN_MAX:
-      return { ...state, min: action.value.min, max: action.value.max };
+    case PRODUCT_LIST_REDUCER.SET_MIN_MAX:{
+      console.log("min, max in reducer", action.value.min, action.value.min)
+      return { ...state, min: parseFloat(action.value.min), max: parseFloat(action.value.max) };
+    }
 
     case PRODUCT_LIST_REDUCER.APPLY_FILTERS: {
       let newProductList = state.productList;
       newProductList.map((product) => {
         let flag = false;
-        // Object.keys(state.filters).map((key) => {
-        //   if (product[key] !== state.filters[key] && key !== 'price') {
-        //     flag = true;
-        //     return;
-        //   }
-        // });
-        // Object.keys(state.filters).map((key) => {
-        //   console.log("filters", key, product[key], state.filters[key].includes(product[key]));
-        // })
-        
         Object.keys(state.filters).map((key) => {
           if (state.filters[key].length > 0) {
-            // console.log("-------->", state.filters[key], product[key]);
             if (state.filters[key].includes(product[key]) === false) {
-              flag = true   // size s  color blue     filter l, m, s    blue, red, black 
+              flag = true   
               return;
             }
           }
@@ -101,47 +92,18 @@ const productListReducer = (state = initialState, action) => {
         } else {
           product.disabled = false;
         }
-        // let min = state.min,
-        //   max = state.max,
-        //   offset = (max - min) / 3;
-        // if(offset !==0 ) {
-        //   switch (state.filters.price) {
-        //     case `${min} - ${Math.floor(min + offset)}`: {
-        //       if (product.product_price < min || product.product_price > Math.floor(min + offset)) {
-        //         product.disabled = true;
-        //       }
-        //       break;
-        //     }
-        //     case `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`: {
-        //       if (
-        //         product.product_price < Math.floor(min + offset) ||
-        //         product.product_price > Math.floor(min + offset * 2)
-        //       ) {
-        //         product.disabled = true;
-        //       }
-        //       break;
-        //     }
-        //     case `${Math.floor(min + offset * 2 + 1)} - ${max}`: {
-        //       if (
-        //         product.product_price < Math.floor(min + offset * 2 + 1) ||
-        //         product.product_price > max
-        //       ) {
-        //         product.disabled = true;
-        //       }
-        //       break;
-        //     }
-        //   }
-        // }
-        // else {
-        //   if(product.product_price !== min) {
-        //     product.disabled = true;
-        //   }
-        //   else {
-        //     product.disabled = false;
-        //   }
-        // }
-        // console.log("product", product, state.filters);
       });
+      return { ...state, productList: newProductList };
+    }
+
+    case PRODUCT_LIST_REDUCER.APPLY_PRICE_FILTER: {
+      let min = state.min, max = state.max, newProductList = state.productList;
+        console.log("min, max", min, max)
+        newProductList.map((product) => {
+          if(product.product_price < min || product.product_price > max){
+            product.disabled = true;
+          }
+        })
       return { ...state, productList: newProductList };
     }
 
@@ -160,10 +122,8 @@ const productListReducer = (state = initialState, action) => {
     }
     case PRODUCT_LIST_REDUCER.UPDATE_PRODUCT: {
       let newProductList = state.productList;
-      //console.log('Old', newProductList);
       let index = newProductList.findIndex((product) => product.id === action.value.id);
       newProductList[index] = action.value;
-      //console.log('New',newProductList);
       return {
         ...state,
         productList: newProductList
