@@ -63,12 +63,13 @@ let productTitle = {
     placeholder: 'brand'
   },
   imageUrl = {
-    field: 'exampleImageURL',
-    labelText: 'ImageURL *',
-    type: 'imageUrl',
-    name: 'imageUrl',
+    field: 'exampleFile',
+    labelText: 'Choose Product Image!!',
+    type: 'file',
+    name: 'file',
     placeholder: '**.**'
   };
+
 
 const AddProductForm = ({ validateData, dispatch, formState }) => {
   productTitle = {
@@ -180,7 +181,12 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
         <FormField formfield={brand} />
         <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={true} />
         <FormField formfield={imageUrl} />
-
+        <ButtonWrapper
+          buttonText={'Upload'}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        />
         <ButtonWrapper
           buttonText={'Add'}
           onSubmit={(e) => {

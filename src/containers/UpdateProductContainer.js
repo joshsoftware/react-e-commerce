@@ -12,6 +12,7 @@ const UpdateProductContainer = () => {
   useEffect(() => {
     dispatch(resetState());
   }, []);
+  
   const productListDispatch = useDispatch(productListReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   const updateProductState = useSelector((state) => state.updateProductReducer);

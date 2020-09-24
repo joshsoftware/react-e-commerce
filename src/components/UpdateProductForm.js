@@ -63,14 +63,25 @@ let productTitle = {
     placeholder: 'brand'
   },
   imageUrl = {
-    field: 'exampleImageURL',
-    labelText: 'ImageURL',
-    type: 'imageUrl',
-    name: 'imageUrl',
+    field: 'exampleFile',
+    labelText: 'Choose Product Image!!',
+    type: 'file',
+    name: 'file',
     placeholder: '**.**'
   };
 
+
 const UpdateProductForm = ({ validateData, dispatch, formState }) => {
+
+  //const[image, setImage] = useState("");
+  const uploadImage = e=>{
+    const files = e.target.files
+    let data1 = new FormData();
+    data1.append('file',files[0])
+    console.log('dasdasda2',data1.get('file'));
+    dispatch(setField('imageUrl',data1.get('file')));
+  }
+
   productTitle = {
     ...productTitle,
     value: formState.productTitle,
@@ -136,13 +147,13 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
   };
   imageUrl = {
     ...imageUrl,
-    value: formState.imageUrl,
     onChange: (evt) => {
-      dispatch(setField('imageUrl', evt.target.value));
+      uploadImage(evt);
     },
     invalid: formState.imageUrlError !== null ? true : false,
     message: formState.imageUrlError
   };
+
   const alertDispatch = useDispatch(alertReducer);
   let row_content = [];
   let BackTo = <ButtonWrapper style={'dash_button'} buttonText={'Back-To'} />;
@@ -167,6 +178,7 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
+          //uploadImage();
           alertDispatch(alertMessage({ alert: true, alertText: 'Product Updated Successfully' }));
         }}>
         <FormField formfield={productTitle} />
@@ -178,12 +190,19 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
         <FormField formfield={brand} />
         <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={false} />
         <FormField formfield={imageUrl} />
-
+       
+        {/* <ButtonWrapper
+          buttonText={'Upload'}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        /> */}
         <ButtonWrapper
           buttonText={'Update'}
           onSubmit={(e) => {
             e.preventDefault();
             validateData();
+           // uploadImage();
           }}
         />
       </Form>
