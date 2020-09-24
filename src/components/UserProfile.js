@@ -28,10 +28,9 @@ const UserProfile = () => {
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertMessage({ alert: false, alertText: '' }));
-    }, 10000);
+    }, 2000);
   };
   useEffect(() => {
-    console.log('fddgfdhf', alertText);
     timeOutFunction();
   }, [alert]);
 
@@ -72,14 +71,11 @@ const UserProfile = () => {
       {editButton}
     </Link>
   );
+  userprofile_content.push(
+    <AlertWrapper className="text-center fixed-top" color="info" isOpen={alert} data={alertText} />
+  );
   return (
     <>
-      <AlertWrapper
-        className="text-center fixed-top"
-        color="info"
-        isOpen={alert}
-        data={alertText}
-      />
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
       <CartHeader header={`Welcome ${profile.first_name} ${profile.last_name}`} />
       <ContainerWrapper data={userprofile_content} />

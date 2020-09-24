@@ -22,6 +22,7 @@ const ProductListContainer = () => {
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertLogin({ alert: false, alertText: '' }));
+      setVisible(false);
     }, 2000);
   };
   const handleScroll = () => {
@@ -47,6 +48,11 @@ const ProductListContainer = () => {
     timeOutFunction();
   }, [loginAlert]);
 
+  useEffect(() => {
+    if (visible === true) {
+      timeOutFunction();
+    }
+  }, [visible]);
   const changeStates = async () => {
     setTimeout(() => {
       setPage(page + 1);
@@ -93,9 +99,9 @@ const ProductListContainer = () => {
   arr.push(
     <AlertWrapper
       className="text-center fixed-top"
-      color={visible ? 'danger' : 'info'}
+      color={visible && !alertText.includes('added') ? 'danger' : 'info'}
       isOpen={visible || loginAlert}
-      data={alertText}
+      data={alertText === '' ? 'No items matches your choice!!' : alertText}
     />
   );
 

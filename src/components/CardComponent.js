@@ -52,10 +52,14 @@ const CardComponent = ({ index, product, productExists, setVisible,setAlertText}
       );
     } else {
       card_content.push(
-       <ButtonWrapper buttonText={'Add to Cart'}  onClick={() => {
-        alertDispatch(alertMessage({ alert: true, alertText: 'Item Added!!' }));
-        productExists(product)} 
-       }/>
+        <ButtonWrapper
+          buttonText={'Add to Cart'}
+          onClick={() => {
+            productExists(product);
+            setVisible(true);
+            setAlertText(`${product_title} added to cart`);
+          }}
+        />
       );
     }
   }

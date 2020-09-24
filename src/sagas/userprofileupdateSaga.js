@@ -6,8 +6,7 @@ import userprofileupdateApi from '../apis/userprofileupdateApi';
 //worker saga
 function* userprofileupdateWorkerSaga(action) {
   try {
-    const { data } = yield call(userprofileupdateApi, action.value);
-    console.log(data);
+    yield call(userprofileupdateApi, action.value);
     yield put(setUpdated(true));
   } catch (error) {
     console.log('error', error);

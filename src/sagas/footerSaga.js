@@ -9,7 +9,7 @@ function* footerWorkerSaga() {
     const { data } = yield call(getFooterListApi);
     yield put(setFooterElementList(data));
   } catch (error) {
-    console.log(error);
+    console.log('error', error);
   }
 }
 

@@ -8,7 +8,6 @@ import { resetProductList, setProductList } from '../actions/productListActions'
 function* searchbarWorkerSaga(action) {
   try {
     const { data } = yield call(searchbar, action.value);
-    console.log(data);
     yield put(resetProductList());
     yield put(setProductList(data));
   } catch (error) {

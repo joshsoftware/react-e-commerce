@@ -9,7 +9,23 @@ const DropdownMenuWrapper = ({ data, tag, right, flip, className, positionFixed 
       right={right}
       flip={flip}
       className={className}
-      positionFixed={positionFixed}>
+      positionFixed={positionFixed}
+      modifiers={{
+        setMaxHeight: {
+          enabled: true,
+          order: 890,
+          fn: (data) => {
+            return {
+              ...data,
+              styles: {
+                ...data.styles,
+                overflow: 'auto',
+                maxHeight: '100px'
+              }
+            };
+          }
+        }
+      }}>
       {data}
     </DropdownMenu>
   );

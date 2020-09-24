@@ -7,6 +7,12 @@ export const setProductList = (product_list) => {
   };
 };
 
+export const setFilteredProducts = () => {
+  return {
+    type: PRODUCT_LIST_REDUCER.SET_FILTERED_PRODUCTS
+  };
+};
+
 export const getProductList = (page) => {
   return {
     type: PRODUCT_LIST_REDUCER.GET_PRODUCT_LIST,
@@ -96,9 +102,20 @@ export const updateProduct = (product) => {
 };
 
 export const deleteProduct = (product_id) => {
-  console.log('delete product');
   return {
     type: PRODUCT_LIST_REDUCER.DELETE_PRODUCT,
     value: product_id
+  };
+};
+
+export const applyPriceFilter = () => {
+  return {
+    type: PRODUCT_LIST_REDUCER.APPLY_PRICE_FILTER
+  };
+};
+
+export const resetFilter = () => {
+  return {
+    type: PRODUCT_LIST_REDUCER.RESET_FILTER
   };
 };

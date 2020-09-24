@@ -22,6 +22,9 @@ const LoginContainer = () => {
     (state) => state.alertReducer
   );
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetState());
+  }, []);
   const alertDispatch = useDispatch(alertReducer);
   const registrationDispatch = useDispatch(registrationReducer);
   registrationDispatch(setRegistered(false));

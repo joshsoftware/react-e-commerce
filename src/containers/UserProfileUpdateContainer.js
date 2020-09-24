@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
@@ -10,6 +10,9 @@ import Footer from '../components/Footer';
 
 const UserProfileUpdateContainer = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetState());
+  }, []);
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
@@ -18,9 +21,13 @@ const UserProfileUpdateContainer = () => {
   const schema = yup.object().shape({
     firstname: yup.string(),
     lastname: yup.string(),
-    password: yup.string().min(8).required(),
-    country: yup.string(),
-    state: yup.string(),
+    password: yup.string().test('size', 'password must be at least 8 characters', (value) => {
+      if (value === '' || value.length >= 8) {
+        return true;
+      } else {
+        return false;
+      }
+    }),
     city: yup.string(),
     address: yup.string()
   });
@@ -80,7 +87,6 @@ const UserProfileUpdateContainer = () => {
   return (
     <>
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
-      <br />
       <UserProfileUpdateComponent
         validateData={validateData}
         dispatch={dispatch}

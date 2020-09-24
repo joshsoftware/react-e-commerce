@@ -1,78 +1,92 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Label } from 'reactstrap';
 import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import Data from './Data';
-import { setFilters, applyFilters, setAlert, setMinMax } from '../actions/productListActions';
+import {
+  setFilters,
+  applyFilters,
+  setAlert,
+  deleteFilters,
+  setFilteredProducts,
+  applyPriceFilter,
+  resetFilter
+} from '../actions/productListActions';
 
-const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
+const FormLabel = ({ labelText, mainLabel, setLabel }) => {
   const dispatch = useDispatch();
-  const { productList, filters } = useSelector((state) => state.productListReducer);
+  const { productList } = useSelector((state) => state.productListReducer);
+  const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch', 'All'];
 
+  useEffect(() => {
+    dispatch(applyFilters());
+  }, [productList]);
+
+  let LabelsToShow = [];
   const [checked, setChecked] = useState(false);
+
   const filterFunction = (labelText) => {
-    dispatch(setAlert(false));
-    setChecked(!checked);
-    let selectedFilters = filters;
-    if (!checked) {
+    try {
+      dispatch(setAlert(false));
+      setChecked(!checked);
+      let selectedFilters = {};
       selectedFilters[`${mainLabel}`] = labelText;
-      dispatch(setFilters(selectedFilters));
-      dispatch(applyFilters());
-    } else {
-      delete selectedFilters[`${mainLabel}`];
-      dispatch(applyFilters());
-    }
-    const accessories = ['Clothes', 'Mobile', 'Sports', 'Electronics', 'Books', 'Watch'];
-    if (accessories.includes(labelText) && !checked) {
-      addFilters(labelText);
-    } else {
-      if (accessories.includes(labelText)) {
-        dispatch(setFilters({}));
+      if (!checked && !accessories.includes(labelText)) {
+        dispatch(setFilters(selectedFilters));
         dispatch(applyFilters());
-        setLabel(Data);
+        dispatch(applyPriceFilter());
+        dispatch(setFilteredProducts());
+      } else if (!accessories.includes(labelText)) {
+        dispatch(deleteFilters(selectedFilters));
+        dispatch(applyFilters());
+        dispatch(applyPriceFilter());
+        dispatch(setFilteredProducts());
       }
-    }
-    let flag = false;
-    for (let i = 0; i < productList.length; i++) {
-      if (productList[i].disabled === false) {
-        flag = true;
-        break;
+
+      let flag = false;
+      for (let i = 0; i < productList.length; i++) {
+        if (productList[i].disabled === false) {
+          flag = true;
+          break;
+        }
       }
-    }
-    if (flag === false) {
-      dispatch(setAlert(true));
+      if (flag === false) {
+        dispatch(setAlert(true));
+      }
+    } catch (error) {
+      console.log('error', error);
     }
   };
 
   const addFilters = (labelText) => {
-    const LabelsToShow = [];
+    let selectedFilters = {},
+      flag = true;
+    selectedFilters[`${mainLabel}`] = labelText;
+    if (accessories.includes(labelText)) {
+      if (labelText === 'All') {
+        flag = false;
+      }
+      dispatch(resetFilter());
+      if (flag === true) {
+        dispatch(setFilters(selectedFilters));
+      }
+      dispatch(applyFilters());
+      dispatch(applyPriceFilter());
+    }
+
     let arr = productList;
+    LabelsToShow = [];
     let size_arr = [];
     let color_arr = [];
     let brand_arr = [];
-    let min = 1000000,
-      max = 0;
     arr.map((filteredProduct) => {
       if (filteredProduct.disabled === false) {
         size_arr.push(filteredProduct.size);
         color_arr.push(filteredProduct.color);
         brand_arr.push(filteredProduct.brand);
-        if (min >= filteredProduct.product_price) {
-          min = filteredProduct.product_price;
-        }
-        if (max <= filteredProduct.product_price) {
-          max = filteredProduct.product_price;
-        }
       }
     });
-    let offset = (max - min) / 3;
-    dispatch(setMinMax(min, max));
-    const price_arr = [
-      `${min} - ${Math.floor(min + offset)}`,
-      `${Math.floor(min + offset + 1)} - ${Math.floor(min + offset * 2)}`,
-      `${Math.floor(min + offset * 2 + 1)} - ${max}`
-    ];
     size_arr = Array.from(new Set(size_arr));
     color_arr = Array.from(new Set(color_arr));
     brand_arr = Array.from(new Set(brand_arr));
@@ -97,15 +111,21 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
     const new_object_price = {
       id: 'price',
       label: 'Price',
-      sublabel: price_arr,
-      open: false
+      sublabel: [],
+      open: true
     };
     LabelsToShow.push(Data[0]);
-    if (labelText === 'Electronics' || labelText === 'Mobile' || labelText === 'Watch') {
+    if (
+      labelText === 'Clothes' ||
+      labelText === 'Sports' ||
+      labelText === 'Electronics' ||
+      labelText === 'Mobile' ||
+      labelText === 'Watch'
+    ) {
       LabelsToShow.push(new_object_color);
-    } else if (labelText !== 'Books') {
+    }
+    if (labelText === 'Clothes' || labelText === 'Sports') {
       LabelsToShow.push(new_object_size);
-      LabelsToShow.push(new_object_color);
     }
     LabelsToShow.push(new_object_brand);
     LabelsToShow.push(new_object_price);
@@ -116,26 +136,55 @@ const FormLabel = ({ field, labelText, mainLabel, setLabel }) => {
   };
 
   if (labelText === '') {
-    return <> </>;
+    return <>Nothing to choose </>;
   } else {
-    return (
-      <Label for={field}>
-        <FormInput
-          type="checkbox"
-          onChange={() => {
-            filterFunction(labelText);
-          }}
-          labelText={labelText}
-        />{' '}
-        {labelText}
-      </Label>
-    );
+    if (
+      labelText === 'Clothes' ||
+      labelText === 'Mobile' ||
+      labelText === 'Sports' ||
+      labelText === 'Electronics' ||
+      labelText === 'Books' ||
+      labelText === 'Watch' ||
+      labelText === 'All'
+    ) {
+      return (
+        <>
+          <div className="form-check">
+            <Label class="form-check-label" for="exampleRadios1">
+              <FormInput
+                class="form-check-input"
+                type="radio"
+                name="exampleRadios"
+                id="exampleRadios1"
+                value={labelText}
+                onChange={() => {
+                  addFilters(labelText);
+                }}
+              />{' '}
+              {labelText}
+            </Label>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <Label>
+          <FormInput
+            type="checkbox"
+            onChange={() => {
+              filterFunction(labelText);
+            }}
+            labelText={labelText}
+          />{' '}
+          {labelText}
+        </Label>
+      );
+    }
   }
 };
 
 export default FormLabel;
 
 FormLabel.propTypes = {
-  field: PropTypes.string,
   labelText: PropTypes.string
 };

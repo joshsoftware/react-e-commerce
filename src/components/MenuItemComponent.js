@@ -13,7 +13,9 @@ const MenuItem = () => {
         if (i === index) {
           label.open = !label.open;
         } else {
-          label.open = false;
+          if (label.label !== 'Price' || label.label !== 'Accessories') {
+            label.open = false;
+          }
         }
 
         return label;
@@ -31,6 +33,7 @@ const MenuItem = () => {
           setLabel={setLabel}
           setProducts={setProducts}
           products={products}
+          labels={labels}
         />
       ))}
     </div>

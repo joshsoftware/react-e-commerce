@@ -6,9 +6,7 @@ import { setProductUpdated } from '../actions/formActions';
 //worker saga
 function* updateProductWorkerSaga(action) {
   try {
-    console.log('in worker');
-    const { data } = yield call(updateProduct, action.value);
-    console.log(data);
+    yield call(updateProduct, action.value);
     yield put(setProductUpdated(true));
   } catch (error) {
     console.log('error', error);
@@ -17,6 +15,5 @@ function* updateProductWorkerSaga(action) {
 
 //watcher saga
 export default function* updateProductSaga() {
-  console.log('in watcher');
   yield takeLatest(FORM_ACTIONS.UPDATE_PRODUCT_REQUEST, updateProductWorkerSaga);
 }

@@ -8,7 +8,7 @@ function* userprofileWorkerSaga(action) {
     const { data } = yield call(getUserProfileApi, action.value);
     yield put(setUserProfile(data.data));
   } catch (error) {
-    console.log(error);
+    console.log('error', error);
   }
 }
 
