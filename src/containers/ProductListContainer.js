@@ -25,11 +25,6 @@ const ProductListContainer = () => {
     }, 2000);
   };
   const handleScroll = () => {
-    console.log(
-      window.innerHeight,
-      document.documentElement.scrollTop,
-      document.documentElement.offsetHeight
-    );
     if (
       window.innerHeight + document.documentElement.scrollTop !==
         document.documentElement.offsetHeight ||
@@ -48,7 +43,6 @@ const ProductListContainer = () => {
   }, []);
 
   useEffect(() => {
-    console.log(loginAlertText);
     setAlertText(loginAlertText);
     timeOutFunction();
   }, [loginAlert]);

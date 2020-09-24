@@ -9,7 +9,7 @@ import { updateCartItemsApi, addCartItemApi } from '../apis/cartApi';
 import { updateProductStockApi } from '../apis/productApi';
 import './productContainer.css';
 
-const ProductRowContainer = ({ products, setVisible, setAlertText }) => {
+const ProductRowContainer = ({ products, setVisible, setAlertText}) => {
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { cartItemsList } = useSelector((state) => state.cartReducer);
@@ -44,6 +44,7 @@ const ProductRowContainer = ({ products, setVisible, setAlertText }) => {
                 productExists={productExists}
                 setVisible={setVisible}
                 setAlertText={setAlertText}
+
               />
             }
           />
