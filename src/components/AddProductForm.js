@@ -64,7 +64,7 @@ let productTitle = {
   },
   imageUrl = {
     field: 'exampleImageURL',
-    labelText: 'Choose a File',
+    labelText: 'Choose a File* [.jpg, .png, .jpeg, .gif, .webp] only',
     type: 'file',
     name: 'file',
     placeholder: '**.**'

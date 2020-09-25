@@ -23,6 +23,7 @@ const productListReducer = (state = initialState, action) => {
       newProductList.forEach((element) => {
         element.disabled = false;
       });
+      console.log('productList data in reducer', state.productList);
       return {
         ...state,
         productList: [...state.productList, ...newProductList],

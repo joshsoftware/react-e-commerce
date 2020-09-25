@@ -16,6 +16,7 @@ import alertReducer from '../reducers/alertReducer';
 import { alertLogin, alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
 import logout from '../apis/logoutApi';
+import ProductCategoryContainer from './ProductCategoryContainer';
 
 const AdminDashboardContainer = () => {
   const { alert, loginAlert, alertText, loginAlertText } = useSelector(
@@ -53,7 +54,9 @@ const AdminDashboardContainer = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    setLoading(true);
+    if (productList.length === 0) {
+      setLoading(true);
+    }
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
