@@ -70,6 +70,7 @@ let productTitle = {
     placeholder: '**.**'
   };
 
+
 const AddProductForm = ({ validateData, dispatch, formState }) => {
   const uploadImage = (e) => {
     const files = e.target.files;
@@ -184,7 +185,12 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
         <FormField formfield={brand} />
         <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={true} />
         <FormField formfield={imageUrl} />
-
+        <ButtonWrapper
+          buttonText={'Upload'}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        />
         <ButtonWrapper
           buttonText={'Add'}
           onSubmit={(e) => {

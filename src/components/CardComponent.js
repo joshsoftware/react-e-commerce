@@ -9,12 +9,17 @@ import ButtonWrapper from './ButtonWrapper';
 import { useDispatch, useSelector } from 'react-redux';
 import './CartItem.css';
 import InputSpinnerContainer from '../containers/InputSpinnerContainer';
+import alertReducer from '../reducers/alertReducer';
+import { alertMessage } from '../actions/alertActions';
 
-const CardComponent = ({ index, product, productExists, setVisible, setAlertText }) => {
+const CardComponent = ({ index, product, productExists, setVisible,setAlertText}) => {
   const dispatch = useDispatch();
+  const alertDispatch = useDispatch(alertReducer);
   const { cartItemsList } = useSelector((state) => state.cartReducer);
   const { id, image_urls, product_title, product_price, stock } = product;
   let body_content = [];
+ 
+
   body_content.push(<CardTitleWrapper className={'font-weight-bold'} title={product_title} />);
   body_content.push(<CardTextWrapper text={'$' + product_price} />);
   let card_content = [];
