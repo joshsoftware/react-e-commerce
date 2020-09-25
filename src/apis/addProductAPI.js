@@ -37,8 +37,6 @@ const addProduct = ({
   data.append('color', color);
   data.append('size', size);
   data.append('images', image_url);
-  console.log('actual data is ', data);
-  console.log('data is', data.get('images'));
   return apiHelper('post', `${process.env.REACT_APP_SERVER_URL}createProduct`, data, headers);
 };
 export { addProduct };

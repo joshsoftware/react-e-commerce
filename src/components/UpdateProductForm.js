@@ -70,14 +70,13 @@ let productTitle = {
     placeholder: '**.**'
   };
 
-
 const UpdateProductForm = ({ validateData, dispatch, formState }) => {
-  const uploadImage = e=>{
-    const files = e.target.files
+  const uploadImage = (e) => {
+    const files = e.target.files;
     let data1 = new FormData();
-    data1.append('file',files[0])
-    dispatch(setField('imageUrl',data1.get('file')));
-  }
+    data1.append('file', files[0]);
+    dispatch(setField('imageUrl', data1.get('file')));
+  };
 
   productTitle = {
     ...productTitle,
@@ -186,7 +185,7 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
         <FormField formfield={brand} />
         <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={false} />
         <FormField formfield={imageUrl} />
-       
+
         <ButtonWrapper
           buttonText={'Update'}
           onSubmit={(e) => {

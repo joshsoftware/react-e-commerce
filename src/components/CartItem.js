@@ -18,7 +18,6 @@ import alertReducer from '../reducers/alertReducer';
 import { useDispatch } from 'react-redux';
 import { alertMessage } from '../actions/alertActions';
 
-
 const CartItem = ({ item, dispatch }) => {
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);

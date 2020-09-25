@@ -2,7 +2,6 @@ import React from 'react';
 import { Input } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-
 const FormInput = ({ className, type, name, placeholder, value, onChange, invalid }) => {
   return (
     <Input

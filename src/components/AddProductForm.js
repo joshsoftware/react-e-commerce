@@ -70,7 +70,6 @@ let productTitle = {
     placeholder: '**.**'
   };
 
-
 const AddProductForm = ({ validateData, dispatch, formState }) => {
   const uploadImage = (e) => {
     const files = e.target.files;
