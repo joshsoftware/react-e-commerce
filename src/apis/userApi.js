@@ -1,0 +1,50 @@
+import axios from 'axios';
+export const getUserListApi = (token) => {
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
+  };
+  return axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_SERVER_URL}users`,
+    headers: headers
+  });
+};
+
+export const deleteUserApi = ({ token, user_id }) => {
+  console.log('User Id', user_id);
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
+  };
+  return axios({
+    method: 'delete',
+    url: `${process.env.REACT_APP_SERVER_URL}user/${user_id}`,
+    headers: headers
+  });
+};
+
+export const enableUserApi = ({ token, user_id }) => {
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
+  };
+  return axios({
+    method: 'patch',
+    url: `${process.env.REACT_APP_SERVER_URL}user/enable/${user_id}`,
+    headers: headers
+  });
+};
+
+export const disableUserApi = ({ token, user_id }) => {
+  console.log('Id', user_id);
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
+  };
+  return axios({
+    method: 'patch',
+    url: `${process.env.REACT_APP_SERVER_URL}user/disable/${user_id}`,
+    headers: headers
+  });
+};

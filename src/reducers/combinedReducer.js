@@ -10,6 +10,7 @@ import addProductReducer from './addProductReducer';
 import updateProductReducer from './updateProductReducer';
 import searbarReducer from './searchbarReducer';
 import alertReducer from './alertReducer';
+import userListReducer from './userListReducer';
 
 const combinedReducer = () => {
   return combineReducers({
@@ -23,7 +24,8 @@ const combinedReducer = () => {
     userprofileupdateReducer,
     addProductReducer,
     updateProductReducer,
-    alertReducer
+    alertReducer,
+    userListReducer
   });
 };
 
