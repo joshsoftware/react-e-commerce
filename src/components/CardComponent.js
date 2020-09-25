@@ -13,13 +13,16 @@ import InputSpinnerContainer from '../containers/InputSpinnerContainer';
 const CardComponent = ({ index, product, productExists, setVisible, setAlertText }) => {
   const dispatch = useDispatch();
   const { cartItemsList } = useSelector((state) => state.cartReducer);
-  const { id, image_url, product_title, product_price, stock } = product;
+  const { id, image_urls, product_title, product_price, stock } = product;
   let body_content = [];
   body_content.push(<CardTitleWrapper className={'font-weight-bold'} title={product_title} />);
   body_content.push(<CardTextWrapper text={'$' + product_price} />);
   let card_content = [];
   card_content.push(
-    <CardImgWrapper className={'img_style_card cart-image img-fluid m-20'} src={image_url} />
+    <CardImgWrapper
+      className={'img_style_card cart-image img-fluid m-20'}
+      src={`${process.env.REACT_APP_SERVER_URL}${image_urls[0]}`}
+    />
   );
   card_content.push(<CardBodyWrapper body_content={body_content} />);
   if (index !== -1) {
@@ -66,7 +69,7 @@ CardComponent.propTypes = {
   productExists: PropTypes.func.isRequired,
   product: PropTypes.shape({
     id: PropTypes.number,
-    image_url: PropTypes.string.isRequired,
+    image_urls: PropTypes.array.isRequired,
     product_title: PropTypes.string.isRequired,
     product_price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,

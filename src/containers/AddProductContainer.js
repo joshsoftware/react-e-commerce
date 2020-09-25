@@ -69,7 +69,15 @@ const AddProductContainer = () => {
     category: yup.string().required(),
     color: yup.string(),
     size: yup.string(),
-    imageUrl: yup.string().required()
+    imageUrl: yup
+      .mixed()
+      .required()
+      .test('extension', 'allowed files jpg, jpeg, gif, webp, png', (value) => {
+        let array = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/webp'];
+        if (value !== null) {
+          return array.includes(value.type);
+        }
+      })
   });
 
   if (!userDetails.isAdmin) {
