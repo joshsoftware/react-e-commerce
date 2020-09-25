@@ -72,13 +72,10 @@ let productTitle = {
 
 
 const UpdateProductForm = ({ validateData, dispatch, formState }) => {
-
-  //const[image, setImage] = useState("");
   const uploadImage = e=>{
     const files = e.target.files
     let data1 = new FormData();
     data1.append('file',files[0])
-    console.log('dasdasda2',data1.get('file'));
     dispatch(setField('imageUrl',data1.get('file')));
   }
 
@@ -178,7 +175,6 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
-          //uploadImage();
           alertDispatch(alertMessage({ alert: true, alertText: 'Product Updated Successfully' }));
         }}>
         <FormField formfield={productTitle} />
@@ -191,18 +187,11 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
         <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={false} />
         <FormField formfield={imageUrl} />
        
-        {/* <ButtonWrapper
-          buttonText={'Upload'}
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        /> */}
         <ButtonWrapper
           buttonText={'Update'}
           onSubmit={(e) => {
             e.preventDefault();
             validateData();
-           // uploadImage();
           }}
         />
       </Form>
