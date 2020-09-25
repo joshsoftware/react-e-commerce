@@ -20,7 +20,7 @@ const FormField = ({ formfield }) => {
     autoComplete
   } = formfield;
   return (
-    <FormGroup>
+    <FormGroup className={'align-items-center'}>
       <FormLabel field={field} labelText={labelText} />
       <FormInput
         type={type}
@@ -30,6 +30,7 @@ const FormField = ({ formfield }) => {
         onChange={onChange}
         invalid={invalid}
         autoComplete={autoComplete}
+        className={'align-items-center'}
       />
       <FormFeedbackWrapper message={message} />
     </FormGroup>

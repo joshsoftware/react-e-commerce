@@ -22,7 +22,7 @@ import { alertMessage } from '../actions/alertActions';
 const CartItem = ({ item, dispatch }) => {
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);
-  let { product_title, image_url, product_price, quantity, id } = item;
+  let { product_title, image_urls, product_price, quantity, id } = item;
   const { userDetails } = useSelector((state) => state.loginReducer);
   const alertDispatch = useDispatch(alertReducer);
 
@@ -70,7 +70,12 @@ const CartItem = ({ item, dispatch }) => {
       sm={2}
       lg={2}
       xl={2}
-      data={<CardImgWrapper src={image_url} className="img_fluid img_style" />}
+      data={
+        <CardImgWrapper
+          src={`${process.env.REACT_APP_SERVER_URL}${image_urls[0]}`}
+          className="img_fluid img_style"
+        />
+      }
     />
   );
   column_content.push(<ColumnWrapper key={i++} className={'col_two'} data={item_details} />);
@@ -124,7 +129,7 @@ CartItem.propTypes = {
   item: PropTypes.shape({
     discount: PropTypes.number,
     tax: PropTypes.number,
-    image_url: PropTypes.string,
+    image_urls: PropTypes.array,
     product_title: PropTypes.string,
     product_price: PropTypes.number,
     quantity: PropTypes.number,

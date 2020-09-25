@@ -12,7 +12,7 @@ import RowWrapper from '../components/RowWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
 import { Link } from 'react-router-dom';
 import '../containers/AdminDashboardContainer.css';
-
+import '../images/levi.jpg';
 let productTitle = {
     field: 'exampleProductTitle',
     labelText: 'Product Title *',
@@ -63,8 +63,8 @@ let productTitle = {
     placeholder: 'brand'
   },
   imageUrl = {
-    field: 'exampleFile',
-    labelText: 'Choose Product Image!!',
+    field: 'exampleImageURL',
+    labelText: 'Choose a File',
     type: 'file',
     name: 'file',
     placeholder: '**.**'
@@ -72,6 +72,12 @@ let productTitle = {
 
 
 const AddProductForm = ({ validateData, dispatch, formState }) => {
+  const uploadImage = (e) => {
+    const files = e.target.files;
+    let data1 = new FormData();
+    data1.append('file', files[0]);
+    dispatch(setField('imageUrl', data1.get('file')));
+  };
   productTitle = {
     ...productTitle,
     value: formState.productTitle,
@@ -137,14 +143,12 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
   };
   imageUrl = {
     ...imageUrl,
-    value: formState.imageUrl,
     onChange: (evt) => {
-      dispatch(setField('imageUrl', evt.target.value));
+      uploadImage(evt);
     },
     invalid: formState.imageUrlError !== null ? true : false,
     message: formState.imageUrlError
   };
-
   const alertDispatch = useDispatch(alertReducer);
 
   let row_content = [];
