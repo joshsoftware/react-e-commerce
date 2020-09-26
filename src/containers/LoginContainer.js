@@ -78,7 +78,11 @@ const LoginContainer = () => {
     <>
       <AlertWrapper
         className="text-center fixed-top"
-        color={alertText === 'Login Failed : Enter Correct Credentials' ? 'danger' : 'info'}
+        color={
+          alertText === 'Login Failed : Enter Correct Credentials' || alertText === 'User Disabled!'
+            ? 'danger'
+            : 'info'
+        }
         isOpen={alert || registrationAlert}
         data={alertState}
       />

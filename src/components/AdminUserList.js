@@ -13,15 +13,11 @@ import { disableUser } from '../actions/userListActions';
 import { deleteUserApi } from '../apis/userApi';
 import { disableUserApi } from '../apis/userApi';
 import { enableUserApi } from '../apis/userApi';
-import { useDispatch, useSelector } from 'react-redux';
-import { alertMessage } from '../actions/alertActions';
-import alertReducer from '../reducers/alertReducer';
-import AlertWrapper from '../components/AlertWrapper';
+import { useSelector } from 'react-redux';
 
-const AdminProductList = ({ user, dispatch }) => {
+const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
   console.log(user);
   let { first_name, last_name, id, email, mobile, country, state, city, isDisabled } = user;
-  const alertDispatch = useDispatch(alertReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
   let i = 0;
@@ -37,9 +33,9 @@ const AdminProductList = ({ user, dispatch }) => {
   user_details.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Email Id: ' + email} />
   );
-  user_details.push(
-    <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Phone No. : ' + mobile} />
-  );
+  // user_details.push(
+  //   <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Phone No. : ' + mobile} />
+  // );
   user_location_details.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'City: ' + city} />
   );
@@ -87,8 +83,18 @@ const AdminProductList = ({ user, dispatch }) => {
           outline
           color={'danger'}
           onClick={() => {
-            deleteUserApi({ token: userDetails.token, user_id: id });
-            dispatch(deleteUser(id));
+            deleteUserApi({ token: userDetails.token, user_id: id })
+              .then((res) => {
+                dispatch(deleteUser(id));
+                setAlertText('User deleted Successfully');
+                setVisible(true);
+                console.log('response', res);
+              })
+              .catch((err) => {
+                setAlertText('Delete Failed');
+                setVisible(true);
+                console.log('error --', err);
+              });
           }}
         />
       }
@@ -104,8 +110,18 @@ const AdminProductList = ({ user, dispatch }) => {
             buttonText={'Enable User'}
             outline
             onClick={() => {
-              dispatch(enableUser(id));
-              enableUserApi({ token: userDetails.token, user_id: id });
+              enableUserApi({ token: userDetails.token, user_id: id })
+                .then((res) => {
+                  dispatch(enableUser(id));
+                  setAlertText('Enabled Successfully');
+                  setVisible(true);
+                  console.log('response', res);
+                })
+                .catch((err) => {
+                  setAlertText('Enable failed');
+                  setVisible(true);
+                  console.log('error --', err);
+                });
             }}
           />
         }
@@ -121,8 +137,18 @@ const AdminProductList = ({ user, dispatch }) => {
             buttonText={'Disable User'}
             outline
             onClick={() => {
-              dispatch(disableUser(id));
-              disableUserApi({ token: userDetails.token, user_id: id });
+              disableUserApi({ token: userDetails.token, user_id: id })
+                .then((res) => {
+                  dispatch(disableUser(id));
+                  setAlertText('Disabled Successfully');
+                  setVisible(true);
+                  console.log('response', res);
+                })
+                .catch((err) => {
+                  setAlertText('Disable failed');
+                  setVisible(true);
+                  console.log('error --', err);
+                });
             }}
           />
         }
@@ -137,9 +163,9 @@ const AdminProductList = ({ user, dispatch }) => {
   );
 };
 
-export default AdminProductList;
+export default AdminUserList;
 
-AdminProductList.propTypes = {
+AdminUserList.propTypes = {
   user: PropTypes.shape({
     first_name: PropTypes.string,
     last_name: PropTypes.string,
@@ -152,5 +178,7 @@ AdminProductList.propTypes = {
     id: PropTypes.number,
     isDisabled: PropTypes.bool
   }),
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  setAlertText: PropTypes.func.isRequired,
+  setVisible: PropTypes.func.isRequired
 };

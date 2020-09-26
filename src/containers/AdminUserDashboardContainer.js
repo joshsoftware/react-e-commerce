@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ButtonWrapper from '../components/ButtonWrapper';
 import RowWrapper from '../components/RowWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
@@ -8,27 +8,24 @@ import AdminUserList from '../components/AdminUserList';
 import ContainerWrapper from '../components/ContainerWrapper';
 import { getUserList } from '../actions/userListActions';
 import './AdminDashboardContainer.css';
-import alertReducer from '../reducers/alertReducer';
-import { alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
-import userListReducer from '../reducers/userListReducer';
 
 const AdminUserDashboardContainer = () => {
-  const { alert, alertText } = useSelector((state) => state.alertReducer);
-  const alertDispatch = useDispatch(alertReducer);
+  const [alertText, setAlertText] = useState('');
+  const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.loginReducer);
 
   const timeOutFunction = async () => {
     setTimeout(() => {
-      alertDispatch(alertMessage({ alert: false, alertText: '' }));
+      setVisible(false);
     }, 2000);
   };
   useEffect(() => {
-    if (alert === true) {
+    if (visible === true) {
       timeOutFunction();
     }
-  }, [alert]);
+  }, [visible]);
 
   useEffect(() => {
     dispatch(getUserList(userDetails.token));
@@ -44,7 +41,15 @@ const AdminUserDashboardContainer = () => {
   let users = [];
   users.push(<RowWrapper data={row_content} />);
   users.push(
-    userList.map((user, index) => <AdminUserList key={index} user={user} dispatch={dispatch} />)
+    userList.map((user, index) => (
+      <AdminUserList
+        key={index}
+        user={user}
+        dispatch={dispatch}
+        setVisible={setVisible}
+        setAlertText={setAlertText}
+      />
+    ))
   );
 
   column_content.push(<h1>USERS DETAILS</h1>);
@@ -65,12 +70,18 @@ const AdminUserDashboardContainer = () => {
   return (
     <>
       <ContainerWrapper
-        className={'fixed-top'}
         data={
           <AlertWrapper
-            className="text-center"
-            color={alertText === 'Product deleted Successfully' ? 'danger' : 'info'}
-            isOpen={alert}
+            className="text-center fixed-top"
+            color={
+              alertText === 'User deleted Successfully' ||
+              alertText === 'Disable failed' ||
+              alertText === 'Enable failed' ||
+              alertText === 'Delete Failed'
+                ? 'danger'
+                : 'info'
+            }
+            isOpen={visible}
             data={alertText}
           />
         }
