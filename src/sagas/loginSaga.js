@@ -9,8 +9,15 @@ function* loginWorkerSaga(action) {
   try {
     const { data } = yield call(login, action.value);
     yield put(setUserDetails(data));
+    console.log('Data', data);
   } catch (error) {
-    yield put(alertMessage({ alert: true, alertText: 'Login Failed : Enter Correct Credentials' }));
+    if (error == 'Error: Request failed with status code 403') {
+      yield put(alertMessage({ alert: true, alertText: 'User Disabled!' }));
+    } else {
+      yield put(
+        alertMessage({ alert: true, alertText: 'Login Failed : Enter Correct Credentials' })
+      );
+    }
     yield put(loginFailed(error));
   }
 }

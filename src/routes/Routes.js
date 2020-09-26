@@ -9,6 +9,8 @@ import UserProfileUpdateContainer from '../containers/UserProfileUpdateContainer
 import AdminDashboardContainer from '../containers/AdminDashboardContainer';
 import AddProductContainer from '../containers/AddProductContainer';
 import UpdateProductContainer from '../containers/UpdateProductContainer';
+import AdminMainDashboardContainer from '../containers/AdminMainDashboardContainer';
+import AdminUserDashboardContainer from '../containers/AdminUserDashboardContainer';
 
 const Routes = () => {
   return (
@@ -33,7 +35,13 @@ const Routes = () => {
           <UserProfileUpdateContainer />
         </Route>
         <Route path="/admindashboard" exact={true}>
+          <AdminMainDashboardContainer />
+        </Route>
+        <Route path="/admin/products" exact={true}>
           <AdminDashboardContainer />
+        </Route>
+        <Route path="/admin/users" exact={true}>
+          <AdminUserDashboardContainer />
         </Route>
         <Route path="/admin/addproduct" exact={true}>
           <AddProductContainer />

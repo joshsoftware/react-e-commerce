@@ -1,0 +1,12 @@
+.dashboard_button{
+  font-size: 30px;
+  margin-top: 10px;
+  width: 300px;
+}
+.dashboard_row{
+  margin-top: 10%;
+}
+.dash_button{
+  font-weight: bolder;
+  height: 50px;
+}

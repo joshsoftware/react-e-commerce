@@ -9,23 +9,18 @@ import ContainerWrapper from '../components/ContainerWrapper';
 import { getProductList } from '../actions/productListActions';
 import addProductReducer from '../reducers/addProductReducer';
 import updateProductReducer from '../reducers/updateProductReducer';
-import loginReducer from '../reducers/LoginReducer';
-import { setProductAdded, setProductUpdated, setUserDetails } from '../actions/formActions';
+import { setProductAdded, setProductUpdated } from '../actions/formActions';
 import './AdminDashboardContainer.css';
 import alertReducer from '../reducers/alertReducer';
-import { alertLogin, alertMessage } from '../actions/alertActions';
+import { alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
-import logout from '../apis/logoutApi';
 
 const AdminDashboardContainer = () => {
-  const { alert, loginAlert, alertText, loginAlertText } = useSelector(
-    (state) => state.alertReducer
-  );
+  const { alert, alertText } = useSelector((state) => state.alertReducer);
   const alertDispatch = useDispatch(alertReducer);
   const dispatch = useDispatch();
   const addProductDispatch = useDispatch(addProductReducer);
   const updateProductDispatch = useDispatch(updateProductReducer);
-  const loginDispatch = useDispatch(loginReducer);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   addProductDispatch(setProductAdded(false));
@@ -36,7 +31,6 @@ const AdminDashboardContainer = () => {
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertMessage({ alert: false, alertText: '' }));
-      alertDispatch(alertLogin({ alert: false, alertText: '' }));
     }, 2000);
   };
 
@@ -64,12 +58,6 @@ const AdminDashboardContainer = () => {
       timeOutFunction();
     }
   }, [alert]);
-
-  useEffect(() => {
-    if (loginAlert === true) {
-      timeOutFunction();
-    }
-  }, [loginAlert]);
 
   const changeStates = async () => {
     setTimeout(() => {
@@ -101,31 +89,15 @@ const AdminDashboardContainer = () => {
       <AdminProductList key={index} item={product} dispatch={dispatch} />
     ))
   );
-  let logoutVar = (
-    <ButtonWrapper
-      style={'dash_button'}
-      onClick={() => {
-        let token = userDetails.token;
-        logout(token)
-          .then(() => {
-            loginDispatch(setUserDetails({}));
-          })
-          .catch((error) => {
-            console.log('error', error);
-          });
-      }}
-      buttonText={'Logout'}
-    />
-  );
 
   column_content.push(<Link to="/admin/addproduct"> {addButton} </Link>);
-
+  let BackTo = <ButtonWrapper style={'dash_button'} buttonText={'Back-To'} />;
   row_content.push(
     <ColumnWrapper
       data={
-        <Link className={'bg-dark text-white float-left'} to="/login">
+        <Link className={'bg-dark text-white float-left'} to="/admindashboard">
           {' '}
-          {logoutVar}{' '}
+          {BackTo}{' '}
         </Link>
       }
     />
@@ -141,8 +113,8 @@ const AdminDashboardContainer = () => {
           <AlertWrapper
             className="text-center"
             color={alertText === 'Product deleted Successfully' ? 'danger' : 'info'}
-            isOpen={alert || loginAlert}
-            data={alertText === '' ? loginAlertText : alertText}
+            isOpen={alert}
+            data={alertText}
           />
         }
       />
