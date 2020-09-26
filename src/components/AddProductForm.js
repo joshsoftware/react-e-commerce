@@ -185,12 +185,6 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
         <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={true} />
         <FormField formfield={imageUrl} />
         <ButtonWrapper
-          buttonText={'Upload'}
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        />
-        <ButtonWrapper
           buttonText={'Add'}
           onSubmit={(e) => {
             e.preventDefault();
