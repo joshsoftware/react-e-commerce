@@ -17,7 +17,7 @@ import { alertMessage } from '../actions/alertActions';
 import alertReducer from '../reducers/alertReducer';
 
 const AdminProductList = ({ item, dispatch }) => {
-  let { product_title, image_url, product_price, id } = item;
+  let { product_title, image_urls, product_price, id } = item;
   const alertDispatch = useDispatch(alertReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
@@ -50,7 +50,12 @@ const AdminProductList = ({ item, dispatch }) => {
       sm={2}
       lg={2}
       xl={2}
-      data={<CardImgWrapper src={image_url} className="img_fluid img_style" />}
+      data={
+        <CardImgWrapper
+          src={`${process.env.REACT_APP_SERVER_URL}${image_urls[0]}`}
+          className="img_fluid img_style"
+        />
+      }
     />
   );
 
@@ -97,7 +102,7 @@ AdminProductList.propTypes = {
   item: PropTypes.shape({
     discount: PropTypes.number,
     tax: PropTypes.number,
-    image_url: PropTypes.string,
+    image_urls: PropTypes.string,
     product_title: PropTypes.string,
     product_price: PropTypes.number,
     quantity: PropTypes.number,

@@ -13,7 +13,7 @@ const cartObject = (product) => {
     quantity: 1,
     category: product.category,
     description: product.description,
-    image_url: product.image_url,
+    image_urls: product.image_urls,
     product_price: product.product_price,
     discount: product.discount,
     tax: product.tax

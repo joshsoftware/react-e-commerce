@@ -12,7 +12,7 @@ const initialState = {
   category: 'select category',
   color: '',
   size: '',
-  imageUrl: '',
+  imageUrl: null,
   productTitleError: null,
   descriptionError: null,
   productPriceError: null,

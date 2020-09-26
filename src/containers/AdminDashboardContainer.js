@@ -53,7 +53,9 @@ const AdminDashboardContainer = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    setLoading(true);
+    if (productList.length === 0) {
+      setLoading(true);
+    }
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

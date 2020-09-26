@@ -38,7 +38,9 @@ const ProductListContainer = () => {
 
   useEffect(() => {
     dispatch(resetProductList());
-    setLoading(true);
+    if (productList.length === 0) {
+      setLoading(true);
+    }
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
