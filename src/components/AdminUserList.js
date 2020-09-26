@@ -83,12 +83,12 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
           color={'danger'}
           onClick={() => {
             deleteUserApi({ token: userDetails.token, user_id: id })
-              .then((res) => {
+              .then(() => {
                 dispatch(deleteUser(id));
                 setAlertText('User deleted Successfully');
                 setVisible(true);
               })
-              .catch((err) => {
+              .catch(() => {
                 setAlertText('Delete Failed');
                 setVisible(true);
               });
@@ -108,12 +108,12 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
             outline
             onClick={() => {
               enableUserApi({ token: userDetails.token, user_id: id })
-                .then((res) => {
+                .then(() => {
                   dispatch(enableUser(id));
                   setAlertText('Enabled Successfully');
                   setVisible(true);
                 })
-                .catch((err) => {
+                .catch(() => {
                   setAlertText('Enable failed');
                   setVisible(true);
                 });
@@ -133,12 +133,12 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
             outline
             onClick={() => {
               disableUserApi({ token: userDetails.token, user_id: id })
-                .then((res) => {
+                .then(() => {
                   dispatch(disableUser(id));
                   setAlertText('Disabled Successfully');
                   setVisible(true);
                 })
-                .catch((err) => {
+                .catch(() => {
                   setAlertText('Disable failed');
                   setVisible(true);
                 });
