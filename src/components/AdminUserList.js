@@ -16,7 +16,6 @@ import { enableUserApi } from '../apis/userApi';
 import { useSelector } from 'react-redux';
 
 const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
-  console.log(user);
   let { first_name, last_name, id, email, mobile, country, state, city, isDisabled } = user;
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
@@ -88,12 +87,10 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
                 dispatch(deleteUser(id));
                 setAlertText('User deleted Successfully');
                 setVisible(true);
-                console.log('response', res);
               })
               .catch((err) => {
                 setAlertText('Delete Failed');
                 setVisible(true);
-                console.log('error --', err);
               });
           }}
         />
@@ -115,12 +112,10 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
                   dispatch(enableUser(id));
                   setAlertText('Enabled Successfully');
                   setVisible(true);
-                  console.log('response', res);
                 })
                 .catch((err) => {
                   setAlertText('Enable failed');
                   setVisible(true);
-                  console.log('error --', err);
                 });
             }}
           />
@@ -142,12 +137,10 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
                   dispatch(disableUser(id));
                   setAlertText('Disabled Successfully');
                   setVisible(true);
-                  console.log('response', res);
                 })
                 .catch((err) => {
                   setAlertText('Disable failed');
                   setVisible(true);
-                  console.log('error --', err);
                 });
             }}
           />
