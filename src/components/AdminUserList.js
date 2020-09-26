@@ -16,7 +16,7 @@ import { enableUserApi } from '../apis/userApi';
 import { useSelector } from 'react-redux';
 
 const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
-  let { first_name, last_name, id, email, mobile, country, state, city, isDisabled } = user;
+  let { first_name, last_name, id, email, country, state, city, isDisabled } = user;
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
   let i = 0;
@@ -32,9 +32,6 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
   user_details.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Email Id: ' + email} />
   );
-  // user_details.push(
-  //   <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Phone No. : ' + mobile} />
-  // );
   user_location_details.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'City: ' + city} />
   );
@@ -167,7 +164,6 @@ AdminUserList.propTypes = {
     city: PropTypes.string,
     state: PropTypes.string,
     country: PropTypes.string,
-    mobile: PropTypes.number,
     id: PropTypes.number,
     isDisabled: PropTypes.bool
   }),

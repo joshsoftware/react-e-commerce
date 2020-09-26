@@ -41,15 +41,19 @@ const AdminUserDashboardContainer = () => {
   let users = [];
   users.push(<RowWrapper data={row_content} />);
   users.push(
-    userList.map((user, index) => (
-      <AdminUserList
-        key={index}
-        user={user}
-        dispatch={dispatch}
-        setVisible={setVisible}
-        setAlertText={setAlertText}
-      />
-    ))
+    userList.map((user, index) => {
+      if (!user.isAdmin) {
+        return (
+          <AdminUserList
+            key={index}
+            user={user}
+            dispatch={dispatch}
+            setVisible={setVisible}
+            setAlertText={setAlertText}
+          />
+        );
+      }
+    })
   );
 
   column_content.push(<h1>USERS DETAILS</h1>);

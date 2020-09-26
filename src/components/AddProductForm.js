@@ -155,7 +155,7 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
   row_content.push(
     <ColumnWrapper
       data={
-        <Link className={'bg-dark text-white float-left'} to="/admindashboard">
+        <Link className={'bg-dark text-white float-left'} to="/admin/products">
           {' '}
           {BackTo}{' '}
         </Link>

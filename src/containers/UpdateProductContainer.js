@@ -153,7 +153,7 @@ const UpdateProductContainer = () => {
   };
 
   if (updateProductState.productUpdated) {
-    return <Redirect to="/admindashboard" />;
+    return <Redirect to="/admin/products" />;
   }
 
   return (
