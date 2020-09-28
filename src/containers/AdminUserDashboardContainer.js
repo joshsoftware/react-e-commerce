@@ -52,7 +52,15 @@ const AdminUserDashboardContainer = () => {
           });
         });
       } else {
-        userInvite(email, userDetails.token);
+        userInvite(email, userDetails.token)
+        .then(() => {
+          setAlertText('User Invited');
+          setVisible(true);
+        })
+        .catch(() => {
+          setAlertText('Invitation Failed');
+          setVisible(true);
+        })
         setEmail('');
       }
     });
@@ -92,12 +100,7 @@ const AdminUserDashboardContainer = () => {
             lg={9}
             md={8}
             data={
-              <Form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  validateData();
-                  // alertDispatch(alertRegistration({ alert: true, alertText: 'Successfully Registered' }));
-                }}>
+              <Form>
                 <FormGroup row>
                   <Label for={emailObj.field} sm={2}>
                     {emailObj.labelText}
@@ -114,17 +117,14 @@ const AdminUserDashboardContainer = () => {
                     <FormFeedback>{emailObj.message}</FormFeedback>
                   </Col>
                 </FormGroup>
-                {/* <FormField formfield={emailObj} /> */}
               </Form>
             }
           />
           <ColumnWrapper
             data={
               <ButtonWrapper
-                // className={{float: 'right'}}
                 buttonText={'Invite'}
-                onSubmit={(e) => {
-                  e.preventDefault();
+                onClick={() => {
                   validateData();
                 }}
               />
@@ -171,7 +171,8 @@ const AdminUserDashboardContainer = () => {
               alertText === 'User deleted Successfully' ||
               alertText === 'Disable failed' ||
               alertText === 'Enable failed' ||
-              alertText === 'Delete Failed'
+              alertText === 'Delete Failed' ||
+              alertText === 'Invitation Failed'
                 ? 'danger'
                 : 'info'
             }
