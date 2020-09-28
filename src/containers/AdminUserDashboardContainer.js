@@ -9,12 +9,54 @@ import ContainerWrapper from '../components/ContainerWrapper';
 import { getUserList } from '../actions/userListActions';
 import './AdminDashboardContainer.css';
 import AlertWrapper from '../components/AlertWrapper';
+import { Form, FormFeedback, FormGroup, Label, Col, Input } from 'reactstrap';
+import * as yup from 'yup';
+import { userInvite } from '../apis/userApi';
+
+let emailObj = {
+  field: 'exampleEmail',
+  labelText: 'Email',
+  type: 'email',
+  name: 'email',
+  placeholder: 'example@company.com'
+};
 
 const AdminUserDashboardContainer = () => {
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.loginReducer);
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState(null);
+
+  emailObj = {
+    ...emailObj,
+    value: email,
+    onChange: (evt) => {
+      setEmail(evt.target.value);
+    },
+    invalid: emailError !== null ? true : false,
+    message: emailError
+  };
+  let schema = yup.object().shape({
+    email: yup.string().email()
+  });
+
+  const validateData = () => {
+    setEmailError(null);
+    schema.isValid({ email }).then(function (valid) {
+      if (!valid) {
+        schema.validate({ email }, { abortEarly: false }).catch((err) => {
+          err.inner.forEach((ele) => {
+            setEmailError(ele.message);
+          });
+        });
+      } else {
+        userInvite(email, userDetails.token);
+        setEmail('')
+      }
+    });
+  };
 
   const timeOutFunction = async () => {
     setTimeout(() => {
@@ -40,6 +82,45 @@ const AdminUserDashboardContainer = () => {
   let row_content = [];
   let users = [];
   users.push(<RowWrapper data={row_content} />);
+  users.push(
+    <RowWrapper data={
+      <>
+        <ColumnWrapper xs={8} sm={8} lg={9} md={8} data={
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              validateData();
+              // alertDispatch(alertRegistration({ alert: true, alertText: 'Successfully Registered' }));
+            }}>
+            <FormGroup row>
+              <Label for={emailObj.field} sm={2}>{emailObj.labelText}</Label>
+              <Col sm={10}>
+                <Input 
+                  type={emailObj.type}
+                  name={emailObj.name}
+                  placeholder={emailObj.placeholder}
+                  value={emailObj.value}
+                  onChange={emailObj.onChange} 
+                  placeholder={emailObj.placeholder} 
+                  invalid={emailObj.invalid}
+                />
+                <FormFeedback>{emailObj.message}</FormFeedback>
+              </Col>
+            </FormGroup>
+            {/* <FormField formfield={emailObj} /> */}
+          </Form> 
+        }/>  
+        <ColumnWrapper data={
+          <ButtonWrapper
+            // className={{float: 'right'}} 
+            buttonText={'Invite'} 
+            onSubmit={(e) => {
+              e.preventDefault();
+              validateData();
+            }}/>
+        }/>
+      </>
+  }/>)
   users.push(
     userList.map((user, index) => (
       <AdminUserList

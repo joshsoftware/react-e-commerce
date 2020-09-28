@@ -1,4 +1,6 @@
 import axios from 'axios';
+import apiHelper from './apiHelper';
+
 export const getUserListApi = (token) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
@@ -47,4 +49,19 @@ export const disableUserApi = ({ token, user_id }) => {
     url: `${process.env.REACT_APP_SERVER_URL}user/disable/${user_id}`,
     headers: headers
   });
+};
+
+export const userInvite = ( email, token ) => {
+  const headers = {
+    Accept: 'application/vnd.e-commerce.v1',
+    Token: token
+  };
+  return apiHelper(
+    'post',
+    `${process.env.REACT_APP_SERVER_URL}invite`,
+    {
+      email
+    },
+    headers
+  );
 };
