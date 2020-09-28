@@ -53,7 +53,7 @@ const AdminUserDashboardContainer = () => {
         });
       } else {
         userInvite(email, userDetails.token);
-        setEmail('')
+        setEmail('');
       }
     });
   };
@@ -83,44 +83,57 @@ const AdminUserDashboardContainer = () => {
   let users = [];
   users.push(<RowWrapper data={row_content} />);
   users.push(
-    <RowWrapper data={
-      <>
-        <ColumnWrapper xs={8} sm={8} lg={9} md={8} data={
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-              validateData();
-              // alertDispatch(alertRegistration({ alert: true, alertText: 'Successfully Registered' }));
-            }}>
-            <FormGroup row>
-              <Label for={emailObj.field} sm={2}>{emailObj.labelText}</Label>
-              <Col sm={10}>
-                <Input 
-                  type={emailObj.type}
-                  name={emailObj.name}
-                  placeholder={emailObj.placeholder}
-                  value={emailObj.value}
-                  onChange={emailObj.onChange} 
-                  placeholder={emailObj.placeholder} 
-                  invalid={emailObj.invalid}
-                />
-                <FormFeedback>{emailObj.message}</FormFeedback>
-              </Col>
-            </FormGroup>
-            {/* <FormField formfield={emailObj} /> */}
-          </Form> 
-        }/>  
-        <ColumnWrapper data={
-          <ButtonWrapper
-            // className={{float: 'right'}} 
-            buttonText={'Invite'} 
-            onSubmit={(e) => {
-              e.preventDefault();
-              validateData();
-            }}/>
-        }/>
-      </>
-  }/>)
+    <RowWrapper
+      data={
+        <>
+          <ColumnWrapper
+            xs={8}
+            sm={8}
+            lg={9}
+            md={8}
+            data={
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  validateData();
+                  // alertDispatch(alertRegistration({ alert: true, alertText: 'Successfully Registered' }));
+                }}>
+                <FormGroup row>
+                  <Label for={emailObj.field} sm={2}>
+                    {emailObj.labelText}
+                  </Label>
+                  <Col sm={10}>
+                    <Input
+                      type={emailObj.type}
+                      name={emailObj.name}
+                      placeholder={emailObj.placeholder}
+                      value={emailObj.value}
+                      onChange={emailObj.onChange}
+                      invalid={emailObj.invalid}
+                    />
+                    <FormFeedback>{emailObj.message}</FormFeedback>
+                  </Col>
+                </FormGroup>
+                {/* <FormField formfield={emailObj} /> */}
+              </Form>
+            }
+          />
+          <ColumnWrapper
+            data={
+              <ButtonWrapper
+                // className={{float: 'right'}}
+                buttonText={'Invite'}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  validateData();
+                }}
+              />
+            }
+          />
+        </>
+      }
+    />
+  );
   users.push(
     userList.map((user, index) => (
       <AdminUserList

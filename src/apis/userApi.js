@@ -51,7 +51,7 @@ export const disableUserApi = ({ token, user_id }) => {
   });
 };
 
-export const userInvite = ( email, token ) => {
+export const userInvite = (email, token) => {
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token
