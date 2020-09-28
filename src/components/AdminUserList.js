@@ -16,7 +16,7 @@ import { enableUserApi } from '../apis/userApi';
 import { useSelector } from 'react-redux';
 
 const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
-  let { first_name, last_name, id, email, mobile, country, state, city, isDisabled } = user;
+  let { first_name, last_name, id, email, country, state, city, isDisabled } = user;
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
   let i = 0;

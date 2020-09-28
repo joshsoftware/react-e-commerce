@@ -53,14 +53,14 @@ const AdminUserDashboardContainer = () => {
         });
       } else {
         userInvite(email, userDetails.token)
-        .then(() => {
-          setAlertText('User Invited');
-          setVisible(true);
-        })
-        .catch(() => {
-          setAlertText('Invitation Failed');
-          setVisible(true);
-        })
+          .then(() => {
+            setAlertText('User Invited');
+            setVisible(true);
+          })
+          .catch(() => {
+            setAlertText('Invitation Failed');
+            setVisible(true);
+          });
         setEmail('');
       }
     });

@@ -28,7 +28,6 @@ export const enableUser = (user_id) => {
   };
 };
 export const disableUser = (user_id) => {
-  console.log('kjfhd', user_id);
   return {
     type: USER_LIST_REDUCER.DISABLE_USER,
     value: user_id
