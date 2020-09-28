@@ -102,7 +102,7 @@ AdminProductList.propTypes = {
   item: PropTypes.shape({
     discount: PropTypes.number,
     tax: PropTypes.number,
-    image_urls: PropTypes.string,
+    image_urls: PropTypes.array,
     product_title: PropTypes.string,
     product_price: PropTypes.number,
     quantity: PropTypes.number,

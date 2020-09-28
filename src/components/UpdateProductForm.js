@@ -64,7 +64,7 @@ let productTitle = {
   },
   imageUrl = {
     field: 'exampleFile',
-    labelText: 'Choose Product Image!!',
+    labelText: 'Choose a File* [.jpg, .png, .jpeg, .gif, .webp] only',
     type: 'file',
     name: 'file',
     placeholder: '**.**'
@@ -156,7 +156,7 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
   row_content.push(
     <ColumnWrapper
       data={
-        <Link className={'bg-dark text-white float-left'} to="/admindashboard">
+        <Link className={'bg-dark text-white float-left'} to="/admin/products">
           {' '}
           {BackTo}{' '}
         </Link>

@@ -151,7 +151,7 @@ const AddProductContainer = () => {
       });
   };
   if (addProductState.productAdded) {
-    return <Redirect to="/admindashboard" />;
+    return <Redirect to="/admin/products" />;
   }
   return (
     <AddProductComponent

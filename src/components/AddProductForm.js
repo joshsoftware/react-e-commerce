@@ -155,7 +155,7 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
   row_content.push(
     <ColumnWrapper
       data={
-        <Link className={'bg-dark text-white float-left'} to="/admindashboard">
+        <Link className={'bg-dark text-white float-left'} to="/admin/products">
           {' '}
           {BackTo}{' '}
         </Link>
@@ -184,12 +184,6 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
         <FormField formfield={brand} />
         <ProductCategoryContainer dispatch={dispatch} formState={formState} isRequired={true} />
         <FormField formfield={imageUrl} />
-        <ButtonWrapper
-          buttonText={'Upload'}
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        />
         <ButtonWrapper
           buttonText={'Add'}
           onSubmit={(e) => {

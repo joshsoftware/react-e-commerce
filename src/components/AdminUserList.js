@@ -32,9 +32,6 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
   user_details.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Email Id: ' + email} />
   );
-  // user_details.push(
-  //   <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Phone No. : ' + mobile} />
-  // );
   user_location_details.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'City: ' + city} />
   );
@@ -167,7 +164,6 @@ AdminUserList.propTypes = {
     city: PropTypes.string,
     state: PropTypes.string,
     country: PropTypes.string,
-    mobile: PropTypes.number,
     id: PropTypes.number,
     isDisabled: PropTypes.bool
   }),
