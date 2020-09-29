@@ -57,8 +57,12 @@ const AdminUserDashboardContainer = () => {
             setAlertText('User Invited');
             setVisible(true);
           })
-          .catch(() => {
-            setAlertText('Invitation Failed');
+          .catch((err) => {
+            if (err == 'Error: Request failed with status code 409') {
+              setAlertText('User already registered');
+            } else {
+              setAlertText('Invitation Failed');
+            }
             setVisible(true);
           });
         setEmail('');
@@ -176,7 +180,8 @@ const AdminUserDashboardContainer = () => {
               alertText === 'Disable failed' ||
               alertText === 'Enable failed' ||
               alertText === 'Delete Failed' ||
-              alertText === 'Invitation Failed'
+              alertText === 'Invitation Failed' ||
+              alertText === 'User already registered'
                 ? 'danger'
                 : 'info'
             }

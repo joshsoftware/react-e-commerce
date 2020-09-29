@@ -54,11 +54,13 @@ export const userInvite = (email, token) => {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token
   };
+  let email_ar = [];
+  email_ar.push(email);
   return apiHelper(
     'post',
     `${process.env.REACT_APP_SERVER_URL}invite`,
     {
-      email
+      email: email_ar
     },
     headers
   );
