@@ -15,6 +15,8 @@ import RowWrapper from './RowWrapper';
 import alertReducer from '../reducers/alertReducer';
 import { alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
+import ColumnWrapper from './ColumnWrapper';
+import ImageComponent from './ImageComponent';
 
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
@@ -74,11 +76,37 @@ const UserProfile = () => {
   userprofile_content.push(
     <AlertWrapper className="text-center fixed-top" color="info" isOpen={alert} data={alertText} />
   );
+  const profileImage =
+    profile.profile_image !== ''
+      ? `${process.env.REACT_APP_SERVER_URL}${profile.profile_image}`
+      : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
   return (
     <>
       <NavigationBarComponent className="navClass fixed-top" expand="md" />
       <CartHeader header={`Welcome ${profile.first_name} ${profile.last_name}`} />
-      <ContainerWrapper data={userprofile_content} />
+      <ContainerWrapper
+        data={
+          <RowWrapper
+            data={
+              <>
+                <ColumnWrapper
+                  xs={9}
+                  sm={9}
+                  lg={9}
+                  className={'pl-0 ml-0'}
+                  data={userprofile_content}
+                />
+                <ColumnWrapper
+                  xs={3}
+                  sm={3}
+                  lg={3}
+                  data={<ImageComponent src={profileImage} alt="profile image" />}
+                />
+              </>
+            }
+          />
+        }
+      />
 
       <Footer />
     </>

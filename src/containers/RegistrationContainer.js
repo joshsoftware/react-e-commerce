@@ -23,7 +23,17 @@ const RegistrationContainer = () => {
   }, []);
   const alertDispatch = useDispatch(alertReducer);
   const registrationState = useSelector((state) => state.registrationReducer);
-  const { firstname, lastname, email, password, country, state, city, address } = registrationState;
+  const {
+    firstname,
+    lastname,
+    email,
+    password,
+    country,
+    state,
+    city,
+    address,
+    imageUrl
+  } = registrationState;
   const schema = yup.object().shape({
     firstname: yup.string().required(),
     lastname: yup.string(),
@@ -32,19 +42,48 @@ const RegistrationContainer = () => {
     country: yup.string(),
     state: yup.string(),
     city: yup.string(),
-    address: yup.string()
+    address: yup.string(),
+    imageUrl: yup
+      .mixed()
+      .required()
+      .test('extension', 'allowed files jpg, jpeg, gif, webp, png', (value) => {
+        let array = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/webp'];
+        if (value !== null) {
+          return array.includes(value.type);
+        }
+      })
   });
 
   const validateData = () => {
     dispatch(setIsLoading(true));
     dispatch(resetErrors());
     schema
-      .isValid({ firstname, lastname, email, password, country, state, city, address })
+      .isValid({
+        firstname,
+        lastname,
+        email,
+        password,
+        country,
+        state,
+        city,
+        address,
+        imageUrl
+      })
       .then(function (valid) {
         if (!valid) {
           schema
             .validate(
-              { firstname, lastname, email, password, country, state, city, address },
+              {
+                firstname,
+                lastname,
+                email,
+                password,
+                country,
+                state,
+                city,
+                address,
+                imageUrl
+              },
               { abortEarly: false }
             )
             .catch((err) => {
@@ -75,7 +114,8 @@ const RegistrationContainer = () => {
               form_country,
               form_state,
               form_city,
-              address
+              address,
+              imageUrl
             })
           );
           dispatch(resetState());

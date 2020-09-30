@@ -22,15 +22,14 @@ const LoginContainer = () => {
     (state) => state.alertReducer
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(resetState());
-  }, []);
   const alertDispatch = useDispatch(alertReducer);
   const registrationDispatch = useDispatch(registrationReducer);
   registrationDispatch(setRegistered(false));
   const result = useSelector((state) => state.loginReducer);
   const { email, password, userDetails } = result;
-
+  useEffect(() => {
+    dispatch(resetState());
+  }, []);
   let schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required()

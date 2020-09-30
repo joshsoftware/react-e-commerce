@@ -16,7 +16,16 @@ const UserProfileUpdateContainer = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
-  const { firstname, lastname, password, country, state, city, address } = userprofileupdatestate;
+  const {
+    firstname,
+    lastname,
+    password,
+    country,
+    state,
+    city,
+    address,
+    imageUrl
+  } = userprofileupdatestate;
 
   const schema = yup.object().shape({
     firstname: yup.string(),
@@ -29,18 +38,27 @@ const UserProfileUpdateContainer = () => {
       }
     }),
     city: yup.string(),
-    address: yup.string()
+    address: yup.string(),
+    imageUrl: yup
+      .mixed()
+      .required()
+      .test('extension', 'allowed files jpg, jpeg, gif, webp, png', (value) => {
+        let array = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/webp'];
+        if (value !== null) {
+          return array.includes(value.type);
+        }
+      })
   });
 
   const validateData = () => {
     dispatch(resetErrors());
     schema
-      .isValid({ firstname, lastname, password, country, state, city, address })
+      .isValid({ firstname, lastname, password, country, state, city, address, imageUrl })
       .then(function (valid) {
         if (!valid) {
           schema
             .validate(
-              { firstname, lastname, password, country, state, city, address },
+              { firstname, lastname, password, country, state, city, address, imageUrl },
               { abortEarly: false }
             )
             .catch((err) => {
@@ -70,6 +88,7 @@ const UserProfileUpdateContainer = () => {
               form_city,
               password,
               address,
+              imageUrl,
               token
             })
           );
