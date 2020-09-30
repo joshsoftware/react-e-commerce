@@ -9,7 +9,7 @@ const initialState = {
   state: 'select state',
   city: 'select city',
   address: '',
-  imageUrl: null,
+  imageUrl: '',
   firstnameError: null,
   lastnameError: null,
   emailError: null,

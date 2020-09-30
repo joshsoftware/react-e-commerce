@@ -43,13 +43,15 @@ const RegistrationContainer = () => {
     state: yup.string(),
     city: yup.string(),
     address: yup.string(),
-    imageUrl: yup.mixed().test('extension', 'allowed files jpg, jpeg, webp, png', (value) => {
-      let array = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
-      if (value !== null) {
-        return array.includes(value.type);
-      }
-      return true;
-    })
+    imageUrl: yup
+      .mixed()
+      .required()
+      .test('extension', 'allowed files jpg, jpeg, webp, png', (value) => {
+        let array = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
+        if (value !== '') {
+          return array.includes(value.type);
+        }
+      })
   });
 
   const validateData = () => {

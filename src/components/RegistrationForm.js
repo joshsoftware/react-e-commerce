@@ -15,7 +15,7 @@ import { setField } from '../actions/formActions';
 
 let imageUrl = {
   field: 'exampleImageURL',
-  labelText: 'Profile Picture [.jpg, .png, .jpeg, .webp]',
+  labelText: 'Profile Picture* [.jpg, .png, .jpeg, .webp]',
   type: 'file',
   name: 'file',
   placeholder: '**.**'
