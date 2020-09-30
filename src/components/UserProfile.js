@@ -17,7 +17,7 @@ import { alertMessage } from '../actions/alertActions';
 import AlertWrapper from '../components/AlertWrapper';
 import ColumnWrapper from './ColumnWrapper';
 import ImageComponent from './ImageComponent';
-
+import './CartItem.css';
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { profile } = useSelector((state) => state.userprofileReducer);
@@ -100,7 +100,13 @@ const UserProfile = () => {
                   xs={3}
                   sm={3}
                   lg={3}
-                  data={<ImageComponent src={profileImage} alt="profile image" />}
+                  data={
+                    <ImageComponent
+                      src={profileImage}
+                      className={'image_size'}
+                      alt="profile image"
+                    />
+                  }
                 />
               </>
             }

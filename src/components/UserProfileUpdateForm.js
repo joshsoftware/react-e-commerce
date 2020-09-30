@@ -13,7 +13,7 @@ import { setField } from '../actions/formActions';
 
 let imageUrl = {
   field: 'exampleImageURL',
-  labelText: 'Profile Picture* [.jpg, .png, .jpeg, .webp]',
+  labelText: 'Profile Picture [.jpg, .png, .jpeg, .webp]',
   type: 'file',
   name: 'file',
   placeholder: '**.**'
@@ -74,6 +74,7 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
           dispatch={dispatch}
         />
         <FormDropdownField country={country} state={state} city={city} dispatch={dispatch} />
+        <br></br>
         <FormField formfield={imageUrl} />
         <br />
         <ButtonWrapper

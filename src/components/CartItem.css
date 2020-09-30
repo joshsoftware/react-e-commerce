@@ -54,3 +54,8 @@
 .update_profile {
     margin-top: 120px;
 }
+
+.image_size {
+    width: 200px;
+    height: 200px;
+}
