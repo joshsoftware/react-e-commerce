@@ -8,7 +8,16 @@ import FormDropdownField from './FormDropdownField';
 import alertReducer from '../reducers/alertReducer';
 import { useDispatch } from 'react-redux';
 import { alertMessage } from '../actions/alertActions';
+import FormField from './FormField';
+import { setField } from '../actions/formActions';
 
+let imageUrl = {
+  field: 'exampleImageURL',
+  labelText: 'Profile Picture* [.jpg, .png, .jpeg, .webp]',
+  type: 'file',
+  name: 'file',
+  placeholder: '**.**'
+};
 const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
   const alertDispatch = useDispatch(alertReducer);
   const {
@@ -24,7 +33,20 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
     passwordError,
     addressError
   } = formState;
-
+  const uploadImage = (e) => {
+    const files = e.target.files;
+    let data1 = new FormData();
+    data1.append('file', files[0]);
+    dispatch(setField('imageUrl', data1.get('file')));
+  };
+  imageUrl = {
+    ...imageUrl,
+    onChange: (evt) => {
+      uploadImage(evt);
+    },
+    invalid: formState.imageUrlError !== null ? true : false,
+    message: formState.imageUrlError
+  };
   return (
     <>
       <h3>Update User Profile</h3>
@@ -52,6 +74,7 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
           dispatch={dispatch}
         />
         <FormDropdownField country={country} state={state} city={city} dispatch={dispatch} />
+        <FormField formfield={imageUrl} />
         <br />
         <ButtonWrapper
           buttonText={'Update'}

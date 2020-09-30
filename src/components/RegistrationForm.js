@@ -10,6 +10,16 @@ import FormDropdownField from './FormDropdownField';
 import alertReducer from '../reducers/alertReducer';
 import { useDispatch } from 'react-redux';
 import { alertRegistration } from '../actions/alertActions';
+import FormField from './FormField';
+import { setField } from '../actions/formActions';
+
+let imageUrl = {
+  field: 'exampleImageURL',
+  labelText: 'Profile Picture* [.jpg, .png, .jpeg, .webp]',
+  type: 'file',
+  name: 'file',
+  placeholder: '**.**'
+};
 
 const RegistrationForm = ({ validateData, dispatch, formState }) => {
   const {
@@ -28,6 +38,21 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     addressError,
     isLoading
   } = formState;
+  const uploadImage = (e) => {
+    const files = e.target.files;
+    let data1 = new FormData();
+    data1.append('file', files[0]);
+    dispatch(setField('imageUrl', data1.get('file')));
+  };
+
+  imageUrl = {
+    ...imageUrl,
+    onChange: (evt) => {
+      uploadImage(evt);
+    },
+    invalid: formState.imageUrlError !== null ? true : false,
+    message: formState.imageUrlError
+  };
   const alertDispatch = useDispatch(alertReducer);
   return (
     <>
@@ -62,6 +87,7 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
           isRequired={true}
         />
         <FormDropdownField country={country} state={state} city={city} dispatch={dispatch} />
+        <FormField formfield={imageUrl} />
         <br />
         <ButtonWrapper
           buttonText={'Register'}

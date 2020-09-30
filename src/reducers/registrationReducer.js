@@ -9,11 +9,13 @@ const initialState = {
   state: 'select state',
   city: 'select city',
   address: '',
+  imageUrl: null,
   firstnameError: null,
   lastnameError: null,
   emailError: null,
   passwordError: null,
   addressError: null,
+  imageUrlError: null,
   isLoading: false,
   registered: false
 };
@@ -27,7 +29,8 @@ const registrationReducer = (state = initialState, action) => {
         lastnameError: null,
         emailError: null,
         passwordError: null,
-        addressError: null
+        addressError: null,
+        imageUrlError: null
       };
     }
     case FORM_ACTIONS.RESET_STATE:
@@ -48,6 +51,8 @@ const registrationReducer = (state = initialState, action) => {
       return { ...state, city: action.value };
     case FORM_ACTIONS.SET_ADDRESS:
       return { ...state, address: action.value };
+    case FORM_ACTIONS.SET_IMAGE_URL:
+      return { ...state, imageUrl: action.value };
     case FORM_ACTIONS.SET_ISLOADING:
       return { ...state, isLoading: action.value };
     case FORM_ACTIONS.SET_REGISTERED:
@@ -62,6 +67,8 @@ const registrationReducer = (state = initialState, action) => {
       return { ...state, passwordError: action.value };
     case FORM_ACTIONS.SET_ADDRESS_ERROR:
       return { ...state, addressError: action.value };
+    case FORM_ACTIONS.SET_IMAGEURL_ERROR:
+      return { ...state, imageUrlError: action.value };
     case FORM_ACTIONS.SET_FIELD: {
       return {
         ...state,

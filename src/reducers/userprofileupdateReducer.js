@@ -8,10 +8,12 @@ const initialState = {
   state: 'select state',
   city: 'select city',
   address: '',
+  imageUrl: null,
   firstnameError: null,
   lastnameError: null,
   passwordError: null,
   addressError: null,
+  imageUrlError: null,
   isLoading: false,
   updated: false
 };
@@ -43,6 +45,8 @@ const userprofileupdateReducer = (state = initialState, action) => {
       return { ...state, city: action.value };
     case FORM_ACTIONS.SET_ADDRESS:
       return { ...state, address: action.value };
+    case FORM_ACTIONS.SET_IMAGE_URL:
+      return { ...state, imageUrl: action.value };
     case FORM_ACTIONS.SET_ISLOADING:
       return { ...state, isLoading: action.value };
     case FORM_ACTIONS.SET_UPDATED:
@@ -59,6 +63,8 @@ const userprofileupdateReducer = (state = initialState, action) => {
       return { ...state, passwordError: action.value };
     case FORM_ACTIONS.SET_ADDRESS_ERROR:
       return { ...state, addressError: action.value };
+    case FORM_ACTIONS.SET_IMAGEURL_ERROR:
+      return { ...state, imageUrlError: action.value };
     case FORM_ACTIONS.SET_FIELD: {
       return {
         ...state,

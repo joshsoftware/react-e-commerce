@@ -6,9 +6,7 @@ import { setUserList } from '../actions/userListActions';
 function* usersWorkerSaga(action) {
   try {
     const { data } = yield call(getUserListApi, action.value);
-    console.log('Saga', data);
     yield put(setUserList(data));
-    console.log('Users', data);
   } catch (error) {
     console.log('error', error);
   }

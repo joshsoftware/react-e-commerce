@@ -12,7 +12,6 @@ export const getUserListApi = (token) => {
 };
 
 export const deleteUserApi = ({ token, user_id }) => {
-  console.log('User Id', user_id);
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token
@@ -37,7 +36,6 @@ export const enableUserApi = ({ token, user_id }) => {
 };
 
 export const disableUserApi = ({ token, user_id }) => {
-  console.log('Id', user_id);
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token
