@@ -16,6 +16,7 @@ const updateProduct = ({
   imageUrl,
   token
 }) => {
+  console.log('Token', token);
   let product_title = productTitle,
     product_price = productPrice,
     category_id = categoryId;

@@ -5,9 +5,6 @@ import { Form } from 'reactstrap';
 import PropTypes from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
 import { setField } from '../actions/formActions';
-import { useDispatch } from 'react-redux';
-import alertReducer from '../reducers/alertReducer';
-import { alertMessage } from '../actions/alertActions';
 import RowWrapper from '../components/RowWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
 import { Link } from 'react-router-dom';
@@ -167,8 +164,6 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
     invalid: formState.imageUrlError !== null ? true : false,
     message: formState.imageUrlError
   };
-  const alertDispatch = useDispatch(alertReducer);
-
   let row_content = [];
   let BackTo = <ButtonWrapper style={'dash_button'} buttonText={'Back-To'} />;
   row_content.push(
@@ -192,7 +187,6 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
-          alertDispatch(alertMessage({ alert: true, alertText: 'Product Added Successfully' }));
         }}>
         <FormField formfield={productTitle} />
         <FormField formfield={description} />

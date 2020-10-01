@@ -6,12 +6,28 @@ import AddProductComponent from '../components/AddProductComponent';
 import { setErrors, resetErrors, addProductRequest, resetState } from '../actions/formActions';
 import productListReducer from '../reducers/productListReducer';
 import { resetProductList } from '../actions/productListActions';
+import ContainerWrapper from '../components/ContainerWrapper';
+import AlertWrapper from '../components/AlertWrapper';
+import alertReducer from '../reducers/alertReducer';
+import { alertMessage } from '../actions/alertActions';
 
 const AddProductContainer = () => {
+  const { alert, alertText } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
+  const alertDispatch = useDispatch(alertReducer);
   useEffect(() => {
     dispatch(resetState());
   }, []);
+  const timeOutFunction = async () => {
+    setTimeout(() => {
+      alertDispatch(alertMessage({ alert: false, alertText: '' }));
+    }, 2000);
+  };
+  useEffect(() => {
+    if (alert === true) {
+      timeOutFunction();
+    }
+  }, [alert]);
   const productListDispatch = useDispatch(productListReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   const addProductState = useSelector((state) => state.addProductReducer);
@@ -168,11 +184,23 @@ const AddProductContainer = () => {
     return <Redirect to="/admin/products" />;
   }
   return (
-    <AddProductComponent
-      validateData={validateData}
-      dispatch={dispatch}
-      formState={addProductState}
-    />
+    <>
+      <AlertWrapper
+        className="text-center fixed-top"
+        color={'danger'}
+        isOpen={alert}
+        data={alertText}
+      />
+      <ContainerWrapper
+        data={
+          <AddProductComponent
+            validateData={validateData}
+            dispatch={dispatch}
+            formState={addProductState}
+          />
+        }
+      />
+    </>
   );
 };
 
