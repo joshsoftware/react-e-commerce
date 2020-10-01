@@ -60,7 +60,7 @@ const updateProduct = ({
   }
   return apiHelper(
     'put',
-    `${process.env.REACT_APP_SERVER_URL}product1/${updateProductId}`,
+    `${process.env.REACT_APP_SERVER_URL}product/${updateProductId}`,
     data,
     headers
   );
