@@ -41,8 +41,12 @@ const AdminUserDashboardContainer = () => {
   let schema = yup.object().shape({
     email: yup.string().email()
   });
-
+  const [invited, setInvited] = useState(false);
+  useEffect(() => {
+    setInvited(true);
+  }, []);
   const validateData = () => {
+    setInvited(false);
     setEmailError(null);
     schema.isValid({ email }).then(function (valid) {
       if (!valid) {
@@ -56,8 +60,10 @@ const AdminUserDashboardContainer = () => {
           .then(() => {
             setAlertText('User Invited');
             setVisible(true);
+            setInvited(true);
           })
           .catch((err) => {
+            setInvited(true);
             if (err == 'Error: Request failed with status code 409') {
               setAlertText('User Already Registered');
             } else if (
@@ -89,7 +95,8 @@ const AdminUserDashboardContainer = () => {
 
   useEffect(() => {
     dispatch(getUserList(userDetails.token));
-  }, []);
+    setInvited(false);
+  }, [invited]);
 
   const { userList } = useSelector((state) => state.userListReducer);
   if (!userDetails.token) {
