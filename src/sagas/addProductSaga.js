@@ -2,14 +2,24 @@ import { FORM_ACTIONS } from '../shared/actionConstants';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { addProduct } from '../apis/addProductAPI';
 import { setProductAdded } from '../actions/formActions';
+import { alertMessage } from '../actions/alertActions';
 
 //worker saga
 function* addProductWorkerSaga(action) {
   try {
     yield call(addProduct, action.value);
+    yield put(alertMessage({ alert: true, alertText: 'Product Added Successfully' }));
     yield put(setProductAdded(true));
   } catch (error) {
-    console.log('error', error);
+    if (error == 'Error: Request failed with status code 400') {
+      yield put(alertMessage({ alert: true, alertText: 'Bad Request' }));
+    } else if (error == 'Error: Request failed with status code 401') {
+      yield put(alertMessage({ alert: true, alertText: 'Unauthorised Access' }));
+    } else if (error == 'Error: Request failed with status code 404') {
+      yield put(alertMessage({ alert: true, alertText: 'Page Not Found' }));
+    } else {
+      yield put(alertMessage({ alert: true, alertText: 'Internal Server Error' }));
+    }
   }
 }
 

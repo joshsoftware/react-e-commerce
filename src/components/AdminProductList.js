@@ -73,9 +73,22 @@ const AdminProductList = ({ item, dispatch }) => {
           outline
           color={'danger'}
           onClick={() => {
-            deleteProductApi({ token: userDetails.token, product_id: id });
-            dispatch(deleteProduct(id));
-            alertDispatch(alertMessage({ alert: true, alertText: 'Product deleted Successfully' }));
+            deleteProductApi({ token: userDetails.token, product_id: id })
+              .then(() => {
+                dispatch(deleteProduct(id));
+                alertDispatch(
+                  alertMessage({ alert: true, alertText: 'Product deleted Successfully' })
+                );
+              })
+              .catch((err) => {
+                if (err == 'Error: Request failed with status code 404') {
+                  alertDispatch(alertMessage({ alert: true, alertText: 'Bad Request' }));
+                } else if (err == 'Error: Request failed with status code 401') {
+                  alertDispatch(alertMessage({ alert: true, alertText: 'Unauthorised' }));
+                } else {
+                  alertDispatch(alertMessage({ alert: true, alertText: 'Internal Server Error' }));
+                }
+              });
           }}
         />
       }

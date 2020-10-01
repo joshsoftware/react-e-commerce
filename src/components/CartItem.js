@@ -100,15 +100,28 @@ const CartItem = ({ item, dispatch }) => {
           outline
           color={'danger'}
           onClick={() => {
-            alertDispatch(
-              alertMessage({
-                alert: true,
-                alertText: product_title + '... was removed from Shopping Cart'
+            deleteCartItemApi({ token: userDetails.token, product_id: id })
+              .then(() => {
+                updateProductStockApi({ product_id: id, stock: -quantity });
+                dispatch(deleteCartItem(id));
+                alertDispatch(
+                  alertMessage({
+                    alert: true,
+                    alertText: product_title + '... was removed from Shopping Cart'
+                  })
+                );
               })
-            );
-            deleteCartItemApi({ token: userDetails.token, product_id: id });
-            updateProductStockApi({ product_id: id, stock: -quantity });
-            dispatch(deleteCartItem(id));
+              .catch((err) => {
+                if (err == 'Error: Request failed with status code 404') {
+                  alertDispatch(alertMessage({ alert: true, alertText: 'Bad Request' }));
+                } else if (err == 'Error: Request failed with status code 401') {
+                  alertDispatch(alertMessage({ alert: true, alertText: 'Unauthorised' }));
+                } else if (err == 'Error: Request failed with status code 403') {
+                  alertDispatch(alertMessage({ alert: true, alertText: 'Forbidden' }));
+                } else {
+                  alertDispatch(alertMessage({ alert: true, alertText: 'Internal Server Error' }));
+                }
+              });
           }}
         />
       }
