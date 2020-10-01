@@ -186,6 +186,7 @@ const AddProductContainer = () => {
               token
             })
           );
+          dispatch(resetState());
           productListDispatch(resetProductList());
         }
       });
