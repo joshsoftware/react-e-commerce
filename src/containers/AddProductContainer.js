@@ -96,17 +96,28 @@ const AddProductContainer = () => {
       .nullable(),
     brand: yup.string().required(),
     categoryId: yup.string().required(),
-    category: yup.string().required(),
+    category: yup.string().test('required', 'Category is required', (value) => {
+      if (value === '' || value === 'select category') {
+        return false;
+      }
+      return true;
+    }),
     color: yup.string(),
     size: yup.string(),
     imageUrl: yup
       .mixed()
-      .required()
+      .test('required', 'Profile Picture is required', (value) => {
+        if (value === '' || value === null) {
+          return false;
+        }
+        return true;
+      })
       .test('extension', 'allowed files jpg, jpeg, gif, webp, png', (value) => {
         let array = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/webp'];
         if (value !== null) {
           return array.includes(value.type);
         }
+        return true;
       })
   });
 
@@ -175,7 +186,6 @@ const AddProductContainer = () => {
               token
             })
           );
-          dispatch(resetState());
           productListDispatch(resetProductList());
         }
       });

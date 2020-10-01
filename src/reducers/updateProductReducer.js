@@ -43,8 +43,9 @@ const updateProductReducer = (state = initialState, action) => {
         imageUrlError: null
       };
     }
-    case FORM_ACTIONS.RESET_STATE:
+    case FORM_ACTIONS.RESET_STATE: {
       return initialState;
+    }
     case FORM_ACTIONS.SET_FIELD: {
       return {
         ...state,

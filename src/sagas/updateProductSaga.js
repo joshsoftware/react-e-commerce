@@ -1,24 +1,26 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { updateProduct } from '../apis/updateProductApi';
-import { setProductUpdated } from '../actions/formActions';
+import { resetState, setProductUpdated } from '../actions/formActions';
 import { alertMessage } from '../actions/alertActions';
 //worker saga
 function* updateProductWorkerSaga(action) {
   try {
     yield call(updateProduct, action.value);
-    yield put(alertMessage({ alert: true, alertText: 'Product Updated Successfully' }));
+    yield put(
+      alertMessage({ alert: true, alertText: 'Product Updated Successfully', color: 'info' })
+    );
+    yield put(resetState());
     yield put(setProductUpdated(true));
   } catch (error) {
-    console.log('kjhghjh');
     if (error == 'Error: Request failed with status code 400') {
-      yield put(alertMessage({ alert: true, alertText: 'Bad Request' }));
+      yield put(alertMessage({ alert: true, alertText: 'Bad Request', color: 'danger' }));
     } else if (error == 'Error: Request failed with status code 401') {
-      yield put(alertMessage({ alert: true, alertText: 'Unauthorised Access' }));
+      yield put(alertMessage({ alert: true, alertText: 'Unauthorised Access', color: 'danger' }));
     } else if (error == 'Error: Request failed with status code 404') {
-      yield put(alertMessage({ alert: true, alertText: 'Page Not Found' }));
+      yield put(alertMessage({ alert: true, alertText: 'Page Not Found', color: 'danger' }));
     } else {
-      yield put(alertMessage({ alert: true, alertText: 'Internal Server Error' }));
+      yield put(alertMessage({ alert: true, alertText: 'Internal Server Error', color: 'danger' }));
     }
   }
 }

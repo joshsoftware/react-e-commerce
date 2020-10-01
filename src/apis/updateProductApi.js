@@ -10,13 +10,11 @@ const updateProduct = ({
   stock,
   brand,
   categoryId,
-  category,
   color,
   size,
   imageUrl,
   token
 }) => {
-  console.log('Token', token);
   let product_title = productTitle,
     product_price = productPrice,
     category_id = categoryId;
@@ -27,23 +25,42 @@ const updateProduct = ({
     Token: token
   };
   let data = new FormData();
-  data.append('product_title', product_title);
-  data.append('description', description);
-  data.append('product_price', parseFloat(product_price));
-  data.append('discount', parseFloat(discount));
-  data.append('tax', parseFloat(tax));
-
-  data.append('stock', parseInt(stock));
-  data.append('brand', brand);
-  data.append('category_id', parseInt(category_id));
-  data.append('category', category);
-  data.append('color', color);
-  data.append('size', size);
-  data.append('images', image_url);
-
+  if (product_title !== '') {
+    data.append('product_title', product_title);
+  }
+  if (description !== '') {
+    data.append('description', description);
+  }
+  if (product_price !== null) {
+    data.append('product_price', parseFloat(product_price));
+  }
+  if (discount !== null) {
+    data.append('discount', parseFloat(discount));
+  }
+  if (tax !== null) {
+    data.append('tax', parseFloat(tax));
+  }
+  if (stock !== null) {
+    data.append('stock', parseInt(stock));
+  }
+  if (brand !== '') {
+    data.append('brand', brand);
+  }
+  if (category_id !== 0) {
+    data.append('category_id', category_id);
+  }
+  if (color !== '') {
+    data.append('color', color);
+  }
+  if (size !== '') {
+    data.append('size', size);
+  }
+  if (image_url !== null) {
+    data.append('images', image_url);
+  }
   return apiHelper(
     'put',
-    `${process.env.REACT_APP_SERVER_URL}product/${updateProductId}`,
+    `${process.env.REACT_APP_SERVER_URL}product1/${updateProductId}`,
     data,
     headers
   );

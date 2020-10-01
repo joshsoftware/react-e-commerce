@@ -33,7 +33,8 @@ const AdminUserDashboardContainer = () => {
     ...emailObj,
     value: email,
     onChange: (evt) => {
-      setEmail(evt.target.value);
+      let inviteEmail = evt.target.value.trim();
+      setEmail(inviteEmail);
     },
     invalid: emailError !== null ? true : false,
     message: emailError

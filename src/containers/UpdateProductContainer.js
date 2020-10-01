@@ -11,7 +11,7 @@ import alertReducer from '../reducers/alertReducer';
 import { alertMessage } from '../actions/alertActions';
 
 const UpdateProductContainer = () => {
-  const { alert, alertText } = useSelector((state) => state.alertReducer);
+  const alertState = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
   useEffect(() => {
@@ -91,6 +91,7 @@ const UpdateProductContainer = () => {
       if (value !== null) {
         return array.includes(value.type);
       }
+      return true;
     })
   });
 
@@ -160,7 +161,6 @@ const UpdateProductContainer = () => {
               token
             })
           );
-          dispatch(resetState());
           productListDispatch(resetProductList());
         }
       });
@@ -174,9 +174,9 @@ const UpdateProductContainer = () => {
     <>
       <AlertWrapper
         className="text-center fixed-top"
-        color={'danger'}
-        isOpen={alert}
-        data={alertText}
+        color={alertState.color}
+        isOpen={alertState.alert}
+        data={alertState.alertText}
       />
       <UpdateProductComponent
         validateData={validateData}

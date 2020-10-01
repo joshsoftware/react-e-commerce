@@ -31,7 +31,7 @@ const productListReducer = (state = initialState, action) => {
       };
     }
     case PRODUCT_LIST_REDUCER.RESET_PRODUCT_LIST: {
-      return initialState;
+      return { ...initialState, updateProductId: state.updateProductId };
     }
     case PRODUCT_LIST_REDUCER.UPDATE_PRODUCT_LIST: {
       let newProductList = state.productList;
