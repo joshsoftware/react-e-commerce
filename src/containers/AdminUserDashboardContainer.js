@@ -59,9 +59,15 @@ const AdminUserDashboardContainer = () => {
           })
           .catch((err) => {
             if (err == 'Error: Request failed with status code 409') {
-              setAlertText('User already registered');
+              setAlertText('User Already Registered');
+            } else if (
+              err == 'Error: Request failed with status code 400' ||
+              err == 'Error: Request failed with status code 401' ||
+              err == 'Error: Request failed with status code 404'
+            ) {
+              setAlertText('Invitation Failed: Bad Request');
             } else {
-              setAlertText('Invitation Failed');
+              setAlertText('Invitation Failed: Internal Server Error/Email Not Sent');
             }
             setVisible(true);
           });
@@ -168,23 +174,28 @@ const AdminUserDashboardContainer = () => {
   );
   row_content.push(<ColumnWrapper className={'col_dash'} data={column_content} />);
   row_content.push(<ColumnWrapper />);
-
+  const alertTextArr = [
+    'User Deleted Successfully',
+    'Disable Failed: Bad Request',
+    'Disable Failed: Unauthorized',
+    'Disable Failed: Internal Server Error',
+    'Enable Failed: Bad Request',
+    'Enable Failed: Unauthorized',
+    'Enable Failed: Internal Server Error',
+    'Delete Failed: Bad Request',
+    'Delete Failed: Unauthorized',
+    'Delete Failed: Internal Server Error',
+    'Invitation Failed: Bad Request',
+    'Invitation Failed: Internal Server Error/Email Not Sent',
+    'User Already Registered'
+  ];
   return (
     <>
       <ContainerWrapper
         data={
           <AlertWrapper
             className="text-center fixed-top"
-            color={
-              alertText === 'User deleted Successfully' ||
-              alertText === 'Disable failed' ||
-              alertText === 'Enable failed' ||
-              alertText === 'Delete Failed' ||
-              alertText === 'Invitation Failed' ||
-              alertText === 'User already registered'
-                ? 'danger'
-                : 'info'
-            }
+            color={alertTextArr.includes(alertText) ? 'danger' : 'info'}
             isOpen={visible}
             data={alertText}
           />
