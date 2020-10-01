@@ -82,11 +82,17 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
             deleteUserApi({ token: userDetails.token, user_id: id })
               .then(() => {
                 dispatch(deleteUser(id));
-                setAlertText('User deleted Successfully');
+                setAlertText('User Deleted Successfully');
                 setVisible(true);
               })
-              .catch(() => {
-                setAlertText('Delete Failed');
+              .catch((err) => {
+                if (err == 'Error: Request failed with status code 404') {
+                  setAlertText('Delete Failed: Bad Request');
+                } else if (err == 'Error: Request failed with status code 401') {
+                  setAlertText('Delete Failed: Unauthorized');
+                } else {
+                  setAlertText('Delete Failed: Internal Server Error');
+                }
                 setVisible(true);
               });
           }}
@@ -110,8 +116,14 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
                   setAlertText('Enabled Successfully');
                   setVisible(true);
                 })
-                .catch(() => {
-                  setAlertText('Enable failed');
+                .catch((err) => {
+                  if (err == 'Error: Request failed with status code 404') {
+                    setAlertText('Enable Failed: Bad Request');
+                  } else if (err == 'Error: Request failed with status code 401') {
+                    setAlertText('Enable Failed: Unauthorized');
+                  } else {
+                    setAlertText('Enable Failed: Internal Server Error');
+                  }
                   setVisible(true);
                 });
             }}
@@ -135,8 +147,14 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
                   setAlertText('Disabled Successfully');
                   setVisible(true);
                 })
-                .catch(() => {
-                  setAlertText('Disable failed');
+                .catch((err) => {
+                  if (err == 'Error: Request failed with status code 404') {
+                    setAlertText('Disable Failed: Bad Request');
+                  } else if (err == 'Error: Request failed with status code 401') {
+                    setAlertText('Disable Failed: Unauthorized');
+                  } else {
+                    setAlertText('Disable Failed: Internal Server Error');
+                  }
                   setVisible(true);
                 });
             }}
