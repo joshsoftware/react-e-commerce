@@ -99,7 +99,11 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
     ...productPrice,
     value: formState.productPrice,
     onChange: (evt) => {
-      dispatch(setField('productPrice', evt.target.value));
+      if (evt.target.value === '') {
+        dispatch(setField('productPrice', null));
+      } else {
+        dispatch(setField('productPrice', evt.target.value));
+      }
     },
     invalid: formState.productPriceError !== null ? true : false,
     message: formState.productPriceError
@@ -108,7 +112,11 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
     ...discount,
     value: formState.discount,
     onChange: (evt) => {
-      dispatch(setField('discount', evt.target.value));
+      if (evt.target.value === '') {
+        dispatch(setField('discount', null));
+      } else {
+        dispatch(setField('discount', evt.target.value));
+      }
     },
     invalid: formState.discountError !== null ? true : false,
     message: formState.discountError
@@ -117,7 +125,11 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
     ...tax,
     value: formState.tax,
     onChange: (evt) => {
-      dispatch(setField('tax', evt.target.value));
+      if (evt.target.value === '') {
+        dispatch(setField('tax', null));
+      } else {
+        dispatch(setField('tax', evt.target.value));
+      }
     },
     invalid: formState.taxError !== null ? true : false,
     message: formState.taxError
@@ -126,7 +138,11 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
     ...stock,
     value: formState.stock,
     onChange: (evt) => {
-      dispatch(setField('stock', evt.target.value));
+      if (evt.target.value === '') {
+        dispatch(setField('stock', null));
+      } else {
+        dispatch(setField('stock', evt.target.value));
+      }
     },
     invalid: formState.stockError !== null ? true : false,
     message: formState.stockError

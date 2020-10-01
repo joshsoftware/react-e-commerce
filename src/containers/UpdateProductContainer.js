@@ -39,8 +39,9 @@ const UpdateProductContainer = () => {
     productPrice: yup
       .number()
       .typeError('you must specify a number')
+      .nullable()
       .test('positive', 'price must be greater than 0', (value) => {
-        if (value <= 0) {
+        if (value <= 0 && value !== null) {
           return false;
         }
         return true;
@@ -48,8 +49,9 @@ const UpdateProductContainer = () => {
     discount: yup
       .number()
       .typeError('you must specify a number')
+      .nullable()
       .test('positive', 'discount must be greater than 0 and less than 100', (value) => {
-        if (value <= 0 || value > 100) {
+        if (value < 0 || value > 100) {
           return false;
         }
         return true;
@@ -57,13 +59,14 @@ const UpdateProductContainer = () => {
     tax: yup
       .number()
       .typeError('you must specify a number')
+      .nullable()
       .test('positive', 'tax must be greater than 0 and less than 100', (value) => {
-        if (value <= 0 || value > 100) {
+        if (value < 0 || value > 100) {
           return false;
         }
         return true;
       }),
-    stock: yup.number().min(0).integer().typeError('you must specify a number'),
+    stock: yup.number().min(0).integer().typeError('you must specify a number').nullable(),
     brand: yup.string(),
     categoryId: yup.string(),
     category: yup.string(),
