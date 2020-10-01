@@ -41,7 +41,7 @@ const UserProfileUpdateContainer = () => {
     address: yup.string(),
     imageUrl: yup.mixed().test('extension', 'allowed files jpg, jpeg, gif, webp, png', (value) => {
       let array = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
-      if (value !== null) {
+      if (value !== '') {
         return array.includes(value.type);
       }
       return true;
@@ -94,7 +94,6 @@ const UserProfileUpdateContainer = () => {
         }
       });
   };
-
   if (userprofileupdatestate.updated) {
     return <Redirect to="/profile" />;
   }

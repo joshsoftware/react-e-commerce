@@ -16,7 +16,7 @@ import { alertMessage } from '../actions/alertActions';
 import alertReducer from '../reducers/alertReducer';
 
 const RegistrationContainer = () => {
-  const { alert, alertText } = useSelector((state) => state.alertReducer);
+  const { alert, alertText, color } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetState());
@@ -45,12 +45,18 @@ const RegistrationContainer = () => {
     address: yup.string(),
     imageUrl: yup
       .mixed()
-      .required()
+      .test('required', 'Profile Picture is required', (value) => {
+        if (value === '' || value === null) {
+          return false;
+        }
+        return true;
+      })
       .test('extension', 'allowed files jpg, jpeg, webp, png', (value) => {
         let array = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
         if (value !== '') {
           return array.includes(value.type);
         }
+        return true;
       })
   });
 
@@ -142,7 +148,7 @@ const RegistrationContainer = () => {
     <>
       <AlertWrapper
         className="text-center fixed-top"
-        color={'danger'}
+        color={color}
         isOpen={alert}
         data={alertText}
       />

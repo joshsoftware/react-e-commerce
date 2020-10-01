@@ -6,23 +6,35 @@ const initialState = {
   userProfileAlert: false,
   alertText: '',
   loginAlertText: '',
-  registrationAlertText: ''
+  registrationAlertText: '',
+  color: ''
 };
 
 const alertReducer = (state = initialState, action) => {
   switch (action.type) {
     case ALERT_ACTIONS.ALERT_MESSAGE: {
-      return { ...state, alert: action.value.alert, alertText: action.value.alertText };
+      return {
+        ...state,
+        alert: action.value.alert,
+        alertText: action.value.alertText,
+        color: action.value.color
+      };
     }
     case ALERT_ACTIONS.ALERT_REGISTRATION: {
       return {
         ...state,
         registrationAlert: action.value.alert,
-        registrationAlertText: action.value.alertText
+        registrationAlertText: action.value.alertText,
+        color: action.value.color
       };
     }
     case ALERT_ACTIONS.ALERT_LOGIN: {
-      return { ...state, loginAlert: action.value.alert, loginAlertText: action.value.alertText };
+      return {
+        ...state,
+        loginAlert: action.value.alert,
+        loginAlertText: action.value.alertText,
+        color: action.value.color
+      };
     }
     case ALERT_ACTIONS.ALERT_USER_PROFILE:
       return { ...state, userProfileAlert: action.value, alertText: action.value.alertText };

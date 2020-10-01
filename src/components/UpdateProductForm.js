@@ -12,6 +12,7 @@ import RowWrapper from '../components/RowWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
 import { Link } from 'react-router-dom';
 import '../containers/AdminDashboardContainer.css';
+import './CartItem.css';
 
 let productTitle = {
     field: 'exampleProductTitle',
@@ -67,7 +68,8 @@ let productTitle = {
     labelText: 'Choose a File [.jpg, .png, .jpeg, .gif, .webp] only',
     type: 'file',
     name: 'file',
-    placeholder: '**.**'
+    placeholder: '**.**',
+    inputClassName: 'file_field'
   };
 
 const UpdateProductForm = ({ validateData, dispatch, formState }) => {

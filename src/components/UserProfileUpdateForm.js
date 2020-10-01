@@ -5,21 +5,18 @@ import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
 import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
-import alertReducer from '../reducers/alertReducer';
-import { useDispatch } from 'react-redux';
-import { alertMessage } from '../actions/alertActions';
 import FormField from './FormField';
 import { setField } from '../actions/formActions';
-
+import './CartItem.css';
 let imageUrl = {
   field: 'exampleImageURL',
   labelText: 'Profile Picture [.jpg, .png, .jpeg, .webp]',
   type: 'file',
   name: 'file',
+  inputClassName: 'file_field',
   placeholder: '**.**'
 };
 const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
-  const alertDispatch = useDispatch(alertReducer);
   const {
     firstname,
     lastname,
@@ -55,7 +52,6 @@ const UserProfileUpdateForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
-          alertDispatch(alertMessage({ alert: true, alertText: 'profile Updated Successfully' }));
         }}
         autoComplete="off">
         <FormPasswordField

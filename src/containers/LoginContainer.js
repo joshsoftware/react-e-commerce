@@ -18,13 +18,13 @@ import { alertMessage, alertRegistration } from '../actions/alertActions';
 
 const LoginContainer = () => {
   const [alertState, setAlertState] = useState('');
-  const { alert, alertText, registrationAlert, registrationAlertText } = useSelector(
+  const { alert, alertText, registrationAlert, registrationAlertText, color } = useSelector(
     (state) => state.alertReducer
   );
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
   const registrationDispatch = useDispatch(registrationReducer);
-  registrationDispatch(setRegistered(false));
+  const { registered } = useSelector((state) => state.registrationReducer);
   const result = useSelector((state) => state.loginReducer);
   const { email, password, userDetails } = result;
   useEffect(() => {
@@ -47,8 +47,11 @@ const LoginContainer = () => {
   }, [alert]);
 
   useEffect(() => {
-    setAlertState(registrationAlertText);
-    timeOutFunction();
+    if (registered === true) {
+      registrationDispatch(setRegistered(false));
+      setAlertState(registrationAlertText);
+      timeOutFunction();
+    }
   }, [registrationAlert]);
 
   const validateData = () => {
@@ -77,11 +80,7 @@ const LoginContainer = () => {
     <>
       <AlertWrapper
         className="text-center fixed-top"
-        color={
-          alertText === 'Login Failed : Enter Correct Credentials' || alertText === 'User Disabled!'
-            ? 'danger'
-            : 'info'
-        }
+        color={color !== '' ? color : 'info'}
         isOpen={alert || registrationAlert}
         data={alertState}
       />

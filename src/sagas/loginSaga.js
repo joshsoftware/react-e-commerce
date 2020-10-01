@@ -1,6 +1,6 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { setUserDetails, loginFailed } from '../actions/formActions';
+import { setUserDetails } from '../actions/formActions';
 import { alertMessage } from '../actions/alertActions';
 import login from '../apis/loginApi';
 
@@ -11,13 +11,18 @@ function* loginWorkerSaga(action) {
     yield put(setUserDetails(data));
   } catch (error) {
     if (error == 'Error: Request failed with status code 403') {
-      yield put(alertMessage({ alert: true, alertText: 'User Disabled!' }));
-    } else {
+      yield put(alertMessage({ alert: true, alertText: 'User Disabled!', color: 'danger' }));
+    } else if (error == 'Error: Request failed with status code 401') {
       yield put(
-        alertMessage({ alert: true, alertText: 'Login Failed : Enter Correct Credentials' })
+        alertMessage({
+          alert: true,
+          alertText: 'Login Failed : Enter Correct Credentials',
+          color: 'danger'
+        })
       );
+    } else {
+      yield put(alertMessage({ alert: true, alertText: 'Internal Server Error', color: 'danger' }));
     }
-    yield put(loginFailed(error));
   }
 }
 

@@ -5,27 +5,38 @@ import RowWrapper from './RowWrapper';
 import ColumnWrapper from './ColumnWrapper';
 import PropTypes from 'prop-types';
 import './CartItem.css';
+import AlertWrapper from './AlertWrapper';
+import { useSelector } from 'react-redux';
 
 const UserProfileUpdateComponent = ({ validateData, dispatch, formState }) => {
+  const { alert, alertText, color } = useSelector((state) => state.alertReducer);
   return (
     <ContainerWrapper
       styleClass={'pt-3 text-center update_profile'}
       data={
-        <RowWrapper
-          data={
-            <ColumnWrapper
-              sm={{ size: 6, offset: 3 }}
-              data={
-                <FormCard
-                  type={'userprofileupdate'}
-                  validateData={validateData}
-                  dispatch={dispatch}
-                  formState={formState}
-                />
-              }
-            />
-          }
-        />
+        <>
+          <AlertWrapper
+            className="text-center fixed-top"
+            color={color}
+            isOpen={alert}
+            data={alertText}
+          />
+          <RowWrapper
+            data={
+              <ColumnWrapper
+                sm={{ size: 6, offset: 3 }}
+                data={
+                  <FormCard
+                    type={'userprofileupdate'}
+                    validateData={validateData}
+                    dispatch={dispatch}
+                    formState={formState}
+                  />
+                }
+              />
+            }
+          />
+        </>
       }
     />
   );

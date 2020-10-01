@@ -1,17 +1,23 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { setRegistered, registrationFailed } from '../actions/formActions';
+import { setRegistered } from '../actions/formActions';
 import registration from '../apis/registrationApi';
-import { alertMessage } from '../actions/alertActions';
+import { alertMessage, alertRegistration } from '../actions/alertActions';
 
 //worker saga
 function* registrationWorkerSaga(action) {
   try {
     yield call(registration, action.value);
+    yield put(
+      alertRegistration({ alert: true, alertText: 'Successfully Registered', color: 'info' })
+    );
     yield put(setRegistered(true));
   } catch (error) {
-    yield put(alertMessage({ alert: true, alertText: 'Email already exists' }));
-    yield put(registrationFailed(error));
+    if (error == 'Error: Request failed with status code 400') {
+      yield put(alertMessage({ alert: true, alertText: 'Email already exists', color: 'danger' }));
+    } else {
+      yield put(alertMessage({ alert: true, alertText: 'Internal Server Error', color: 'danger' }));
+    }
   }
 }
 

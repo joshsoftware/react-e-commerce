@@ -16,7 +16,8 @@ const FormField = ({ formfield }) => {
     value,
     onChange,
     invalid,
-    autoComplete
+    autoComplete,
+    inputClassName
   } = formfield;
   return (
     <FormGroup className={'align-items-center'}>
@@ -29,7 +30,7 @@ const FormField = ({ formfield }) => {
         onChange={onChange}
         invalid={invalid}
         autoComplete={autoComplete}
-        className={'align-items-center'}
+        className={inputClassName}
       />
       <FormFeedbackWrapper message={message} />
     </FormGroup>

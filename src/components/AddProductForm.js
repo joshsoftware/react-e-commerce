@@ -13,6 +13,8 @@ import ColumnWrapper from '../components/ColumnWrapper';
 import { Link } from 'react-router-dom';
 import '../containers/AdminDashboardContainer.css';
 import '../images/levi.jpg';
+import './CartItem.css';
+
 let productTitle = {
     field: 'exampleProductTitle',
     labelText: 'Product Title *',
@@ -67,7 +69,8 @@ let productTitle = {
     labelText: 'Choose a File* [.jpg, .png, .jpeg, .gif, .webp] only',
     type: 'file',
     name: 'file',
-    placeholder: '**.**'
+    placeholder: '**.**',
+    inputClassName: 'file_field'
   };
 
 const AddProductForm = ({ validateData, dispatch, formState }) => {

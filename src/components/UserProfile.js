@@ -22,7 +22,7 @@ const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { profile } = useSelector((state) => state.userprofileReducer);
   const dispatch = useDispatch();
-  const { alert, alertText } = useSelector((state) => state.alertReducer);
+  const { alert, alertText, color } = useSelector((state) => state.alertReducer);
   const alertDispatch = useDispatch(alertReducer);
 
   const userProfileUpdateDispatch = useDispatch(userprofileupdateReducer);
@@ -74,7 +74,7 @@ const UserProfile = () => {
     </Link>
   );
   userprofile_content.push(
-    <AlertWrapper className="text-center fixed-top" color="info" isOpen={alert} data={alertText} />
+    <AlertWrapper className="text-center fixed-top" color={color} isOpen={alert} data={alertText} />
   );
   const profileImage =
     profile.profile_image !== ''

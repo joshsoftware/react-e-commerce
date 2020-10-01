@@ -7,18 +7,17 @@ import FormPasswordField from './FormPasswordField';
 import FormTextField from './FormTextField';
 import PropTypes from 'prop-types';
 import FormDropdownField from './FormDropdownField';
-import alertReducer from '../reducers/alertReducer';
-import { useDispatch } from 'react-redux';
-import { alertRegistration } from '../actions/alertActions';
 import FormField from './FormField';
 import { setField } from '../actions/formActions';
+import './CartItem.css';
 
 let imageUrl = {
   field: 'exampleImageURL',
   labelText: 'Profile Picture* [.jpg, .png, .jpeg, .webp]',
   type: 'file',
   name: 'file',
-  placeholder: '**.**'
+  placeholder: '**.**',
+  inputClassName: 'file_field border-dark'
 };
 
 const RegistrationForm = ({ validateData, dispatch, formState }) => {
@@ -44,7 +43,6 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     data1.append('file', files[0]);
     dispatch(setField('imageUrl', data1.get('file')));
   };
-
   imageUrl = {
     ...imageUrl,
     onChange: (evt) => {
@@ -53,7 +51,6 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     invalid: formState.imageUrlError !== null ? true : false,
     message: formState.imageUrlError
   };
-  const alertDispatch = useDispatch(alertReducer);
   return (
     <>
       <h3>Register</h3>
@@ -62,7 +59,6 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
-          alertDispatch(alertRegistration({ alert: true, alertText: 'Successfully Registered' }));
         }}>
         <FormEmailField
           email={email}
