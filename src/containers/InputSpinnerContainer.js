@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { updateItemQuantity } from '../actions/cartActions';
 import { updateCartItemsApi } from '../apis/cartApi';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { updateProductStockApi, getProductByIdApi } from '../apis/productApi';
 import InputSpinnerWrapper from '../components/InputSpinnerWrapper';
 import ButtonWrapper from '../components/ButtonWrapper';
@@ -55,7 +55,8 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
       };
     }
   }, [flag]);
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   let itemFunc = (item_quantity) => {
     updateProductStockApi({ id: id, stockChange: item_quantity - quantity });
     updateCartItemsApi({ token: userDetails.token, product_id: id, quantity: item_quantity });

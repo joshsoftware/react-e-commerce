@@ -17,7 +17,8 @@ const AdminMainDashboardContainer = () => {
   const { loginAlert, loginAlertText } = useSelector((state) => state.alertReducer);
   const alertDispatch = useDispatch(alertReducer);
   const loginDispatch = useDispatch(loginReducer);
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
 
   const timeOutFunction = async () => {
     setTimeout(() => {
@@ -34,14 +35,17 @@ const AdminMainDashboardContainer = () => {
   if (!userDetails.token) {
     return <Redirect to="/login" />;
   }
+  if (!userDetails.isAdmin) {
+    return <Redirect to="/products" />;
+  }
 
   let logoutVar = (
     <ButtonWrapper
       style={'dash_button'}
       onClick={() => {
-        let token = userDetails.token;
-        logout(token)
+        logout(userDetails.token)
           .then(() => {
+            sessionStorage.removeItem('userDetails');
             loginDispatch(setUserDetails({}));
           })
           .catch((error) => {

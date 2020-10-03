@@ -13,7 +13,8 @@ const UserProfileUpdateContainer = () => {
   useEffect(() => {
     dispatch(resetState());
   }, []);
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
   const {

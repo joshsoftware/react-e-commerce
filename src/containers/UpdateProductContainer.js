@@ -28,7 +28,8 @@ const UpdateProductContainer = () => {
     }
   }, [alert]);
   const productListDispatch = useDispatch(productListReducer);
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const updateProductState = useSelector((state) => state.updateProductReducer);
   const { updateProductId } = useSelector((state) => state.productListReducer);
 
@@ -168,6 +169,12 @@ const UpdateProductContainer = () => {
 
   if (updateProductState.productUpdated) {
     return <Redirect to="/admin/products" />;
+  }
+  if (!userDetails.token) {
+    return <Redirect to="/login" />;
+  }
+  if (!userDetails.isAdmin) {
+    return <Redirect to="/products" />;
   }
 
   return (

@@ -11,7 +11,8 @@ import './productContainer.css';
 
 const ProductRowContainer = ({ products, setVisible, setAlertText }) => {
   const dispatch = useDispatch();
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const { cartItemsList } = useSelector((state) => state.cartReducer);
   let arr = [];
   let productExists = (product) => {

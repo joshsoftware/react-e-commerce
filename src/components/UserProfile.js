@@ -19,7 +19,8 @@ import ColumnWrapper from './ColumnWrapper';
 import ImageComponent from './ImageComponent';
 import './CartItem.css';
 const UserProfile = () => {
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const { profile } = useSelector((state) => state.userprofileReducer);
   const dispatch = useDispatch();
   const { alert, alertText, color } = useSelector((state) => state.alertReducer);

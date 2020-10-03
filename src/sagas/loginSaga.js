@@ -8,6 +8,8 @@ import login from '../apis/loginApi';
 function* loginWorkerSaga(action) {
   try {
     const { data } = yield call(login, action.value);
+    sessionStorage.setItem('userDetails', JSON.stringify(data));
+    console.log('userDetails ->', JSON.parse(sessionStorage.getItem('userDetails')));
     yield put(setUserDetails(data));
   } catch (error) {
     if (error == 'Error: Request failed with status code 403') {

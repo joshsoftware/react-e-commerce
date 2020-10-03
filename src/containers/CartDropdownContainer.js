@@ -6,7 +6,7 @@ import DropdownItemWrapper from '../components/DropdownItemWrapper';
 import PropTypes from 'prop-types';
 import { updateItemQuantity } from '../actions/cartActions';
 import { updateCartItemsApi } from '../apis/cartApi';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { updateProductStockApi, getProductByIdApi } from '../apis/productApi';
 
 const CartDropdownContainer = ({ id, quantity, dispatch }) => {
@@ -23,7 +23,8 @@ const CartDropdownContainer = ({ id, quantity, dispatch }) => {
       getProduct();
     }
   }, [flag]);
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   let arr = [];
   let arr1 = [];

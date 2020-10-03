@@ -26,7 +26,8 @@ const AdminDashboardContainer = () => {
   addProductDispatch(setProductAdded(false));
   updateProductDispatch(setProductUpdated(false));
   const { totalPages } = useSelector((state) => state.productListReducer);
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
 
   const timeOutFunction = async () => {
     setTimeout(() => {
@@ -76,6 +77,9 @@ const AdminDashboardContainer = () => {
   const { productList } = useSelector((state) => state.productListReducer);
   if (!userDetails.token) {
     return <Redirect to="/login" />;
+  }
+  if (!userDetails.isAdmin) {
+    return <Redirect to="/products" />;
   }
 
   let addButton = <ButtonWrapper style={'dash_button'} buttonText={'Add Product'} />;
