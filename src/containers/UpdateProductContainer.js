@@ -85,7 +85,12 @@ const UpdateProductContainer = () => {
     size: yup.string(),
     imageUrl: yup.mixed().test('extension', 'allowed files jpg, jpeg, gif, webp, png', (value) => {
       let array = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/webp'];
+      if (typeof value === 'string' && value.includes('assets')) {
+        console.log('er');
+        return true;
+      }
       if (value !== null) {
+        console.log('er1');
         return array.includes(value.type);
       }
       return true;
