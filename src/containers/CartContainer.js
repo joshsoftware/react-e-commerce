@@ -11,7 +11,8 @@ import alertReducer from '../reducers/alertReducer';
 import { alertMessage } from '../actions/alertActions';
 
 const CartContainer = () => {
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const dispatch = useDispatch();
   const { alert, alertText } = useSelector((state) => state.alertReducer);
   const alertDispatch = useDispatch(alertReducer);
@@ -30,7 +31,7 @@ const CartContainer = () => {
   useEffect(() => {
     dispatch(getCartItems(userDetails.token));
   }, []);
-  if (!userDetails.token) {
+  if (!userDetails) {
     return <Redirect to="/login" />;
   }
   return (

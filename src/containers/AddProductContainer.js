@@ -29,7 +29,8 @@ const AddProductContainer = () => {
     }
   }, [alert]);
   const productListDispatch = useDispatch(productListReducer);
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const addProductState = useSelector((state) => state.addProductReducer);
   const {
     productTitle,
@@ -120,9 +121,15 @@ const AddProductContainer = () => {
         return true;
       })
   });
-
-  if (!userDetails.isAdmin) {
-    return <Redirect to="/products" />;
+  if (userDetails) {
+    if (!userDetails.token) {
+      return <Redirect to="/login" />;
+    }
+    if (!userDetails.isAdmin) {
+      return <Redirect to="/products" />;
+    }
+  } else {
+    return <Redirect to="/login" />;
   }
 
   const validateData = () => {

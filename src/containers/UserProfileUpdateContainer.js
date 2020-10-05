@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
@@ -10,7 +10,8 @@ import Footer from '../components/Footer';
 
 const UserProfileUpdateContainer = () => {
   const dispatch = useDispatch();
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
   const {
@@ -94,7 +95,7 @@ const UserProfileUpdateContainer = () => {
   if (userprofileupdatestate.updated) {
     return <Redirect to="/profile" />;
   }
-  if (!userDetails.token) {
+  if (!userDetails) {
     return <Redirect to="/login" />;
   }
   return (

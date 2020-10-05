@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ButtonWrapper from '../components/ButtonWrapper';
 import RowWrapper from '../components/RowWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
@@ -17,8 +17,9 @@ const AdminMainDashboardContainer = () => {
   const { loginAlert, loginAlertText } = useSelector((state) => state.alertReducer);
   const alertDispatch = useDispatch(alertReducer);
   const loginDispatch = useDispatch(loginReducer);
-  const { userDetails } = useSelector((state) => state.loginReducer);
-
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
+  const [isLogout, setLogout] = useState(false);
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertLogin({ alert: false, alertText: '' }));
@@ -31,18 +32,28 @@ const AdminMainDashboardContainer = () => {
     }
   }, [loginAlert]);
 
-  if (!userDetails.token) {
+  if (userDetails) {
+    if (!userDetails.token) {
+      return <Redirect to="/login" />;
+    }
+    if (!userDetails.isAdmin) {
+      return <Redirect to="/products" />;
+    }
+  } else {
     return <Redirect to="/login" />;
   }
-
+  if (isLogout) {
+    return <Redirect to="/login" />;
+  }
   let logoutVar = (
     <ButtonWrapper
       style={'dash_button'}
       onClick={() => {
-        let token = userDetails.token;
-        logout(token)
+        logout(userDetails.token)
           .then(() => {
+            sessionStorage.removeItem('userDetails');
             loginDispatch(setUserDetails({}));
+            setLogout(true);
           })
           .catch((error) => {
             console.log('error', error);

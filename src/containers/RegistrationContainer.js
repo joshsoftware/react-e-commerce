@@ -23,6 +23,7 @@ const RegistrationContainer = () => {
   }, []);
   const alertDispatch = useDispatch(alertReducer);
   const registrationState = useSelector((state) => state.registrationReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const {
     firstname,
     lastname,
@@ -143,7 +144,13 @@ const RegistrationContainer = () => {
   if (registrationState.registered) {
     return <Redirect to="/login" />;
   }
-
+  if (userDetails !== null) {
+    if (userDetails.token && userDetails.isAdmin) {
+      return <Redirect to="/admindashboard" />;
+    } else if (userDetails.token) {
+      return <Redirect to="/products" />;
+    }
+  }
   return (
     <>
       <AlertWrapper

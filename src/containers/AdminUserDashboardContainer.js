@@ -25,7 +25,8 @@ const AdminUserDashboardContainer = () => {
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(null);
 
@@ -100,7 +101,14 @@ const AdminUserDashboardContainer = () => {
   }, [invited]);
 
   const { userList } = useSelector((state) => state.userListReducer);
-  if (!userDetails.token) {
+  if (userDetails) {
+    if (!userDetails.token) {
+      return <Redirect to="/login" />;
+    }
+    if (!userDetails.isAdmin) {
+      return <Redirect to="/products" />;
+    }
+  } else {
     return <Redirect to="/login" />;
   }
 

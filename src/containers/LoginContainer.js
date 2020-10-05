@@ -26,7 +26,8 @@ const LoginContainer = () => {
   const registrationDispatch = useDispatch(registrationReducer);
   const { registered } = useSelector((state) => state.registrationReducer);
   const result = useSelector((state) => state.loginReducer);
-  const { email, password, userDetails } = result;
+  const { email, password } = result;
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   useEffect(() => {
     dispatch(resetState());
   }, []);
@@ -71,11 +72,15 @@ const LoginContainer = () => {
     });
     dispatch(setIsLoading(false));
   };
-  if (userDetails.token && userDetails.isAdmin) {
-    return <Redirect to="/admindashboard" />;
-  } else if (userDetails.token) {
-    return <Redirect to="/products" />;
+
+  if (userDetails !== null) {
+    if (userDetails.token && userDetails.isAdmin) {
+      return <Redirect to="/admindashboard" />;
+    } else if (userDetails.token) {
+      return <Redirect to="/products" />;
+    }
   }
+
   return (
     <>
       <AlertWrapper

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import ProductListContainer from './ProductListContainer';
 import ProductComponent from '../components/ProductComponent';
@@ -8,13 +8,14 @@ import Footer from '../components/Footer';
 import { getUserProfile } from '../actions/userprofileAction';
 
 const ProductContainer = () => {
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCartItems(userDetails.token));
     dispatch(getUserProfile(userDetails.token));
   }, []);
-  if (!userDetails.token) {
+  if (!userDetails) {
     return <Redirect to="/login" />;
   }
   return (
