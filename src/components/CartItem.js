@@ -5,7 +5,6 @@ import RowWrapper from './RowWrapper';
 import CardImgWrapper from './CardImgWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from 'prop-types';
-import ButtonWrapper from './ButtonWrapper';
 import CardTextWrapper from './CardTextWrapper';
 import { deleteCartItem } from '../actions/cartActions';
 import { deleteCartItemApi } from '../apis/cartApi';
@@ -17,14 +16,37 @@ import AlertWrapper from './AlertWrapper';
 import alertReducer from '../reducers/alertReducer';
 import { useDispatch } from 'react-redux';
 import { alertMessage } from '../actions/alertActions';
-
+import ModalWrapper from './ModalWrapper';
 const CartItem = ({ item, dispatch }) => {
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);
   let { product_title, image_url, product_price, quantity, id } = item;
   const { userDetails } = useSelector((state) => state.loginReducer);
   const alertDispatch = useDispatch(alertReducer);
-
+  const onClickWrapper = () => {
+    deleteCartItemApi({ token: userDetails.token, product_id: id })
+      .then(() => {
+        updateProductStockApi({ product_id: id, stock: -quantity });
+        dispatch(deleteCartItem(id));
+        alertDispatch(
+          alertMessage({
+            alert: true,
+            alertText: product_title + '... was removed from Shopping Cart'
+          })
+        );
+      })
+      .catch((err) => {
+        if (err == 'Error: Request failed with status code 404') {
+          alertDispatch(alertMessage({ alert: true, alertText: 'Bad Request' }));
+        } else if (err == 'Error: Request failed with status code 401') {
+          alertDispatch(alertMessage({ alert: true, alertText: 'Unauthorised' }));
+        } else if (err == 'Error: Request failed with status code 403') {
+          alertDispatch(alertMessage({ alert: true, alertText: 'Forbidden' }));
+        } else {
+          alertDispatch(alertMessage({ alert: true, alertText: 'Internal Server Error' }));
+        }
+      });
+  };
   let column_content = [];
   let i = 0;
   let item_details = [];
@@ -95,34 +117,11 @@ const CartItem = ({ item, dispatch }) => {
       key={i++}
       className={'col_five'}
       data={
-        <ButtonWrapper
-          buttonText={'X'}
-          outline
+        <ModalWrapper
+          buttonText={'Delete'}
           color={'danger'}
-          onClick={() => {
-            deleteCartItemApi({ token: userDetails.token, product_id: id })
-              .then(() => {
-                updateProductStockApi({ product_id: id, stock: -quantity });
-                dispatch(deleteCartItem(id));
-                alertDispatch(
-                  alertMessage({
-                    alert: true,
-                    alertText: product_title + '... was removed from Shopping Cart'
-                  })
-                );
-              })
-              .catch((err) => {
-                if (err == 'Error: Request failed with status code 404') {
-                  alertDispatch(alertMessage({ alert: true, alertText: 'Bad Request' }));
-                } else if (err == 'Error: Request failed with status code 401') {
-                  alertDispatch(alertMessage({ alert: true, alertText: 'Unauthorised' }));
-                } else if (err == 'Error: Request failed with status code 403') {
-                  alertDispatch(alertMessage({ alert: true, alertText: 'Forbidden' }));
-                } else {
-                  alertDispatch(alertMessage({ alert: true, alertText: 'Internal Server Error' }));
-                }
-              });
-          }}
+          onClickWrapper={onClickWrapper}
+          modalTitle={'Do you really want to remove this item?'}
         />
       }
     />

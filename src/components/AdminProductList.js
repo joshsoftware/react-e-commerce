@@ -15,6 +15,7 @@ import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { alertMessage } from '../actions/alertActions';
 import alertReducer from '../reducers/alertReducer';
+import ModalWrapper from './ModalWrapper';
 
 const AdminProductList = ({ item, dispatch }) => {
   let { product_title, image_urls, product_price, id } = item;
@@ -30,6 +31,22 @@ const AdminProductList = ({ item, dispatch }) => {
       buttonText={'Update Product'}
     />
   );
+  const onClickWrapper = () => {
+    deleteProductApi({ token: userDetails.token, product_id: id })
+      .then(() => {
+        dispatch(deleteProduct(id));
+        alertDispatch(alertMessage({ alert: true, alertText: 'Product deleted Successfully' }));
+      })
+      .catch((err) => {
+        if (err == 'Error: Request failed with status code 404') {
+          alertDispatch(alertMessage({ alert: true, alertText: 'Bad Request' }));
+        } else if (err == 'Error: Request failed with status code 401') {
+          alertDispatch(alertMessage({ alert: true, alertText: 'Unauthorised' }));
+        } else {
+          alertDispatch(alertMessage({ alert: true, alertText: 'Internal Server Error' }));
+        }
+      });
+  };
   let item_details = [];
   let item_price_details_key = [];
   item_price_details_key.push(
@@ -68,28 +85,11 @@ const AdminProductList = ({ item, dispatch }) => {
       key={i++}
       className={'col_five'}
       data={
-        <ButtonWrapper
-          buttonText={'X'}
-          outline
+        <ModalWrapper
+          buttonText={'Delete'}
           color={'danger'}
-          onClick={() => {
-            deleteProductApi({ token: userDetails.token, product_id: id })
-              .then(() => {
-                dispatch(deleteProduct(id));
-                alertDispatch(
-                  alertMessage({ alert: true, alertText: 'Product deleted Successfully' })
-                );
-              })
-              .catch((err) => {
-                if (err == 'Error: Request failed with status code 404') {
-                  alertDispatch(alertMessage({ alert: true, alertText: 'Bad Request' }));
-                } else if (err == 'Error: Request failed with status code 401') {
-                  alertDispatch(alertMessage({ alert: true, alertText: 'Unauthorised' }));
-                } else {
-                  alertDispatch(alertMessage({ alert: true, alertText: 'Internal Server Error' }));
-                }
-              });
-          }}
+          onClickWrapper={onClickWrapper}
+          modalTitle={'Do you really want to remove this product?'}
         />
       }
     />

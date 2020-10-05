@@ -13,11 +13,12 @@ const ModalWrapper = ({ buttonText, color, onClickWrapper, modalTitle, className
         {buttonText}
       </Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader className={'bg-danger'} toggle={toggle}>
+        <ModalHeader className={''} toggle={toggle}>
           Delete Confirmation
         </ModalHeader>
         <ModalBody>
           {modalTitle}
+          <br />
           <span className={'text-danger'}>This process cannot be undone.</span>
         </ModalBody>
         <ModalFooter className={'align-center'}>
