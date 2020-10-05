@@ -15,6 +15,7 @@ import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { alertMessage } from '../actions/alertActions';
 import alertReducer from '../reducers/alertReducer';
+import { setFormState } from '../actions/formActions';
 
 const AdminProductList = ({ item, dispatch }) => {
   let { product_title, image_urls, product_price, id } = item;
@@ -26,6 +27,7 @@ const AdminProductList = ({ item, dispatch }) => {
     <ButtonWrapper
       onClick={() => {
         dispatch(setUpdateProductId(id));
+        dispatch(setFormState(item));
       }}
       buttonText={'Update Product'}
     />

@@ -29,6 +29,25 @@ const userprofileupdateReducer = (state = initialState, action) => {
         addressError: null
       };
     }
+    case FORM_ACTIONS.SET_FORM_STATE: {
+      let newFormState = initialState,
+        data = action.value;
+      newFormState.firstname = data.first_name;
+      newFormState.lastname = data.last_name;
+      newFormState.address = data.address;
+      if (data.city !== '') {
+        newFormState.city = data.city;
+      }
+      if (data.country !== '') {
+        newFormState.country = data.country;
+      }
+      if (data.state !== '') {
+        newFormState.state = data.state;
+      }
+      newFormState.password = '';
+      //newFormState.imageUrl = data.image_urls[0];
+      return newFormState;
+    }
     case FORM_ACTIONS.RESET_STATE:
       return initialState;
     case FORM_ACTIONS.SET_FIRSTNAME:

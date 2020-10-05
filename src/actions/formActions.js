@@ -108,6 +108,13 @@ export const setState = (val) => {
   };
 };
 
+export const setFormState = (data) => {
+  return {
+    type: FORM_ACTIONS.SET_FORM_STATE,
+    value: data
+  };
+};
+
 export const setCity = (val) => {
   return {
     type: FORM_ACTIONS.SET_CITY,

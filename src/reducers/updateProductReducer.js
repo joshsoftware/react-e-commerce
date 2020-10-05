@@ -43,6 +43,23 @@ const updateProductReducer = (state = initialState, action) => {
         imageUrlError: null
       };
     }
+    case FORM_ACTIONS.SET_FORM_STATE: {
+      let newFormState = initialState,
+        data = action.value;
+      newFormState.productTitle = data.product_title;
+      newFormState.productPrice = data.product_price;
+      newFormState.discount = data.discount;
+      newFormState.tax = data.tax;
+      newFormState.stock = data.stock;
+      newFormState.description = data.description;
+      newFormState.categoryId = data.category_id;
+      newFormState.color = data.color;
+      newFormState.size = data.size;
+      newFormState.category = data.category;
+      newFormState.brand = data.brand;
+      //newFormState.imageUrl = data.image_urls[0];
+      return newFormState;
+    }
     case FORM_ACTIONS.RESET_STATE: {
       return initialState;
     }

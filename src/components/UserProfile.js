@@ -6,7 +6,7 @@ import { getUserProfile } from '../actions/userprofileAction';
 import NavigationBarComponent from './NavigationBarComponent';
 import Footer from './Footer';
 import userprofileupdateReducer from '../reducers/userprofileupdateReducer';
-import { setUpdated } from '../actions/formActions';
+import { setUpdated, setFormState } from '../actions/formActions';
 import ContainerWrapper from './ContainerWrapper';
 import RenderData from './RenderData';
 import CartHeader from './CartHeader';
@@ -18,6 +18,7 @@ import AlertWrapper from '../components/AlertWrapper';
 import ColumnWrapper from './ColumnWrapper';
 import ImageComponent from './ImageComponent';
 import './CartItem.css';
+
 const UserProfile = () => {
   const { userDetails } = useSelector((state) => state.loginReducer);
   const { profile } = useSelector((state) => state.userprofileReducer);
@@ -47,7 +48,17 @@ const UserProfile = () => {
   let userprofile_content = [];
 
   let editButton = (
-    <RowWrapper data={<ButtonWrapper style="m-auto" buttonText={'Edit Profile'} />} />
+    <RowWrapper
+      data={
+        <ButtonWrapper
+          style="m-auto"
+          onClick={() => {
+            userProfileUpdateDispatch(setFormState(profile));
+          }}
+          buttonText={'Edit Profile'}
+        />
+      }
+    />
   );
   userprofile_content.push(<RenderData label="Email " userdata={profile.email} />);
   userprofile_content.push(

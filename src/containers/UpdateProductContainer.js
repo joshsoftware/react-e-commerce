@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
 import UpdateProductComponent from '../components/UpdateProductComponent';
-import { setErrors, resetErrors, updateProductRequest, resetState } from '../actions/formActions';
+import { setErrors, resetErrors, updateProductRequest } from '../actions/formActions';
 import productListReducer from '../reducers/productListReducer';
 import { resetProductList } from '../actions/productListActions';
 import AlertWrapper from '../components/AlertWrapper';
@@ -14,9 +14,11 @@ const UpdateProductContainer = () => {
   const alertState = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
-  useEffect(() => {
-    dispatch(resetState());
-  }, []);
+  const productListDispatch = useDispatch(productListReducer);
+  const { userDetails } = useSelector((state) => state.loginReducer);
+  const updateProductState = useSelector((state) => state.updateProductReducer);
+  const { updateProductId } = useSelector((state) => state.productListReducer);
+
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertMessage({ alert: false, alertText: '' }));
@@ -27,11 +29,6 @@ const UpdateProductContainer = () => {
       timeOutFunction();
     }
   }, [alert]);
-  const productListDispatch = useDispatch(productListReducer);
-  const { userDetails } = useSelector((state) => state.loginReducer);
-  const updateProductState = useSelector((state) => state.updateProductReducer);
-  const { updateProductId } = useSelector((state) => state.productListReducer);
-
   const {
     productTitle,
     description,
