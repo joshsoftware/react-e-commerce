@@ -96,10 +96,6 @@ const UpdateProductContainer = () => {
     })
   });
 
-  if (!userDetails.isAdmin) {
-    return <Redirect to="/products" />;
-  }
-
   const validateData = () => {
     dispatch(resetErrors());
     schema
@@ -170,11 +166,15 @@ const UpdateProductContainer = () => {
   if (updateProductState.productUpdated) {
     return <Redirect to="/admin/products" />;
   }
-  if (!userDetails.token) {
+  if (userDetails) {
+    if (!userDetails.token) {
+      return <Redirect to="/login" />;
+    }
+    if (!userDetails.isAdmin) {
+      return <Redirect to="/products" />;
+    }
+  } else {
     return <Redirect to="/login" />;
-  }
-  if (!userDetails.isAdmin) {
-    return <Redirect to="/products" />;
   }
 
   return (

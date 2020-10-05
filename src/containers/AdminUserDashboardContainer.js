@@ -101,11 +101,15 @@ const AdminUserDashboardContainer = () => {
   }, [invited]);
 
   const { userList } = useSelector((state) => state.userListReducer);
-  if (!userDetails.token) {
+  if (userDetails) {
+    if (!userDetails.token) {
+      return <Redirect to="/login" />;
+    }
+    if (!userDetails.isAdmin) {
+      return <Redirect to="/products" />;
+    }
+  } else {
     return <Redirect to="/login" />;
-  }
-  if (!userDetails.isAdmin) {
-    return <Redirect to="/products" />;
   }
 
   let column_content = [];

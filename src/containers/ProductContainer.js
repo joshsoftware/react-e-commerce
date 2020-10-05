@@ -15,7 +15,7 @@ const ProductContainer = () => {
     dispatch(getCartItems(userDetails.token));
     dispatch(getUserProfile(userDetails.token));
   }, []);
-  if (!userDetails.token) {
+  if (!userDetails) {
     return <Redirect to="/login" />;
   }
   return (

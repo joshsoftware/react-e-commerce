@@ -75,11 +75,15 @@ const AdminDashboardContainer = () => {
   }, [loading]);
 
   const { productList } = useSelector((state) => state.productListReducer);
-  if (!userDetails.token) {
+  if (userDetails) {
+    if (!userDetails.token) {
+      return <Redirect to="/login" />;
+    }
+    if (!userDetails.isAdmin) {
+      return <Redirect to="/products" />;
+    }
+  } else {
     return <Redirect to="/login" />;
-  }
-  if (!userDetails.isAdmin) {
-    return <Redirect to="/products" />;
   }
 
   let addButton = <ButtonWrapper style={'dash_button'} buttonText={'Add Product'} />;

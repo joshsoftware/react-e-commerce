@@ -98,7 +98,7 @@ const UserProfileUpdateContainer = () => {
   if (userprofileupdatestate.updated) {
     return <Redirect to="/profile" />;
   }
-  if (!userDetails.token) {
+  if (!userDetails) {
     return <Redirect to="/login" />;
   }
   return (

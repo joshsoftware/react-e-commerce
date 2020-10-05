@@ -31,7 +31,7 @@ const CartContainer = () => {
   useEffect(() => {
     dispatch(getCartItems(userDetails.token));
   }, []);
-  if (!userDetails.token) {
+  if (!userDetails) {
     return <Redirect to="/login" />;
   }
   return (
