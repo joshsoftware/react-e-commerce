@@ -2,7 +2,6 @@ import React from 'react';
 import './CartItem.css';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';
-//import CardImgWrapper from './CardImgWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
@@ -14,6 +13,7 @@ import { deleteUserApi } from '../apis/userApi';
 import { disableUserApi } from '../apis/userApi';
 import { enableUserApi } from '../apis/userApi';
 import { useSelector } from 'react-redux';
+import ModalWrapper from './ModalWrapper';
 
 const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
   let { first_name, last_name, id, email, country, state, city, isDisabled } = user;
@@ -29,6 +29,24 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
       text={'Name: ' + first_name + ' ' + last_name}
     />
   );
+  const onClickWrapper = () => {
+    deleteUserApi({ token: userDetails.token, user_id: id })
+      .then(() => {
+        dispatch(deleteUser(id));
+        setAlertText('User Deleted Successfully');
+        setVisible(true);
+      })
+      .catch((err) => {
+        if (err == 'Error: Request failed with status code 404') {
+          setAlertText('Delete Failed: Bad Request');
+        } else if (err == 'Error: Request failed with status code 401') {
+          setAlertText('Delete Failed: Unauthorized');
+        } else {
+          setAlertText('Delete Failed: Internal Server Error');
+        }
+        setVisible(true);
+      });
+  };
   user_details.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Email Id: ' + email} />
   );
@@ -41,18 +59,6 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
   user_location_details.push(
     <CardTextWrapper className={'font-weight-bold'} key={i++} text={'Country: ' + country} />
   );
-  // column_content.push(
-  //   <ColumnWrapper
-  //     key={i++}
-  //     className={'col_one'}
-  //     md={2}
-  //     xs={2}
-  //     sm={2}
-  //     lg={2}
-  //     xl={2}
-  //     data={<CardImgWrapper src={image_url} className="img_fluid img_style" />}
-  //   />
-  // );
   column_content.push(
     <ColumnWrapper
       key={i++}
@@ -74,28 +80,11 @@ const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
       key={i++}
       className={'col_five'}
       data={
-        <ButtonWrapper
+        <ModalWrapper
           buttonText={'Delete'}
-          outline
           color={'danger'}
-          onClick={() => {
-            deleteUserApi({ token: userDetails.token, user_id: id })
-              .then(() => {
-                dispatch(deleteUser(id));
-                setAlertText('User Deleted Successfully');
-                setVisible(true);
-              })
-              .catch((err) => {
-                if (err == 'Error: Request failed with status code 404') {
-                  setAlertText('Delete Failed: Bad Request');
-                } else if (err == 'Error: Request failed with status code 401') {
-                  setAlertText('Delete Failed: Unauthorized');
-                } else {
-                  setAlertText('Delete Failed: Internal Server Error');
-                }
-                setVisible(true);
-              });
-          }}
+          onClickWrapper={onClickWrapper}
+          modalTitle={'Do you really want to remove this user?'}
         />
       }
     />
