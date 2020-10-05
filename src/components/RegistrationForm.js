@@ -38,6 +38,10 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     isLoading
   } = formState;
   const uploadImage = (e) => {
+    if (e.target.files.length === 0) {
+      dispatch(setField('imageUrl', ''));
+      return;
+    }
     const files = e.target.files;
     let data1 = new FormData();
     data1.append('file', files[0]);
