@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormCard from './FormCard';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';
@@ -8,7 +8,7 @@ import ImagePreviewContainer from '../containers/ImagePreviewContainer';
 
 const UpdateProductComponent = ({ validateData, dispatch, formState }) => {
   const { imageUrl } = formState;
-
+  const [currentImage, setCurrentImage] = useState(imageUrl);
   return (
     <ContainerWrapper
       styleClass={'pt-3 text-center h-100'}
@@ -29,11 +29,18 @@ const UpdateProductComponent = ({ validateData, dispatch, formState }) => {
               />
               <ImagePreviewContainer
                 imageUrl={
-                  imageUrl === null
-                    ? `${process.env.REACT_APP_SERVER_URL}${profile.profile_image}`
+                  imageUrl === null || imageUrl === currentImage
+                    ? `${process.env.REACT_APP_SERVER_URL}${currentImage}`
                     : imageUrl
                 }
-                message={imageUrl === '' ? 'Product Image (current)' : 'Product Image (preview)'}
+                message={
+                  imageUrl === null || imageUrl === currentImage
+                    ? 'Product Image (current)'
+                    : 'Product Image (preview)'
+                }
+                altrImageUrl={
+                  'https://lh3.googleusercontent.com/proxy/-AbfZYmBs73YKKTYVym-eHFdT_gCDvsW0JkWJdciwxbuKJ9-oY7GmmXHCnLfdpE_06yG3Lz4lYsaDCz-ROiw2OzZDAXyde52uCM3ddqpYMF9BeEZ9YANDHGCP7tIc4ywGuI4H49iKbZfI04VEw'
+                }
               />
             </>
           }

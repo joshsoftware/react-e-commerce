@@ -57,7 +57,7 @@ const updateProductReducer = (state = initialState, action) => {
       newFormState.size = data.size;
       newFormState.category = data.category;
       newFormState.brand = data.brand;
-      //newFormState.imageUrl = data.image_urls[0];
+      newFormState.imageUrl = data.image_urls === 'undefined' ? null : data.image_urls[0];
       return newFormState;
     }
     case FORM_ACTIONS.RESET_STATE: {

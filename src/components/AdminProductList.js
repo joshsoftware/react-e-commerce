@@ -16,10 +16,12 @@ import { Link } from 'react-router-dom';
 import { alertMessage } from '../actions/alertActions';
 import alertReducer from '../reducers/alertReducer';
 import { setFormState } from '../actions/formActions';
+import updateProductReducer from '../reducers/updateProductReducer';
 
 const AdminProductList = ({ item, dispatch }) => {
   let { product_title, image_urls, product_price, id } = item;
   const alertDispatch = useDispatch(alertReducer);
+  const updateProductDispatch = useDispatch(updateProductReducer);
   const { userDetails } = useSelector((state) => state.loginReducer);
   let column_content = [];
   let i = 0;
@@ -27,7 +29,7 @@ const AdminProductList = ({ item, dispatch }) => {
     <ButtonWrapper
       onClick={() => {
         dispatch(setUpdateProductId(id));
-        dispatch(setFormState(item));
+        updateProductDispatch(setFormState(item));
       }}
       buttonText={'Update Product'}
     />

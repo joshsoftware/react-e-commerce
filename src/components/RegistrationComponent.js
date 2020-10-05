@@ -27,7 +27,13 @@ const RegistrationComponent = ({ validateData, dispatch, formState }) => {
                   />
                 }
               />
-              <ImagePreviewContainer imageUrl={imageUrl} />
+              <ImagePreviewContainer
+                imageUrl={imageUrl}
+                altrImageUrl={
+                  'https://lh3.googleusercontent.com/proxy/-AbfZYmBs73YKKTYVym-eHFdT_gCDvsW0JkWJdciwxbuKJ9-oY7GmmXHCnLfdpE_06yG3Lz4lYsaDCz-ROiw2OzZDAXyde52uCM3ddqpYMF9BeEZ9YANDHGCP7tIc4ywGuI4H49iKbZfI04VEw'
+                }
+                message={'Profile Picture'}
+              />
             </>
           }
         />

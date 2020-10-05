@@ -3,13 +3,12 @@ import ColumnWrapper from '../components/ColumnWrapper';
 import ImageComponent from '../components/ImageComponent';
 import PropTypes from 'prop-types';
 
-const ImagePreviewContainer = ({ imageUrl, message }) => {
+const ImagePreviewContainer = ({ imageUrl, message, altrImageUrl }) => {
   const [imgUrl, setImgUrl] = useState('');
   let reader = new FileReader();
   reader.onload = () => {
     if (reader.readyState === 2) {
       setImgUrl(reader.result);
-      console.log(typeof reader.result);
     }
   };
   useEffect(() => {
@@ -27,11 +26,7 @@ const ImagePreviewContainer = ({ imageUrl, message }) => {
       data={
         <>
           <ImageComponent
-            src={
-              imageUrl === ''
-                ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-                : imgUrl
-            }
+            src={imageUrl === '' ? altrImageUrl : imgUrl}
             className={'image_size img-thumbnail'}
             alt="profile image"
           />
@@ -49,5 +44,6 @@ export default ImagePreviewContainer;
 
 ImagePreviewContainer.propTypes = {
   imageUrl: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  message: PropTypes.string
+  message: PropTypes.string,
+  altrImageUrl: PropTypes.string
 };

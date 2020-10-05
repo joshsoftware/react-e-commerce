@@ -147,6 +147,12 @@ export const loginFailed = (error) => {
   };
 };
 
+export const setFormState1 = (data) => {
+  return {
+    type: FORM_ACTIONS.SET_FORM_STATE1,
+    value: data
+  };
+};
 // export const loginOAuthRequest = (data) => {
 //   return {
 //     type: FORM_ACTIONS.LOGINOAUTH_REQUEST,

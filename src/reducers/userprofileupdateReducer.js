@@ -29,7 +29,7 @@ const userprofileupdateReducer = (state = initialState, action) => {
         addressError: null
       };
     }
-    case FORM_ACTIONS.SET_FORM_STATE: {
+    case FORM_ACTIONS.SET_FORM_STATE1: {
       let newFormState = initialState,
         data = action.value;
       newFormState.firstname = data.first_name;
@@ -45,7 +45,7 @@ const userprofileupdateReducer = (state = initialState, action) => {
         newFormState.state = data.state;
       }
       newFormState.password = '';
-      //newFormState.imageUrl = data.image_urls[0];
+      newFormState.imageUrl = data.profile_image;
       return newFormState;
     }
     case FORM_ACTIONS.RESET_STATE:

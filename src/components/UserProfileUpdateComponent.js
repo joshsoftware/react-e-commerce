@@ -40,11 +40,16 @@ const UserProfileUpdateComponent = ({ validateData, dispatch, formState }) => {
                 />
                 <ImagePreviewContainer
                   imageUrl={
-                    imageUrl === ''
+                    imageUrl === profile.profile_image || imageUrl === ''
                       ? `${process.env.REACT_APP_SERVER_URL}${profile.profile_image}`
                       : imageUrl
                   }
-                  message={imageUrl === '' ? 'current' : 'preview'}
+                  message={
+                    imageUrl === '' || imageUrl === profile.profile_image ? 'current' : 'preview'
+                  }
+                  altrImageUrl={
+                    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+                  }
                 />
               </>
             }

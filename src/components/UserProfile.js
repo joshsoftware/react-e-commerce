@@ -6,7 +6,7 @@ import { getUserProfile } from '../actions/userprofileAction';
 import NavigationBarComponent from './NavigationBarComponent';
 import Footer from './Footer';
 import userprofileupdateReducer from '../reducers/userprofileupdateReducer';
-import { setUpdated, setFormState } from '../actions/formActions';
+import { setUpdated } from '../actions/formActions';
 import ContainerWrapper from './ContainerWrapper';
 import RenderData from './RenderData';
 import CartHeader from './CartHeader';
@@ -18,9 +18,9 @@ import AlertWrapper from '../components/AlertWrapper';
 import ColumnWrapper from './ColumnWrapper';
 import ImageComponent from './ImageComponent';
 import './CartItem.css';
+import { setFormState1 } from '../actions/userprofileupdateAction';
 
 const UserProfile = () => {
-  // const { userDetails } = useSelector((state) => state.loginReducer);
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const { profile } = useSelector((state) => state.userprofileReducer);
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const UserProfile = () => {
         <ButtonWrapper
           style="m-auto"
           onClick={() => {
-            userProfileUpdateDispatch(setFormState(profile));
+            userProfileUpdateDispatch(setFormState1(profile));
           }}
           buttonText={'Edit Profile'}
         />

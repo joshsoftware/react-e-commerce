@@ -15,7 +15,6 @@ const UpdateProductContainer = () => {
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
   const productListDispatch = useDispatch(productListReducer);
-  // const { userDetails } = useSelector((state) => state.loginReducer);
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const updateProductState = useSelector((state) => state.updateProductReducer);
   const { updateProductId } = useSelector((state) => state.productListReducer);
