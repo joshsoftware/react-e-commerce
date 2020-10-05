@@ -72,6 +72,10 @@ let productTitle = {
 const UpdateProductForm = ({ validateData, dispatch, formState }) => {
   const uploadImage = (e) => {
     const files = e.target.files;
+    if (e.target.files.length === 0) {
+      dispatch(setField('imageUrl', null));
+      return;
+    }
     let data1 = new FormData();
     data1.append('file', files[0]);
     dispatch(setField('imageUrl', data1.get('file')));

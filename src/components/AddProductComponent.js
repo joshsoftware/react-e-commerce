@@ -26,7 +26,10 @@ const AddProductComponent = ({ validateData, dispatch, formState }) => {
                   />
                 }
               />
-              <ImagePreviewContainer imageUrl={imageUrl} />
+              <ImagePreviewContainer
+                imageUrl={imageUrl === null ? '' : imageUrl}
+                message={'Product Image'}
+              />
             </>
           }
         />
