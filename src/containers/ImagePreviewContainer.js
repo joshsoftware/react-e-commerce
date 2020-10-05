@@ -37,7 +37,7 @@ const ImagePreviewContainer = ({ imageUrl, message }) => {
           />
           <p className={`mb-0 ${imageUrl === '' ? 'text-danger' : 'text-success'}`}>
             {' '}
-            {`Profile Picture (${message})`}
+            {`${message}`}
           </p>
         </>
       }
