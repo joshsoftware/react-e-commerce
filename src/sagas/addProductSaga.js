@@ -1,7 +1,7 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { addProduct } from '../apis/addProductAPI';
-import { setProductAdded } from '../actions/formActions';
+import { resetState, setProductAdded } from '../actions/formActions';
 import { alertMessage } from '../actions/alertActions';
 
 //worker saga
@@ -10,9 +10,10 @@ function* addProductWorkerSaga(action) {
     yield call(addProduct, action.value);
     yield put(alertMessage({ alert: true, alertText: 'Product Added Successfully' }));
     yield put(setProductAdded(true));
+    yield put(resetState());
   } catch (error) {
     if (error == 'Error: Request failed with status code 400') {
-      yield put(alertMessage({ alert: true, alertText: 'Bad Request' }));
+      yield put(alertMessage({ alert: true, alertText: 'product_title already exists' }));
     } else if (error == 'Error: Request failed with status code 401') {
       yield put(alertMessage({ alert: true, alertText: 'Unauthorised Access' }));
     } else if (error == 'Error: Request failed with status code 404') {

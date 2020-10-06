@@ -6,7 +6,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import AdminProductList from '../components/AdminProductList';
 import ContainerWrapper from '../components/ContainerWrapper';
-import { getProductList } from '../actions/productListActions';
+import { getProductList, resetProductList } from '../actions/productListActions';
 import addProductReducer from '../reducers/addProductReducer';
 import updateProductReducer from '../reducers/updateProductReducer';
 import { setProductAdded, setProductUpdated } from '../actions/formActions';
@@ -26,7 +26,6 @@ const AdminDashboardContainer = () => {
   addProductDispatch(setProductAdded(false));
   updateProductDispatch(setProductUpdated(false));
   const { totalPages } = useSelector((state) => state.productListReducer);
-  // const { userDetails } = useSelector((state) => state.loginReducer);
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
 
   const timeOutFunction = async () => {
@@ -48,9 +47,8 @@ const AdminDashboardContainer = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    if (productList.length === 0) {
-      setLoading(true);
-    }
+    dispatch(resetProductList());
+    setLoading(true);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

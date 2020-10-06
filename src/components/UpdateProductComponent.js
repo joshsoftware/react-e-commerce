@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormCard from './FormCard';
 import ColumnWrapper from './ColumnWrapper';
 import RowWrapper from './RowWrapper';
@@ -9,6 +9,13 @@ import ImagePreviewContainer from '../containers/ImagePreviewContainer';
 const UpdateProductComponent = ({ validateData, dispatch, formState }) => {
   const { imageUrl } = formState;
   const [currentImage, setCurrentImage] = useState(imageUrl);
+  const [typeFlag, setTypeFlag] = useState(false);
+  let array = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/webp'];
+  useEffect(() => {
+    if (imageUrl !== null) {
+      setTypeFlag(array.includes(imageUrl.type));
+    }
+  }, [imageUrl]);
   return (
     <ContainerWrapper
       styleClass={'pt-3 text-center h-100'}
@@ -29,12 +36,12 @@ const UpdateProductComponent = ({ validateData, dispatch, formState }) => {
               />
               <ImagePreviewContainer
                 imageUrl={
-                  imageUrl === null || imageUrl === currentImage
+                  imageUrl === null || imageUrl === currentImage || !typeFlag
                     ? `${process.env.REACT_APP_SERVER_URL}${currentImage}`
                     : imageUrl
                 }
                 message={
-                  imageUrl === null || imageUrl === currentImage
+                  imageUrl === null || imageUrl === currentImage || !typeFlag
                     ? 'Product Image (current)'
                     : 'Product Image (preview)'
                 }

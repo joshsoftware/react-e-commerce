@@ -44,7 +44,7 @@ const addProductReducer = (state = initialState, action) => {
       };
     }
     case FORM_ACTIONS.RESET_STATE:
-      return initialState;
+      return { ...state, ...initialState };
     case FORM_ACTIONS.SET_FIELD: {
       return {
         ...state,

@@ -19,7 +19,6 @@ import { setFormState } from '../actions/formActions';
 import updateProductReducer from '../reducers/updateProductReducer';
 import ModalWrapper from './ModalWrapper';
 
-
 const AdminProductList = ({ item, dispatch }) => {
   let { product_title, image_urls, product_price, id } = item;
   const alertDispatch = useDispatch(alertReducer);

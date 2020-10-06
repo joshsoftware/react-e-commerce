@@ -125,7 +125,6 @@ const RegistrationContainer = () => {
               imageUrl
             })
           );
-          dispatch(resetState());
           dispatch(setIsLoading(false));
         }
       });

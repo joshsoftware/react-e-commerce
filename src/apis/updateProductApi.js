@@ -19,6 +19,7 @@ const updateProduct = ({
     product_price = productPrice,
     category_id = categoryId;
   let image_url = imageUrl;
+  console.log('type of ', typeof image_url);
 
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
@@ -55,7 +56,7 @@ const updateProduct = ({
   if (size !== '') {
     data.append('size', size);
   }
-  if (image_url !== null) {
+  if (image_url !== null && typeof image_url !== 'string') {
     data.append('images', image_url);
   }
   return apiHelper(

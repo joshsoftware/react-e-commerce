@@ -4,7 +4,7 @@ import ProductCategoryContainer from '../containers/ProductCategoryContainer';
 import { Form } from 'reactstrap';
 import PropTypes from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
-import { setField } from '../actions/formActions';
+import { resetState, setField } from '../actions/formActions';
 import RowWrapper from '../components/RowWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
 import { Link } from 'react-router-dom';
@@ -71,6 +71,7 @@ let productTitle = {
   };
 
 const AddProductForm = ({ validateData, dispatch, formState }) => {
+  console.log('formState', formState);
   const uploadImage = (e) => {
     const files = e.target.files;
     if (e.target.files.length === 0) {
@@ -191,6 +192,7 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
         onSubmit={(e) => {
           e.preventDefault();
           validateData();
+          // dispatch(resetState());
         }}>
         <FormField formfield={productTitle} />
         <FormField formfield={description} />

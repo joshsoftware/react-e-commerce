@@ -29,7 +29,6 @@ const AddProductContainer = () => {
     }
   }, [alert]);
   const productListDispatch = useDispatch(productListReducer);
-  // const { userDetails } = useSelector((state) => state.loginReducer);
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const addProductState = useSelector((state) => state.addProductReducer);
   const {
@@ -193,7 +192,7 @@ const AddProductContainer = () => {
               token
             })
           );
-          dispatch(resetState());
+          // dispatch(resetState());
           productListDispatch(resetProductList());
         }
       });

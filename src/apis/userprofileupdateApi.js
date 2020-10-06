@@ -19,7 +19,9 @@ const userprofileupdateApi = ({
   data.append('city', form_city);
   data.append('password', password);
   data.append('address', address);
-  data.append('profile_image', imageUrl);
+  if (typeof imageUrl !== 'string') {
+    data.append('profile_image', imageUrl);
+  }
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token

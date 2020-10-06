@@ -10,7 +10,6 @@ import Footer from '../components/Footer';
 
 const UserProfileUpdateContainer = () => {
   const dispatch = useDispatch();
-  // const { userDetails } = useSelector((state) => state.loginReducer);
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
@@ -39,6 +38,9 @@ const UserProfileUpdateContainer = () => {
     address: yup.string(),
     imageUrl: yup.mixed().test('extension', 'allowed files jpg, jpeg, gif, webp, png', (value) => {
       let array = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
+      if (typeof value === 'string' && value.includes('assets')) {
+        return true;
+      }
       if (value !== '') {
         return array.includes(value.type);
       }

@@ -16,7 +16,6 @@ const FormField = ({ formfield }) => {
     value,
     onChange,
     invalid,
-    autoComplete,
     inputClassName
   } = formfield;
   return (
@@ -29,7 +28,6 @@ const FormField = ({ formfield }) => {
         value={value}
         onChange={onChange}
         invalid={invalid}
-        autoComplete={autoComplete}
         className={inputClassName}
       />
       <FormFeedbackWrapper message={message} />
