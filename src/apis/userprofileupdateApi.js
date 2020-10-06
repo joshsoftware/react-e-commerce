@@ -17,7 +17,7 @@ const userprofileupdateApi = ({
   data.append('country', form_country);
   data.append('state', form_state);
   data.append('city', form_city);
-  data.append('password', password);
+  data.append('password', password === undefined ? '' : password);
   data.append('address', address);
   if (typeof imageUrl !== 'string') {
     data.append('profile_image', imageUrl);

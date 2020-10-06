@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
@@ -13,49 +13,23 @@ const UserProfileUpdateContainer = () => {
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   const { token } = userDetails;
   const userprofileupdatestate = useSelector((state) => state.userprofileupdateReducer);
-  const {
-    firstname,
-    lastname,
-    password,
-    country,
-    state,
-    city,
-    address,
-    imageUrl
-  } = userprofileupdatestate;
-  const [passwordErr, setPasswordErr] = useState('');
+  const { firstname, lastname, country, state, city, address, imageUrl } = userprofileupdatestate;
+
   const schema = yup.object().shape({
     firstname: yup.string(),
     lastname: yup.string(),
     password: yup
       .string()
-      .test('password validation', `${passwordErr}`, (value) => {
-        let regex1 = /^(?=.*[A-Za-z])/,
-          regex2 = /(?=.*\d)/,
-          regex3 = /(?=.*[@$!%*#?&\s])/,
-          regex4 = /[A-Za-z\d@$!%*#?&\s]{0,}$/;
-        if (value === '') {
+      .notRequired()
+      .matches(/^(?=.*[A-Za-z])/, 'must contain one or more uppercase or lowercase characters')
+      .matches(/(?=.*\d)/, 'must contain one or more numeric characters')
+      .matches(/(?=.*[@$!%*#?&\s])/, 'must contain one or more special characters')
+      .matches(/[A-Za-z\d@$!%*#?&\s]{0,}$/, 'must contain atleast 8 characters')
+      .test('size', 'password must be at least 8 characters', (value) => {
+        console.log('in test', value);
+        if (value === undefined) {
           return true;
         }
-        if (!regex4.test(value)) {
-          setPasswordErr('atleast 8 characters');
-          return false;
-        }
-        if (!regex1.test(value)) {
-          setPasswordErr('must contain one or more uppercase or lowercase characters');
-          return false;
-        }
-        if (!regex2.test(value)) {
-          setPasswordErr('must contain one or more numeric characters');
-          return false;
-        }
-        if (!regex3.test(value)) {
-          setPasswordErr('must contain one or more special characters');
-          return false;
-        }
-        return true;
-      })
-      .test('size', 'password must be at least 8 characters', (value) => {
         if (value === '' || value.length >= 8) {
           return true;
         } else {
@@ -78,6 +52,10 @@ const UserProfileUpdateContainer = () => {
 
   const validateData = () => {
     dispatch(resetErrors());
+    let password = userprofileupdatestate.password;
+    if (password === '') {
+      password = undefined;
+    }
     schema
       .isValid({ firstname, lastname, password, country, state, city, address, imageUrl })
       .then(function (valid) {
