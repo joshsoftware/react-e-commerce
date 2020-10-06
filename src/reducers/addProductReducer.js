@@ -20,6 +20,7 @@ const initialState = {
   taxError: null,
   stockError: null,
   brandError: null,
+  categoryError: null,
   colorError: null,
   sizeError: null,
   imageUrlError: null,
@@ -38,6 +39,7 @@ const addProductReducer = (state = initialState, action) => {
         taxError: null,
         stockError: null,
         brandError: null,
+        categoryError: null,
         colorError: null,
         sizeError: null,
         imageUrlError: null
@@ -65,6 +67,8 @@ const addProductReducer = (state = initialState, action) => {
       return { ...state, stockError: action.value };
     case PRODUCT_ACTIONS.SET_BRAND_ERROR:
       return { ...state, brandError: action.value };
+    case PRODUCT_ACTIONS.SET_CATEGORY_ERROR:
+      return { ...state, categoryError: action.value };
     case PRODUCT_ACTIONS.SET_COLOR_ERROR:
       return { ...state, colorError: action.value };
     case PRODUCT_ACTIONS.SET_SIZE_ERROR:
