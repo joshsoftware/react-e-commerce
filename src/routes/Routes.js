@@ -11,6 +11,7 @@ import AddProductContainer from '../containers/AddProductContainer';
 import UpdateProductContainer from '../containers/UpdateProductContainer';
 import AdminMainDashboardContainer from '../containers/AdminMainDashboardContainer';
 import AdminUserDashboardContainer from '../containers/AdminUserDashboardContainer';
+import SetPasswordContainer from '../containers/SetPasswordContainer';
 
 const Routes = () => {
   return (
@@ -48,6 +49,9 @@ const Routes = () => {
         </Route>
         <Route path="/admin/updateproduct" exact={true}>
           <UpdateProductContainer />
+        </Route>
+        <Route path="/setpassword" exact={true}>
+          <SetPasswordContainer />
         </Route>
       </Switch>
     </Router>

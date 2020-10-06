@@ -11,6 +11,7 @@ import updateProductReducer from './updateProductReducer';
 import searbarReducer from './searchbarReducer';
 import alertReducer from './alertReducer';
 import userListReducer from './userListReducer';
+import setPasswordReducer from './setPasswordReducer';
 
 const combinedReducer = () => {
   return combineReducers({
@@ -25,7 +26,8 @@ const combinedReducer = () => {
     addProductReducer,
     updateProductReducer,
     alertReducer,
-    userListReducer
+    userListReducer,
+    setPasswordReducer
   });
 };
 
