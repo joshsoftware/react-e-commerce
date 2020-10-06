@@ -7,6 +7,8 @@ import CardBodyWrapper from './CardBodyWrapper';
 import UserProfileUpdateForm from './UserProfileUpdateForm';
 import AddProductForm from './AddProductForm';
 import UpdateProductForm from './UpdateProductForm';
+import SetPasswordForm from './SetPasswordForm';
+
 const FormCard = ({ type, validateData, dispatch, formState }) => {
   if (type === 'registration') {
     return (
@@ -75,6 +77,22 @@ const FormCard = ({ type, validateData, dispatch, formState }) => {
           <CardBodyWrapper
             body_content={
               <UpdateProductForm
+                validateData={validateData}
+                dispatch={dispatch}
+                formState={formState}
+              />
+            }
+          />
+        }
+      />
+    );
+  } else if (type === 'set-password') {
+    return (
+      <FormCardComponent
+        data={
+          <CardBodyWrapper
+            body_content={
+              <SetPasswordForm
                 validateData={validateData}
                 dispatch={dispatch}
                 formState={formState}
