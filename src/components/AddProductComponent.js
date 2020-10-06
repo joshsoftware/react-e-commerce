@@ -36,7 +36,7 @@ const AddProductComponent = ({ validateData, dispatch, formState }) => {
               <ImagePreviewContainer
                 imageUrl={imageUrl === null || !typeFlag ? '' : imageUrl}
                 altrImageUrl={
-                  'https://lh3.googleusercontent.com/proxy/-AbfZYmBs73YKKTYVym-eHFdT_gCDvsW0JkWJdciwxbuKJ9-oY7GmmXHCnLfdpE_06yG3Lz4lYsaDCz-ROiw2OzZDAXyde52uCM3ddqpYMF9BeEZ9YANDHGCP7tIc4ywGuI4H49iKbZfI04VEw'
+                  'https://developer.apple.com/library/archive/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Art/defaultphoto_2x.png'
                 }
                 message={imageUrlError !== null ? `${imageUrlError}` : 'Product Image'}
               />
