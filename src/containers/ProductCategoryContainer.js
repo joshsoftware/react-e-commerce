@@ -82,6 +82,9 @@ const ProductCategoryContainer = ({ dispatch, formState, isRequired }) => {
         state={formState.category}
         dispatch={dispatch}
       />
+      <span style={{ color: '#cc0000', fontSize: '75%', padding: 0, margin: 0 }}>
+        {formState.categoryError}
+      </span>
       <br />
       <ContainerWrapper data={ar2} />
     </>
