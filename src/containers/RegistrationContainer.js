@@ -35,11 +35,47 @@ const RegistrationContainer = () => {
     address,
     imageUrl
   } = registrationState;
+  // const [passwordErr, setPasswordErr] = useState('');
   const schema = yup.object().shape({
     firstname: yup.string().required(),
     lastname: yup.string(),
     email: yup.string().email().required(),
-    password: yup.string().min(8).required(),
+    password: yup
+      .string()
+      .min(8, 'Password is too short - should be 8 chars minimum.')
+      // .matches(
+      //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&\s])[A-Za-z\d@$!%*#?&\s]{8,}$/,
+      //   `-The password length must be greater than or equal to 8\n
+      //   -The password must contain one or more uppercase, lowercase, numeric and special characters`
+      // )
+      // .test('password validation', `${passwordErr}`, (value) => {
+      //   let regex1 = /^(?=.*[A-Za-z])/,
+      //     regex2 = /(?=.*\d)/,
+      //     regex3 = /(?=.*[@$!%*#?&\s])/,
+      //     regex4 = /[A-Za-z\d@$!%*#?&\s]{8,}$/;
+      //   if (!regex4.test(value)) {
+      //     setPasswordErr('atleast 8 characters');
+      //     return false;
+      //   }
+      //   if (!regex1.test(value)) {
+      //     setPasswordErr('must contain one or more uppercase or lowercase characters');
+      //     return false;
+      //   }
+      //   if (!regex2.test(value)) {
+      //     setPasswordErr('must contain one or more numeric characters');
+      //     return false;
+      //   }
+      //   if (!regex3.test(value)) {
+      //     setPasswordErr('must contain one or more special characters');
+      //     return false;
+      //   }
+      //   return true;
+      // })
+      .matches(/^(?=.*[A-Za-z])/, 'must contain one or more uppercase or lowercase characters')
+      .matches(/(?=.*\d)/, 'must contain one or more numeric characters')
+      .matches(/(?=.*[@$!%*#?&\s])/, 'must contain one or more special characters')
+      .matches(/[A-Za-z\d@$!%*#?&\s]{8,}$/, 'must contain atleast 8 characters')
+      .required('No password provided'),
     country: yup.string(),
     state: yup.string(),
     city: yup.string(),

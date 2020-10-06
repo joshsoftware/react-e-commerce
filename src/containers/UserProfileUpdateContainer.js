@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
@@ -24,17 +24,45 @@ const UserProfileUpdateContainer = () => {
     address,
     imageUrl
   } = userprofileupdatestate;
-
+  const [passwordErr, setPasswordErr] = useState('');
   const schema = yup.object().shape({
     firstname: yup.string(),
     lastname: yup.string(),
-    password: yup.string().test('size', 'password must be at least 8 characters', (value) => {
-      if (value === '' || value.length >= 8) {
+    password: yup
+      .string()
+      .test('password validation', `${passwordErr}`, (value) => {
+        let regex1 = /^(?=.*[A-Za-z])/,
+          regex2 = /(?=.*\d)/,
+          regex3 = /(?=.*[@$!%*#?&\s])/,
+          regex4 = /[A-Za-z\d@$!%*#?&\s]{0,}$/;
+        if (value === '') {
+          return true;
+        }
+        if (!regex4.test(value)) {
+          setPasswordErr('atleast 8 characters');
+          return false;
+        }
+        if (!regex1.test(value)) {
+          setPasswordErr('must contain one or more uppercase or lowercase characters');
+          return false;
+        }
+        if (!regex2.test(value)) {
+          setPasswordErr('must contain one or more numeric characters');
+          return false;
+        }
+        if (!regex3.test(value)) {
+          setPasswordErr('must contain one or more special characters');
+          return false;
+        }
         return true;
-      } else {
-        return false;
-      }
-    }),
+      })
+      .test('size', 'password must be at least 8 characters', (value) => {
+        if (value === '' || value.length >= 8) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
     city: yup.string(),
     address: yup.string(),
     imageUrl: yup.mixed().test('extension', 'allowed files jpg, jpeg, gif, webp, png', (value) => {
