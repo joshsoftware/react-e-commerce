@@ -1,6 +1,6 @@
 import { FORM_ACTIONS } from '../shared/actionConstants';
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { setUpdated, updateFailed } from '../actions/formActions';
+import { resetState, setUpdated, updateFailed } from '../actions/formActions';
 import userprofileupdateApi from '../apis/userprofileupdateApi';
 import { alertMessage } from '../actions/alertActions';
 
@@ -12,6 +12,7 @@ function* userprofileupdateWorkerSaga(action) {
       alertMessage({ alert: true, alertText: 'profile Updated Successfully', color: 'info' })
     );
     yield put(setUpdated(true));
+    yield put(resetState());
   } catch (error) {
     if (
       error == 'Error: Request failed with status code 401' ||

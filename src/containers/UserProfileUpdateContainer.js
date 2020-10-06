@@ -90,7 +90,6 @@ const UserProfileUpdateContainer = () => {
               token
             })
           );
-          dispatch(resetState());
         }
       });
   };
