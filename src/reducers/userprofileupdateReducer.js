@@ -44,8 +44,7 @@ const userprofileupdateReducer = (state = initialState, action) => {
       if (data.state !== '') {
         newFormState.state = data.state;
       }
-      newFormState.password = '';
-      //newFormState.imageUrl = data.image_urls[0];
+      newFormState.password = undefined;
       return newFormState;
     }
     case FORM_ACTIONS.RESET_STATE:
