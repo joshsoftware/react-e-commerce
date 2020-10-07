@@ -39,7 +39,6 @@ const FormPasswordField = (props) => {
         <ul style={{ 'padding-left': 15 }}>
           <li>Must be a minimum of 8 characters</li>
           <li>Must contain letters, numbers and symbols</li>
-          <li>Passwords must match</li>
         </ul>
       </p>
     </>
