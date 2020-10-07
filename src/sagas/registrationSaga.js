@@ -26,7 +26,7 @@ function* registrationWorkerSaga(action) {
       );
     } else {
       yield put(
-        alertMessage({ alert: true, alertText: error.response.data.error, color: 'danger' })
+        alertMessage({ alert: true, alertText: error.response.data.error.message, color: 'danger' })
       );
     }
   }

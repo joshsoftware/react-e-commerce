@@ -2,11 +2,20 @@ import { FORM_ACTIONS } from '../shared/actionConstants';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { alertMessage } from '../actions/alertActions';
 import verifyUserApi from '../apis/verifyUserApi';
+import { setField } from '../actions/formActions';
 
 //worker saga
 function* setPasswordWorkerSaga(action) {
   try {
     const { data } = yield call(verifyUserApi, action.value);
+    yield put(
+      alertMessage({
+        alert: true,
+        alertText: 'Successfully verified, please login to continue',
+        color: 'info'
+      })
+    );
+    yield put(setField('verified', true));
     console.log(data);
   } catch (error) {
     if (error.response.status == '400') {

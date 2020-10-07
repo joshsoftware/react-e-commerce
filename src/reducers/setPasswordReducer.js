@@ -4,7 +4,8 @@ const initialState = {
   password: '',
   confirmPassword: '',
   passwordError: null,
-  confirmPasswordError: null
+  confirmPasswordError: null,
+  verified: false
 };
 
 const setPasswordReducer = (state = initialState, action) => {

@@ -9,12 +9,14 @@ import {
   setIsLoading,
   loginRequest,
   setRegistered,
-  resetState
+  resetState,
+  setField
 } from '../actions/formActions';
 import registrationReducer from '../reducers/registrationReducer';
 import AlertWrapper from '../components/AlertWrapper';
 import alertReducer from '../reducers/alertReducer';
 import { alertMessage, alertRegistration } from '../actions/alertActions';
+import setPasswordReducer from '../reducers/setPasswordReducer';
 
 const LoginContainer = () => {
   const [alertState, setAlertState] = useState('');
@@ -25,11 +27,16 @@ const LoginContainer = () => {
   const alertDispatch = useDispatch(alertReducer);
   const registrationDispatch = useDispatch(registrationReducer);
   const { registered } = useSelector((state) => state.registrationReducer);
+  const setPasswordDispatch = useDispatch(setPasswordReducer);
+  const { verified } = useSelector((state) => state.setPasswordReducer);
   const result = useSelector((state) => state.loginReducer);
   const { email, password } = result;
   const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   useEffect(() => {
     dispatch(resetState());
+    if (verified) {
+      setPasswordDispatch(setField('verified', false));
+    }
   }, []);
   let schema = yup.object().shape({
     email: yup.string().email().required(),

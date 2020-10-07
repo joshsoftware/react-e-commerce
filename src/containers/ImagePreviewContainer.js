@@ -28,7 +28,7 @@ const ImagePreviewContainer = ({ imageUrl, message, altrImageUrl }) => {
           <ImageComponent
             src={imageUrl === '' ? altrImageUrl : imgUrl}
             className={'image_size img-thumbnail'}
-            alt="Image load failed"
+            alt="No Image To Preview"
           />
           <p className={`mb-0 ${imageUrl === '' ? 'text-danger' : 'text-success'}`}>
             {' '}

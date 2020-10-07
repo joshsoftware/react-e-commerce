@@ -3,11 +3,12 @@ import SetPassword from '../components/SetPassword';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { setErrors, resetErrors, resetState, setPasswordRequest } from '../actions/formActions';
+import { Redirect } from 'react-router-dom';
 
 const SetPasswordContainer = (props) => {
   const dispatch = useDispatch();
   const setPasswordState = useSelector((state) => state.setPasswordReducer);
-  const { password, confirmPassword } = setPasswordState;
+  const { password, confirmPassword, verified } = setPasswordState;
   const schema = yup.object().shape({
     password: yup
       .string()
@@ -38,7 +39,7 @@ const SetPasswordContainer = (props) => {
           });
         });
       } else {
-        let token = props.location.search.slice(7,props.location.search.length).trim();
+        let token = props.location.search.slice(7, props.location.search.length).trim();
         console.log('token', token);
         dispatch(setPasswordRequest({ password, token }));
         //dispatch(resetState());
@@ -46,6 +47,9 @@ const SetPasswordContainer = (props) => {
     });
   };
 
+  if (verified) {
+    return <Redirect to="/login" />;
+  }
   return (
     <SetPassword validateData={validateData} dispatch={dispatch} formState={setPasswordState} />
   );
