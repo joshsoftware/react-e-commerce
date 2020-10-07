@@ -14,10 +14,20 @@ function* registrationWorkerSaga(action) {
     yield put(setRegistered(true));
     yield put(resetState());
   } catch (error) {
-    if (error == 'Error: Request failed with status code 400') {
-      yield put(alertMessage({ alert: true, alertText: 'Email already exists', color: 'danger' }));
+    console.log('response', error.response);
+    if (error.response.status == '500') {
+      console.log('in hii', typeof error.response.statusText);
+      yield put(
+        alertMessage({
+          alert: true,
+          alertText: error.response.statusText,
+          color: 'danger'
+        })
+      );
     } else {
-      yield put(alertMessage({ alert: true, alertText: 'Internal Server Error', color: 'danger' }));
+      yield put(
+        alertMessage({ alert: true, alertText: error.response.data.error, color: 'danger' })
+      );
     }
   }
 }

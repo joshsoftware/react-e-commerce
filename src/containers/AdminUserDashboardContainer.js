@@ -12,6 +12,8 @@ import AlertWrapper from '../components/AlertWrapper';
 import { Form, FormFeedback, FormGroup, Label, Col, Input } from 'reactstrap';
 import * as yup from 'yup';
 import { userInvite } from '../apis/userApi';
+import { alertMessage } from '../actions/alertActions';
+import alertReducer from '../reducers/alertReducer';
 
 let emailObj = {
   field: 'exampleEmail',
@@ -22,6 +24,7 @@ let emailObj = {
 };
 
 const AdminUserDashboardContainer = () => {
+  const alertDispatch = useDispatch(alertReducer);
   const [alertText, setAlertText] = useState('');
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
@@ -181,7 +184,12 @@ const AdminUserDashboardContainer = () => {
   row_content.push(
     <ColumnWrapper
       data={
-        <Link className={'bg-dark text-white float-left'} to="/admindashboard">
+        <Link
+          className={'bg-dark text-white float-left'}
+          to="/admindashboard"
+          onClick={() => {
+            alertDispatch(alertMessage({ alert: false, alertText: '' }));
+          }}>
           {' '}
           {BackTo}{' '}
         </Link>

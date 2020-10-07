@@ -4,13 +4,16 @@ import ProductCategoryContainer from '../containers/ProductCategoryContainer';
 import { Form } from 'reactstrap';
 import PropTypes from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
-import { resetState, setField } from '../actions/formActions';
+import { setField } from '../actions/formActions';
 import RowWrapper from '../components/RowWrapper';
 import ColumnWrapper from '../components/ColumnWrapper';
 import { Link } from 'react-router-dom';
 import '../containers/AdminDashboardContainer.css';
 import '../images/levi.jpg';
 import './CartItem.css';
+import { useDispatch } from 'react-redux';
+import alertReducer from '../reducers/alertReducer';
+import { alertMessage } from '../actions/alertActions';
 
 let productTitle = {
     field: 'exampleProductTitle',
@@ -71,6 +74,7 @@ let productTitle = {
   };
 
 const AddProductForm = ({ validateData, dispatch, formState }) => {
+  const alertDispatch = useDispatch(alertReducer);
   console.log('formState', formState);
   const uploadImage = (e) => {
     const files = e.target.files;
@@ -174,7 +178,12 @@ const AddProductForm = ({ validateData, dispatch, formState }) => {
   row_content.push(
     <ColumnWrapper
       data={
-        <Link className={'bg-dark text-white float-left'} to="/admin/products">
+        <Link
+          className={'bg-dark text-white float-left'}
+          to="/admin/products"
+          onClick={() => {
+            alertDispatch(alertMessage({ alert: false, alertText: '' }));
+          }}>
           {' '}
           {BackTo}{' '}
         </Link>

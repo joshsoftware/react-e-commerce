@@ -50,9 +50,7 @@ const Routes = () => {
         <Route path="/admin/updateproduct" exact={true}>
           <UpdateProductContainer />
         </Route>
-        <Route path="/setpassword" exact={true}>
-          <SetPasswordContainer />
-        </Route>
+        <Route path="/verifyUser" render={(props) => <SetPasswordContainer {...props} />} />
       </Switch>
     </Router>
   );

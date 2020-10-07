@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { updateItemQuantity } from '../actions/cartActions';
 import { updateCartItemsApi } from '../apis/cartApi';
-// import { useSelector } from 'react-redux';
 import { updateProductStockApi, getProductByIdApi } from '../apis/productApi';
 import InputSpinnerWrapper from '../components/InputSpinnerWrapper';
 import ButtonWrapper from '../components/ButtonWrapper';
@@ -16,7 +15,7 @@ const InputSpinnerContainer = ({ id, quantity, dispatch, setVisible, setAlertTex
   const timeoutFunction = () => {
     setTimeout(() => {
       setVisible(false);
-    }, 5000);
+    }, 2000);
   };
 
   const setAlert = (text) => {

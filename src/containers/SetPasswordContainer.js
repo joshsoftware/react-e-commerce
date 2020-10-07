@@ -2,10 +2,9 @@ import React from 'react';
 import SetPassword from '../components/SetPassword';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
-import { setErrors, resetErrors, resetState } from '../actions/formActions';
-import setPasswordReducer from '../reducers/setPasswordReducer';
+import { setErrors, resetErrors, resetState, setPasswordRequest } from '../actions/formActions';
 
-const SetPasswordContainer = () => {
+const SetPasswordContainer = (props) => {
   const dispatch = useDispatch();
   const setPasswordState = useSelector((state) => state.setPasswordReducer);
   const { password, confirmPassword } = setPasswordState;
@@ -22,6 +21,7 @@ const SetPasswordContainer = () => {
       .string()
       .required('Confirm password is a required field')
       .test('Confirm Password', "Password Doesn't Match", (value) => {
+        console.log('vkjdljsdfkj');
         if (value !== password) {
           return false;
         }
@@ -29,6 +29,7 @@ const SetPasswordContainer = () => {
       })
   });
   const validateData = () => {
+    dispatch(resetErrors());
     schema.isValid({ password, confirmPassword }).then(function (valid) {
       if (!valid) {
         schema.validate({ password, confirmPassword }, { abortEarly: false }).catch((err) => {
@@ -37,7 +38,9 @@ const SetPasswordContainer = () => {
           });
         });
       } else {
-        //dispatch(loginRequest({ email, password }));
+        let token = props.location.search.slice(7,props.location.search.length).trim();
+        console.log('token', token);
+        dispatch(setPasswordRequest({ password, token }));
         //dispatch(resetState());
       }
     });

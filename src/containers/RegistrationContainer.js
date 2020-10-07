@@ -170,7 +170,7 @@ const RegistrationContainer = () => {
   const timeOutFunction = async () => {
     setTimeout(() => {
       alertDispatch(alertMessage({ alert: false, alertText: '' }));
-    }, 10000);
+    }, 2000);
   };
 
   useEffect(() => {

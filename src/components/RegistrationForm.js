@@ -10,6 +10,9 @@ import FormDropdownField from './FormDropdownField';
 import FormField from './FormField';
 import { setField } from '../actions/formActions';
 import './CartItem.css';
+import { alertMessage, alertRegistration } from '../actions/alertActions';
+import { useDispatch } from 'react-redux';
+import alertReducer from '../reducers/alertReducer';
 
 let imageUrl = {
   field: 'exampleImageURL',
@@ -37,6 +40,7 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
     addressError,
     isLoading
   } = formState;
+  const alertDispatch = useDispatch(alertReducer);
   const uploadImage = (e) => {
     if (e.target.files.length === 0) {
       dispatch(setField('imageUrl', ''));
@@ -103,7 +107,15 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
       <h6>
         Already registered?
         <span className="input-group-btn">
-          <Link to="/login"> Click to login</Link>
+          <Link
+            to="/login"
+            onClick={() => {
+              alertDispatch(alertRegistration({ alert: false, alertText: '' }));
+              alertDispatch(alertMessage({ alert: false, alertText: '' }));
+            }}>
+            {' '}
+            Click to login
+          </Link>
         </span>
       </h6>
     </>

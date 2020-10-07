@@ -39,7 +39,7 @@ const LoginContainer = () => {
     setTimeout(() => {
       alertDispatch(alertMessage({ alert: false, alertText: '' }));
       alertDispatch(alertRegistration({ alert: false, alertText: '' }));
-    }, 10000);
+    }, 2000);
   };
 
   useEffect(() => {

@@ -10,6 +10,9 @@ import ColumnWrapper from '../components/ColumnWrapper';
 import { Link } from 'react-router-dom';
 import '../containers/AdminDashboardContainer.css';
 import './CartItem.css';
+import { alertMessage } from '../actions/alertActions';
+import { useDispatch } from 'react-redux';
+import alertReducer from '../reducers/alertReducer';
 
 let productTitle = {
     field: 'exampleProductTitle',
@@ -70,6 +73,7 @@ let productTitle = {
   };
 
 const UpdateProductForm = ({ validateData, dispatch, formState }) => {
+  const alertDispatch = useDispatch(alertReducer);
   const uploadImage = (e) => {
     const files = e.target.files;
     if (e.target.files.length === 0) {
@@ -174,7 +178,12 @@ const UpdateProductForm = ({ validateData, dispatch, formState }) => {
   row_content.push(
     <ColumnWrapper
       data={
-        <Link className={'bg-dark text-white float-left'} to="/admin/products">
+        <Link
+          className={'bg-dark text-white float-left'}
+          to="/admin/products"
+          onClick={() => {
+            alertDispatch(alertMessage({ alert: false, alertText: '' }));
+          }}>
           {' '}
           {BackTo}{' '}
         </Link>

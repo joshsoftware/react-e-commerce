@@ -9,7 +9,7 @@ import { GoogleLogin } from 'react-google-login';
 import { loginOAuthRequest } from '../actions/formActions';
 import { Link } from 'react-router-dom';
 import alertReducer from '../reducers/alertReducer';
-import { alertLogin } from '../actions/alertActions';
+import { alertLogin, alertMessage } from '../actions/alertActions';
 
 const LoginForm = ({ validateData, dispatch, formState }) => {
   const { email, password, emailError, passwordError, isLoading } = formState;
@@ -62,7 +62,15 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
       <h6>
         Not registered?
         <span className="input-group-btn">
-          <Link to="/register"> Click to register</Link>
+          <Link
+            to="/register"
+            onClick={() => {
+              alertDispatch(alertLogin({ alert: false, alertText: '' }));
+              alertDispatch(alertMessage({ alert: false, alertText: '' }));
+            }}>
+            {' '}
+            Click to register
+          </Link>
         </span>
       </h6>
     </>

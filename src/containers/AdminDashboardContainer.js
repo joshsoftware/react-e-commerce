@@ -101,7 +101,12 @@ const AdminDashboardContainer = () => {
   row_content.push(
     <ColumnWrapper
       data={
-        <Link className={'bg-dark text-white float-left'} to="/admindashboard">
+        <Link
+          className={'bg-dark text-white float-left'}
+          to="/admindashboard"
+          onClick={() => {
+            alertDispatch(alertMessage({ alert: false, alertText: '' }));
+          }}>
           {' '}
           {BackTo}{' '}
         </Link>

@@ -11,19 +11,14 @@ function* loginWorkerSaga(action) {
     sessionStorage.setItem('userDetails', JSON.stringify(data));
     yield put(setUserDetails(data));
   } catch (error) {
-    if (error == 'Error: Request failed with status code 403') {
-      yield put(alertMessage({ alert: true, alertText: 'User Disabled!', color: 'danger' }));
-    } else if (error == 'Error: Request failed with status code 401') {
-      yield put(
-        alertMessage({
-          alert: true,
-          alertText: 'Login Failed : Enter Correct Credentials',
-          color: 'danger'
-        })
-      );
-    } else {
-      yield put(alertMessage({ alert: true, alertText: 'Internal Server Error', color: 'danger' }));
-    }
+    console.log('error ', error.response);
+    yield put(
+      alertMessage({
+        alert: true,
+        alertText: error.response.data.error.message,
+        color: 'danger'
+      })
+    );
   }
 }
 

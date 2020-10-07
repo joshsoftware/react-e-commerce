@@ -11,6 +11,7 @@ import addProductSaga from './addProductSaga';
 import updateProductSaga from './updateProductSaga';
 import searchbarSaga from './searchbarSaga';
 import userWatcherSaga from './userSaga';
+import setPasswordSaga from './setPasswordSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -25,6 +26,7 @@ export default function* rootSaga() {
     addProductSaga(),
     updateProductSaga(),
     searchbarSaga(),
-    userWatcherSaga()
+    userWatcherSaga(),
+    setPasswordSaga()
   ]);
 }

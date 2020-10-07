@@ -73,7 +73,9 @@ const AdminProductList = ({ item, dispatch }) => {
       xl={2}
       data={
         <CardImgWrapper
-          src={`${process.env.REACT_APP_SERVER_URL}${image_urls[0]}`}
+          src={`${process.env.REACT_APP_SERVER_URL}${
+            image_urls !== null ? image_urls[0] : 'no_image'
+          }`}
           className="img_fluid img_style"
         />
       }
