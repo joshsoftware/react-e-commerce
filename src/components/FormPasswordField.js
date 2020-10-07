@@ -32,10 +32,8 @@ const FormPasswordField = (props) => {
         style={{
           'text-align': 'left',
           'padding-top': -10,
-          'padding-bottom': 10,
           display: props.type === 'login' ? 'none' : 'block'
         }}>
-        <h5>Password Requirements</h5>
         <ul style={{ 'padding-left': 15 }}>
           <li>Must be a minimum of 8 characters</li>
           <li>Must contain letters, numbers and symbols</li>
