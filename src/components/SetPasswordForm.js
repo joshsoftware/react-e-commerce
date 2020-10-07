@@ -58,7 +58,7 @@ const SetPasswordForm = ({ validateData, dispatch, formState }) => {
   return (
     <>
       <h3>Set Password</h3>
-      <p>Create your password and log in to your account</p>
+      <h6>Create your password and log in to your account</h6>
       <hr />
       <Form
         onSubmit={(e) => {
