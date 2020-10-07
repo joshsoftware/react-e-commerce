@@ -261,7 +261,6 @@ export const setSearchproduct = (val) => {
 };
 
 export const setPasswordRequest = (val) => {
-  console.log(val);
   return {
     type: FORM_ACTIONS.SET_PASSWORD_REQUEST,
     value: val

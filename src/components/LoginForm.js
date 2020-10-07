@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import alertReducer from '../reducers/alertReducer';
 import { alertLogin, alertMessage } from '../actions/alertActions';
 
-const LoginForm = ({ validateData, dispatch, formState }) => {
+const LoginForm = ({ validateData, dispatch, formState, type }) => {
   const { email, password, emailError, passwordError, isLoading } = formState;
   const dispatchOAuth = useDispatch();
   const responseGoogle = (response) => {
@@ -40,6 +40,7 @@ const LoginForm = ({ validateData, dispatch, formState }) => {
           passwordError={passwordError}
           dispatch={dispatch}
           isRequired={true}
+          type={type}
         />
         <ButtonWrapper
           buttonText={'Login'}
@@ -82,5 +83,6 @@ export default LoginForm;
 LoginForm.propTypes = {
   validateData: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
-  formState: PropTypes.object.isRequired
+  formState: PropTypes.object.isRequired,
+  type: PropTypes.string
 };

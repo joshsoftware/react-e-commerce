@@ -14,9 +14,7 @@ function* registrationWorkerSaga(action) {
     yield put(setRegistered(true));
     yield put(resetState());
   } catch (error) {
-    console.log('response', error.response);
     if (error.response.status == '500') {
-      console.log('in hii', typeof error.response.statusText);
       yield put(
         alertMessage({
           alert: true,

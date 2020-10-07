@@ -11,12 +11,11 @@ function* setPasswordWorkerSaga(action) {
     yield put(
       alertMessage({
         alert: true,
-        alertText: 'Successfully verified, please login to continue',
+        alertText: data.data,
         color: 'info'
       })
     );
     yield put(setField('verified', true));
-    console.log(data);
   } catch (error) {
     if (error.response.status == '400') {
       yield put(

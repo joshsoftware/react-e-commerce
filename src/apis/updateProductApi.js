@@ -19,8 +19,6 @@ const updateProduct = ({
     product_price = productPrice,
     category_id = categoryId;
   let image_url = imageUrl;
-  console.log('type of ', typeof image_url);
-
   const headers = {
     Accept: 'application/vnd.e-commerce.v1',
     Token: token

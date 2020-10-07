@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Redirect } from 'react-router-dom';
-import { setErrors, resetErrors, updateRequest, resetState } from '../actions/formActions';
+import { setErrors, resetErrors, updateRequest } from '../actions/formActions';
 import UserProfileUpdateComponent from '../components/UserProfileUpdateComponent';
 import { initialState } from '../reducers/userprofileupdateReducer';
 import NavigationBarComponent from '../components/NavigationBarComponent';
@@ -26,7 +26,6 @@ const UserProfileUpdateContainer = () => {
       .matches(/(?=.*[@$!%*#?&\s])/, 'must contain one or more special characters')
       .matches(/[A-Za-z\d@$!%*#?&\s]{0,}$/, 'must contain atleast 8 characters')
       .test('size', 'password must be at least 8 characters', (value) => {
-        console.log('in test', value);
         if (value === undefined) {
           return true;
         }

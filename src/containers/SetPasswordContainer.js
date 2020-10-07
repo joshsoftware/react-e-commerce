@@ -2,7 +2,8 @@ import React from 'react';
 import SetPassword from '../components/SetPassword';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
-import { setErrors, resetErrors, resetState, setPasswordRequest } from '../actions/formActions';
+import PropTypes from 'prop-types';
+import { setErrors, resetErrors, setPasswordRequest } from '../actions/formActions';
 import { Redirect } from 'react-router-dom';
 
 const SetPasswordContainer = (props) => {
@@ -22,7 +23,6 @@ const SetPasswordContainer = (props) => {
       .string()
       .required('Confirm password is a required field')
       .test('Confirm Password', "Password Doesn't Match", (value) => {
-        console.log('vkjdljsdfkj');
         if (value !== password) {
           return false;
         }
@@ -40,7 +40,6 @@ const SetPasswordContainer = (props) => {
         });
       } else {
         let token = props.location.search.slice(7, props.location.search.length).trim();
-        console.log('token', token);
         dispatch(setPasswordRequest({ password, token }));
         //dispatch(resetState());
       }
@@ -55,3 +54,7 @@ const SetPasswordContainer = (props) => {
   );
 };
 export default SetPasswordContainer;
+
+SetPasswordContainer.propTypes = {
+  location: PropTypes.object
+};

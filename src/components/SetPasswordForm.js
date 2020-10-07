@@ -3,8 +3,6 @@ import FormField from './FormField';
 import { Form } from 'reactstrap';
 import PropTypes from 'prop-types';
 import ButtonWrapper from './ButtonWrapper';
-import RowWrapper from '../components/RowWrapper';
-import ColumnWrapper from '../components/ColumnWrapper';
 import { setField } from '../actions/formActions';
 
 let password = {
@@ -12,7 +10,7 @@ let password = {
     labelText: 'Password*',
     type: 'password',
     name: 'password',
-    placeholder: 'password'
+    placeholder: 'sample123! - must have minimum 8 characters'
   },
   confirmPassword = {
     field: 'exampleConfirmPassword',
@@ -60,6 +58,7 @@ const SetPasswordForm = ({ validateData, dispatch, formState }) => {
   return (
     <>
       <h3>Set Password</h3>
+      <p>Create your password and log in to your account</p>
       <hr />
       <Form
         onSubmit={(e) => {
@@ -75,8 +74,16 @@ const SetPasswordForm = ({ validateData, dispatch, formState }) => {
           {formState.confirmPasswordError}
         </span>
         <br />
+        <p style={{ 'text-align': 'left' }}>
+          <h5>Password Requirements</h5>
+          <ul style={{ 'padding-left': 15 }}>
+            <li>Must be a minimum of 8 characters</li>
+            <li>Must contain letters, numbers and symbols</li>
+            <li>Passwords must match</li>
+          </ul>
+        </p>
         <ButtonWrapper
-          buttonText={'Submit'}
+          buttonText={'Set Password and log in'}
           onSubmit={(e) => {
             e.preventDefault();
             validateData();
@@ -91,3 +98,9 @@ const SetPasswordForm = ({ validateData, dispatch, formState }) => {
 };
 
 export default SetPasswordForm;
+
+SetPasswordForm.propTypes = {
+  validateData: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  formState: PropTypes.object.isRequired
+};

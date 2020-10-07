@@ -10,7 +10,7 @@ import CardTextWrapper from './CardTextWrapper';
 import { deleteProduct } from '../actions/productListActions';
 import { setUpdateProductId } from '../actions/productListActions';
 import { deleteProductApi } from '../apis/productApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { alertMessage } from '../actions/alertActions';
@@ -23,7 +23,8 @@ const AdminProductList = ({ item, dispatch }) => {
   let { product_title, image_urls, product_price, id } = item;
   const alertDispatch = useDispatch(alertReducer);
   const updateProductDispatch = useDispatch(updateProductReducer);
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   let column_content = [];
   let i = 0;
   let updateButton = (

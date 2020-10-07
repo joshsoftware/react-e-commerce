@@ -12,12 +12,12 @@ import { disableUser } from '../actions/userListActions';
 import { deleteUserApi } from '../apis/userApi';
 import { disableUserApi } from '../apis/userApi';
 import { enableUserApi } from '../apis/userApi';
-import { useSelector } from 'react-redux';
 import ModalWrapper from './ModalWrapper';
 
 const AdminUserList = ({ user, dispatch, setAlertText, setVisible }) => {
   let { first_name, last_name, id, email, country, state, city, isDisabled } = user;
-  const { userDetails } = useSelector((state) => state.loginReducer);
+  // const { userDetails } = useSelector((state) => state.loginReducer);
+  const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
   let column_content = [];
   let i = 0;
   let user_details = [];

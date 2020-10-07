@@ -20,6 +20,7 @@ const FormCard = ({ type, validateData, dispatch, formState }) => {
                 validateData={validateData}
                 dispatch={dispatch}
                 formState={formState}
+                type={type}
               />
             }
           />
@@ -36,6 +37,7 @@ const FormCard = ({ type, validateData, dispatch, formState }) => {
                 validateData={validateData}
                 dispatch={dispatch}
                 formState={formState}
+                type={type}
               />
             }
           />
@@ -48,7 +50,12 @@ const FormCard = ({ type, validateData, dispatch, formState }) => {
         data={
           <CardBodyWrapper
             body_content={
-              <LoginForm validateData={validateData} dispatch={dispatch} formState={formState} />
+              <LoginForm
+                validateData={validateData}
+                dispatch={dispatch}
+                formState={formState}
+                type={type}
+              />
             }
           />
         }

@@ -8,7 +8,7 @@ let password = {
   labelText: 'Password',
   type: 'password',
   name: 'password',
-  placeholder: 'password'
+  placeholder: 'sample123! - must have minimum 8 characters'
 };
 const FormPasswordField = (props) => {
   password = {
@@ -25,7 +25,25 @@ const FormPasswordField = (props) => {
   } else {
     password = { ...password, labelText: 'Password' };
   }
-  return <FormField formfield={password} autoComplete={props.autoComplete} />;
+  return (
+    <>
+      <FormField formfield={password} autoComplete={props.autoComplete} />
+      <p
+        style={{
+          'text-align': 'left',
+          'padding-top': -10,
+          'padding-bottom': 10,
+          display: props.type === 'login' ? 'none' : 'block'
+        }}>
+        <h5>Password Requirements</h5>
+        <ul style={{ 'padding-left': 15 }}>
+          <li>Must be a minimum of 8 characters</li>
+          <li>Must contain letters, numbers and symbols</li>
+          <li>Passwords must match</li>
+        </ul>
+      </p>
+    </>
+  );
 };
 
 export default FormPasswordField;
@@ -35,5 +53,6 @@ FormPasswordField.propTypes = {
   dispatch: PropTypes.func.isRequired,
   passwordError: PropTypes.string,
   autoComplete: PropTypes.string,
-  isRequired: PropTypes.bool
+  isRequired: PropTypes.bool,
+  type: PropTypes.string
 };

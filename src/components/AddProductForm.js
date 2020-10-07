@@ -75,7 +75,6 @@ let productTitle = {
 
 const AddProductForm = ({ validateData, dispatch, formState }) => {
   const alertDispatch = useDispatch(alertReducer);
-  console.log('formState', formState);
   const uploadImage = (e) => {
     const files = e.target.files;
     if (e.target.files.length === 0) {

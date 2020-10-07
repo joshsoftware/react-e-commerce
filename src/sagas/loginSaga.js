@@ -11,7 +11,6 @@ function* loginWorkerSaga(action) {
     sessionStorage.setItem('userDetails', JSON.stringify(data));
     yield put(setUserDetails(data));
   } catch (error) {
-    console.log('error ', error.response);
     yield put(
       alertMessage({
         alert: true,
