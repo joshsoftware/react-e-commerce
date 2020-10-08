@@ -15,7 +15,7 @@ import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { alertMessage } from '../actions/alertActions';
 import alertReducer from '../reducers/alertReducer';
-import { setFormState } from '../actions/formActions';
+import { resetState, setFormState } from '../actions/formActions';
 import updateProductReducer from '../reducers/updateProductReducer';
 import ModalWrapper from './ModalWrapper';
 
@@ -30,6 +30,7 @@ const AdminProductList = ({ item, dispatch }) => {
   let updateButton = (
     <ButtonWrapper
       onClick={() => {
+        updateProductDispatch(resetState());
         dispatch(setUpdateProductId(id));
         updateProductDispatch(setFormState(item));
       }}
