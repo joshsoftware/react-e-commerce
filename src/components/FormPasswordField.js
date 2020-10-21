@@ -8,7 +8,8 @@ let password = {
   labelText: 'Password',
   type: 'password',
   name: 'password',
-  placeholder: 'sample123! - must have minimum 8 characters'
+  placeholder: 'sample123! - must have minimum 8 characters',
+  maxLength: 1024
 };
 const FormPasswordField = (props) => {
   password = {

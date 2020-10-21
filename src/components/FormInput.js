@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const FormInput = ({ className, type, name, placeholder, value, onChange, invalid }) => {
+const FormInput = ({ className, type, name, placeholder, value, onChange, invalid, maxLength }) => {
   return (
     <Input
       className={className}
@@ -12,6 +12,7 @@ const FormInput = ({ className, type, name, placeholder, value, onChange, invali
       value={value}
       onChange={onChange}
       invalid={invalid}
+      maxLength={maxLength}
     />
   );
 };
@@ -25,5 +26,6 @@ FormInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   invalid: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  maxLength: PropTypes.number
 };

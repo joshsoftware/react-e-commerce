@@ -8,21 +8,24 @@ let firstname = {
     labelText: 'First Name',
     type: 'firstname',
     name: 'firstname',
-    placeholder: 'John'
+    placeholder: 'John',
+    maxLength: 100
   },
   lastname = {
     field: 'exampleLastName',
     labelText: 'Last Name',
     type: 'lastname',
     name: 'lastname',
-    placeholder: 'Doe'
+    placeholder: 'Doe',
+    maxLength: 100
   },
   address = {
     field: 'exampleAddress',
     labelText: 'Address',
     type: 'address',
     name: 'address',
-    placeholder: ''
+    placeholder: '',
+    maxLength: 200
   };
 
 const FormTextField = (props) => {

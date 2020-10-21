@@ -10,14 +10,16 @@ let password = {
     labelText: 'Password*',
     type: 'password',
     name: 'password',
-    placeholder: 'sample123! - must have minimum 8 characters'
+    placeholder: 'sample123! - must have minimum 8 characters',
+    maxLength: 1024
   },
   confirmPassword = {
     field: 'exampleConfirmPassword',
     labelText: 'Confirm Password*',
     type: 'password',
     name: 'confirm_password',
-    placeholder: 'confirm password'
+    placeholder: 'confirm password',
+    maxLength: 1024
   };
 
 const SetPasswordForm = ({ validateData, dispatch, formState }) => {

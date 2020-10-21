@@ -20,49 +20,56 @@ let productTitle = {
     labelText: 'Product Title *',
     type: 'productTitle',
     name: 'productTitle',
-    placeholder: 'title'
+    placeholder: 'title',
+    maxLength: 100
   },
   description = {
     field: 'exampleDescription',
     labelText: 'Description *',
     type: 'description',
     name: 'description',
-    placeholder: 'description'
+    placeholder: 'description',
+    maxLength: 1024
   },
   productPrice = {
     field: 'exampleProductPrice',
     labelText: 'Product Price *',
     type: 'productPrice',
     name: 'productPrice',
-    placeholder: '0.00'
+    placeholder: '0.00',
+    maxLength: 12
   },
   discount = {
     field: 'exampleDiscount',
     labelText: 'Discount *',
     type: 'discount',
     name: 'discount',
-    placeholder: '0.00%'
+    placeholder: '0.00%',
+    maxLength: 12
   },
   tax = {
     field: 'exampleTax',
     labelText: 'Tax *',
     type: 'tax',
     name: 'tax',
-    placeholder: '0.00%'
+    placeholder: '0.00%',
+    maxLength: 12
   },
   stock = {
     field: 'exampleStock',
     labelText: 'Stock *',
     type: 'stock',
     name: 'stock',
-    placeholder: '0'
+    placeholder: '0',
+    maxLength: 12
   },
   brand = {
     field: 'exampleBrand',
     labelText: 'Brand *',
     type: 'brand',
     name: 'brand',
-    placeholder: 'brand'
+    placeholder: 'brand',
+    maxLength: 100
   },
   imageUrl = {
     field: 'exampleImageURL',

@@ -16,7 +16,8 @@ const FormField = ({ formfield }) => {
     value,
     onChange,
     invalid,
-    inputClassName
+    inputClassName,
+    maxLength
   } = formfield;
   return (
     <FormGroup className={'align-items-center'}>
@@ -29,6 +30,7 @@ const FormField = ({ formfield }) => {
         onChange={onChange}
         invalid={invalid}
         className={inputClassName}
+        maxLength={maxLength}
       />
       <FormFeedbackWrapper message={message} />
     </FormGroup>

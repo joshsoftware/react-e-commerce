@@ -8,7 +8,8 @@ let email = {
   labelText: 'Email',
   type: 'email',
   name: 'email',
-  placeholder: 'example@company.com'
+  placeholder: 'example@company.com',
+  maxLength: 50
 };
 const FormEmailField = (props) => {
   email = {

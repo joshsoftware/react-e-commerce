@@ -175,6 +175,7 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
                 value={min}
                 onChange={(e) => setMin(e.target.value)}
                 invalid={minError !== null ? true : false}
+                maxLength={12}
               />
               <FormFeedbackWrapper message={minError} />
             </FormGroup>
@@ -186,6 +187,7 @@ const ItemComponent = ({ label, index, toggle, setLabel, setProducts, products, 
                 value={max}
                 onChange={(e) => setMax(e.target.value)}
                 invalid={maxError !== null ? true : false}
+                maxLength={12}
               />
               <FormFeedbackWrapper message={maxError} />
             </FormGroup>

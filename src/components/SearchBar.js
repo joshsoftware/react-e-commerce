@@ -19,6 +19,7 @@ const SearchBar = ({ searchData, onsearchchange }) => {
                   type="search"
                   placeholder={'search'}
                   onChange={onsearchchange}
+                  maxLength={50}
                 />
               }
             />
