@@ -101,6 +101,5 @@ test('Successful login with valid credentials', async (t) => {
     .typeText(email, 'vikramsingh@gmail.com')
     .typeText(password, 'qwerty123!')
     .click(loginButton);
-
   await t.expect(body.innerText).contains('Successfully Login', 'Reject invalid email input');
 });

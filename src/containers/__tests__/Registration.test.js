@@ -92,3 +92,34 @@ test('Email validation', async (t) => {
     .expect(body.innerText)
     .contains('email must be a valid email', 'already registered alert failed');
 });
+
+test('Profile picture validation', async (t) => {
+  const profilePicture = Selector('input').withAttribute('type', 'file');
+  const body = Selector('body');
+  const registerButton = Selector('button').withText('Register');
+
+  await t.setFilesToUpload(profilePicture, '../../images/shirt.pdf').click(registerButton);
+  await t
+    .expect(body.innerText)
+    .contains('allowed files jpg, jpeg, webp, png', 'valid file selection error failed');
+});
+
+test('Successful registration', async (t) => {
+  const email = Selector('input').nth(0);
+  const password = Selector('input').nth(1);
+  const firstname = Selector('input').nth(2);
+  const profilePicture = Selector('input').withAttribute('type', 'file');
+  const body = Selector('body');
+  const registerButton = Selector('button').withText('Register');
+
+  await t
+    .typeText(email, 'abc123@gmail.com')
+    .typeText(password, 'qwerty123!')
+    .typeText(firstname, 'vikram')
+    .setFilesToUpload(profilePicture, '../../images/levi.jpg')
+    .click(registerButton);
+
+  await t
+    .expect(body.innerText)
+    .contains('Successfully Registered', 'successful registration failed');
+});
