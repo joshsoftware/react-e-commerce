@@ -3,6 +3,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { searchFailed } from '../actions/formActions';
 import searchbar from '../apis/searchbarApi';
 import { resetProductList, setProductList } from '../actions/productListActions';
+import { alertMessage } from '../actions/alertActions';
 
 //worker saga
 function* searchbarWorkerSaga(action) {
@@ -12,6 +13,17 @@ function* searchbarWorkerSaga(action) {
     yield put(setProductList(data));
   } catch (error) {
     console.log('error', error);
+    if (error == 'Error: Request failed with status code 500') {
+      yield put(alertMessage({ alert: true, alertText: 'Internal Server Error', color: 'danger' }));
+    } else {
+      yield put(
+        alertMessage({
+          alert: true,
+          alertText: error.response.data.error.message,
+          color: 'danger'
+        })
+      );
+    }
     yield put(searchFailed(error));
   }
 }
