@@ -64,6 +64,7 @@ const RegistrationForm = ({ validateData, dispatch, formState }) => {
       <h3>Register</h3>
       <hr />
       <Form
+        noValidate
         onSubmit={(e) => {
           e.preventDefault();
           validateData();

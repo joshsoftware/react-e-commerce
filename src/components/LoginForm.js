@@ -24,6 +24,7 @@ const LoginForm = ({ validateData, dispatch, formState, type }) => {
       <h3>Login</h3>
       <hr />
       <Form
+        noValidate
         onSubmit={(e) => {
           e.preventDefault();
           validateData();

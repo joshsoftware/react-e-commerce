@@ -23,6 +23,7 @@ const LoginContainer = () => {
   const { alert, alertText, registrationAlert, registrationAlertText, color } = useSelector(
     (state) => state.alertReducer
   );
+  const [timeoutId, setTimeoutId] = useState('');
   const dispatch = useDispatch();
   const alertDispatch = useDispatch(alertReducer);
   const registrationDispatch = useDispatch(registrationReducer);
@@ -43,15 +44,20 @@ const LoginContainer = () => {
     password: yup.string().required()
   });
   const timeOutFunction = async () => {
-    setTimeout(() => {
-      alertDispatch(alertMessage({ alert: false, alertText: '' }));
-      alertDispatch(alertRegistration({ alert: false, alertText: '' }));
-    }, 2000);
+    setTimeoutId(
+      setTimeout(() => {
+        alertDispatch(alertMessage({ alert: false, alertText: '' }));
+        alertDispatch(alertRegistration({ alert: false, alertText: '' }));
+      }, 2000)
+    );
   };
 
   useEffect(() => {
     setAlertState(alertText);
-    timeOutFunction();
+    if (alert === true) {
+      clearTimeout(timeoutId);
+      timeOutFunction();
+    }
   }, [alert]);
 
   useEffect(() => {
@@ -92,7 +98,7 @@ const LoginContainer = () => {
     <>
       <AlertWrapper
         className="text-center fixed-top"
-        color={color !== '' ? color : 'info'}
+        color={color}
         isOpen={alert || registrationAlert}
         data={alertState}
       />

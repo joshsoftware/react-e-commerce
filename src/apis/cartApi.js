@@ -19,7 +19,7 @@ export const deleteCartItemApi = ({ token, product_id }) => {
   };
   return axios({
     method: 'delete',
-    url: `${process.env.REACT_APP_SERVER_URL}cart?productId=${product_id}`,
+    url: `${process.env.REACT_APP_SERVER_URL}cart?productID=${product_id}`,
     headers: headers
   });
 };
@@ -31,7 +31,7 @@ export const updateCartItemsApi = ({ token, product_id, quantity }) => {
   };
   return axios({
     method: 'put',
-    url: `${process.env.REACT_APP_SERVER_URL}cart?productId=${product_id}&quantity=${quantity}`,
+    url: `${process.env.REACT_APP_SERVER_URL}cart?productID=${product_id}&quantity=${quantity}`,
     headers: headers
   });
 };
@@ -43,7 +43,7 @@ export const addCartItemApi = ({ token, product_id }) => {
   };
   return axios({
     method: 'post',
-    url: `${process.env.REACT_APP_SERVER_URL}cart?productId=${product_id}`,
+    url: `${process.env.REACT_APP_SERVER_URL}cart?productID=${product_id}`,
     headers: headers
   });
 };
