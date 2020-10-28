@@ -1,0 +1,66 @@
+.img_style {
+    max-width: 80%;
+    max-height: 200px !important;
+    flex-shrink: 1 !important;
+}
+
+.img_style_card {
+    max-width: 80%;
+    height: 200px !important;
+    flex-shrink: 1 !important;
+}
+
+.row_style {
+    background-color: white;
+    margin: 8px 0;
+}
+
+.col_one {
+    text-align: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+.col_two {
+    margin: auto;
+}
+
+.col_five {
+    text-align: center;
+    margin: auto;
+}
+.cart-image {
+    height: 250px;
+}
+.col_three {
+    text-align: right;
+    margin: auto;
+    
+}
+.col_four {
+    text-align: center;
+    margin: auto;
+}
+
+.card_footer {
+    padding-left: 20px !important;
+}
+
+.btn_cursor {
+    cursor: not-allowed !important;
+    pointer-events: all !important;
+}
+
+.update_profile {
+    margin-top: 120px;
+}
+
+.image_size {
+    width: 200px;
+    height: 200px;
+}
+.file_field {
+    display: inline-flex !important;
+    width: auto !important;
+    margin-top: 5px;
+}

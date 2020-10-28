@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CartItem Component Must return cart item 1`] = `
+<DocumentFragment>
+  <div
+    class="row_style row"
+  >
+    <div
+      class="col_one col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3"
+    >
+      <img
+        alt="Product Image"
+        class="img_fluid img_style card-img"
+        src="https://assets.ajio.com/medias/sys_master/root/hb7/h8b/15083561943070/-473Wx593H-460422382-black-MODEL.jpg"
+      />
+    </div>
+    <div
+      class="col_two col"
+    >
+      <div
+        class="card-title"
+      >
+        product
+      </div>
+      <p
+        class="card-text"
+      >
+        Price : $ 15
+      </p>
+      <p
+        class="card-text"
+      >
+        Quantity : $ 15
+      </p>
+    </div>
+    <div
+      class="col_three col"
+    >
+      <button
+        class="btn btn-secondary"
+      >
+        X
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

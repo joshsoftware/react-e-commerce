@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormCard Component Must return FormCard Component 1`] = `
+<DocumentFragment>
+  <div
+    class="invalid-feedback"
+  />
+</DocumentFragment>
+`;
